@@ -8,7 +8,7 @@ on:
     paths:
       - ".github/workflows/daily-update.yml"
   schedule:
-    - cron: "45 20 * * 1-5"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
