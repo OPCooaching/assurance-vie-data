@@ -22,13 +22,29 @@ def read_series(path: Path):
     return df
 
 
-def payload(series_map, dates, start_eur=None):
-    return {
+def load_existing_metadata(name: str):
+    path = OUT / f"{name}.json"
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return {
+            "strategies": data.get("strategies", []),
+        }
+    except Exception:
+        return {}
+
+
+def payload(series_map, dates, start_eur=None, extra=None):
+    data = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "start_eur": float(start_eur) if start_eur else None,
         "dates": [str(x) for x in dates],
         "series": series_map,
     }
+    if extra:
+        data.update(extra)
+    return data
 
 
 def main():
@@ -42,8 +58,8 @@ def main():
         base_values = pd.to_numeric(baseline["baseline"], errors="coerce").round(6).tolist()
         bernard = {"label": "Bernard origine", "values": base_values}
     else:
-        base_dates = []
-        bernard = {"label": "Bernard origine", "values": []}
+        base_dates = ["2026-09-07"]
+        bernard = {"label": "Bernard origine", "values": [100.0]}
 
     series = [bernard]
     dates = base_dates
@@ -76,11 +92,10 @@ def main():
         encoding="utf-8",
     )
 
-    # ChatGPT and Claude pages always include the common Bernard baseline.
-    # Their own series are imported later from their separate repositories.
     for name in ("chatgpt", "claude"):
+        metadata = load_existing_metadata(name)
         (OUT / f"{name}.json").write_text(
-            json.dumps(payload([bernard], dates, START_EUR), ensure_ascii=False),
+            json.dumps(payload([bernard], dates, START_EUR, metadata), ensure_ascii=False),
             encoding="utf-8",
         )
 
