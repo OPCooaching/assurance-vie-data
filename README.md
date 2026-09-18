@@ -2,6 +2,13 @@
 
 Source commune, neutre et anonymisée des données utilisées pour le suivi de l'assurance-vie.
 
+## État initial
+
+- **473 supports Altaprofits** importés depuis la liste du 08/09/2026.
+- Portefeuille courant stocké uniquement en pourcentages au 07/09/2026.
+- Mise à jour automatique prévue les jours ouvrés.
+- Aucune donnée personnelle ni numéro de contrat stocké.
+
 ## Rôle du dépôt
 
 Ce dépôt contient uniquement :
@@ -10,7 +17,7 @@ Ce dépôt contient uniquement :
 - les historiques de cours récupérés automatiquement ;
 - les indicateurs de marché communs ;
 - une représentation anonymisée du portefeuille courant ;
-- les journaux techniques de mise à jour.
+- les snapshots techniques.
 
 Il ne contient **aucune stratégie d'investissement propre à une IA**.
 
@@ -26,9 +33,11 @@ Les deux moteurs utilisent exactement la même base :
 | `strategie-chatgpt` | lecture + écriture | lecture | selon son propre workflow |
 | `strategie-claude` | lecture | lecture + écriture | selon son propre workflow |
 
-Dans **ce dépôt**, ChatGPT et strategie-claude peuvent analyser tout le contenu mais ne doivent pas écrire leurs décisions, scores propriétaires, portefeuilles proposés ou résultats de stratégie.
+En exploitation normale, ChatGPT et strategie-claude lisent ce dépôt mais n'y écrivent pas leurs décisions, scores propriétaires, portefeuilles proposés ou résultats.
 
-Chaque IA écrit uniquement dans son dépôt de stratégie. Les deux peuvent lire les résultats de l'autre pour comparaison.
+Une IA peut modifier l'infrastructure de ce dépôt uniquement sur demande explicite d'Olivier.
+
+Voir aussi `AGENTS.md`, `config/access-policy.yml` et `STRATEGY_INTERFACE.md`.
 
 ## Anonymisation obligatoire
 
@@ -55,6 +64,7 @@ Le portefeuille courant est stocké uniquement en **pourcentages / base 100**.
 
 ```text
 config/
+  universe_part_01.csv ... universe_part_05.csv
   universe.csv
   portfolio_current.csv
   symbol_map.csv
@@ -64,48 +74,55 @@ data/
   prices/
   indicators/
   snapshots/
-  logs/
 
 scripts/
+  build_universe.py
   resolve_symbols.py
   update_market_data.py
   compute_indicators.py
   validate_public_data.py
 
+contracts/
+  strategy-decision.schema.json
+
 .github/workflows/
   daily-update.yml
 ```
 
-## Principe de fonctionnement
+## Fonctionnement
 
-1. `config/universe.csv` contient les supports Altaprofits disponibles.
-2. `resolve_symbols.py` cherche progressivement les symboles de marché à partir des ISIN.
-3. `update_market_data.py` récupère chaque jour les cours des supports résolus.
-4. `compute_indicators.py` calcule les indicateurs communs et reproductibles.
-5. GitHub Actions enregistre les mises à jour.
-6. ChatGPT et strategie-claude lisent ces mêmes données et écrivent leurs stratégies dans leurs dépôts respectifs.
+1. Les fichiers `universe_part_*.csv` constituent le snapshot source anonymisé des 473 supports.
+2. `build_universe.py` reconstruit `config/universe.csv` et préserve les correspondances déjà résolues.
+3. `resolve_symbols.py` tente de relier les ISIN aux symboles de marché.
+4. `update_market_data.py` récupère les cours des supports résolus.
+5. `compute_indicators.py` calcule les indicateurs communs et reproductibles.
+6. GitHub Actions enregistre les mises à jour.
+7. ChatGPT et strategie-claude lisent les mêmes données et écrivent leurs stratégies dans leurs dépôts respectifs.
 
-## Ce qui est commun et ce qui ne l'est pas
+## Données communes
 
-Les données communes peuvent contenir : cours, rendements 5/20/60/120 jours, volatilité, drawdown, moyennes mobiles, momentum et métadonnées objectives.
+Les données communes peuvent contenir : cours, rendements 5/20/60/120 jours, volatilité, drawdown, moyennes mobiles et métadonnées objectives.
 
 Les pondérations d'une stratégie, ses règles de décision, ses arbitrages et ses scores propriétaires restent dans `strategie-chatgpt` ou `strategie-claude`.
 
-## Mise à jour
+## Mise à jour automatique
 
-Le workflow quotidien est prévu pour :
-- contrôler l'absence de données personnelles ;
-- résoudre progressivement les symboles manquants ;
-- récupérer les nouveaux cours ;
-- recalculer les indicateurs ;
-- produire un snapshot ;
-- commit les fichiers générés.
+Le workflow `Daily market data update` tourne du lundi au vendredi et peut aussi être lancé manuellement depuis l'onglet **Actions**.
 
-La collecte utilise par défaut Yahoo Finance via `yfinance`, sans clé API. Les symboles non résolus restent explicitement marqués comme tels ; aucune donnée n'est inventée.
+Il :
+- reconstruit l'univers ;
+- contrôle l'absence de données personnelles ;
+- tente de résoudre les symboles de marché ;
+- récupère les cours ;
+- recalcule les indicateurs ;
+- produit un snapshot ;
+- commit les nouvelles données.
+
+La collecte utilise par défaut Yahoo Finance via `yfinance`, sans clé API. Les supports non couverts restent explicitement marqués comme non résolus ou manuels ; aucune donnée n'est inventée.
 
 ## Source initiale
 
-L'univers initial provient de la liste Altaprofits Vie datée du 08/09/2026 fournie par Olivier. Les documents source ne sont volontairement pas stockés ici.
+L'univers initial provient de la liste Altaprofits Vie datée du 08/09/2026 fournie par Olivier. Les documents originaux ne sont volontairement pas stockés ici.
 
 ## Convention
 
