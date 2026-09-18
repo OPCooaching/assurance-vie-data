@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -38,7 +38,7 @@ jobs:
 
       - name: Resolve missing market symbols
         env:
-          RESOLVE_LIMIT: "40"
+          RESOLVE_LIMIT: "500"
         run: python scripts/resolve_symbols.py
 
       - name: Update prices
