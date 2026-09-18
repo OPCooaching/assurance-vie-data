@@ -1,7 +1,14 @@
 id: chatgpt-rotation-diversifiee
-label: ChatGPT Rotation diversifiée
-active_version: v1
-rebalance_frequency: weekly
+label: "ChatGPT C — Momentum diversifié"
+status: research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
 target_positions: 6-8
-core_logic: relative_strength_with_diversification_constraints
+research_basis:
+  - relative_momentum
+  - absolute_momentum
+  - correlation_control
+  - concentration_control
+core_logic: rank_then_diversify
 history_mode: append_only
