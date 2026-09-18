@@ -1,0 +1,7 @@
+id: chatgpt-adaptative
+label: ChatGPT Adaptative
+active_version: v1
+rebalance_frequency: weekly
+core_logic: regime_then_selection
+risk_exposure: variable
+history_mode: append_only
