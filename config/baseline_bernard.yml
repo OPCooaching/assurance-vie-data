@@ -1,0 +1,20 @@
+baseline_id: bernard-origin
+as_of_date: 2026-09-07
+normalization: 100
+method: buy_and_hold
+cashflows_in_performance: excluded
+
+fund_euro:
+  asset_id: ALTAPROFITS:FONDS-EN-EURO-NETISSIMA
+  provisional_annual_rate: 0.03
+  note: "Estimation provisoire jusqu'au taux réellement crédité."
+
+source_portfolio: config/portfolio_current.csv
+output_series: data/benchmarks/bernard_origin.csv
+
+comparison_metrics:
+  - performance_since_origin
+  - performance_5d
+  - performance_20d
+  - max_drawdown
+  - volatility_20d
