@@ -101,6 +101,7 @@ async function initDashboard(dataPath){
   renderChart(labels,series,data.start_eur||null);
   renderSummary(series,data.start_eur||null);
   renderTable(series,data.start_eur||null);
+  renderStrategyDetails(data.strategies||[]);
   renderDetailSwatches();
   const status=document.querySelector("#status");
   if(status)status.textContent=data.generated_at?"Mise à jour : "+data.generated_at:"Point de départ : 07/09/2026";
@@ -124,4 +125,42 @@ async function initOverview(paths){
   renderTable(series,startEur);
   const status=document.querySelector("#status");
   if(status)status.textContent="Vue d'ensemble des stratégies";
+}
+function renderStrategyDetails(strategies){
+  const box=document.querySelector("#strategy-details");
+  if(!box)return;
+  box.innerHTML="";
+  for(const s of strategies||[]){
+    const div=document.createElement("div");
+    div.className="strategy";
+    const holdings=(s.holdings||[]);
+    const holdingsHtml=holdings.length
+      ? "<ul>"+holdings.map(h=>"<li>"+(h.name||h.asset_id||"")+" — "+(h.weight_pct!=null?h.weight_pct.toFixed(1)+" %":"")+"</li>").join("")+"</ul>"
+      : '<p class="muted">'+(s.status||"Aucune position calculée")+"</p>";
+    div.innerHTML=
+      '<h3><span class="swatch" style="background:'+colorFor(s.label)+'"></span>'+s.label+' <small class="muted">'+(s.version||"")+'</small></h3>'+
+      '<p><strong>Résumé.</strong> '+s.short+'</p>'+
+      '<p><strong>Objectif.</strong> '+s.objective+'</p>'+
+      '<p><strong>Règle principale.</strong> '+s.main_rule+'</p>'+
+      '<p>'+s.details+'</p>'+
+      '<h4>Actifs actuellement détenus</h4>'+holdingsHtml;
+    box.appendChild(div);
+  }
+}
+async function renderHistory(path){
+  const box=document.querySelector("#history-body");
+  if(!box)return;
+  try{
+    const data=await loadJSON(path);
+    const rows=data.history||[];
+    if(!rows.length){
+      box.innerHTML='<tr><td colspan="6" class="muted">Aucun arbitrage enregistré pour le moment.</td></tr>';
+      return;
+    }
+    box.innerHTML=rows.slice().reverse().map(r=>
+      "<tr><td>"+(r.date||"")+"</td><td>"+(r.strategy_label||r.strategy_id||"")+"</td><td>"+(r.version||"")+"</td><td>"+(r.action||"")+"</td><td>"+(r.reason||"")+"</td><td>"+(r.value_index!=null?Number(r.value_index).toFixed(2):"—")+"</td></tr>"
+    ).join("");
+  }catch(e){
+    box.innerHTML='<tr><td colspan="6" class="muted">Historique indisponible.</td></tr>';
+  }
 }
