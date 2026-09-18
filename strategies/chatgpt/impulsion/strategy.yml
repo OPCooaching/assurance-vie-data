@@ -1,8 +1,14 @@
 id: chatgpt-impulsion
-label: ChatGPT Impulsion
-active_version: v1
-rebalance_frequency: weekly
+label: "ChatGPT A — Momentum hebdomadaire"
+status: research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
 target_positions: 3-5
-core_logic: momentum_and_relative_strength
+research_basis:
+  - relative_momentum
+  - absolute_momentum
+  - multi_horizon_1_3_6_12_months
+core_logic: rank_then_filter_trend
 replacement_rule: replace_only_if_materially_better
 history_mode: append_only
