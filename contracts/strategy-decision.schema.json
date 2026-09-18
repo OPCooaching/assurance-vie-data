@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Strategy decision",
+  "type": "object",
+  "required": ["date", "strategy_id", "strategy_version", "allocations"],
+  "properties": {
+    "date": {"type": "string", "format": "date"},
+    "strategy_id": {"type": "string"},
+    "strategy_version": {"type": "string"},
+    "comment": {"type": "string"},
+    "allocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["asset_id", "weight_pct"],
+        "properties": {
+          "asset_id": {"type": "string"},
+          "weight_pct": {"type": "number", "minimum": 0, "maximum": 100},
+          "action": {"enum": ["buy", "sell", "hold", "increase", "decrease"]}
+        }
+      }
+    }
+  }
+}
