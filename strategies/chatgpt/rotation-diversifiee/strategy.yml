@@ -1,0 +1,7 @@
+id: chatgpt-rotation-diversifiee
+label: ChatGPT Rotation diversifiée
+active_version: v1
+rebalance_frequency: weekly
+target_positions: 6-8
+core_logic: relative_strength_with_diversification_constraints
+history_mode: append_only
