@@ -1,7 +1,15 @@
 id: chatgpt-adaptative
-label: ChatGPT Adaptative
-active_version: v1
-rebalance_frequency: weekly
-core_logic: regime_then_selection
+label: "ChatGPT B — Momentum adaptatif"
+status: research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
 risk_exposure: variable
+research_basis:
+  - momentum
+  - market_regime
+  - breadth
+  - volatility
+  - drawdown
+core_logic: regime_then_rank
 history_mode: append_only
