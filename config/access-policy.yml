@@ -3,20 +3,26 @@ privacy: public-anonymized
 
 actors:
   chatgpt:
-    read: true
-    write_strategy_here: false
-    strategy_repository: strategie-chatgpt
+    read_all: true
+    write_paths:
+      - strategies/chatgpt/
+      - history/chatgpt/
+      - docs/data/chatgpt.json
+      - docs/data/chatgpt-history.json
     may_read_other_strategy: true
 
-  strategie-claude:
-    read: true
-    write_strategy_here: false
-    strategy_repository: strategie-claude
+  claude:
+    read_all: true
+    write_paths:
+      - strategies/claude/
+      - history/claude/
+      - docs/data/claude.json
     may_read_other_strategy: true
 
   automation:
     read: true
     write_generated_market_data: true
+    write_generated_dashboard_data: true
 
 forbidden_data:
   - surname
@@ -27,13 +33,14 @@ forbidden_data:
   - contract_number
   - client_identifier
   - raw_contract_document
-  - exact_contract_value
+  - exact_contract_value_in_repository
   - beneficiary_clause
 
 allowed_identity:
   alias: Bernard
 
 portfolio_representation:
-  exact_euro_amounts: false
+  exact_euro_amounts_in_repository: false
   percentages: true
   base_100: true
+  exact_value_on_public_page_via_secret: true
