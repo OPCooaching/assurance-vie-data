@@ -1,49 +1,75 @@
 # assurance-vie-data
 
-Source commune, neutre et anonymisée des données utilisées pour le suivi de l'assurance-vie.
+Dépôt unique, public et anonymisé pour les données, stratégies, historiques et pages de suivi de l'assurance-vie.
 
 ## État initial
 
 - **473 supports Altaprofits** importés depuis la liste du 08/09/2026.
 - Portefeuille courant stocké uniquement en pourcentages au 07/09/2026.
+- Benchmark immuable **Bernard origine** en base 100.
 - Mise à jour automatique prévue les jours ouvrés.
-- Aucune donnée personnelle ni numéro de contrat stocké.
+- Aucune donnée personnelle, numéro de contrat ou document contractuel brut stocké.
 
-## Rôle du dépôt
+## Organisation
 
-Ce dépôt contient uniquement :
-- l'univers des supports disponibles ;
-- les correspondances ISIN / symboles de marché ;
-- les historiques de cours récupérés automatiquement ;
-- les indicateurs de marché communs ;
-- une représentation anonymisée du portefeuille courant ;
-- les snapshots techniques.
+```text
+config/                 configuration commune
+data/                   cours, indicateurs, benchmarks et résultats calculés
+strategies/
+  academic/             stratégies externes de référence
+  chatgpt/
+    impulsion/
+    adaptative/
+    rotation-diversifiee/
+  claude/               stratégies Claude
+history/
+  chatgpt/              historique append-only ChatGPT
+  claude/               historique append-only Claude
+scripts/                moteurs de calcul
+docs/                   site GitHub Pages
+```
 
-Il ne contient **aucune stratégie d'investissement propre à une IA**.
+## Principe
 
-Les deux moteurs utilisent exactement la même base :
-- **ChatGPT**
-- **strategie-claude**
+Toutes les stratégies utilisent exactement les mêmes données de marché et le même point de départ.
 
-## Règles d'accès
+Les familles suivies sont :
+- **Bernard origine** : portefeuille initial figé ;
+- **Académiques** : 60/40, Harry Browne adapté, Faber Trend et momentum académique adapté ;
+- **ChatGPT** : Impulsion, Adaptative, Rotation diversifiée ;
+- **Claude** : espace séparé dans le même dépôt.
 
-| Espace | ChatGPT | strategie-claude | Automatisation |
-|---|---|---|---|
-| `assurance-vie-data` | lecture | lecture | lecture + écriture des données générées |
-| `strategie-chatgpt` | lecture + écriture | lecture | selon son propre workflow |
-| `strategie-claude` | lecture | lecture + écriture | selon son propre workflow |
+## Historique
 
-En exploitation normale, ChatGPT et strategie-claude lisent ce dépôt mais n'y écrivent pas leurs décisions, scores propriétaires, portefeuilles proposés ou résultats.
+Les décisions passées ne sont jamais réécrites. Une modification de logique crée une nouvelle version. Les résultats restent rattachés à la version qui les a produits.
 
-Une IA peut modifier l'infrastructure de ce dépôt uniquement sur demande explicite d'Olivier.
+## Pages publiques
 
-Voir aussi `AGENTS.md`, `config/access-policy.yml` et `STRATEGY_INTERFACE.md`.
+- `docs/index.html` : synthèse générale ;
+- `docs/academic.html` : stratégies académiques ;
+- `docs/chatgpt.html` : stratégies ChatGPT ;
+- `docs/claude.html` : stratégies Claude.
 
-## Anonymisation obligatoire
+## Mise à jour automatique
 
-Ce dépôt est conçu pour pouvoir être public.
+Le workflow `Daily market data update` tourne du lundi au vendredi et peut aussi être lancé manuellement depuis l'onglet **Actions**.
 
-**Interdit :**
+Il :
+1. reconstruit l'univers ;
+2. contrôle l'absence de données personnelles ;
+3. tente de résoudre les symboles de marché ;
+4. récupère les cours ;
+5. recalcule les indicateurs ;
+6. recalcule Bernard origine ;
+7. recalcule les stratégies académiques ;
+8. reconstruit les données du tableau de bord ;
+9. commit les nouvelles données.
+
+La collecte utilise Yahoo Finance via `yfinance`, sans clé API. Les supports non couverts restent explicitement marqués comme non résolus ou manuels ; aucune donnée n'est inventée.
+
+## Confidentialité
+
+Interdit dans le dépôt :
 - nom de famille ;
 - adresse ;
 - e-mail ;
@@ -52,77 +78,10 @@ Ce dépôt est conçu pour pouvoir être public.
 - numéro de contrat ;
 - identifiant client ;
 - document contractuel brut ;
-- montant exact du contrat ou du patrimoine ;
 - clause bénéficiaire ;
-- toute donnée permettant d'identifier Bernard.
+- montant exact du contrat stocké en clair.
 
 Le prénom **Bernard** peut être utilisé comme alias.
-
-Le portefeuille courant est stocké uniquement en **pourcentages / base 100**.
-
-## Arborescence
-
-```text
-config/
-  universe_part_01.csv ... universe_part_05.csv
-  universe.csv
-  portfolio_current.csv
-  symbol_map.csv
-  access-policy.yml
-
-data/
-  prices/
-  indicators/
-  snapshots/
-
-scripts/
-  build_universe.py
-  resolve_symbols.py
-  update_market_data.py
-  compute_indicators.py
-  validate_public_data.py
-
-contracts/
-  strategy-decision.schema.json
-
-.github/workflows/
-  daily-update.yml
-```
-
-## Fonctionnement
-
-1. Les fichiers `universe_part_*.csv` constituent le snapshot source anonymisé des 473 supports.
-2. `build_universe.py` reconstruit `config/universe.csv` et préserve les correspondances déjà résolues.
-3. `resolve_symbols.py` tente de relier les ISIN aux symboles de marché.
-4. `update_market_data.py` récupère les cours des supports résolus.
-5. `compute_indicators.py` calcule les indicateurs communs et reproductibles.
-6. GitHub Actions enregistre les mises à jour.
-7. ChatGPT et strategie-claude lisent les mêmes données et écrivent leurs stratégies dans leurs dépôts respectifs.
-
-## Données communes
-
-Les données communes peuvent contenir : cours, rendements 5/20/60/120 jours, volatilité, drawdown, moyennes mobiles et métadonnées objectives.
-
-Les pondérations d'une stratégie, ses règles de décision, ses arbitrages et ses scores propriétaires restent dans `strategie-chatgpt` ou `strategie-claude`.
-
-## Mise à jour automatique
-
-Le workflow `Daily market data update` tourne du lundi au vendredi et peut aussi être lancé manuellement depuis l'onglet **Actions**.
-
-Il :
-- reconstruit l'univers ;
-- contrôle l'absence de données personnelles ;
-- tente de résoudre les symboles de marché ;
-- récupère les cours ;
-- recalcule les indicateurs ;
-- produit un snapshot ;
-- commit les nouvelles données.
-
-La collecte utilise par défaut Yahoo Finance via `yfinance`, sans clé API. Les supports non couverts restent explicitement marqués comme non résolus ou manuels ; aucune donnée n'est inventée.
-
-## Source initiale
-
-L'univers initial provient de la liste Altaprofits Vie datée du 08/09/2026 fournie par Olivier. Les documents originaux ne sont volontairement pas stockés ici.
 
 ## Convention
 
