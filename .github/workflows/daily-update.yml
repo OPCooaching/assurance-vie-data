@@ -2,6 +2,8 @@ name: Daily market data update
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
   push:
     paths:
       - ".github/workflows/daily-update.yml"
@@ -17,6 +19,7 @@ concurrency:
 
 jobs:
   update:
+    if: github.event_name != 'issues' || startsWith(github.event.issue.title, '[data-refresh]')
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
