@@ -1,0 +1,39 @@
+repository: assurance-vie-data
+privacy: public-anonymized
+
+actors:
+  chatgpt:
+    read: true
+    write_strategy_here: false
+    strategy_repository: strategie-chatgpt
+    may_read_other_strategy: true
+
+  strategie-claude:
+    read: true
+    write_strategy_here: false
+    strategy_repository: strategie-claude
+    may_read_other_strategy: true
+
+  automation:
+    read: true
+    write_generated_market_data: true
+
+forbidden_data:
+  - surname
+  - email
+  - postal_address
+  - phone
+  - birth_date_full
+  - contract_number
+  - client_identifier
+  - raw_contract_document
+  - exact_contract_value
+  - beneficiary_clause
+
+allowed_identity:
+  alias: Bernard
+
+portfolio_representation:
+  exact_euro_amounts: false
+  percentages: true
+  base_100: true
