@@ -1,0 +1,39 @@
+start_date: 2026-09-07
+normalization: 100
+
+strategies:
+  sixty_forty:
+    label: "60/40 mondial adapté"
+    type: static
+    rebalance: monthly
+    allocations:
+      FR0010315770: 0.60
+      LU0478205379: 0.40
+
+  permanent_portfolio:
+    label: "Harry Browne - Permanent Portfolio adapté"
+    type: static
+    rebalance: annual
+    allocations:
+      FR0010315770: 0.25
+      LU0290357846: 0.25
+      LU0290358497: 0.25
+      LU2611731824: 0.25
+    warning: "Le contrat ne propose pas ici un or physique pur : LU2611731824 est un proxy actions minières aurifères. Cette adaptation n'est donc pas une réplication exacte du Permanent Portfolio."
+
+  faber_trend:
+    label: "Faber Trend 10 mois - World"
+    type: faber_sma10
+    risk_asset: FR0010315770
+    defensive_asset: LU0290358497
+    signal_frequency: monthly
+
+  academic_momentum:
+    label: "Momentum 12 mois - adaptation long-only"
+    type: momentum_12m
+    universe_category: ETF
+    top_n: 5
+    defensive_asset: LU0290358497
+    rebalance: monthly
+    require_positive_momentum: true
+    warning: "Adaptation long-only à l'univers Altaprofits. Ce n'est pas une réplication du portefeuille long/short futures de Moskowitz, Ooi et Pedersen."
