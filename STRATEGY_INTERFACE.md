@@ -1,46 +1,63 @@
 # Interface commune des stratégies
 
-ChatGPT et strategie-claude lisent les mêmes données dans ce dépôt mais écrivent dans des dépôts séparés.
+ChatGPT, Claude et les stratégies académiques utilisent les mêmes données de marché dans ce dépôt unique.
 
-## Entrées communes à lire
+## Entrées communes
 
 - `config/universe.csv`
 - `config/portfolio_current.csv`
 - `config/symbol_map.csv`
 - `data/prices/daily.csv`
 - `data/indicators/latest.csv`
+- `data/benchmarks/`
 - `data/snapshots/`
 
-## Sorties attendues dans chaque dépôt de stratégie
-
-Chaque dépôt (`strategie-chatgpt` et `strategie-claude`) doit conserver :
+## Arborescence
 
 ```text
-strategy/
-  active.yml
-  versions/
+strategies/
+  academic/
+  chatgpt/
+    impulsion/
+    adaptative/
+    rotation-diversifiee/
+  claude/
 
-decisions/
-  YYYY-MM-DD.json
+history/
+  chatgpt/
+  claude/
 
-portfolio/
-  latest.csv
-  history/
-
-results/
-  performance.csv
-  comparison.csv
-
-web/
+docs/
   index.html
+  academic.html
+  chatgpt.html
+  claude.html
 ```
+
+## Contenu attendu pour chaque stratégie
+
+Chaque stratégie conserve au minimum :
+- sa règle et son objectif ;
+- sa version active ;
+- ses paramètres ;
+- son portefeuille courant ;
+- ses décisions datées ;
+- ses performances ;
+- son historique de versions.
 
 ## Règle d'historique
 
-Une décision passée ne doit jamais être réécrite a posteriori. Si la stratégie change, créer une nouvelle version.
+Une décision passée ne doit jamais être réécrite a posteriori. Si la logique change, créer une nouvelle version.
 
-## Comparaison entre IA
+## Comparaison
 
-Chaque IA peut lire les fichiers `results/` et `decisions/` de l'autre dépôt, mais ne les modifie jamais.
+Toutes les stratégies sont comparées au même point de départ et au benchmark `Bernard origine`.
 
-La comparaison doit se faire sur des données normalisées : rendement en pourcentage, base 100, drawdown, volatilité et benchmark commun. Aucun montant exact en euros.
+Les indicateurs communs sont au minimum :
+- performance depuis l'origine ;
+- performance 5 jours ;
+- performance 20 jours ;
+- drawdown maximum ;
+- volatilité 20 jours ;
+- nombre d'arbitrages ;
+- valeur théorique courante.
