@@ -47,6 +47,9 @@ jobs:
       - name: Compute common indicators
         run: python scripts/compute_indicators.py
 
+      - name: Compute Bernard origin benchmark
+        run: python scripts/compute_baseline.py
+
       - name: Final privacy check
         run: python scripts/validate_public_data.py
 
