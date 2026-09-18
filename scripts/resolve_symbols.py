@@ -29,8 +29,12 @@ def save_rows(rows):
 
 
 def resolve(isin: str):
-    r = requests.get(URL, params={"q": isin, "quotesCount": 8, "newsCount": 0},
-                     headers=HEADERS, timeout=20)
+    r = requests.get(
+        URL,
+        params={"q": isin, "quotesCount": 8, "newsCount": 0},
+        headers=HEADERS,
+        timeout=20,
+    )
     r.raise_for_status()
     quotes = r.json().get("quotes", [])
     for q in quotes:
@@ -43,17 +47,25 @@ def resolve(isin: str):
 
 def main():
     rows = load_rows()
-    done = 0
     today = date.today().isoformat()
 
-    for row in rows:
-        if done >= LIMIT:
-            break
+    candidates = []
+    for idx, row in enumerate(rows):
         if row.get("status") == "resolved" and row.get("symbol"):
             continue
-        isin = (row.get("isin") or "").strip()
-        if not isin or not (len(isin) == 12 and isin[:2].isalpha()):
+        if row.get("status") == "manual":
             continue
+        isin = (row.get("isin") or "").strip()
+        if len(isin) != 12 or not isin[:2].isalpha():
+            continue
+        candidates.append((row.get("last_checked") or "0000-00-00", idx))
+
+    candidates.sort()
+    selected = candidates[:LIMIT]
+
+    for _, idx in selected:
+        row = rows[idx]
+        isin = row["isin"].strip()
         try:
             symbol, qtype = resolve(isin)
             row["last_checked"] = today
@@ -69,11 +81,10 @@ def main():
             row["last_checked"] = today
             row["status"] = "retry"
             row["notes"] = type(exc).__name__
-        done += 1
         time.sleep(0.35)
 
     save_rows(rows)
-    print(f"Checked {done} unresolved ISIN(s).")
+    print(f"Checked {len(selected)} unresolved ISIN(s).")
 
 
 if __name__ == "__main__":
