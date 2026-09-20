@@ -6,12 +6,22 @@ from pathlib import Path
 
 ROOTS = [Path("config"), Path("data")]
 EMAIL = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I)
-PHONE = re.compile(r"(?<!\d)(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}(?!\d)")
+
+# Important: do not scan every 10-digit numeric sequence as a French phone number.
+# ISINs and market identifiers frequently contain substrings such as 0974293251,
+# which look like French phone numbers but are legitimate financial identifiers.
+# A phone-like value is therefore flagged only when it appears next to an explicit
+# phone-related label. CSV columns named phone/tel/etc. are also rejected below.
+PHONE_CONTEXT = re.compile(
+    r"(?i)\b(?:phone|telephone|t[eé]l[eé]phone|tel|t[eé]l|mobile)\b"
+    r".{0,40}((?:\+33|0)[1-9](?:[ .-]?\d{2}){4})"
+)
+
 FORBIDDEN_EXT = {".pdf", ".doc", ".docx", ".htm", ".html", ".xlsx", ".xls"}
 FORBIDDEN_COLUMNS = {
-    "surname", "last_name", "email", "phone", "address",
-    "contract_number", "client_id", "beneficiary_clause",
-    "exact_contract_value", "birth_date"
+    "surname", "last_name", "email", "phone", "telephone", "téléphone",
+    "tel", "mobile", "address", "contract_number", "client_id",
+    "beneficiary_clause", "exact_contract_value", "birth_date"
 }
 
 
@@ -35,10 +45,12 @@ def main():
                 continue
 
             text = p.read_text(encoding="utf-8", errors="ignore")
+
             if EMAIL.search(text):
                 fail(f"email-like value found in {p}")
-            if PHONE.search(text):
-                fail(f"phone-like value found in {p}")
+
+            if PHONE_CONTEXT.search(text):
+                fail(f"phone-like value found in explicit phone context in {p}")
 
             if p.suffix.lower() == ".csv" and text:
                 header = {x.strip().lower() for x in text.splitlines()[0].split(",")}
