@@ -1,0 +1,47 @@
+id: claude-double-filtre
+label: "Claude C — Tendance confirmée par l'ampleur"
+status: research_hypothesis
+active_version: v0.2
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  N'etre pleinement expose que lorsque la tendance est confirmee par un nombre
+  suffisant de supports, et non par un seul indice.
+
+main_rule: >
+  Indice monde au-dessus de sa moyenne 200 jours et plus de la moitie des
+  supports suivis au-dessus de la leur, exposition pleine. Une seule des deux
+  conditions remplie, moitie de l'exposition. Aucune des deux, tout sur le
+  support monetaire.
+
+research_basis:
+  - market_breadth
+  - trend_confirmation_reduces_false_signals
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    breadth_universe: followed_themes_plus_core
+    breadth_threshold_pct: 50
+    trend_filter: sma_200
+    partial_exposure_pct: 50
+    evaluation_day: friday_close
+    min_days_between_changes: 20
+
+  v0.2:
+    note: "Moyenne 100 jours et trois thèmes, seuls supports EUR disponibles."
+    trend_filter: sma_100
+    breadth_threshold_pct: 50
+    equity_target_pct: 50
+    currency_universe: eur_quoted_only
+
+constraints:
+  - no_daily_trading
+  - weekly_review_only
+  - execution_price_unknown_at_order_time
+
+known_weakness: >
+  Trois etats seulement. Les passages d'un etat a l'autre sont brutaux et
+  peuvent se produire pres d'un point de retournement.
