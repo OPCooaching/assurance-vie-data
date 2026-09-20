@@ -1,1 +1,240 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stratégies Claude</title><link rel="stylesheet" href="assets/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script></head><body><header><h1>Stratégies Claude</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a></nav></header><main><div class="card"><div id="status" class="muted"></div><div id="summary" class="grid"></div></div><div class="card"><h2>Bernard origine vs stratégies Claude</h2><p class="muted"><strong>Point de départ commun : 07/09/2026 = 100.</strong> Les courbes affichées ici mesurent uniquement l’évolution depuis cette date ; elles ne sont pas rétrocalculées avant le 07/09/2026.</p><canvas id="comparison-chart"></canvas></div><div class="card"><h2>Indicateurs</h2><table><thead><tr><th>Stratégie</th><th>Depuis le 07/09/2026</th><th>5 j</th><th>20 j</th><th>Drawdown</th><th>Vol. 20 j</th><th>Valeur</th></tr></thead><tbody id="metrics-body"></tbody></table></div><div class="card"><h2>Stratégies Claude</h2><p class="muted">Cette page sera alimentée par le dépôt strategie-claude. ChatGPT peut lire ses résultats mais ne les modifie pas.</p></div></main><script src="assets/dashboard.js?v=20260920-3"></script><script>initDashboard("data/claude.json").catch(console.error)</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stratégies Claude</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  .etat { padding: 12px 14px; border-left: 3px solid #b8860b; margin-bottom: 18px; font-size: .92rem; }
+  .strategie { margin-bottom: 14px; }
+  .resume { font-size: 1.02rem; line-height: 1.55; margin: 0 0 14px; }
+  .bloc { margin: 14px 0; }
+  .bloc h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
+             opacity: .6; margin: 0 0 5px; font-weight: 600; }
+  .bloc p { margin: 0; }
+  .marque { display: inline-block; font-size: .72rem; text-transform: uppercase;
+            letter-spacing: .05em; border: 1px solid currentColor; border-radius: 3px;
+            padding: 1px 7px; opacity: .7; vertical-align: middle; margin-left: 8px; }
+  .defile { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th, td { padding: 7px 9px; text-align: right; border-bottom: 1px solid rgba(128,128,128,.25); }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; opacity: .6; font-weight: 500; }
+  .muted { opacity: .65; }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; font-size: .88rem; opacity: .75; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Stratégies Claude</h1>
+  <nav>
+    <a href="index.html">Synthèse</a>
+    <a href="academic.html">Académiques</a>
+    <a href="chatgpt.html">ChatGPT</a>
+    <a href="claude.html">Claude</a>
+  </nav>
+</header>
+
+<main>
+
+<div class="card">
+  <div id="etat"></div>
+</div>
+
+<div class="card">
+  <h2>Comparaison au benchmark Bernard origine</h2>
+  <canvas id="graphique"></canvas>
+  <p class="muted" id="note-graphique"></p>
+</div>
+
+<div class="card">
+  <h2>Indicateurs communs</h2>
+  <div class="defile">
+    <table>
+      <thead><tr>
+        <th>Stratégie</th><th>Depuis origine</th><th>5 j</th><th>20 j</th>
+        <th>Drawdown</th><th>Vol. 20 j</th><th>Arbitrages</th><th>Base 100</th>
+      </tr></thead>
+      <tbody id="indicateurs"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="strategies"></div>
+
+<div class="card">
+  <p class="muted">Page produite par Claude à partir des données communes du dépôt.
+  Les stratégies académiques et celles de ChatGPT servent de comparaison et ne sont
+  jamais modifiées ici. Aucune donnée personnelle ne figure sur cette page.</p>
+</div>
+
+</main>
+
+<script>
+const SOURCES = { web: "data/claude.json", claude: "data/claude-history.json" };
+
+const pct = v => (v === null || v === undefined || Number.isNaN(v))
+  ? "—" : (v > 0 ? "+" : "") + Number(v).toFixed(2).replace(".", ",") + " %";
+
+function afficherEtat(message, alerte) {
+  document.getElementById("etat").innerHTML = alerte
+    ? `<div class="etat">${message}</div>`
+    : `<p class="muted">${message}</p>`;
+}
+
+function tableauIndicateurs(strategies, repere) {
+  const corps = document.getElementById("indicateurs");
+  const lignes = [];
+
+  if (repere) {
+    lignes.push(`<tr><td><strong>Bernard origine</strong></td>
+      <td>${pct(repere.perf)}</td><td colspan="6" class="muted">benchmark commun</td></tr>`);
+  }
+
+  for (const [id, s] of Object.entries(strategies)) {
+    const i = s.indicateurs || {};
+    lignes.push(`<tr>
+      <td>${s.label}</td>
+      <td>${pct(i.perf_origine_pct)}</td>
+      <td>${pct(i.perf_5j_pct)}</td>
+      <td>${pct(i.perf_20j_pct)}</td>
+      <td>${pct(i.drawdown_max_pct)}</td>
+      <td>${i.vol_20j_pct != null ? Number(i.vol_20j_pct).toFixed(1).replace(".", ",") + " %" : "—"}</td>
+      <td>${i.nb_arbitrages ?? "—"}</td>
+      <td>${i.valeur_base_100 ?? "—"}</td>
+    </tr>`);
+  }
+
+  corps.innerHTML = lignes.length
+    ? lignes.join("")
+    : `<tr><td colspan="8" class="muted">Aucun résultat calculé.</td></tr>`;
+}
+
+function fiches(strategies) {
+  const bloc = document.getElementById("strategies");
+  if (!Object.keys(strategies).length) {
+    bloc.innerHTML = `<div class="card"><h2>Stratégies</h2>
+      <p class="muted">Les définitions existent dans <code>strategies/claude/</code>.
+      Les résultats apparaîtront dès que la collecte de cours aura produit un
+      historique suffisant.</p></div>`;
+    return;
+  }
+
+  bloc.innerHTML = Object.entries(strategies).map(([id, s]) => {
+    const marque = s.status === "research_hypothesis"
+      ? `<span class="marque">hypothèse, non validée</span>` : "";
+
+    const lignes = (s.allocation_courante || []).length
+      ? `<div class="defile"><table>
+           <thead><tr><th>Support</th><th>Pondération</th></tr></thead>
+           <tbody>${s.allocation_courante.map(a =>
+             `<tr><td>${a.asset_id}</td><td>${Number(a.weight_pct).toFixed(2).replace(".", ",")} %</td></tr>`
+           ).join("")}</tbody></table></div>`
+      : `<p class="muted">Aucune allocation calculée pour le moment.</p>`;
+
+    return `<div class="card strategie">
+      <h2>${s.label}${marque}</h2>
+      <p class="resume">${s.regle}</p>
+
+      <div class="bloc"><h3>Objectif</h3><p>${s.objectif}</p></div>
+      <div class="bloc"><h3>Version active</h3><p>${s.version}</p></div>
+      <div class="bloc"><h3>Actifs détenus et pondérations</h3>${lignes}</div>
+      <div class="bloc"><h3>Performances</h3>
+        <p>Depuis l'origine ${pct(s.indicateurs?.perf_origine_pct)},
+           drawdown maximum ${pct(s.indicateurs?.drawdown_max_pct)},
+           ${s.indicateurs?.nb_arbitrages ?? 0} arbitrages.</p></div>
+      ${s.faiblesse ? `<div class="bloc"><h3>Limite connue</h3><p>${s.faiblesse}</p></div>` : ""}
+
+      <details>
+        <summary>Historique des décisions (${s.nb_decisions ?? 0})</summary>
+        <p class="muted">Journal complet en append-only dans
+        <code>history/claude/decisions.jsonl</code>. Une décision passée n'est
+        jamais réécrite ; un changement de logique crée une nouvelle version.</p>
+      </details>
+    </div>`;
+  }).join("");
+}
+
+function tracer(donneesWeb, donneesClaude) {
+  const jeux = [];
+
+  if (donneesWeb?.series?.length && donneesWeb.dates?.length > 1) {
+    for (const s of donneesWeb.series) {
+      jeux.push({ label: s.label, data: s.values, borderWidth: 2, pointRadius: 0, tension: .1 });
+    }
+  }
+
+  for (const s of Object.values(donneesClaude?.strategies || {})) {
+    if (!s.courbe?.length) continue;
+    jeux.push({
+      label: s.label,
+      data: s.courbe.map(p => ({ x: p.date, y: p.valeur })),
+      borderWidth: 2, pointRadius: 0, tension: .1, borderDash: [4, 3],
+    });
+  }
+
+  const note = document.getElementById("note-graphique");
+  if (!jeux.length) {
+    note.textContent = "Aucune série disponible. Le graphique apparaîtra dès la première collecte de cours.";
+    return;
+  }
+
+  note.textContent = "Base 100 au premier jour commun. Le fonds en euros est modélisé à "
+    + (donneesClaude?.rendement_fonds_euros_modelise_pct ?? 3) + " % par an, faute de cotation publique.";
+
+  new Chart(document.getElementById("graphique"), {
+    type: "line",
+    data: { labels: donneesWeb?.dates || [], datasets: jeux },
+    options: {
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      scales: { x: { type: "category" }, y: { title: { display: true, text: "Base 100" } } },
+      plugins: { legend: { position: "bottom" } },
+    },
+  });
+}
+
+async function lire(chemin) {
+  try {
+    const r = await fetch(chemin, { cache: "no-store" });
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+
+(async function () {
+  const [web, claude] = await Promise.all([lire(SOURCES.web), lire(SOURCES.claude)]);
+
+  const seances = claude?.seances_disponibles ?? 0;
+  const aucuneDonnee = !claude || seances === 0;
+
+  if (aucuneDonnee) {
+    afficherEtat(
+      "La collecte automatique de cours n'a pas encore produit d'historique. "
+      + "Les stratégies ci-dessous sont définies et leur code de simulation est prêt, "
+      + "mais aucune n'est validée sur données réelles. Rien n'est affiché comme un résultat.",
+      true);
+  } else if (seances < 260) {
+    afficherEtat(
+      `${seances} séances disponibles. Une moyenne mobile 200 jours en demande au moins 260. `
+      + "Les résultats affichés portent sur une période trop courte pour conclure.", true);
+  } else {
+    afficherEtat(
+      `Données arrêtées au ${(claude.generated_at || "").slice(0, 10)}, `
+      + `${seances} séances d'historique.`, false);
+  }
+
+  const repere = web?.series?.find(s => s.label === "Bernard origine");
+  tableauIndicateurs(claude?.strategies || {},
+    repere?.values?.length > 1
+      ? { perf: repere.values.at(-1) / repere.values[0] * 100 - 100 } : null);
+
+  fiches(claude?.strategies || {});
+  tracer(web, claude);
+})();
+</script>
+</body>
+</html>
