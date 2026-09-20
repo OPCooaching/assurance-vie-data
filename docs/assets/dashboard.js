@@ -71,9 +71,11 @@ function renderChart(labels,series,startEur){
         data:s.values,
         borderColor:colorFor(s.label,i),
         backgroundColor:colorFor(s.label,i),
-        borderWidth:s.label==="Bernard origine"?4:2,
-        pointRadius:onePoint?(s.label==="Bernard origine"?7:5):(s.label==="Bernard origine"?2.5:1.5),
-        pointHoverRadius:s.label==="Bernard origine"?7:5,
+        borderWidth:s.label==="Bernard origine"?7:2,
+        pointRadius:onePoint?(s.label==="Bernard origine"?8:5):(s.label==="Bernard origine"?3.5:1.5),
+        pointHoverRadius:s.label==="Bernard origine"?8:5,
+        pointBorderWidth:s.label==="Bernard origine"?2:1,
+        order:s.label==="Bernard origine"?0:1,
         spanGaps:true,
         tension:.1
       }))
