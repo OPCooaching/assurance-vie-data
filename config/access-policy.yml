@@ -17,6 +17,7 @@ actors:
       - strategies/claude/
       - history/claude/
       - docs/data/claude.json
+      - docs/claude.html
     may_read_other_strategy: true
 
   automation:
