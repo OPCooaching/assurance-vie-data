@@ -1,0 +1,169 @@
+{
+  "as_of_market_date": "2026-09-18",
+  "generated_on": "2026-09-20",
+  "status": "preliminary_research_snapshot",
+  "data_window": "2025-09-18 to 2026-09-18",
+  "note": "Première analyse quantitative sur environ un an d'historique. Les allocations servent à la simulation et ne constituent pas encore les stratégies finales validées.",
+  "universe": {
+    "supports_total": 473,
+    "resolved_market_symbols": 416,
+    "assets_with_indicators": 396,
+    "assets_eligible_for_this_analysis": 337
+  },
+  "preliminary_backtests": {
+    "note": "Walk-forward hebdomadaire avec exécution au premier jour de marché suivant. Fenêtre utile d'environ 26 semaines après période de chauffe. Résultats insuffisants pour validation finale.",
+    "tests": [
+      {
+        "strategy": "A",
+        "variant": "top3",
+        "return_pct": 37.01,
+        "max_drawdown_pct": -7.14,
+        "weeks": 26
+      },
+      {
+        "strategy": "A",
+        "variant": "top5",
+        "return_pct": 27.79,
+        "max_drawdown_pct": -8.74,
+        "weeks": 26
+      },
+      {
+        "strategy": "A",
+        "variant": "top8",
+        "return_pct": 28.33,
+        "max_drawdown_pct": -7.89,
+        "weeks": 26
+      },
+      {
+        "strategy": "B",
+        "variant": "top5",
+        "return_pct": 13.17,
+        "max_drawdown_pct": -8.74,
+        "weeks": 26
+      },
+      {
+        "strategy": "C",
+        "variant": "top6",
+        "return_pct": 35.39,
+        "max_drawdown_pct": -6.4,
+        "weeks": 26
+      },
+      {
+        "strategy": "C",
+        "variant": "top8",
+        "return_pct": 18.31,
+        "max_drawdown_pct": -9.92,
+        "weeks": 26
+      }
+    ]
+  },
+  "regime": {
+    "breadth_positive_r60_and_sma50_pct": 23.4,
+    "adaptive_risk_exposure_pct": 25
+  },
+  "simulated_portfolios": [
+    {
+      "strategy_id": "chatgpt-impulsion",
+      "label": "ChatGPT A — Momentum hebdomadaire",
+      "weights": [
+        [
+          "NL0011821202",
+          "ING GROEP N.V.",
+          20
+        ],
+        [
+          "LU1900066462",
+          "AMUNDI MSCI EASTERN EUROPE EX RUSSIA UCITS ETF",
+          20
+        ],
+        [
+          "FR0010380675",
+          "LAZARD ACTIONS EMERGENTES R",
+          20
+        ],
+        [
+          "FR0013176526",
+          "VALEO SE",
+          20
+        ],
+        [
+          "IE00BG0J4C88",
+          "ISHARES DIGITAL SECURITY UCITS ETF",
+          20
+        ]
+      ]
+    },
+    {
+      "strategy_id": "chatgpt-adaptative",
+      "label": "ChatGPT B — Momentum adaptatif",
+      "weights": [
+        [
+          "NL0011821202",
+          "ING GROEP N.V.",
+          5
+        ],
+        [
+          "LU1900066462",
+          "AMUNDI MSCI EASTERN EUROPE EX RUSSIA UCITS ETF",
+          5
+        ],
+        [
+          "FR0010380675",
+          "LAZARD ACTIONS EMERGENTES R",
+          5
+        ],
+        [
+          "FR0013176526",
+          "VALEO SE",
+          5
+        ],
+        [
+          "IE00BG0J4C88",
+          "ISHARES DIGITAL SECURITY UCITS ETF",
+          5
+        ],
+        [
+          "LU0290358497",
+          "XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF",
+          75
+        ]
+      ]
+    },
+    {
+      "strategy_id": "chatgpt-rotation-diversifiee",
+      "label": "ChatGPT C — Momentum diversifié",
+      "weights": [
+        [
+          "NL0011821202",
+          "ING GROEP N.V.",
+          16.67
+        ],
+        [
+          "LU1900066462",
+          "AMUNDI MSCI EASTERN EUROPE EX RUSSIA UCITS ETF",
+          16.67
+        ],
+        [
+          "FR0010380675",
+          "LAZARD ACTIONS EMERGENTES R",
+          16.67
+        ],
+        [
+          "FR0013176526",
+          "VALEO SE",
+          16.67
+        ],
+        [
+          "IE00BG0J4C88",
+          "ISHARES DIGITAL SECURITY UCITS ETF",
+          16.67
+        ],
+        [
+          "LU0533033667",
+          "AMUNDI MSCI WORLD INFORMATION TECHNOLOGY UCITS ETF EUR ACC",
+          16.65
+        ]
+      ]
+    }
+  ]
+}
