@@ -43,7 +43,7 @@ function renderSummary(series,startEur){
     const m=metrics(s.values);
     const d=document.createElement("div");
     d.className="metric";
-    d.innerHTML="<span>"+swatch(s.label,i)+s.label+"</span><b>"+pct(m.since)+"</b><small>Depuis l'origine"+(startEur&&Number.isFinite(m.last)?" · "+euro(startEur*m.last/100):"")+"</small>";
+    d.innerHTML="<span>"+swatch(s.label,i)+s.label+"</span><b>"+pct(m.since)+"</b><small>Depuis le 07/09/2026"+(startEur&&Number.isFinite(m.last)?" · "+euro(startEur*m.last/100):"")+"</small>";
     box.appendChild(d);
   });
 }
