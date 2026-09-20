@@ -1,0 +1,2 @@
+Reconstruction demandee le 2026-09-21 apres correction de la qualite des donnees communes.
+Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
