@@ -10,7 +10,8 @@ Ce dépôt unique contient les données communes, les stratégies, les historiqu
 
 ## Claude
 - Peut lire tous les fichiers.
-- Écrit uniquement dans `strategies/claude/`, `history/claude/` et les fichiers web/générés nécessaires à ses propres résultats.
+- Écrit uniquement dans `strategies/claude/`, `history/claude/`, `docs/data/claude.json` et `docs/claude.html`.
+- Ne modifie pas les fichiers web partagés (`docs/assets/`, `docs/index.html`, `docs/academic.html`, `docs/chatgpt.html`) sauf demande explicite d'Olivier.
 - Peut lire `strategies/chatgpt/` et `history/chatgpt/` pour comparer les résultats.
 - Ne modifie jamais les décisions historiques de ChatGPT.
 
