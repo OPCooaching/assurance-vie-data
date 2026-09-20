@@ -24,13 +24,17 @@ def max_drawdown(close: pd.Series):
 
 def one_asset(g: pd.DataFrame):
     g = g.sort_values("date")
-    close = pd.to_numeric(g["close"], errors="coerce").dropna()
+    if "close_eur" not in g:
+        raise ValueError("EUR-normalised prices are required before computing indicators.")
+    close = pd.to_numeric(g["close_eur"], errors="coerce").dropna()
     ret = close.pct_change().dropna()
 
     return {
         "date": g["date"].iloc[-1],
         "asset_id": g["asset_id"].iloc[-1],
         "symbol": g["symbol"].iloc[-1],
+        "quote_currency": g["quote_currency"].iloc[-1],
+        "close_eur": close.iloc[-1] if len(close) else np.nan,
         "close": close.iloc[-1] if len(close) else np.nan,
         "ret_5d": period_return(close, 5),
         "ret_20d": period_return(close, 20),

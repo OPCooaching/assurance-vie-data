@@ -21,9 +21,14 @@ def load_rows():
 
 
 def save_rows(rows):
-    fields = ["asset_id", "isin", "symbol", "provider", "status", "last_checked", "notes"]
+    fields = [
+        "asset_id", "isin", "symbol", "provider", "status", "last_checked",
+        "quote_currency", "exchange", "currency_status", "metadata_checked",
+        "history_status", "history_start", "history_end", "history_checked",
+        "notes",
+    ]
     with MAP.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fields)
+        w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 
@@ -73,6 +78,18 @@ def main():
                 row["symbol"] = symbol
                 row["provider"] = "yahoo"
                 row["status"] = "resolved"
+                # The search endpoint is useful to find a symbol, but it is
+                # not authoritative for the trading currency.  The price
+                # updater verifies it from Yahoo's history metadata before
+                # the quote can enter shared backtest data.
+                row["quote_currency"] = ""
+                row["exchange"] = ""
+                row["currency_status"] = "pending"
+                row["metadata_checked"] = ""
+                row["history_status"] = "pending"
+                row["history_start"] = ""
+                row["history_end"] = ""
+                row["history_checked"] = ""
                 row["notes"] = qtype or ""
             else:
                 row["status"] = "unresolved"

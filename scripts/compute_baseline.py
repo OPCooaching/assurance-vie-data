@@ -23,6 +23,8 @@ def main():
     portfolio = pd.read_csv(PORTFOLIO)
     portfolio["weight"] = portfolio["allocation_pct"] / 100.0
     prices = pd.read_csv(PRICES)
+    if "close_eur" not in prices.columns:
+        raise SystemExit("Baseline requires EUR-normalised shared prices. Run update_market_data.py first.")
     prices["date"] = pd.to_datetime(prices["date"])
 
     euro_id = cfg["fund_euro"]["asset_id"]
@@ -44,15 +46,15 @@ def main():
     for _, row in market.iterrows():
         aid = row["asset_id"]
         weight = float(row["weight"])
-        px = prices.loc[prices["asset_id"] == aid, ["date", "close"]].copy()
+        px = prices.loc[prices["asset_id"] == aid, ["date", "close_eur"]].copy()
         px = px[px["date"] >= start].dropna().sort_values("date")
 
         if px.empty:
             missing.append(aid)
             continue
 
-        first = float(px.iloc[0]["close"])
-        px["relative"] = px["close"] / first
+        first = float(px.iloc[0]["close_eur"])
+        px["relative"] = px["close_eur"] / first
         rel = (
             px.set_index("date")["relative"]
             .reindex(dates)

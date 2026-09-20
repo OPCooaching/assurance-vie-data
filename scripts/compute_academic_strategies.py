@@ -14,8 +14,10 @@ ALLOC_OUT = Path("data/academic/latest_allocations.csv")
 
 def load_prices():
     df = pd.read_csv(PRICES)
+    if "close_eur" not in df.columns:
+        raise ValueError("Academic strategies require EUR-normalised shared prices.")
     df["date"] = pd.to_datetime(df["date"])
-    px = df.pivot_table(index="date", columns="asset_id", values="close", aggfunc="last")
+    px = df.pivot_table(index="date", columns="asset_id", values="close_eur", aggfunc="last")
     return px.sort_index().ffill()
 
 

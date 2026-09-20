@@ -10,7 +10,15 @@ PARTS = sorted(CONFIG.glob("universe_part_*.csv"))
 UNIVERSE = CONFIG / "universe.csv"
 SYMBOL_MAP = CONFIG / "symbol_map.csv"
 
-MAP_FIELDS = ["asset_id", "isin", "symbol", "provider", "status", "last_checked", "notes"]
+# Keep market metadata in the mapping, not in a strategy-specific file.  The
+# daily update uses these fields to decide whether a Yahoo quote can safely be
+# converted to EUR before it enters the shared price history.
+MAP_FIELDS = [
+    "asset_id", "isin", "symbol", "provider", "status", "last_checked",
+    "quote_currency", "exchange", "currency_status", "metadata_checked",
+    "history_status", "history_start", "history_end", "history_checked",
+    "notes",
+]
 
 
 def main():
@@ -51,7 +59,7 @@ def main():
         rows.append(row)
 
     with SYMBOL_MAP.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=MAP_FIELDS)
+        w = csv.DictWriter(f, fieldnames=MAP_FIELDS, lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 
