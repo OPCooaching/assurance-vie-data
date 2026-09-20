@@ -1,0 +1,49 @@
+id: claude-risque-cible
+label: "Claude B — Risque cible constant"
+status: research_hypothesis
+active_version: v0.2
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Maintenir constant le risque du contrat plutot que sa repartition. La part
+  actions monte quand les marches sont calmes et baisse quand ils s'agitent.
+
+main_rule: >
+  Part actions egale a la volatilite cible divisee par la volatilite realisee
+  sur soixante jours de la poche actions, bornee entre vingt et soixante pour
+  cent. Recalculee chaque semaine, appliquee seulement si l'ecart depasse cinq
+  points.
+
+research_basis:
+  - volatility_clustering
+  - volatility_is_persistent_returns_are_not
+  - volatility_targeting
+
+parameters:
+  v0.1:
+    target_volatility_pct: 10
+    realized_vol_window_days: 60
+    equity_min_pct: 20
+    equity_max_pct: 60
+    action_threshold_pct: 5
+    composition: same_as_claude_socle_satellites
+    max_arbitrages_per_month: 2
+
+  v0.2:
+    note: "Fenêtre de volatilité ramenée à 40 séances, faute de profondeur."
+    realized_vol_window_days: 40
+    target_volatility_pct: 10
+    equity_min_pct: 20
+    equity_max_pct: 60
+    currency_universe: eur_quoted_only
+
+constraints:
+  - no_daily_trading
+  - weekly_review_only
+  - execution_price_unknown_at_order_time
+
+known_weakness: >
+  Reduit l'exposition apres une hausse de volatilite, donc souvent apres le
+  debut d'une baisse. Manque une partie des rebonds rapides.

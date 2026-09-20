@@ -1,0 +1,57 @@
+id: claude-socle-satellites
+label: "Claude A — Socle mondial et satellites plafonnés"
+status: research_hypothesis
+active_version: v0.2
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Conserver une exposition actions elevee en supprimant la concentration
+  sectorielle involontaire du portefeuille d'origine.
+
+main_rule: >
+  Soixante pour cent de la poche actions dans un indice monde large. Le reste
+  sur quatre themes au maximum, plafonnes a huit pour cent du contrat chacun.
+  Toute ligne cloturant sous sa moyenne mobile 200 jours bascule sur le support
+  monetaire jusqu'a cinq clotures consecutives au-dessus.
+
+research_basis:
+  - diversification_reduces_idiosyncratic_risk
+  - time_series_momentum_200d
+  - position_sizing_caps
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    core_share_of_equity_pct: 60
+    max_themes: 4
+    max_theme_weight_pct: 8
+    trend_filter: sma_200
+    reentry_confirmation_sessions: 5
+    rebalance_band_pct: 3
+    rebalance_calendar: first_business_day_of_month
+    max_arbitrages_per_month: 2
+    cash_sleeve_months_of_withdrawals: 36
+
+  v0.2:
+    note: "Adaptée à 253 séances d'historique. La v0.1 reste documentée, jamais réécrite."
+    equity_target_pct: 50
+    core_share_of_equity_pct: 60
+    core_split: {world_index_pct: 70, min_volatility_pct: 30}
+    themes: [IE000I8KRLL9, LU1829219390, IE00BMG6Z448]
+    max_theme_weight_pct: 8
+    trend_filter: sma_100
+    rebalance_band_pct: 3
+    currency_universe: eur_quoted_only
+    bad_tick_filter: reversal_over_5pct_next_session
+
+constraints:
+  - no_daily_trading
+  - weekly_review_only
+  - execution_price_unknown_at_order_time
+  - free_arbitrages_do_not_justify_churn
+
+known_weakness: >
+  Sur un marche sans direction, le filtre de tendance sort apres le debut des
+  baisses et rentre apres le debut des hausses. Chaque aller-retour coute.
