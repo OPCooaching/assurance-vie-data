@@ -2,6 +2,9 @@ name: Daily market data update
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "data/refresh-request.txt"
   schedule:
     - cron: "45 20 * * 1-5"
 
