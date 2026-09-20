@@ -9,6 +9,9 @@ import yfinance as yf
 MAP = Path("config/symbol_map.csv")
 OUT = Path("data/prices/daily.csv")
 BATCH = 40
+BOOTSTRAP_PERIOD = "5y"
+UPDATE_PERIOD = "7d"
+MIN_BOOTSTRAP_DAYS = 900
 
 
 def load_map():
@@ -48,14 +51,21 @@ def extract(data, symbol):
     return out.dropna(subset=["close"])
 
 
-def main():
-    rows = load_map()
-    OUT.parent.mkdir(parents=True, exist_ok=True)
+def needs_bootstrap(existing: pd.DataFrame, asset_id: str) -> bool:
+    if existing.empty:
+        return True
+    g = existing.loc[existing["asset_id"] == asset_id]
+    if g.empty:
+        return True
+    dates = pd.to_datetime(g["date"], errors="coerce").dropna()
+    if dates.empty:
+        return True
+    span = (dates.max() - dates.min()).days
+    return span < MIN_BOOTSTRAP_DAYS
 
-    existing = pd.read_csv(OUT) if OUT.exists() else pd.DataFrame()
-    period = "1y" if existing.empty else "7d"
 
-    new_parts = []
+def fetch_rows(rows, period):
+    parts = []
     for i in range(0, len(rows), BATCH):
         batch = rows[i:i+BATCH]
         symbols = list(dict.fromkeys(r["symbol"] for r in batch))
@@ -70,7 +80,26 @@ def main():
             x["asset_id"] = r["asset_id"]
             x["symbol"] = r["symbol"]
             x["provider"] = r.get("provider") or "yahoo"
-            new_parts.append(x)
+            parts.append(x)
+    return parts
+
+
+def main():
+    rows = load_map()
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+
+    existing = pd.read_csv(OUT) if OUT.exists() else pd.DataFrame()
+
+    bootstrap_rows = [r for r in rows if needs_bootstrap(existing, r["asset_id"])]
+    update_rows = [r for r in rows if r not in bootstrap_rows]
+
+    new_parts = []
+    if bootstrap_rows:
+        print(f"Bootstrapping {len(bootstrap_rows)} asset(s) with {BOOTSTRAP_PERIOD} history.")
+        new_parts.extend(fetch_rows(bootstrap_rows, BOOTSTRAP_PERIOD))
+    if update_rows:
+        print(f"Updating {len(update_rows)} asset(s) with {UPDATE_PERIOD}.")
+        new_parts.extend(fetch_rows(update_rows, UPDATE_PERIOD))
 
     if not new_parts:
         print("No market data downloaded.")
@@ -79,11 +108,16 @@ def main():
     new = pd.concat(new_parts, ignore_index=True)
     cols = ["date", "asset_id", "symbol", "close", "volume", "provider"]
     new = new[cols]
+
     all_data = pd.concat([existing, new], ignore_index=True) if not existing.empty else new
     all_data = all_data.drop_duplicates(["date", "asset_id"], keep="last")
     all_data = all_data.sort_values(["date", "asset_id"])
     all_data.to_csv(OUT, index=False)
-    print(f"Saved {len(all_data)} price rows for {all_data.asset_id.nunique()} assets.")
+
+    print(
+        f"Saved {len(all_data)} price rows for "
+        f"{all_data.asset_id.nunique()} assets."
+    )
 
 
 if __name__ == "__main__":
