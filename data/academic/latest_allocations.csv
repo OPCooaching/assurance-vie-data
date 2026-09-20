@@ -1,0 +1,10 @@
+strategy_id,asset_id,weight_pct
+sixty_forty,FR0010315770,60.0
+sixty_forty,LU0478205379,40.0
+permanent_portfolio,FR0010315770,25.0
+permanent_portfolio,LU0290357846,25.0
+permanent_portfolio,LU0290358497,25.0
+permanent_portfolio,LU2611731824,25.0
+faber_trend,FR0010315770,100.0
+faber_trend,LU0290358497,0.0
+academic_momentum,LU0290358497,100.0
