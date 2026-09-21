@@ -16,8 +16,8 @@ actors:
     write_paths:
       - strategies/claude/
       - history/claude/
+      - data/claude/
       - docs/data/claude.json
-      - docs/data/claude-history.json
       - docs/claude.html
     may_read_other_strategy: true
 
