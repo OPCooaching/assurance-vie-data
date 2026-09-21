@@ -18,38 +18,42 @@
     <a href="screener.html">Screener</a>
   </nav>
 </header>
-<main>
+<main class="screener-main">
   <section class="card">
     <div id="screener-status" class="muted">Chargement des données…</div>
-    <h2>Ce que les données permettent vraiment de comparer</h2>
-    <p class="muted">Cette page ne recommande aucun achat. Elle rend visible la matière première commune dont ChatGPT et Claude peuvent partir pour concevoir des stratégies différentes.</p>
-    <div id="screener-counts" class="grid"></div>
+    <h2>À quoi sert cette page ?</h2>
+    <p class="lead">Avant de choisir une stratégie, il faut savoir ce que chaque support a réellement fait et quelles données sont assez solides pour le comparer aux autres. Cette page ne décide rien : elle prépare une liste de candidats à examiner avec des règles différentes.</p>
+    <div id="screener-counts" class="screener-counts"></div>
   </section>
   <section class="card">
-    <h2>Lecture visuelle</h2>
-    <p class="muted">Les graphiques répondent à trois questions simples : quels supports peuvent être analysés, où se situent-ils entre tendance et stabilité, et quels résultats ressortent du filtre actuel.</p>
+    <h2>Ce que nous savons analyser aujourd’hui</h2>
+    <p class="muted">Le graphique ne juge pas les supports exclus. Il explique simplement pourquoi certains peuvent être comparés avec les mêmes chiffres et pourquoi d’autres doivent être étudiés autrement.</p>
     <div class="visual-grid">
-      <article class="visual-card"><h3>Couverture de l’univers</h3><p>Chaque support est visible, y compris ceux que le screener ne doit pas classer.</p><canvas id="coverage-chart"></canvas></article>
-      <article class="visual-card"><h3>Carte tendance / stabilité</h3><p>En haut à droite : tendance et stabilité élevées. C’est une observation, jamais un ordre.</p><canvas id="map-chart"></canvas></article>
-      <article class="visual-card wide"><h3>Les observations les plus élevées</h3><p>Le classement combine uniquement les données de prix comparables. Il ne prend pas en compte le P/E, car il n’est pas disponible proprement pour tout l’univers.</p><canvas id="top-chart"></canvas></article>
+      <article class="visual-card"><h3>Peut-on comparer ce support avec les autres ?</h3><p><strong>Oui</strong> signifie qu’il a assez de prix réels. Les autres restent dans la liste, mais ne sont pas classés pour ne pas mélanger des choses incomparables.</p><canvas id="coverage-chart"></canvas></article>
+      <article class="visual-card"><h3>Prix en hausse et parcours moins brutal</h3><p>Chaque point est un support. En haut, son prix a davantage monté récemment. À droite, il a moins varié et moins fortement chuté que les autres. Le coin en haut à droite donne des candidats à étudier, pas des achats automatiques.</p><canvas id="map-chart"></canvas></article>
+      <article class="visual-card wide"><h3>Les candidats les plus compatibles avec ce premier filtre</h3><p>Le profil combine <strong>65 % de progression des prix</strong> sur un, trois et six mois et <strong>35 % de parcours moins instable</strong>. Un score élevé ne prédit pas la suite : il indique seulement par quels supports commencer la recherche.</p><canvas id="top-chart"></canvas></article>
     </div>
   </section>
   <section class="card">
-    <h2>Contrat de données</h2>
-    <p class="muted">Un indicateur n’est affiché que lorsqu’il a un sens pour le support concerné et peut être mis à jour régulièrement sans abonnement.</p>
+    <h2>Les trois informations réellement utilisées</h2>
+    <p class="muted">Pas de P/E fantôme, pas d’indicateur posé pour faire savant : chaque carte ci-dessous décrit une donnée calculée aujourd’hui et son rôle.</p>
     <div id="data-contract" class="contract-grid"></div>
   </section>
   <section class="card">
-    <h2>Explorer les supports</h2>
-    <p class="muted"><strong>Score d’observation</strong> : 65 % tendance (20, 60 et 120 séances) et 35 % stabilité (volatilité et recul maximal). Ce n’est pas un signal d’achat.</p>
+    <h2>La liste complète, expliquée colonne par colonne</h2>
+    <div class="reading-guide">
+      <p><strong>Profil actuel</strong> : résumé du filtre affiché au-dessus. Plus il est élevé, plus le support a récemment monté tout en ayant eu, relativement aux autres, moins de secousses ou de forte baisse.</p>
+      <p><strong>Variation 1 / 3 / 6 mois</strong> : ce que le prix a réellement fait, sans prédiction. <strong>Variations sur 3 mois</strong> : plus le chiffre est élevé, plus le prix a fait le yoyo. <strong>Pire baisse sur un an</strong> : par exemple, −25 % veut dire qu’à un moment le support a été 25 % sous son plus haut de l’année.</p>
+      <p><strong>Activité de cotation</strong> : 2,0 × signifie que le volume du jour est deux fois sa moyenne récente. C’est une information supplémentaire, pas une preuve que le support va monter.</p>
+    </div>
     <div class="screener-controls">
       <label>Rechercher <input id="screener-search" type="search" placeholder="Nom, ISIN, catégorie…"></label>
-      <label>État <select id="screener-filter"><option value="">Tous les supports</option><option value="analysable par les prix">Analysables par les prix</option><option value="hors screener de marché">Hors screener de marché</option><option value="données à résoudre">Données à résoudre</option><option value="devise à vérifier">Devise à vérifier</option><option value="historique insuffisant">Historique insuffisant</option></select></label>
+      <label>Afficher <select id="screener-filter"><option value="">Tous les supports</option><option value="analysable par les prix">Comparables aujourd’hui</option><option value="hors screener de marché">À étudier autrement</option><option value="données à résoudre">Cotation à résoudre</option><option value="devise à vérifier">Devise à vérifier</option><option value="historique insuffisant">Historique trop court</option></select></label>
     </div>
-    <div class="table-wrap"><table class="screener-table"><thead><tr><th>Support</th><th>Catégorie</th><th>État</th><th>Score</th><th>Tendance</th><th>Stabilité</th><th>Volume</th><th>20 j</th><th>60 j</th><th>120 j</th></tr></thead><tbody id="screener-body"></tbody></table></div>
+    <div class="table-wrap"><table class="screener-table"><thead><tr><th>Support</th><th>Type</th><th>Peut-on le comparer ?</th><th>Profil actuel</th><th>Variation<br>1 mois</th><th>Variation<br>3 mois</th><th>Variation<br>6 mois</th><th>Variations<br>sur 3 mois</th><th>Pire baisse<br>sur 1 an</th><th>Activité de<br>cotation</th></tr></thead><tbody id="screener-body"></tbody></table></div>
   </section>
 </main>
-<script src="assets/dashboard.js?v=20260921-visual"></script>
+<script src="assets/dashboard.js?v=20260921-plain-language"></script>
 <script>initScreener("data/screener.json").catch(console.error)</script>
 </body>
 </html>
