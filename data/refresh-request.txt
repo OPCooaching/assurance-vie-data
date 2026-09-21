@@ -1,3 +1,2 @@
-Rafraichissement demande le 2026-09-21 : initialiser les trois strategies ChatGPT en suivi quotidien a partir de la premiere date de valorisation commune reelle apres le 07/09/2026.
-Chaque signal ne doit utiliser que les donnees disponibles a sa date ; aucune courbe anterieure ne doit etre reconstruite.
+Rafraichissement demande le 2026-09-21 : verifier le suivi quotidien des trois strategies ChatGPT a partir des seules valorisations reelles.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
