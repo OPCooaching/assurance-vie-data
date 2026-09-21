@@ -10,7 +10,7 @@ s'execute a une valeur liquidative inconnue au moment de l'ordre.
 Entrees, toutes en lecture seule :
   config/universe.csv
   config/symbol_map.csv
-  data/prices/daily.csv          colonnes date, asset_id, symbol, close, volume, provider
+  data/prices/daily.csv          colonne obligatoire close_eur (close est un alias EUR)
   data/benchmarks/bernard_origin.csv
 
 Sorties, uniquement dans les espaces Claude :
