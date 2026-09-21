@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Screener commun</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <h1>Screener commun</h1>
+  <nav>
+    <a href="index.html">Synthèse</a>
+    <a href="academic.html">Académiques</a>
+    <a href="chatgpt.html">ChatGPT</a>
+    <a href="claude.html">Claude</a>
+    <a href="screener.html">Screener</a>
+  </nav>
+</header>
+<main>
+  <section class="card">
+    <div id="screener-status" class="muted">Chargement des données…</div>
+    <h2>Ce que les données permettent vraiment de comparer</h2>
+    <p class="muted">Cette page ne recommande aucun achat. Elle rend visible la matière première commune dont ChatGPT et Claude peuvent partir pour concevoir des stratégies différentes.</p>
+    <div id="screener-counts" class="grid"></div>
+  </section>
+  <section class="card">
+    <h2>Contrat de données</h2>
+    <p class="muted">Un indicateur n’est affiché que lorsqu’il a un sens pour le support concerné et peut être mis à jour régulièrement sans abonnement.</p>
+    <div id="data-contract" class="contract-grid"></div>
+  </section>
+  <section class="card">
+    <h2>Explorer les supports</h2>
+    <p class="muted"><strong>Score d’observation</strong> : 65 % tendance (20, 60 et 120 séances) et 35 % stabilité (volatilité et recul maximal). Ce n’est pas un signal d’achat.</p>
+    <div class="screener-controls">
+      <label>Rechercher <input id="screener-search" type="search" placeholder="Nom, ISIN, catégorie…"></label>
+      <label>État <select id="screener-filter"><option value="">Tous les supports</option><option value="analysable par les prix">Analysables par les prix</option><option value="hors screener de marché">Hors screener de marché</option><option value="données à résoudre">Données à résoudre</option><option value="devise à vérifier">Devise à vérifier</option><option value="historique insuffisant">Historique insuffisant</option></select></label>
+    </div>
+    <div class="table-wrap"><table class="screener-table"><thead><tr><th>Support</th><th>Catégorie</th><th>État</th><th>Score</th><th>Tendance</th><th>Stabilité</th><th>Volume</th><th>20 j</th><th>60 j</th><th>120 j</th></tr></thead><tbody id="screener-body"></tbody></table></div>
+  </section>
+</main>
+<script src="assets/dashboard.js?v=20260921-screener"></script>
+<script>initScreener("data/screener.json").catch(console.error)</script>
+</body>
+</html>
