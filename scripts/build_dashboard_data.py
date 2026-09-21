@@ -73,11 +73,26 @@ def load_actor_results(name: str):
     except (OSError, json.JSONDecodeError):
         return None, []
 
-    # Strategy files are documentation and research artefacts.  They may
+    # Strategy files are documentation and research artefacts. They may
     # never supply a public performance curve: only workflow-generated
-    # data/<actor>/performance.csv files are accepted below.
-    strategies = data.get("strategies", {})
-    return strategies, []
+    # data/<actor>/performance.csv files are accepted below.  Publish a
+    # compact description only; historical backtests, simulated decisions and
+    # allocations remain in the actor's private research area.
+    raw = data.get("strategies", {})
+    public = {}
+    allowed = ("label", "version", "resume", "objectif", "regle", "frequence", "faiblesse", "tracking_start")
+    if isinstance(raw, dict):
+        for strategy_id, spec in raw.items():
+            if not isinstance(spec, dict):
+                continue
+            item = {field: spec[field] for field in allowed if field in spec}
+            item["status"] = "live_paper_tracking"
+            item["statut_public"] = (
+                "Suivi quotidien depuis le 09/09/2026 sur prix réellement observés. "
+                "Aucune courbe antérieure ni résultat de backtest n’est publié ici."
+            )
+            public[strategy_id] = item
+    return public, []
 
 
 def payload(series_map, dates, start_eur=None, extra=None):
