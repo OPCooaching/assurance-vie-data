@@ -6,104 +6,127 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
+BERNARD_SIMULATION = Path("data/benchmarks/bernard_current_composition_5y.csv")
 ACADEMIC = Path("data/academic/performance.csv")
 STRATEGIES = Path("strategies")
 OUT = Path("docs/data")
 START_EUR = os.getenv("PORTFOLIO_START_EUR")
 
 
-def read_series(path: Path):
+def read_csv(path):
     if not path.exists():
         return None
-    df = pd.read_csv(path)
-    if df.empty or "date" not in df.columns:
-        return None
-    return df
+    data = pd.read_csv(path)
+    return data if not data.empty and "date" in data.columns else None
 
 
-def load_existing_metadata(name: str):
+def values_by_date(frame, column):
+    if frame is None or column not in frame.columns:
+        return {}
+    dates = frame["date"].astype(str)
+    values = pd.to_numeric(frame[column], errors="coerce")
+    return {date: float(value) for date, value in zip(dates, values) if pd.notna(value)}
+
+
+def load_existing_metadata(name):
     path = OUT / f"{name}.json"
     if not path.exists():
-        return {}
+        return []
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        return {"strategies": data.get("strategies", {})}
-    except Exception:
-        return {}
-
-
-def load_actor_results(name: str):
-    """Read an actor-owned result file without allowing it to edit generated JSON."""
-    path = STRATEGIES / name / "strategies.json"
-    if not path.exists():
-        return None, []
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        strategies = data.get("strategies", [])
+        return strategies if isinstance(strategies, list) else list(strategies.values())
     except (OSError, json.JSONDecodeError):
-        return None, []
+        return []
 
-    strategies = data.get("strategies", {})
-    curves = []
-    if not isinstance(strategies, dict):
-        return strategies, curves
 
-    for strategy_id, spec in sorted(strategies.items()):
-        points = spec.get("courbe", [])
-        values = {}
-        for point in points:
-            try:
-                date = str(point["date"])
-                value = float(point["valeur"])
-            except (KeyError, TypeError, ValueError):
+def load_actor_results(name):
+    """Read actor-owned sources; generated public JSON is never an input source."""
+    metadata_path = STRATEGIES / name / "strategies.json"
+    metadata, curve_ids, curves = [], set(), []
+    if metadata_path.exists():
+        try:
+            source = json.loads(metadata_path.read_text(encoding="utf-8"))
+            raw = source.get("strategies", {})
+            entries = raw.values() if isinstance(raw, dict) else raw
+            for spec in entries:
+                if not isinstance(spec, dict):
+                    continue
+                curve_ids.add(str(spec.get("id", "")))
+                metadata.append({key: value for key, value in spec.items() if key != "courbe"})
+                points = spec.get("courbe", [])
+                by_date = {}
+                for point in points:
+                    try:
+                        by_date[str(point["date"])] = float(point["valeur"])
+                    except (KeyError, TypeError, ValueError):
+                        continue
+                if by_date:
+                    curves.append({"label": str(spec.get("label") or spec.get("id")), "by_date": by_date})
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    # Claude backtests pre-date strategies.json curves. Read their actor-owned CSVs.
+    for strategy_file in sorted((STRATEGIES / name).glob("*/strategy.yml")):
+        try:
+            spec = yaml.safe_load(strategy_file.read_text(encoding="utf-8"))
+            strategy_id = str(spec["id"])
+            if strategy_id in curve_ids:
                 continue
-            values[date] = value
-        if values:
-            curves.append({
+            version = str(spec["active_version"])
+            backtest = strategy_file.parent / f"backtest_{version}.csv"
+            curve = read_csv(backtest)
+            if curve is None or "valeur" not in curve.columns:
+                continue
+            curves.append({"label": str(spec.get("label") or strategy_id), "by_date": values_by_date(curve, "valeur")})
+            metadata.append({
+                "id": strategy_id,
                 "label": str(spec.get("label") or strategy_id),
-                "by_date": values,
+                "version": f"simulation {version}",
+                "short": str(spec.get("main_rule") or ""),
+                "objective": str(spec.get("objective") or ""),
+                "main_rule": str(spec.get("main_rule") or ""),
+                "details": "Résultat de backtest historique ; il ne constitue pas une décision réelle.",
+                "status": str(spec.get("status") or "simulation historique"),
             })
-    return strategies, curves
+        except (OSError, KeyError, TypeError, yaml.YAMLError):
+            continue
+    return metadata, curves
 
 
-def payload(series_map, dates, start_eur=None, extra=None):
-    data = {
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "start_eur": float(start_eur) if start_eur else None,
-        "dates": [str(x) for x in dates],
-        "series": series_map,
-    }
-    if extra:
-        data.update(extra)
-    return data
+def aligned(label, by_date, dates):
+    return {"label": label, "values": [by_date.get(date) for date in dates]}
 
 
-def aligned_series(label, values_by_date, dates):
+def payload(series, dates, strategies=None):
     return {
-        "label": label,
-        "values": [values_by_date.get(date) for date in dates],
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "start_eur": float(START_EUR) if START_EUR else None,
+        "dates": dates,
+        "series": series,
+        "strategies": strategies or [],
     }
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    real = values_by_date(read_csv(BASELINE), "baseline")
+    simulated = values_by_date(read_csv(BERNARD_SIMULATION), "simulation_current_composition")
+    academic = read_csv(ACADEMIC)
 
-    baseline = read_series(BASELINE)
-    academic = read_series(ACADEMIC)
+    academic_dates = set(academic["date"].astype(str)) if academic is not None else set()
+    real_dates = set(real)
+    comparison_dates = sorted(academic_dates | real_dates)
+    if not comparison_dates:
+        comparison_dates = sorted(simulated)
 
-    if baseline is not None:
-        base_dates = baseline["date"].astype(str).tolist()
-        base_values = pd.to_numeric(baseline["baseline"], errors="coerce").round(6).tolist()
-        baseline_by_date = dict(zip(base_dates, base_values))
-    else:
-        base_dates = ["2026-09-07"]
-        baseline_by_date = {"2026-09-07": 100.0}
-
-    bernard = {"label": "Bernard origine", "values": [baseline_by_date[d] for d in base_dates]}
-    series = [bernard]
-    dates = base_dates
-
+    academic_series = [
+        aligned("Bernard — composition actuelle simulée", simulated, comparison_dates),
+        aligned("Bernard origine (suivi réel)", real, comparison_dates),
+    ]
     if academic is not None:
         labels = {
             "sixty_forty": "60/40 mondial adapté",
@@ -111,45 +134,32 @@ def main():
             "faber_trend": "Faber Trend 10 mois",
             "academic_momentum": "Momentum académique 12 mois",
         }
-        merged = pd.DataFrame({"date": dates})
-        merged["date"] = merged["date"].astype(str)
-        a = academic.copy()
-        a["date"] = a["date"].astype(str)
-        merged = merged.merge(a, on="date", how="left")
-        for col, label in labels.items():
-            if col in merged.columns:
-                vals = pd.to_numeric(merged[col], errors="coerce").round(6)
-                series.append({
-                    "label": label,
-                    "values": [None if pd.isna(x) else float(x) for x in vals],
-                })
-
+        for column, label in labels.items():
+            if column in academic.columns:
+                academic_series.append(aligned(label, values_by_date(academic, column), comparison_dates))
     (OUT / "academic.json").write_text(
-        json.dumps(payload(series, dates, START_EUR), ensure_ascii=False),
+        json.dumps(payload(academic_series, comparison_dates), ensure_ascii=False),
         encoding="utf-8",
     )
 
     for name in ("chatgpt", "claude"):
-        source_strategies, actor_curves = load_actor_results(name)
-        metadata = (
-            {"strategies": source_strategies}
-            if source_strategies is not None
-            else load_existing_metadata(name)
-        )
-        actor_dates = sorted(set(base_dates).union(
-            date for curve in actor_curves for date in curve["by_date"]
+        metadata, curves = load_actor_results(name)
+        if not metadata:
+            metadata = load_existing_metadata(name)
+        actor_dates = sorted(set(comparison_dates).union(
+            date for curve in curves for date in curve["by_date"]
         ))
-        actor_series = [aligned_series("Bernard origine", baseline_by_date, actor_dates)]
-        actor_series.extend(
-            aligned_series(curve["label"], curve["by_date"], actor_dates)
-            for curve in actor_curves
-        )
+        actor_series = [
+            aligned("Bernard — composition actuelle simulée", simulated, actor_dates),
+            aligned("Bernard origine (suivi réel)", real, actor_dates),
+        ]
+        actor_series.extend(aligned(curve["label"], curve["by_date"], actor_dates) for curve in curves)
         (OUT / f"{name}.json").write_text(
-            json.dumps(payload(actor_series, actor_dates, START_EUR, metadata), ensure_ascii=False),
+            json.dumps(payload(actor_series, actor_dates, metadata), ensure_ascii=False),
             encoding="utf-8",
         )
 
-    print("Dashboard JSON generated.")
+    print("Dashboard JSON generated with all available actor curves.")
 
 
 if __name__ == "__main__":
