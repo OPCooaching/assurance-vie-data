@@ -45,6 +45,11 @@ def load_actor_performance(name: str, strategies):
         "chatgpt_impulsion": "ChatGPT A — Momentum hebdomadaire",
         "chatgpt_adaptative": "ChatGPT B — Momentum adaptatif",
         "chatgpt_rotation_diversifiee": "ChatGPT C — Momentum diversifié",
+        "claude_socle_satellites": "Claude A — Socle mondial et satellites",
+        "claude_risque_cible": "Claude B — Risque cible constant",
+        "claude_double_filtre": "Claude C — Tendance confirmée par l’ampleur",
+        "claude_momentum_multi": "Claude D — Momentum multi-horizon",
+        "claude_momentum_prudent": "Claude E — Momentum sous garde-fou",
     }
     result = []
     for column in frame.columns:
@@ -68,27 +73,11 @@ def load_actor_results(name: str):
     except (OSError, json.JSONDecodeError):
         return None, []
 
+    # Strategy files are documentation and research artefacts.  They may
+    # never supply a public performance curve: only workflow-generated
+    # data/<actor>/performance.csv files are accepted below.
     strategies = data.get("strategies", {})
-    curves = []
-    if not isinstance(strategies, dict):
-        return strategies, curves
-
-    for strategy_id, spec in sorted(strategies.items()):
-        points = spec.get("courbe", [])
-        values = {}
-        for point in points:
-            try:
-                date = str(point["date"])
-                value = float(point["valeur"])
-            except (KeyError, TypeError, ValueError):
-                continue
-            values[date] = value
-        if values:
-            curves.append({
-                "label": str(spec.get("label") or strategy_id),
-                "by_date": values,
-            })
-    return strategies, curves
+    return strategies, []
 
 
 def payload(series_map, dates, start_eur=None, extra=None):
