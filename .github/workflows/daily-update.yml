@@ -65,6 +65,9 @@ jobs:
       - name: Compute ChatGPT live strategies
         run: python scripts/compute_chatgpt_strategies.py
 
+      - name: Compute Claude live strategies
+        run: python scripts/compute_claude_strategies.py
+
       - name: Build dashboard data
         run: python scripts/build_dashboard_data.py
 
