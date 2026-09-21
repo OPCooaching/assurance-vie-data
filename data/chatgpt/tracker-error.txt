@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/runner/work/assurance-vie-data/assurance-vie-data/scripts/compute_chatgpt_strategies.py", line 165, in <module>
+    main()
+  File "/home/runner/work/assurance-vie-data/assurance-vie-data/scripts/compute_chatgpt_strategies.py", line 146, in main
+    curve, latest = daily_curve(px, dates, signal_fn, assets)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/assurance-vie-data/assurance-vie-data/scripts/compute_chatgpt_strategies.py", line 114, in daily_curve
+    weights = signal_fn(dt)
+              ^^^^^^^^^^^^^
+  File "/home/runner/work/assurance-vie-data/assurance-vie-data/scripts/compute_chatgpt_strategies.py", line 142, in <lambda>
+    "chatgpt_adaptative": lambda dt: signal_adaptative(px, assets, dt, cfg["adaptative"]),
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/assurance-vie-data/assurance-vie-data/scripts/compute_chatgpt_strategies.py", line 68, in signal_adaptative
+    weights = {cfg["defensive_asset"]: 1.0 - exposure}
+               ~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'defensive_asset'
