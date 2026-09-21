@@ -1,2 +1,2 @@
-Rafraichissement demande le 2026-09-21 : produire le screener commun a partir des cours, volumes et indicateurs deja normalises en EUR. Ne pas modifier les strategies suivies ni les historiques de decisions.
-Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
+Rafraîchissement demandé le 2026-09-21 : produire le screener commun et les données externes de contexte à partir de sources publiques. Ne pas modifier les stratégies suivies ni les historiques de décisions.
+Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient aucune donnée de contrat.
