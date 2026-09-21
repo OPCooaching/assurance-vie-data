@@ -70,6 +70,7 @@ def academic_metadata():
     result = {}
     for strategy_id, spec in (cfg.get("strategies") or {}).items():
         frequency = spec.get("rebalance") or spec.get("signal_frequency") or "selon la règle"
+        frequency = {"monthly": "mensuelle", "annual": "annuelle"}.get(str(frequency), frequency)
         result[strategy_id] = {
             "label": spec.get("label") or strategy_id,
             "version": "règle de référence",
