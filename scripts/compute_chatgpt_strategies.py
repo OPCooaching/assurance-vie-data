@@ -159,4 +159,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # Keep a generated diagnostic in the repository if a workflow-only
+    # environment exposes a data issue; it is not public dashboard content.
+    try:
+        main()
+        Path("data/chatgpt/tracker-error.txt").unlink(missing_ok=True)
+    except Exception:
+        import traceback
+        Path("data/chatgpt").mkdir(parents=True, exist_ok=True)
+        Path("data/chatgpt/tracker-error.txt").write_text(traceback.format_exc(), encoding="utf-8")
+        print("ChatGPT tracker did not produce curves; diagnostic saved.")
