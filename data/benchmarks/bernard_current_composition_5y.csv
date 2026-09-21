@@ -1,7 +1,7 @@
 date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simulation_label,simulation_note
 2021-09-20,100.0,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-09-21,100.04082833106575,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2021-09-22,100.75534982504719,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2021-09-22,100.75534982504718,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-09-23,101.34848620793744,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-09-24,101.08485380575685,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-09-25,101.08962220370603,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -30,13 +30,13 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2021-10-18,102.1906672916138,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-19,102.49360310953574,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-20,102.56333629569126,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2021-10-21,101.99907424244705,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2021-10-21,101.99907424244702,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-22,102.20117592080283,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-23,102.20595514347947,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-24,102.21073475320767,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-25,102.73955041523541,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-26,103.09780225534593,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2021-10-27,102.84960298361052,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2021-10-27,102.8496029836105,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-28,102.91463930284888,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-29,102.94622906224056,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2021-10-30,102.95101099493644,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -184,7 +184,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-03-21,105.32632142443039,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-03-22,105.80446098252254,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-03-23,105.61285660971905,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-03-24,105.74642283909085,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-03-24,105.74642283909084,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-03-25,106.09810151241403,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-03-26,106.10294071183613,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-03-27,106.10778030316706,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -250,7 +250,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-05-26,103.8855011501084,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-05-27,104.68628318929373,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-05-28,104.6911471410624,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-05-29,104.69601148674457,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-05-29,104.69601148674454,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-05-30,105.23143322456502,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-05-31,104.59181589640427,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-06-01,104.27480713288122,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -362,7 +362,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-09-15,101.26210889450537,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-09-16,100.83871009310366,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-09-17,100.84361836206949,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-09-18,100.84852702853786,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-09-18,100.84852702853783,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-09-19,100.90859722564696,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-09-20,100.55229636705685,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-09-21,100.72546182299308,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -377,7 +377,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-09-30,98.861349972547,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-01,98.86626380947881,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-02,98.87117804436409,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-10-03,99.36545192283776,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-10-03,99.36545192283775,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-04,100.63658958572836,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-05,99.9215578533488,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-06,99.9841490929953,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -399,7 +399,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-10-22,100.22048553793152,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-23,100.22540813728848,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-24,100.40721285001501,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-10-25,100.7881086875226,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-10-25,100.78810868752257,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-26,101.15331978950533,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-27,100.62082418367979,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-10-28,100.67027178876538,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -451,7 +451,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2022-12-13,104.12776072847731,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-12-14,103.5393623505205,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-12-15,102.17911902809252,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2022-12-16,101.89578575069956,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2022-12-16,101.89578575069953,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-12-17,101.90073032454094,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-12-18,101.90567529882506,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2022-12-19,101.92082476470125,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -511,7 +511,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2023-02-11,105.86017317217504,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-02-12,105.86514062308821,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-02-13,106.23575467833956,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-02-14,106.39469034230665,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-02-14,106.39469034230662,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-02-15,106.52341776244114,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-02-16,106.96861411588785,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-02-17,106.37815724763719,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -546,12 +546,12 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2023-03-18,103.9004499611392,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-19,103.90543151179625,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-20,104.11785826134859,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-03-21,104.70594106552969,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-03-21,104.70594106552966,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-22,104.81553796052268,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-23,104.74640101332452,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-24,103.988848269891,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-25,103.99383224166228,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-03-26,103.99881661706705,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-03-26,103.99881661706702,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-27,104.38233278818305,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-28,104.28632280344074,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-03-29,104.99440560757567,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -613,7 +613,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2023-05-24,104.8541088848238,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-05-25,105.44002230240261,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-05-26,106.41516250152574,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-05-27,106.42017196614948,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-05-27,106.42017196614945,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-05-28,106.42518183647121,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-05-29,106.51919386398274,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-05-30,106.38439913980149,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -659,7 +659,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2023-07-09,107.01797790532974,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-07-10,106.84221521555163,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-07-11,107.03856470840859,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-07-12,107.91071523337425,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-07-12,107.91071523337423,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-07-13,108.07462283152773,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-07-14,108.06750903029021,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-07-15,108.07253841280367,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -733,7 +733,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2023-09-21,107.48093729089724,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-09-22,107.45850299704927,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-09-23,107.46356097114716,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2023-09-24,107.46861935487169,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2023-09-24,107.46861935487166,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-09-25,107.28690943547284,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-09-26,107.07700759220246,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2023-09-27,107.28364357007518,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -897,7 +897,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2024-03-03,115.66886431676646,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-03-04,115.87025079885672,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-03-05,115.3488631558918,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2024-03-06,115.95850321728688,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2024-03-06,115.95850321728685,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-03-07,116.62070648736014,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-03-08,116.18777652690027,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-03-09,116.19290378572673,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -937,7 +937,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2024-04-12,117.85978351436712,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-04-13,117.86492532654049,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-04-14,117.87006755513023,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2024-04-15,118.00201466112121,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2024-04-15,118.0020146611212,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-04-16,116.72857417854969,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-04-17,116.51900274188196,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-04-18,116.53443140384228,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -994,7 +994,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2024-06-08,119.87425969520953,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-06-09,119.87942529701772,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-06-10,120.23560538304912,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2024-06-11,119.64719448802705,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2024-06-11,119.64719448802703,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-06-12,120.54956123790997,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-06-13,120.00579591418605,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-06-14,119.8238292726014,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1036,7 +1036,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2024-07-20,119.02167524557879,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-07-21,119.02685844699408,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-07-22,119.42544729238452,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2024-07-23,119.71758588633996,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2024-07-23,119.71758588633993,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-07-24,119.03435644461027,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-07-25,118.5203953504599,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2024-07-26,118.54505792500771,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1235,7 +1235,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-02-04,123.6487887908265,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-02-05,123.7771102042787,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-02-06,125.29613435834221,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-02-07,125.02158185355732,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-02-07,125.0215818535573,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-02-08,125.02685054205264,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-02-09,125.03211965723959,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-02-10,125.41897707610138,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1275,7 +1275,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-03-16,123.85596804764948,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-17,124.17646217256969,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-18,124.496834495451,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-03-19,124.71258680960236,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-03-19,124.71258680960233,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-20,124.17058901384566,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-21,123.9211008045228,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-22,123.92638744384958,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1286,12 +1286,12 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-03-27,123.63225215415208,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-28,122.15829944884524,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-29,122.16358908591778,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-03-30,122.16887915137843,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-03-30,122.16887915137842,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-03-31,121.16894504024425,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-01,122.02429190321486,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-02,122.00981752410749,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-03,119.06066701305824,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-04-04,115.29566011062687,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-04-04,115.29566011062684,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-05,115.30095274714496,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-06,115.3062458122941,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-04-07,113.81130669414125,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1327,7 +1327,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-05-07,120.84614162996876,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-05-08,121.65296095449814,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-05-09,122.14934780371682,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-05-10,122.15465546299427,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-05-10,122.15465546299424,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-05-11,122.15996355211935,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-05-12,124.0882262523583,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-05-13,125.0553001352251,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1361,7 +1361,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-06-10,125.56702088540925,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-06-11,125.9261158498375,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-06-12,125.48185706027391,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-06-13,124.74965876831317,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-06-13,124.74965876831314,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-06-14,124.75498149299091,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-06-15,124.76030464873644,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-06-16,125.77311587132058,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1417,7 +1417,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-08-05,128.1995825274261,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-06,128.3163411566869,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-07,129.07874358979072,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-08-08,129.79586885062852,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-08-08,129.7958688506285,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-09,129.80121576894228,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-10,129.8065631202832,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-11,130.1272279284703,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1440,7 +1440,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-08-28,130.62604092867232,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-29,129.9789287528137,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-08-30,129.98428477206542,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-08-31,129.98964122508136,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-08-31,129.98964122508133,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-01,130.11788966698614,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-02,128.8940362635795,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-03,129.53635512176766,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1468,9 +1468,9 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-09-25,133.86795538445736,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-26,134.43046007750434,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-27,134.43582825544107,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-09-28,134.4411968681267,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-09-28,134.44119686812667,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-09-29,134.6306042919255,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-09-30,134.49189051278134,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-09-30,134.4918905127813,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-01,135.52196428845986,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-02,136.10948137762284,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-03,136.84089736378144,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1479,7 +1479,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-10-06,137.39594264889155,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-07,136.65285886474877,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-08,137.94900889824336,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-10-09,137.72673717813166,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-10-09,137.72673717813163,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-10,135.99370053080176,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-11,135.99907479842764,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-10-12,136.00444950129557,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1505,7 +1505,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-11-01,139.82661193560597,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-02,139.83199578670366,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-03,140.12172130793485,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-11-04,139.4321741532169,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-11-04,139.43217415321686,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-05,139.60891863990216,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-06,139.19646501708897,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-07,138.19140604915754,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1532,7 +1532,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2025-11-28,141.0445727658294,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-29,141.04996840182054,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-11-30,141.05536447478426,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2025-12-01,141.13789796219743,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2025-12-01,141.13789796219737,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-12-02,141.4393144943372,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-12-03,141.58690715510053,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2025-12-04,141.85704724767842,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1719,7 +1719,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2026-06-03,177.81969521309367,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-06-04,177.0445675362156,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-06-05,173.07581052044833,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2026-06-06,173.08128937616212,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2026-06-06,173.0812893761621,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-06-07,173.08676867558813,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-06-08,173.56127288068117,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-06-09,171.25485173999388,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1812,7 +1812,7 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2026-09-04,179.49379724699546,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-05,179.49931662803016,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-06,179.50483645605908,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2026-09-07,180.59077541900066,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2026-09-07,180.59077541900064,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-08,180.83959160062992,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-09,179.89067872076407,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-10,178.3631412154287,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
@@ -1826,4 +1826,4 @@ date,simulation_current_composition,coverage_pct,provisional_fund_euro_rate,simu
 2026-09-18,178.47999520821713,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-19,178.48552085046654,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
 2026-09-20,178.49104694021727,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
-2026-09-21,180.4328996622206,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
+2026-09-21,180.42038978478064,100.0,0.03,Composition actuelle de Bernard (simulation),Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard.
