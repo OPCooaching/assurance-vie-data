@@ -1,3 +1,3 @@
-Rafraichissement demande le 2026-09-21 : publier uniquement les dates de marche ou toutes les lignes du portefeuille ont une cloture effectivement disponible depuis le 07/09/2026.
-Aucun rendement quotidien ou week-end ne doit etre reconstitue.
+Rafraichissement demande le 2026-09-21 : initialiser les trois strategies ChatGPT en suivi quotidien a partir de la premiere date de valorisation commune reelle apres le 07/09/2026.
+Chaque signal ne doit utiliser que les donnees disponibles a sa date ; aucune courbe anterieure ne doit etre reconstruite.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
