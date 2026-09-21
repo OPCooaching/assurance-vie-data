@@ -6,18 +6,12 @@ cashflows_in_performance: excluded
 
 fund_euro:
   asset_id: ALTAPROFITS:FONDS-EN-EURO-NETISSIMA
-  provisional_annual_rate: 0.03
-  note: "Estimation provisoire jusqu'au taux réellement crédité."
+  return_mode: held_at_initial_value_pending_credit
+  confirmed_annual_rate: null
+  note: "Aucun rendement journalier n'est inventé. La valeur reste inchangée jusqu'à l'enregistrement d'un taux effectivement crédité."
 
 source_portfolio: config/portfolio_current.csv
 output_series: data/benchmarks/bernard_origin.csv
-
-historical_current_composition:
-  start_date: 2021-09-20
-  output_series: data/benchmarks/bernard_current_composition_5y.csv
-  method: buy_and_hold_no_rebalance
-  label: "Composition actuelle de Bernard (simulation)"
-  note: "Simulation de la composition connue au 07/09/2026 ; ce n'est pas l'historique réel de Bernard."
 
 comparison_metrics:
   - performance_since_origin
