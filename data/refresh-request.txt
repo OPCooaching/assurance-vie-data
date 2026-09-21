@@ -1,2 +1,2 @@
-Rafraichissement demande le 2026-09-21 : publier les allocations actuelles, les frequences de revue et les regles de remplacement des strategies dans les pages detaillees, sans courbe historique supplementaire.
+Rafraichissement demande le 2026-09-21 : afficher en clair les allocations actuelles et les frequences de revue de chaque strategie, sans modifier les regles ou les historiques de decisions.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
