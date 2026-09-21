@@ -1,2 +1,2 @@
-Reconstruction demandee le 2026-09-21 apres protection de l'historique reel Claude et validation de son point d'entree.
+Reconstruction demandee le 2026-09-21 apres ajout des simulations historiques ChatGPT, de la synthese multi-espaces et des couleurs distinctes.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
