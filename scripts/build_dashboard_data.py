@@ -6,9 +6,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
+import yaml
 
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
 ACADEMIC = Path("data/academic/performance.csv")
+ACADEMIC_CFG = Path("config/academic_strategies.yml")
+UNIVERSE = Path("config/universe.csv")
 STRATEGIES = Path("strategies")
 OUT = Path("docs/data")
 START_EUR = os.getenv("PORTFOLIO_START_EUR")
@@ -21,6 +24,62 @@ def read_series(path: Path):
     if df.empty or "date" not in df.columns:
         return None
     return df
+
+
+def asset_names():
+    if not UNIVERSE.exists():
+        return {}
+    frame = pd.read_csv(UNIVERSE)
+    return dict(zip(frame["asset_id"], frame["support_name"]))
+
+
+def attach_allocations(strategies, actor, names):
+    """Attach the current workflow allocation to its public strategy description."""
+    path = Path("data") / actor / "latest_allocations.csv"
+    if not path.exists() or not isinstance(strategies, dict):
+        return strategies
+    frame = pd.read_csv(path)
+    if frame.empty or not {"strategy_id", "asset_id", "weight_pct"}.issubset(frame.columns):
+        return strategies
+    for strategy_id, group in frame.groupby("strategy_id"):
+        candidates = (strategy_id, strategy_id.replace("_", "-"), strategy_id.replace("-", "_"))
+        target = next((key for key in candidates if key in strategies), None)
+        if target is None:
+            continue
+        strategies[target]["holdings"] = [
+            {
+                "asset_id": str(row.asset_id),
+                "name": str(names.get(row.asset_id, row.asset_id)),
+                "weight_pct": round(float(row.weight_pct), 2),
+            }
+            for row in group.sort_values("weight_pct", ascending=False).itertuples()
+            if float(row.weight_pct) > 0
+        ]
+    return strategies
+
+
+def academic_metadata():
+    if not ACADEMIC_CFG.exists():
+        return {}
+    cfg = yaml.safe_load(ACADEMIC_CFG.read_text(encoding="utf-8")) or {}
+    rules = {
+        "static": "Allocation fixe ; rééquilibrage à la fréquence indiquée.",
+        "faber_sma10": "Chaque fin de mois, l’indice monde est détenu seulement au-dessus de sa moyenne 10 mois ; sinon la poche va au monétaire.",
+        "momentum_12m": "Chaque fin de mois, les cinq ETF au momentum 12 mois positif le plus élevé sont détenus ; sinon la poche va au monétaire.",
+    }
+    result = {}
+    for strategy_id, spec in (cfg.get("strategies") or {}).items():
+        frequency = spec.get("rebalance") or spec.get("signal_frequency") or "selon la règle"
+        result[strategy_id] = {
+            "label": spec.get("label") or strategy_id,
+            "version": "règle de référence",
+            "resume": "Référence académique suivie avec les prix réellement observés depuis le 09/09/2026.",
+            "regle": rules.get(spec.get("type"), "Règle documentée dans la configuration académique."),
+            "frequence": f"Revue ou rééquilibrage : {frequency}.",
+            "status": "live_paper_tracking",
+            "statut_public": "Suivi quotidien depuis le 09/09/2026. La composition ci-dessous est celle de la dernière revue disponible.",
+        }
+    return result
 
 
 def load_existing_metadata(name: str):
@@ -86,6 +145,9 @@ def load_actor_results(name: str):
             if not isinstance(spec, dict):
                 continue
             item = {field: spec[field] for field in allowed if field in spec}
+            item["frequence"] = item.get("frequence") or (
+                "Revue hebdomadaire, chaque lundi ; l’allocation décidée s’applique à la valorisation suivante."
+            )
             item["status"] = "live_paper_tracking"
             item["statut_public"] = (
                 "Suivi quotidien depuis le 09/09/2026 sur prix réellement observés. "
@@ -152,8 +214,9 @@ def main():
                     "values": [None if pd.isna(x) else float(x) for x in vals],
                 })
 
+    academic_info = attach_allocations(academic_metadata(), "academic", asset_names())
     (OUT / "academic.json").write_text(
-        json.dumps(payload(series, dates, START_EUR), ensure_ascii=False),
+        json.dumps(payload(series, dates, START_EUR, {"strategies": academic_info}), ensure_ascii=False),
         encoding="utf-8",
     )
 
@@ -163,6 +226,9 @@ def main():
             {"strategies": source_strategies}
             if source_strategies is not None
             else load_existing_metadata(name)
+        )
+        metadata["strategies"] = attach_allocations(
+            metadata.get("strategies", {}), name, asset_names()
         )
         # Only workflow-produced tracking files may add public actor curves.
         # Their dates begin at the declared live-tracking start, never in a
