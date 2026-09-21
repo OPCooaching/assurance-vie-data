@@ -1,2 +1,2 @@
-Rafraichissement demande le 2026-09-21 : publier uniquement les descriptions et suivis quotidiens reels des strategies, sans metadonnees de backtest ou decisions retroconstruites.
+Rafraichissement demande le 2026-09-21 : publier les allocations actuelles, les frequences de revue et les regles de remplacement des strategies dans les pages detaillees, sans courbe historique supplementaire.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
