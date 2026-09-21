@@ -1,0 +1,39 @@
+# Données externes retenues par ChatGPT, distinctes des séries macro demandées par Claude.
+# Elles décrivent le contexte ; elles ne sont pas des ordres d'achat/vente.
+# Une valeur n'est jamais inventée ou prolongée entre deux publications.
+series:
+  - id: USEPUINDXD
+    column: policy_uncertainty_us
+    label: "Incertitude économique et politique américaine"
+    frequency: daily
+    source: "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED"
+    purpose: "Mesurer si l'environnement d'information devient exceptionnellement incertain."
+    url: "https://fred.stlouisfed.org/series/USEPUINDXD"
+  - id: NFCI
+    column: financial_conditions_us
+    label: "Conditions financières américaines"
+    frequency: weekly
+    source: "Chicago Fed, via FRED"
+    purpose: "Mesurer si le crédit et le financement deviennent plus faciles ou plus contraints."
+    url: "https://fred.stlouisfed.org/series/NFCI"
+  - id: DTWEXBGS
+    column: broad_us_dollar
+    label: "Dollar américain pondéré par le commerce"
+    frequency: daily
+    source: "Federal Reserve Board, via FRED"
+    purpose: "Observer la force globale du dollar, sans se limiter à la paire EUR/USD."
+    url: "https://fred.stlouisfed.org/series/DTWEXBGS"
+  - id: DCOILBRENTEU
+    column: brent_europe_usd
+    label: "Pétrole Brent Europe"
+    frequency: daily
+    source: "U.S. Energy Information Administration, via FRED"
+    purpose: "Observer la pression énergétique mondiale, différente du prix des supports du contrat."
+    url: "https://fred.stlouisfed.org/series/DCOILBRENTEU"
+  - id: WEI
+    column: weekly_economic_activity_us
+    label: "Activité économique hebdomadaire américaine"
+    frequency: weekly
+    source: "Lewis-Mertens-Stock Weekly Economic Index, via FRED"
+    purpose: "Observer l'évolution récente de l'activité économique sans attendre les indicateurs mensuels."
+    url: "https://fred.stlouisfed.org/series/WEI"
