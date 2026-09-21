@@ -1,177 +1,22 @@
 const STRATEGY_COLORS={
-  "Bernard — composition actuelle simulée":"#121212",
-  "Bernard origine (suivi réel)":"#121212",
-  "60/40 mondial adapté":"#d64545",
-  "Harry Browne adapté":"#2f6db3",
-  "Faber Trend 10 mois":"#2f8f5b",
-  "Momentum académique 12 mois":"#d88a22",
-  "ChatGPT A — Momentum hebdomadaire":"#7a4fb3",
-  "ChatGPT B — Momentum adaptatif":"#008b95",
-  "ChatGPT C — Momentum diversifié":"#d05a32",
-  "Claude A — Socle mondial et satellites plafonnés":"#8b5e34",
-  "Claude B — Risque cible constant":"#b34f7d",
-  "Claude C — Tendance confirmée par l’ampleur":"#4a79a8",
-  "Claude D — Momentum multi-horizon":"#5a8c45",
-  "Claude E — Momentum sous garde-fou":"#b28a22"
-};
-const FALLBACK_COLORS=["#6d7780","#8a6fb0","#2b7a78","#a56a43","#5a7d9a","#8a8a4a"];
-function colorFor(label,index=0){
-  if(STRATEGY_COLORS[label]) return STRATEGY_COLORS[label];
-  const hash=[...String(label)].reduce((total,char)=>total+char.charCodeAt(0),0);
-  return FALLBACK_COLORS[(hash+index)%FALLBACK_COLORS.length];
-}
-async function loadJSON(path){
-  const r=await fetch(path,{cache:"no-store"});
-  if(!r.ok)throw new Error(path);
-  return r.json();
-}
-function pct(x){return Number.isFinite(x)?(100*x).toFixed(2)+" %":"—";}
-function euro(x){return Number.isFinite(x)?new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(x):"—";}
-function colorFor(label,index=0){return STRATEGY_COLORS[label]||FALLBACK_COLORS[index%FALLBACK_COLORS.length];}
-function metrics(values){
-  const v=values.filter(Number.isFinite);
-  if(v.length===0)return {};
-  if(v.length===1)return {since:0,r5:NaN,r20:NaN,dd:0,vol20:NaN,last:v[0]};
-  const r=v.slice(1).map((x,i)=>x/v[i]-1);
-  let peak=v[0],dd=0;
-  for(const x of v){peak=Math.max(peak,x);dd=Math.min(dd,x/peak-1);}
-  const ret=(n)=>v.length>n?v[v.length-1]/v[v.length-1-n]-1:NaN;
-  const last20=r.slice(-20);
-  const mean=last20.reduce((a,b)=>a+b,0)/(last20.length||1);
-  const variance=last20.length>1?last20.reduce((a,b)=>a+(b-mean)**2,0)/(last20.length-1):NaN;
-  return {since:v[v.length-1]/v[0]-1,r5:ret(5),r20:ret(20),dd,vol20:Number.isFinite(variance)?Math.sqrt(variance)*Math.sqrt(252):NaN,last:v[v.length-1]};
-}
-function swatch(label,index=0){
-  return '<span class="swatch" style="background:'+colorFor(label,index)+'"></span>';
-}
-function renderSummary(series,startEur){
-  const box=document.querySelector("#summary");
-  if(!box)return;
-  box.innerHTML="";
-  series.forEach((s,i)=>{
-    const m=metrics(s.values);
-    const d=document.createElement("div");
-    d.className="metric";
-    d.innerHTML="<span>"+swatch(s.label,i)+s.label+"</span><b>"+pct(m.since)+"</b><small>Depuis le 07/09/2026"+(startEur&&Number.isFinite(m.last)?" · "+euro(startEur*m.last/100):"")+"</small>";
-    box.appendChild(d);
-  });
-}
-function renderTable(series,startEur){
-  const t=document.querySelector("#metrics-body");
-  if(!t)return;
-  t.innerHTML="";
-  series.forEach((s,i)=>{
-    const m=metrics(s.values);
-    const tr=document.createElement("tr");
-    tr.innerHTML="<td>"+swatch(s.label,i)+s.label+"</td><td>"+pct(m.since)+"</td><td>"+pct(m.r5)+"</td><td>"+pct(m.r20)+"</td><td>"+pct(m.dd)+"</td><td>"+pct(m.vol20)+"</td><td>"+(startEur&&Number.isFinite(m.last)?euro(startEur*m.last/100):(Number.isFinite(m.last)?m.last.toFixed(2):"—"))+"</td>";
-    t.appendChild(tr);
-  });
-}
-function renderChart(labels,series,startEur){
-  const ctx=document.querySelector("#comparison-chart");
-  if(!ctx)return;
-  const onePoint=labels.length<=1;
-  new Chart(ctx,{
-    type:"line",
-    data:{
-      labels,
-      datasets:series.map((s,i)=>({
-        label:s.label,
-        data:s.values,
-        borderColor:colorFor(s.label,i),
-        backgroundColor:colorFor(s.label,i),
-        borderWidth:s.label==="Bernard origine"?7:2,
-        pointRadius:onePoint?(s.label==="Bernard origine"?8:5):(s.label==="Bernard origine"?3.5:1.5),
-        pointHoverRadius:s.label==="Bernard origine"?8:5,
-        pointBorderWidth:s.label==="Bernard origine"?2:1,
-        order:s.label==="Bernard origine"?0:1,
-        spanGaps:true,
-        tension:.1
-      }))
-    },
-    options:{
-      responsive:true,
-      interaction:{mode:"index",intersect:false},
-      plugins:{
-        legend:{labels:{usePointStyle:true,pointStyle:"circle"}},
-        tooltip:{callbacks:{label:(c)=>startEur?c.dataset.label+": "+euro(startEur*c.parsed.y/100):c.dataset.label+": "+c.parsed.y.toFixed(2)}}
-      },
-      scales:{y:{title:{display:true,text:startEur?"Valeur théorique (€)":"Base 100"}}}
-    }
-  });
-}
-function renderDetailSwatches(){
-  document.querySelectorAll("[data-series-color]").forEach((el,i)=>{
-    el.style.background=colorFor(el.dataset.seriesColor,i);
-  });
-}
-async function initDashboard(dataPath){
-  const data=await loadJSON(dataPath);
-  const labels=data.dates||[];
-  const series=(data.series||[]).map(s=>({label:s.label,values:s.values}));
-  renderChart(labels,series,data.start_eur||null);
-  renderSummary(series,data.start_eur||null);
-  renderTable(series,data.start_eur||null);
-  renderStrategyDetails(data.strategies||[]);
-  renderDetailSwatches();
-  const status=document.querySelector("#status");
-  if(status)status.textContent=data.generated_at?"Mise à jour : "+data.generated_at:"Point de départ : 07/09/2026";
-}
-async function initOverview(paths){
-  const datasets=await Promise.all(paths.map(loadJSON));
-  const allDates=[...new Set(datasets.flatMap(d=>d.dates||[]))].sort();
-  const byLabel=new Map();
-  for(const d of datasets){
-    const dates=d.dates||[];
-    for(const s of (d.series||[])){
-      if(!byLabel.has(s.label))byLabel.set(s.label,new Map());
-      const m=byLabel.get(s.label);
-      dates.forEach((dt,i)=>{if(s.values[i]!==null&&s.values[i]!==undefined)m.set(dt,s.values[i]);});
-    }
-  }
-  const series=[...byLabel.entries()].map(([label,m])=>({label,values:allDates.map(d=>m.has(d)?m.get(d):null)}));
-  const startEur=datasets.find(d=>d.start_eur)?.start_eur||null;
-  renderChart(allDates,series,startEur);
-  renderSummary(series,startEur);
-  renderTable(series,startEur);
-  const status=document.querySelector("#status");
-  if(status)status.textContent="Vue d'ensemble des stratégies";
-}
-function renderStrategyDetails(strategies){
-  const box=document.querySelector("#strategy-details");
-  if(!box)return;
-  box.innerHTML="";
-  for(const s of strategies||[]){
-    const div=document.createElement("div");
-    div.className="strategy";
-    const holdings=(s.holdings||[]);
-    const holdingsHtml=holdings.length
-      ? "<ul>"+holdings.map(h=>"<li>"+(h.name||h.asset_id||"")+" — "+(h.weight_pct!=null?h.weight_pct.toFixed(1)+" %":"")+"</li>").join("")+"</ul>"
-      : '<p class="muted">'+(s.status||"Aucune position calculée")+"</p>";
-    div.innerHTML=
-      '<h3><span class="swatch" style="background:'+colorFor(s.label)+'"></span>'+s.label+' <small class="muted">'+(s.version||"")+'</small></h3>'+
-      '<p><strong>Résumé.</strong> '+s.short+'</p>'+
-      '<p><strong>Objectif.</strong> '+s.objective+'</p>'+
-      '<p><strong>Règle principale.</strong> '+s.main_rule+'</p>'+
-      '<p>'+s.details+'</p>'+
-      '<h4>Actifs actuellement détenus</h4>'+holdingsHtml;
-    box.appendChild(div);
-  }
-}
-async function renderHistory(path){
-  const box=document.querySelector("#history-body");
-  if(!box)return;
-  try{
-    const data=await loadJSON(path);
-    const rows=data.history||[];
-    if(!rows.length){
-      box.innerHTML='<tr><td colspan="6" class="muted">Aucun arbitrage enregistré pour le moment.</td></tr>';
-      return;
-    }
-    box.innerHTML=rows.slice().reverse().map(r=>
-      "<tr><td>"+(r.date||"")+"</td><td>"+(r.strategy_label||r.strategy_id||"")+"</td><td>"+(r.version||"")+"</td><td>"+(r.action||"")+"</td><td>"+(r.reason||"")+"</td><td>"+(r.value_index!=null?Number(r.value_index).toFixed(2):"—")+"</td></tr>"
-    ).join("");
-  }catch(e){
-    box.innerHTML='<tr><td colspan="6" class="muted">Historique indisponible.</td></tr>';
-  }
-}
+"Bernard origine":"#f6bd60","60/40 mondial adapté":"#e76f51","Harry Browne adapté":"#457b9d","Faber Trend 10 mois":"#2a9d8f","Momentum académique 12 mois":"#8f5fbf",
+"ChatGPT A — Momentum hebdomadaire":"#8ecae6","ChatGPT B — Momentum adaptatif":"#4cc9f0","ChatGPT C — Momentum diversifié":"#4895ef",
+"Claude A — Socle mondial et satellites":"#ff9f1c","Claude B — Risque cible constant":"#ffbf69","Claude C — Tendance confirmée par l’ampleur":"#ffd166","Claude D — Momentum multi-horizon":"#f4a261","Claude E — Momentum sous garde-fou":"#e9c46a",
+"Repère académique (moyenne)":"#2a9d8f","ChatGPT (moyenne des 3)":"#4cc9f0","Claude (moyenne des 5)":"#f4a261"};
+const FALLBACK=["#8ecae6","#ffb703","#fb8500","#90be6d","#c77dff"];
+const ACADEMIC=["60/40 mondial adapté","Harry Browne adapté","Faber Trend 10 mois","Momentum académique 12 mois"];
+let activeChart;
+const colorFor=(label,i=0)=>STRATEGY_COLORS[label]||FALLBACK[i%FALLBACK.length];
+async function loadJSON(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(path);return r.json();}
+const pct=x=>Number.isFinite(x)?(100*x).toFixed(2)+" %":"—";
+const swatch=(label,i=0)=>'<span class="swatch" style="background:'+colorFor(label,i)+'"></span>';
+function metrics(values){const v=values.filter(Number.isFinite);if(!v.length)return{};if(v.length===1)return{since:0,r5:NaN,r20:NaN,dd:0,vol20:NaN,last:v[0]};const r=v.slice(1).map((x,i)=>x/v[i]-1);let peak=v[0],dd=0;for(const x of v){peak=Math.max(peak,x);dd=Math.min(dd,x/peak-1);}const ret=n=>v.length>n?v.at(-1)/v.at(-1-n)-1:NaN,last=r.slice(-20),mean=last.reduce((a,b)=>a+b,0)/(last.length||1),variance=last.length>1?last.reduce((a,b)=>a+(b-mean)**2,0)/(last.length-1):NaN;return{since:v.at(-1)/v[0]-1,r5:ret(5),r20:ret(20),dd,vol20:Number.isFinite(variance)?Math.sqrt(variance)*Math.sqrt(252):NaN,last:v.at(-1)};}
+function renderSummary(series){const box=document.querySelector("#summary");if(box)box.innerHTML=series.map((s,i)=>{const m=metrics(s.values);return '<article class="metric"><span class="eyebrow">'+swatch(s.label,i)+s.label+'</span><b>'+pct(m.since)+'</b><small>Depuis le 09/09/2026 · base '+(Number.isFinite(m.last)?m.last.toFixed(2):"—")+'</small></article>';}).join("");}
+function renderTable(series){const body=document.querySelector("#metrics-body");if(body)body.innerHTML=series.map((s,i)=>{const m=metrics(s.values);return '<tr><td>'+swatch(s.label,i)+s.label+'</td><td>'+pct(m.since)+'</td><td>'+pct(m.r5)+'</td><td>'+pct(m.r20)+'</td><td>'+pct(m.dd)+'</td><td>'+pct(m.vol20)+'</td><td>'+(Number.isFinite(m.last)?m.last.toFixed(2):"—")+'</td></tr>';}).join("");}
+function renderChart(labels,series){const canvas=document.querySelector("#comparison-chart");if(!canvas)return;if(activeChart)activeChart.destroy();activeChart=new Chart(canvas,{type:"line",data:{labels,datasets:series.map((s,i)=>({label:s.label,data:s.values,borderColor:colorFor(s.label,i),backgroundColor:colorFor(s.label,i),borderWidth:s.label==="Bernard origine"?4:2.5,pointRadius:labels.length<12?3:0,pointHoverRadius:6,tension:.28,spanGaps:true,fill:false}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{position:"bottom",labels:{usePointStyle:true,boxWidth:9,padding:18,color:"#dbe8ef",font:{weight:"600"}}},tooltip:{padding:12,callbacks:{label:c=>c.dataset.label+": "+c.parsed.y.toFixed(2)}}},scales:{x:{grid:{display:false},ticks:{color:"#99abb8",maxRotation:0}},y:{grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#99abb8"},title:{display:true,text:"Indice base 100",color:"#99abb8"}}}}});}
+function renderStrategyDetails(strategies){const box=document.querySelector("#strategy-details");if(!box)return;const list=Array.isArray(strategies)?strategies:Object.entries(strategies||{}).map(([id,s])=>({...s,id}));box.innerHTML=list.map((s,i)=>'<article class="strategy"><div class="strategy-title">'+swatch(s.label,i)+'<div><h3>'+s.label+'</h3><small>'+[s.version,s.status].filter(Boolean).join(" · ")+'</small></div></div>'+(s.resume||s.short?'<p>'+(s.resume||s.short)+'</p>':"")+(s.objectif||s.objective?'<p><strong>But.</strong> '+(s.objectif||s.objective)+'</p>':"")+(s.regle||s.main_rule?'<p><strong>Règle.</strong> '+(s.regle||s.main_rule)+'</p>':"")+(s.faiblesse?'<p class="muted"><strong>Point de vigilance.</strong> '+s.faiblesse+'</p>':"")+(s.statut_public?'<p class="status-note">'+s.statut_public+'</p>':"")+'</article>').join("")||'<p class="muted">Aucune stratégie documentée.</p>';}
+function setStatus(data){const e=document.querySelector("#status");if(e)e.textContent=data.generated_at?"Données mises à jour le "+new Date(data.generated_at).toLocaleString("fr-FR"):"";}
+async function initDashboard(path){const data=await loadJSON(path),series=data.series||[];renderChart(data.dates||[],series);renderSummary(series);renderTable(series);renderStrategyDetails(data.strategies||{});setStatus(data);}
+function average(label,items,dates){return{label,values:dates.map((_,i)=>{const v=items.map(s=>s.values[i]).filter(Number.isFinite);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;})};}
+function renderGroups(groups){const box=document.querySelector("#group-breakdown");if(!box)return;box.innerHTML=groups.filter(g=>g.members.length).map((g,i)=>'<article class="group-card group-'+i+'"><span class="eyebrow">'+swatch(g.summary.label,i)+g.title+'</span><strong>'+g.members.length+' '+(g.members.length>1?"stratégies":"stratégie")+'</strong><p>'+g.description+'</p><div class="strategy-tags">'+g.members.map(s=>'<span>'+s.label+'</span>').join("")+'</div>'+(g.href?'<a href="'+g.href+'">Voir le détail →</a>':"")+'</article>').join("");}
+async function initOverview(paths){const data=await Promise.all(paths.map(loadJSON)),dates=[...new Set(data.flatMap(d=>d.dates||[]))].sort(),all=new Map();for(const d of data)(d.series||[]).forEach(s=>{const m=new Map();(d.dates||[]).forEach((dt,i)=>m.set(dt,s.values[i]));all.set(s.label,{label:s.label,values:dates.map(dt=>m.get(dt)??null)});});const bernard=all.get("Bernard origine"),academic=ACADEMIC.map(x=>all.get(x)).filter(Boolean),chatgpt=[...all.values()].filter(s=>s.label.startsWith("ChatGPT ")),claude=[...all.values()].filter(s=>s.label.startsWith("Claude "));const groups=[{title:"Bernard",description:"Le portefeuille suivi tel qu’il était au départ.",members:bernard?[bernard]:[],summary:bernard},{title:"Références académiques",description:"Quatre règles de référence, regroupées pour une lecture simple.",members:academic,summary:average("Repère académique (moyenne)",academic,dates),href:"academic.html"},{title:"Stratégies ChatGPT",description:"Trois approches suivies avec la même poche de marché.",members:chatgpt,summary:average("ChatGPT (moyenne des 3)",chatgpt,dates),href:"chatgpt.html"},{title:"Stratégies Claude",description:"Cinq approches suivies dans la même enveloppe de risque.",members:claude,summary:average("Claude (moyenne des 5)",claude,dates),href:"claude.html"}],display=groups.filter(g=>g.summary&&g.members.length).map(g=>g.summary);renderChart(dates,display);renderSummary(display);renderTable(display);renderGroups(groups);const e=document.querySelector("#status");if(e)e.textContent="Lecture simplifiée · dernière valorisation commune : "+(dates.at(-1)||"—");}
