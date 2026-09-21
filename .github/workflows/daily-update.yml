@@ -50,6 +50,9 @@ jobs:
       - name: Update prices
         run: python scripts/update_market_data.py
 
+      - name: Update ChatGPT external context data
+        run: python scripts/update_context_data.py
+
       - name: Validate normalised market data
         run: python scripts/validate_market_data.py
 
