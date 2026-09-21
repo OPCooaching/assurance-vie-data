@@ -1,16 +1,25 @@
 const STRATEGY_COLORS={
-  "Bernard origine":"#263238",
+  "Bernard — composition actuelle simulée":"#121212",
+  "Bernard origine (suivi réel)":"#121212",
   "60/40 mondial adapté":"#d64545",
   "Harry Browne adapté":"#2f6db3",
   "Faber Trend 10 mois":"#2f8f5b",
   "Momentum académique 12 mois":"#d88a22",
-  "ChatGPT Dynamique":"#7a4fb3",
-  "ChatGPT Adaptative":"#008b95",
-  "Claude 1":"#8b5e34",
-  "Claude 2":"#b34f7d"
+  "ChatGPT A — Momentum hebdomadaire":"#7a4fb3",
+  "ChatGPT B — Momentum adaptatif":"#008b95",
+  "ChatGPT C — Momentum diversifié":"#d05a32",
+  "Claude — Socle et satellites":"#8b5e34",
+  "Claude — Risque cible":"#b34f7d",
+  "Claude — Double filtre":"#4a79a8",
+  "Claude — Momentum multi-actifs":"#5a8c45",
+  "Claude — Momentum prudent":"#b28a22"
 };
 const FALLBACK_COLORS=["#6d7780","#8a6fb0","#2b7a78","#a56a43","#5a7d9a","#8a8a4a"];
-
+function colorFor(label,index=0){
+  if(STRATEGY_COLORS[label]) return STRATEGY_COLORS[label];
+  const hash=[...String(label)].reduce((total,char)=>total+char.charCodeAt(0),0);
+  return FALLBACK_COLORS[(hash+index)%FALLBACK_COLORS.length];
+}
 async function loadJSON(path){
   const r=await fetch(path,{cache:"no-store"});
   if(!r.ok)throw new Error(path);
