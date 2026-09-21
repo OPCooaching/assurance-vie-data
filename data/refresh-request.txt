@@ -1,2 +1,2 @@
-Rafraichissement demande le 2026-09-21 : verifier le suivi quotidien des trois strategies ChatGPT a partir des seules valorisations reelles.
+Rafraichissement demande le 2026-09-21 : mettre a jour les trois strategies ChatGPT en suivi quotidien depuis le 09/09/2026 sur les seules valorisations de marche effectivement observees.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
