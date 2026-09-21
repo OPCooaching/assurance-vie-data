@@ -12,6 +12,8 @@ PRICES = Path("data/prices/daily.csv")
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
 OUT = Path("data/chatgpt/performance.csv")
 ALLOC_OUT = Path("data/chatgpt/latest_allocations.csv")
+RISK_SLEEVE = 0.50
+FONDS_EURO = "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA"
 
 
 def load_inputs():
@@ -111,7 +113,10 @@ def daily_curve(px, dates, signal_fn, assets):
                     ret += float(weight) * (float(current) / float(previous) - 1.0)
             value *= 1.0 + ret
         if is_rebalance_date(dt, dates[0]):
-            weights = signal_fn(dt)
+            # The three ChatGPT engines operate inside the same 50% market
+            # sleeve as Claude.  The other half is the uncredited fund-euro
+            # sleeve, valued unchanged until an actual credit is recorded.
+            weights = {asset: RISK_SLEEVE * weight for asset, weight in signal_fn(dt).items()}
             latest_weights = dict(weights)
         values.append((dt, value))
         last_prices = prices
@@ -152,6 +157,11 @@ def main():
             {"strategy_id": strategy_id, "asset_id": asset, "weight_pct": round(100.0 * weight, 6)}
             for asset, weight in latest.items()
         )
+        allocations.append({
+            "strategy_id": strategy_id,
+            "asset_id": FONDS_EURO,
+            "weight_pct": round(100.0 * (1.0 - sum(latest.values())), 6),
+        })
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     frame = pd.DataFrame(curves)
