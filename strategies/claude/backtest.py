@@ -16,7 +16,7 @@ Entrees, toutes en lecture seule :
 Sorties, uniquement dans les espaces Claude :
   strategies/claude/<id>/backtest_<version>.csv
   strategies/claude/strategies.json
-  history/claude/decisions.jsonl   (append only)
+  strategies/claude/<id>/backtest_decisions_<version>.jsonl
 
 Usage :
   python strategies/claude/backtest.py
@@ -282,9 +282,13 @@ def main() -> int:
         version = strategie["active_version"]
         courbe.to_csv(chemin.parent / f"backtest_{version}.csv", index=False)
 
-        with HISTORIQUE.open("a", encoding="utf-8") as f:
-            for d in decisions:
-                f.write(json.dumps(d, ensure_ascii=False) + "\n")
+        # Un backtest produit des décisions simulées. Elles restent dans son
+        # dossier de stratégie et ne sont jamais ajoutées à l'historique réel.
+        journal = chemin.parent / f"backtest_decisions_{version}.jsonl"
+        journal.write_text(
+            "".join(json.dumps(d, ensure_ascii=False) + "\n" for d in decisions),
+            encoding="utf-8",
+        )
 
         resultats[strategie["id"]] = {
             "label": strategie["label"],
