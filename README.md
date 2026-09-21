@@ -48,7 +48,7 @@ Les décisions passées ne sont jamais réécrites. Une modification de logique 
 - `docs/index.html` : synthèse générale ;
 - `docs/academic.html` : stratégies académiques ;
 - `docs/chatgpt.html` : stratégies ChatGPT ;
-- `docs/claude.html` : stratégies Claude.
+- `docs/claude.html` : stratégies Claude.\n- `docs/screener.html` : observatoire commun des données et de leur disponibilité.
 
 ## Mise à jour automatique
 
@@ -60,7 +60,7 @@ Il :
 3. tente de résoudre les symboles de marché ;
 4. récupère les cours ;
 5. recalcule les indicateurs ;
-6. recalcule Bernard origine ;
+6. construit le screener commun des données exploitables ;\n7. recalcule Bernard origine ;
 7. recalcule les stratégies académiques ;
 8. reconstruit les données du tableau de bord ;
 9. commit les nouvelles données.
