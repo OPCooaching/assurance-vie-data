@@ -34,6 +34,30 @@ def load_existing_metadata(name: str):
         return {}
 
 
+def load_actor_performance(name: str, strategies):
+    """Read daily live paper-tracking values produced by the common workflow."""
+    path = Path("data") / name / "performance.csv"
+    frame = read_series(path)
+    if frame is None:
+        return []
+
+    labels = {
+        "chatgpt_impulsion": "ChatGPT A — Momentum hebdomadaire",
+        "chatgpt_adaptative": "ChatGPT B — Momentum adaptatif",
+        "chatgpt_rotation_diversifiee": "ChatGPT C — Momentum diversifié",
+    }
+    result = []
+    for column in frame.columns:
+        if column == "date":
+            continue
+        points = {}
+        for _, row in frame[["date", column]].dropna().iterrows():
+            points[str(row["date"])] = float(row[column])
+        if points:
+            result.append({"label": labels.get(column, column), "by_date": points})
+    return result
+
+
 def load_actor_results(name: str):
     """Read an actor-owned result file without allowing it to edit generated JSON."""
     path = STRATEGIES / name / "strategies.json"
@@ -136,6 +160,10 @@ def main():
             if source_strategies is not None
             else load_existing_metadata(name)
         )
+        # Only workflow-produced tracking files may add public actor curves.
+        # Their dates begin at the declared live-tracking start, never in a
+        # reconstructed historical period.
+        actor_curves.extend(load_actor_performance(name, metadata.get("strategies", {})))
         actor_dates = sorted(set(base_dates).union(
             date for curve in actor_curves for date in curve["by_date"]
         ))
