@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Screener commun</title>
   <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body>
 <header>
@@ -25,6 +26,15 @@
     <div id="screener-counts" class="grid"></div>
   </section>
   <section class="card">
+    <h2>Lecture visuelle</h2>
+    <p class="muted">Les graphiques répondent à trois questions simples : quels supports peuvent être analysés, où se situent-ils entre tendance et stabilité, et quels résultats ressortent du filtre actuel.</p>
+    <div class="visual-grid">
+      <article class="visual-card"><h3>Couverture de l’univers</h3><p>Chaque support est visible, y compris ceux que le screener ne doit pas classer.</p><canvas id="coverage-chart"></canvas></article>
+      <article class="visual-card"><h3>Carte tendance / stabilité</h3><p>En haut à droite : tendance et stabilité élevées. C’est une observation, jamais un ordre.</p><canvas id="map-chart"></canvas></article>
+      <article class="visual-card wide"><h3>Les observations les plus élevées</h3><p>Le classement combine uniquement les données de prix comparables. Il ne prend pas en compte le P/E, car il n’est pas disponible proprement pour tout l’univers.</p><canvas id="top-chart"></canvas></article>
+    </div>
+  </section>
+  <section class="card">
     <h2>Contrat de données</h2>
     <p class="muted">Un indicateur n’est affiché que lorsqu’il a un sens pour le support concerné et peut être mis à jour régulièrement sans abonnement.</p>
     <div id="data-contract" class="contract-grid"></div>
@@ -39,7 +49,7 @@
     <div class="table-wrap"><table class="screener-table"><thead><tr><th>Support</th><th>Catégorie</th><th>État</th><th>Score</th><th>Tendance</th><th>Stabilité</th><th>Volume</th><th>20 j</th><th>60 j</th><th>120 j</th></tr></thead><tbody id="screener-body"></tbody></table></div>
   </section>
 </main>
-<script src="assets/dashboard.js?v=20260921-screener"></script>
+<script src="assets/dashboard.js?v=20260921-visual"></script>
 <script>initScreener("data/screener.json").catch(console.error)</script>
 </body>
 </html>
