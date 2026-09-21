@@ -8,11 +8,11 @@ const STRATEGY_COLORS={
   "ChatGPT A — Momentum hebdomadaire":"#7a4fb3",
   "ChatGPT B — Momentum adaptatif":"#008b95",
   "ChatGPT C — Momentum diversifié":"#d05a32",
-  "Claude — Socle et satellites":"#8b5e34",
-  "Claude — Risque cible":"#b34f7d",
-  "Claude — Double filtre":"#4a79a8",
-  "Claude — Momentum multi-actifs":"#5a8c45",
-  "Claude — Momentum prudent":"#b28a22"
+  "Claude A — Socle mondial et satellites plafonnés":"#8b5e34",
+  "Claude B — Risque cible constant":"#b34f7d",
+  "Claude C — Tendance confirmée par l’ampleur":"#4a79a8",
+  "Claude D — Momentum multi-horizon":"#5a8c45",
+  "Claude E — Momentum sous garde-fou":"#b28a22"
 };
 const FALLBACK_COLORS=["#6d7780","#8a6fb0","#2b7a78","#a56a43","#5a7d9a","#8a8a4a"];
 function colorFor(label,index=0){
