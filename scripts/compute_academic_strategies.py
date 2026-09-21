@@ -8,6 +8,7 @@ import yaml
 CFG = Path("config/academic_strategies.yml")
 UNIVERSE = Path("config/universe.csv")
 PRICES = Path("data/prices/daily.csv")
+BASELINE = Path("data/benchmarks/bernard_origin.csv")
 OUT = Path("data/academic/performance.csv")
 ALLOC_OUT = Path("data/academic/latest_allocations.csv")
 
@@ -132,12 +133,19 @@ def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
 
 
 def main():
-    if not (CFG.exists() and UNIVERSE.exists() and PRICES.exists()):
+    if not (CFG.exists() and UNIVERSE.exists() and PRICES.exists() and BASELINE.exists()):
         print("Academic strategies skipped: required data not available yet.")
         return
 
+    benchmark_dates = pd.to_datetime(pd.read_csv(BASELINE)["date"], errors="coerce").dropna().sort_values()
+    if benchmark_dates.empty:
+        print("Academic strategies skipped: no actual common valuation date.")
+        return
+
     cfg = yaml.safe_load(CFG.read_text(encoding="utf-8"))
-    start = pd.Timestamp(cfg["start_date"])
+    # Academic rules may use older prices to form their signals, but public
+    # tracking begins on the same first real valuation date as Bernard.
+    start = max(pd.Timestamp(cfg["start_date"]), pd.Timestamp(benchmark_dates.iloc[0]))
     norm = float(cfg.get("normalization", 100))
     universe = pd.read_csv(UNIVERSE)
     px = load_prices()
@@ -183,6 +191,9 @@ def main():
         return
 
     out = pd.concat(curves, axis=1).sort_index()
+    # Never publish dates that Bernard cannot be valued on a common actual
+    # basis.  This also prevents academic-only weekends or later quote dates.
+    out = out.loc[out.index.isin(pd.DatetimeIndex(benchmark_dates))]
     out.index.name = "date"
     OUT.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(OUT)
