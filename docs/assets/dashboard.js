@@ -44,14 +44,104 @@ function addScreenerChart(canvas,config){if(canvas&&typeof Chart!=="undefined")s
 function renderScreenerVisuals(rows){
   if(typeof Chart==="undefined")return;
   destroyScreenerCharts();
+
   const states=["analysable par les prix","hors screener de marché","historique insuffisant","données à résoudre","devise à vérifier"];
-  const labels=states.filter(status=>rows.some(row=>row.status===status)).map(status=>statusLabel(status));
-  const counts=states.filter(status=>rows.some(row=>row.status===status)).map(status=>rows.filter(row=>row.status===status).length);
-  addScreenerChart(document.querySelector("#coverage-chart"),{type:"doughnut",data:{labels,datasets:[{data:counts,backgroundColor:SCREENER_COLORS,borderColor:"#10212c",borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{color:"#dce7eb",font:{size:16},padding:18,boxWidth:15}},tooltip:{callbacks:{label:c=>c.label+": "+c.parsed+" supports"}}}}}});
-  const top=rows.filter(row=>Number.isFinite(row.market_observation_score)).sort((a,b)=>b.market_observation_score-a.market_observation_score).slice(0,10);
-  addScreenerChart(document.querySelector("#top-chart"),{type:"bar",data:{labels:top.map(row=>row.name),datasets:[{label:"Profil actuel",data:top.map(row=>row.market_observation_score),backgroundColor:"#f6bd60",borderRadius:7,borderSkipped:false}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x.toFixed(0)+" / 100 · profil calculé avec les prix"}}},scales:{x:{min:0,max:100,title:{display:true,text:"Profil actuel : tendance des prix + moindre instabilité",color:"#cbd9df",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}},y:{grid:{display:false},ticks:{color:"#e8f0f4",font:{size:13}}}}}});
-  const points=rows.filter(row=>Number.isFinite(row.trend_score)&&Number.isFinite(row.stability_score)).map(row=>({x:row.stability_score,y:row.trend_score,name:row.name}));
-  addScreenerChart(document.querySelector("#map-chart"),{type:"scatter",data:{datasets:[{data:points,backgroundColor:"rgba(76,201,240,.75)",borderColor:"#4cc9f0",pointRadius:4,pointHoverRadius:7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.name+" · progression "+c.raw.y.toFixed(0)+" / 100 · moins de secousses "+c.raw.x.toFixed(0)+" / 100"}}},scales:{x:{min:0,max:100,title:{display:true,text:"À droite : prix moins secoués et moins de forte baisse",color:"#dce7eb",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}},y:{min:0,max:100,title:{display:true,text:"En haut : prix en hausse sur 1, 3 et 6 mois",color:"#dce7eb",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}}}}}});
+  const availableStates=states.filter(status=>rows.some(row=>row.status===status));
+  const coverageConfig={
+    type:"doughnut",
+    data:{
+      labels:availableStates.map(status=>statusLabel(status)),
+      datasets:[{
+        data:availableStates.map(status=>rows.filter(row=>row.status===status).length),
+        backgroundColor:SCREENER_COLORS,
+        borderColor:"#10212c",
+        borderWidth:3,
+      }],
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{position:"bottom",labels:{color:"#dce7eb",font:{size:16},padding:18,boxWidth:15}},
+        tooltip:{callbacks:{label:context=>context.label+": "+context.parsed+" supports"}},
+      },
+    },
+  };
+  addScreenerChart(document.querySelector("#coverage-chart"),coverageConfig);
+
+  const top=rows
+    .filter(row=>Number.isFinite(row.market_observation_score))
+    .sort((a,b)=>b.market_observation_score-a.market_observation_score)
+    .slice(0,10);
+  const topConfig={
+    type:"bar",
+    data:{
+      labels:top.map(row=>row.name),
+      datasets:[{
+        label:"Profil actuel",
+        data:top.map(row=>row.market_observation_score),
+        backgroundColor:"#f6bd60",
+        borderRadius:7,
+        borderSkipped:false,
+      }],
+    },
+    options:{
+      indexAxis:"y",
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:context=>context.parsed.x.toFixed(0)+" / 100 · profil calculé avec les prix"}},
+      },
+      scales:{
+        x:{
+          min:0,max:100,
+          title:{display:true,text:"Profil actuel : tendance des prix + moindre instabilité",color:"#cbd9df",font:{size:14}},
+          grid:{color:"rgba(148,163,184,.14)"},
+          ticks:{color:"#dce7eb",font:{size:13}},
+        },
+        y:{grid:{display:false},ticks:{color:"#e8f0f4",font:{size:13}}},
+      },
+    },
+  };
+  addScreenerChart(document.querySelector("#top-chart"),topConfig);
+
+  const points=rows
+    .filter(row=>Number.isFinite(row.trend_score)&&Number.isFinite(row.stability_score))
+    .map(row=>({x:row.stability_score,y:row.trend_score,name:row.name}));
+  const mapConfig={
+    type:"scatter",
+    data:{datasets:[{
+      data:points,
+      backgroundColor:"rgba(76,201,240,.75)",
+      borderColor:"#4cc9f0",
+      pointRadius:4,
+      pointHoverRadius:7,
+    }]},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:context=>context.raw.name+" · progression "+context.raw.y.toFixed(0)+" / 100 · moins de secousses "+context.raw.x.toFixed(0)+" / 100"}},
+      },
+      scales:{
+        x:{
+          min:0,max:100,
+          title:{display:true,text:"À droite : prix moins secoués et moins de forte baisse",color:"#dce7eb",font:{size:14}},
+          grid:{color:"rgba(148,163,184,.14)"},
+          ticks:{color:"#dce7eb",font:{size:13}},
+        },
+        y:{
+          min:0,max:100,
+          title:{display:true,text:"En haut : prix en hausse sur 1, 3 et 6 mois",color:"#dce7eb",font:{size:14}},
+          grid:{color:"rgba(148,163,184,.14)"},
+          ticks:{color:"#dce7eb",font:{size:13}},
+        },
+      },
+    },
+  };
+  addScreenerChart(document.querySelector("#map-chart"),mapConfig);
 }
 function initScreener(path){return loadJSON(path).then(data=>{
   const rows=data.rows||[],counts=data.counts||{};
