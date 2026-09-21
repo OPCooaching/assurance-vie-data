@@ -25,6 +25,12 @@ async function initOverview(paths){const data=await Promise.all(paths.map(loadJS
 const htmlEscape=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
 const percent=value=>Number.isFinite(value)?(value*100).toFixed(1)+" %":"—";
 const whole=value=>Number.isFinite(value)?value.toFixed(0)+" / 100":"—";
+function readableName(value){
+  let text=String(value??"").toLocaleLowerCase("fr-FR").replace(/(^|[\s(/-])(\p{L})/gu,(all,before,letter)=>before+letter.toLocaleUpperCase("fr-FR"));
+  const names={"Msci":"MSCI","Etf":"ETF","Ucits":"UCITS","Eur":"EUR","Usd":"USD","Esg":"ESG","Sri":"SRI","Isin":"ISIN","S&p":"S&P","Ishares":"iShares","Bnpp":"BNP Paribas","Nyse":"NYSE","Jpmorgan":"JPMorgan","Stoxx":"STOXX","S&p":"S&P"};
+  for(const [from,to] of Object.entries(names))text=text.replaceAll(from,to);
+  return text;
+}
 const screenerCharts=[];
 const SCREENER_COLORS=["#2a9d8f","#f6bd60","#8f5fbf","#e76f51","#4cc9f0"];
 const statusLabel=status=>({
@@ -34,114 +40,52 @@ const statusLabel=status=>({
   "données à résoudre":"À résoudre : cotation manquante",
   "devise à vérifier":"À vérifier : devise de cotation",
 }[status]||status);
+const tooltipStyle={
+  backgroundColor:"#07131a",
+  titleColor:"#ffffff",
+  bodyColor:"#e8f0f4",
+  titleFont:{size:17,weight:"500"},
+  bodyFont:{size:15},
+  padding:14,
+  displayColors:false,
+};
 function renderScreenerRows(rows){
   const body=document.querySelector("#screener-body");
   if(!body)return;
-  body.innerHTML=rows.map(row=>'<tr><td><strong>'+htmlEscape(row.name)+'</strong><span class="table-sub">'+htmlEscape(row.asset_id)+(row.symbol?" · "+htmlEscape(row.symbol):"")+'</span></td><td>'+htmlEscape(row.category)+'</td><td><span class="status-pill">'+htmlEscape(statusLabel(row.status))+'</span><span class="table-sub">'+htmlEscape(row.note)+'</span></td><td>'+whole(row.market_observation_score)+'</td><td>'+percent(row.ret_20d)+'</td><td>'+percent(row.ret_60d)+'</td><td>'+percent(row.ret_120d)+'</td><td>'+percent(row.vol_60d_ann)+'</td><td>'+percent(row.drawdown_252d)+'</td><td>'+(row.volume_available?(Number.isFinite(row.volume_ratio_20d)?htmlEscape(row.volume_ratio_20d.toFixed(1))+" × sa moyenne":"donnée présente"):"—")+'</td></tr>').join("")||'<tr><td colspan="10">Aucun support ne correspond à ce filtre.</td></tr>';
+  body.innerHTML=rows.map(row=>'<tr><td><strong>'+htmlEscape(readableName(row.name))+'</strong><span class="table-sub">'+htmlEscape(row.asset_id)+(row.symbol?" · "+htmlEscape(row.symbol):"")+'</span></td><td>'+htmlEscape(row.category)+'</td><td><span class="status-pill">'+htmlEscape(statusLabel(row.status))+'</span><span class="table-sub">'+htmlEscape(row.note)+'</span></td><td>'+whole(row.market_observation_score)+'</td><td>'+percent(row.ret_20d)+'</td><td>'+percent(row.ret_60d)+'</td><td>'+percent(row.ret_120d)+'</td><td>'+percent(row.vol_60d_ann)+'</td><td>'+percent(row.drawdown_252d)+'</td><td>'+(row.volume_available?(Number.isFinite(row.volume_ratio_20d)?htmlEscape(row.volume_ratio_20d.toFixed(1))+" × sa moyenne":"donnée présente"):"—")+'</td></tr>').join("")||'<tr><td colspan="10">Aucun support ne correspond à ce filtre.</td></tr>';
 }
 function destroyScreenerCharts(){while(screenerCharts.length)screenerCharts.pop().destroy();}
 function addScreenerChart(canvas,config){if(canvas&&typeof Chart!=="undefined")screenerCharts.push(new Chart(canvas,config));}
+function showSelectedPoint(point){
+  const output=document.querySelector("#map-selection");
+  if(!output)return;
+  output.textContent=readableName(point.name)+" : progression "+whole(point.y)+" ; parcours moins brutal "+whole(point.x)+". Prix réellement observé : "+percent(point.ret20)+" sur un mois, "+percent(point.ret60)+" sur trois mois et "+percent(point.ret120)+" sur six mois.";
+}
 function renderScreenerVisuals(rows){
   if(typeof Chart==="undefined")return;
   destroyScreenerCharts();
 
   const states=["analysable par les prix","hors screener de marché","historique insuffisant","données à résoudre","devise à vérifier"];
   const availableStates=states.filter(status=>rows.some(row=>row.status===status));
-  const coverageConfig={
+  addScreenerChart(document.querySelector("#coverage-chart"),{
     type:"doughnut",
-    data:{
-      labels:availableStates.map(status=>statusLabel(status)),
-      datasets:[{
-        data:availableStates.map(status=>rows.filter(row=>row.status===status).length),
-        backgroundColor:SCREENER_COLORS,
-        borderColor:"#10212c",
-        borderWidth:3,
-      }],
-    },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      plugins:{
-        legend:{position:"bottom",labels:{color:"#dce7eb",font:{size:16},padding:18,boxWidth:15}},
-        tooltip:{callbacks:{label:context=>context.label+": "+context.parsed+" supports"}},
-      },
-    },
-  };
-  addScreenerChart(document.querySelector("#coverage-chart"),coverageConfig);
+    data:{labels:availableStates.map(status=>statusLabel(status)),datasets:[{data:availableStates.map(status=>rows.filter(row=>row.status===status).length),backgroundColor:SCREENER_COLORS,borderColor:"#10212c",borderWidth:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{color:"#dce7eb",font:{size:16},padding:18,boxWidth:15}},tooltip:{...tooltipStyle,callbacks:{label:context=>context.label+": "+context.parsed+" supports"}}}},
+  });
 
-  const top=rows
-    .filter(row=>Number.isFinite(row.market_observation_score))
-    .sort((a,b)=>b.market_observation_score-a.market_observation_score)
-    .slice(0,10);
-  const topConfig={
+  const top=rows.filter(row=>Number.isFinite(row.market_observation_score)).sort((a,b)=>b.market_observation_score-a.market_observation_score).slice(0,10);
+  addScreenerChart(document.querySelector("#top-chart"),{
     type:"bar",
-    data:{
-      labels:top.map(row=>row.name),
-      datasets:[{
-        label:"Profil actuel",
-        data:top.map(row=>row.market_observation_score),
-        backgroundColor:"#f6bd60",
-        borderRadius:7,
-        borderSkipped:false,
-      }],
-    },
-    options:{
-      indexAxis:"y",
-      responsive:true,
-      maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:context=>context.parsed.x.toFixed(0)+" / 100 · profil calculé avec les prix"}},
-      },
-      scales:{
-        x:{
-          min:0,max:100,
-          title:{display:true,text:"Profil actuel : tendance des prix + moindre instabilité",color:"#cbd9df",font:{size:14}},
-          grid:{color:"rgba(148,163,184,.14)"},
-          ticks:{color:"#dce7eb",font:{size:13}},
-        },
-        y:{grid:{display:false},ticks:{color:"#e8f0f4",font:{size:13}}},
-      },
-    },
-  };
-  addScreenerChart(document.querySelector("#top-chart"),topConfig);
+    data:{labels:top.map(row=>readableName(row.name)),datasets:[{label:"Résultat du filtre de départ",data:top.map(row=>row.market_observation_score),backgroundColor:"#f6bd60",borderRadius:7,borderSkipped:false}]},
+    options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{title:items=>readableName(top[items[0].dataIndex].name),label:context=>"Résultat : "+context.parsed.x.toFixed(0)+" / 100"}}},scales:{x:{min:0,max:100,title:{display:true,text:"Résultat calculé : progression des prix + parcours moins instable",color:"#cbd9df",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}},y:{grid:{display:false},ticks:{color:"#e8f0f4",font:{size:14}}}}},
+  });
 
-  const points=rows
-    .filter(row=>Number.isFinite(row.trend_score)&&Number.isFinite(row.stability_score))
-    .map(row=>({x:row.stability_score,y:row.trend_score,name:row.name}));
-  const mapConfig={
+  const points=rows.filter(row=>Number.isFinite(row.trend_score)&&Number.isFinite(row.stability_score)).map(row=>({x:row.stability_score,y:row.trend_score,name:row.name,ret20:row.ret_20d,ret60:row.ret_60d,ret120:row.ret_120d}));
+  addScreenerChart(document.querySelector("#map-chart"),{
     type:"scatter",
-    data:{datasets:[{
-      data:points,
-      backgroundColor:"rgba(76,201,240,.75)",
-      borderColor:"#4cc9f0",
-      pointRadius:4,
-      pointHoverRadius:7,
-    }]},
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:context=>context.raw.name+" · progression "+context.raw.y.toFixed(0)+" / 100 · moins de secousses "+context.raw.x.toFixed(0)+" / 100"}},
-      },
-      scales:{
-        x:{
-          min:0,max:100,
-          title:{display:true,text:"À droite : prix moins secoués et moins de forte baisse",color:"#dce7eb",font:{size:14}},
-          grid:{color:"rgba(148,163,184,.14)"},
-          ticks:{color:"#dce7eb",font:{size:13}},
-        },
-        y:{
-          min:0,max:100,
-          title:{display:true,text:"En haut : prix en hausse sur 1, 3 et 6 mois",color:"#dce7eb",font:{size:14}},
-          grid:{color:"rgba(148,163,184,.14)"},
-          ticks:{color:"#dce7eb",font:{size:13}},
-        },
-      },
-    },
-  };
-  addScreenerChart(document.querySelector("#map-chart"),mapConfig);
+    data:{datasets:[{data:points,backgroundColor:"rgba(76,201,240,.8)",borderColor:"#4cc9f0",pointRadius:6,pointHoverRadius:10,pointHitRadius:14}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"nearest",intersect:false},onHover:(event,elements,chart)=>{chart.canvas.style.cursor=elements.length?"pointer":"default";},onClick:(event,elements)=>{if(elements.length)showSelectedPoint(points[elements[0].index]);},plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{title:items=>readableName(items[0].raw.name),label:context=>["Progression des prix : "+whole(context.raw.y),"Parcours moins brutal : "+whole(context.raw.x),"Prix : "+percent(context.raw.ret20)+" (1 mois) · "+percent(context.raw.ret60)+" (3 mois) · "+percent(context.raw.ret120)+" (6 mois)"]}}},scales:{x:{min:0,max:100,title:{display:true,text:"À droite : prix moins secoués et moins de forte baisse",color:"#dce7eb",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}},y:{min:0,max:100,title:{display:true,text:"En haut : prix en hausse sur 1, 3 et 6 mois",color:"#dce7eb",font:{size:14}},grid:{color:"rgba(148,163,184,.14)"},ticks:{color:"#dce7eb",font:{size:13}}}}},
+  });
 }
 function initScreener(path){return loadJSON(path).then(data=>{
   const rows=data.rows||[],counts=data.counts||{};
@@ -155,9 +99,9 @@ function initScreener(path){return loadJSON(path).then(data=>{
   ].map(([label,value,detail])=>'<article class="metric"><span class="eyebrow">'+htmlEscape(label)+'</span><b>'+htmlEscape(value??"—")+'</b><small>'+htmlEscape(detail)+'</small></article>').join("");
   const contract=document.querySelector("#data-contract");
   if(contract)contract.innerHTML=[
-    ["1. Ce que le prix a fait","Nous calculons la hausse ou la baisse sur un, trois et six mois. C’est utilisé dans le profil actuel pour savoir quels supports ont récemment progressé ou reculé."],
+    ["1. Ce que le prix a fait","Nous calculons la hausse ou la baisse sur un, trois et six mois. C’est utilisé dans le résultat du filtre de départ pour savoir quels supports ont récemment progressé ou reculé."],
     ["2. À quel point le parcours a été mouvementé","Nous mesurons les variations des trois derniers mois et la pire baisse depuis le plus haut de l’année. Cela évite de ne regarder que les gagnants récents."],
-    ["3. L’activité de cotation, quand elle existe","Pour certaines actions et ETF, on compare le volume du jour à sa moyenne. Ce repère n’est pas encore utilisé dans le profil : il servira à tester des stratégies différentes."],
+    ["3. L’activité de cotation, quand elle existe","Pour certaines actions et ETF, on compare le volume du jour à sa moyenne. Ce repère n’est pas encore utilisé dans le filtre : il servira à tester des stratégies différentes."],
   ].map(([title,text])=>'<article class="contract-card"><h3>'+htmlEscape(title)+'</h3><p>'+htmlEscape(text)+'</p></article>').join("");
   renderScreenerVisuals(rows);
   const search=document.querySelector("#screener-search"),filter=document.querySelector("#screener-filter");
