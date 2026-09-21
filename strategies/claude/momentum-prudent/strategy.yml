@@ -1,0 +1,56 @@
+id: claude-momentum-prudent
+label: "Claude E — Momentum sous garde-fou"
+status: research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+summary: >
+  Même sélection que Claude D, mais les supports les plus agités pèsent moins
+  que les plus calmes, et toute la poche actions part sur le support monétaire
+  tant que l'indice monde clôture sous sa moyenne 200 jours.
+
+objective: >
+  Obtenir l'essentiel du rendement d'une sélection par le classement, en
+  acceptant d'en perdre une part pour réduire la profondeur des baisses.
+
+main_rule: >
+  Sélection identique à celle de Claude D. Les six supports retenus sont
+  pondérés à l'inverse de leur volatilité des soixante dernières séances, donc
+  un support deux fois plus agité reçoit deux fois moins. Si l'indice monde
+  large clôture sous sa moyenne 200 jours, aucune ligne action n'est détenue et
+  toute la poche va sur le support monétaire jusqu'à la revue suivante.
+
+main_rule_scope: >
+  Ce texte décrit la version active, la v0.1.
+
+research_basis:
+  - cross_sectional_momentum
+  - inverse_volatility_weighting
+  - market_regime_filter
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    selection: cross_sectional_momentum
+    lookbacks_sessions: [126, 252]
+    top_k: 6
+    weighting: inverse_volatility
+    realized_vol_window_days: 60
+    absolute_filter: score_strictly_positive
+    market_guard: sma_200_on_world_index
+    rebalance_band_pct: 3
+    currency_universe: eur_quoted_only
+    universe: all_eur_quoted_funds
+
+constraints:
+  - no_daily_trading
+  - weekly_review_only
+  - execution_price_unknown_at_order_time
+
+known_weakness: >
+  Le garde-fou sort après le début d'une baisse et rentre après le début du
+  rebond. Sur la première moitié de la période testée, il a coûté près de trois
+  points de rendement annuel par rapport à Claude D. Ses résultats sont aussi
+  plus sensibles au jour de la semaine retenu pour la revue.

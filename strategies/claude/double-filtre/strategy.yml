@@ -6,15 +6,27 @@ decision_frequency: weekly
 execution_model: next_available_valuation
 history_mode: append_only
 
+summary: >
+  L'exposition ne passe au maximum que si l'indice monde et la majorité des
+  supports suivis montent ensemble ; une seule des deux conditions donne une
+  demi-exposition, aucune des deux renvoie au support monétaire.
+
 objective: >
-  N'etre pleinement expose que lorsque la tendance est confirmee par un nombre
+  N'être pleinement exposé que lorsque la tendance est confirmée par un nombre
   suffisant de supports, et non par un seul indice.
 
 main_rule: >
-  Indice monde au-dessus de sa moyenne 200 jours et plus de la moitie des
-  supports suivis au-dessus de la leur, exposition pleine. Une seule des deux
-  conditions remplie, moitie de l'exposition. Aucune des deux, tout sur le
-  support monetaire.
+  Indice monde au-dessus de sa moyenne mobile et plus de la moitié des supports
+  suivis au-dessus de la leur, exposition pleine. Une seule des deux conditions
+  remplie, moitié de l'exposition. Aucune des deux, tout sur le support
+  monétaire.
+
+main_rule_scope: >
+  Ce texte décrit la version active, la v0.2, qui utilise une moyenne 100 jours
+  et trois thèmes, seuls supports disponibles en cotation euro. Le délai minimal
+  de vingt séances entre deux changements d'état, prévu par la v0.1, n'est pas
+  implémenté : le rétablir relève d'une version suivante, pas d'une retouche.
+  Les paramètres de la v0.1 restent en place et ne sont pas réécrits.
 
 research_basis:
   - market_breadth
@@ -43,5 +55,5 @@ constraints:
   - execution_price_unknown_at_order_time
 
 known_weakness: >
-  Trois etats seulement. Les passages d'un etat a l'autre sont brutaux et
-  peuvent se produire pres d'un point de retournement.
+  Trois états seulement. Les passages d'un état à l'autre sont brutaux et
+  peuvent se produire près d'un point de retournement.

@@ -13,7 +13,7 @@
   .bloc { margin: 14px 0; }
   .bloc h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
              opacity: .6; margin: 0 0 5px; font-weight: 600; }
-  .bloc p { margin: 0; }
+  .bloc p { margin: 0 0 6px; }
   .marque { display: inline-block; font-size: .72rem; text-transform: uppercase;
             letter-spacing: .05em; border: 1px solid currentColor; border-radius: 3px;
             padding: 1px 7px; opacity: .7; vertical-align: middle; margin-left: 8px; }
@@ -22,9 +22,17 @@
   th, td { padding: 7px 9px; text-align: right; border-bottom: 1px solid rgba(128,128,128,.25); }
   th:first-child, td:first-child { text-align: left; }
   th { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; opacity: .6; font-weight: 500; }
+  tr.active td { font-weight: 600; }
   .muted { opacity: .65; }
+  .reserve { border-left: 3px solid rgba(128,128,128,.45); padding: 10px 14px; margin: 12px 0 0;
+             font-size: .9rem; }
+  .reserve ul { margin: 6px 0 0; padding-left: 18px; }
+  .reserve li { margin-bottom: 5px; }
   details { margin-top: 10px; }
   summary { cursor: pointer; font-size: .88rem; opacity: .75; }
+  .journal { font-size: .84rem; margin-top: 10px; }
+  .journal li { margin-bottom: 6px; }
+  code { font-size: .86em; }
 </style>
 </head>
 <body>
@@ -43,23 +51,38 @@
 
 <div class="card">
   <div id="etat"></div>
+  <div id="fenetre"></div>
 </div>
 
 <div class="card">
-  <h2>Comparaison au benchmark Bernard origine</h2>
+  <h2>Évolution simulée, base 100</h2>
   <canvas id="graphique"></canvas>
   <p class="muted" id="note-graphique"></p>
 </div>
 
 <div class="card">
   <h2>Indicateurs communs</h2>
+  <p class="muted" id="note-indicateurs"></p>
   <div class="defile">
     <table>
       <thead><tr>
-        <th>Stratégie</th><th>Depuis origine</th><th>5 j</th><th>20 j</th>
-        <th>Drawdown</th><th>Vol. 20 j</th><th>Arbitrages</th><th>Base 100</th>
+        <th>Ligne</th><th>Depuis l'origine</th><th>Annualisée</th><th>5 j</th><th>20 j</th>
+        <th>Drawdown</th><th>Volatilité</th><th>Vol. 20 j</th><th>Arbitrages</th><th>Base 100</th>
       </tr></thead>
       <tbody id="indicateurs"></tbody>
+    </table>
+  </div>
+  <div id="reserves-retro"></div>
+</div>
+
+<div class="card">
+  <h2>Comparaison au benchmark Bernard origine</h2>
+  <p class="muted" id="note-bernard"></p>
+  <canvas id="graphique-bernard"></canvas>
+  <div class="defile">
+    <table>
+      <thead><tr><th>Ligne</th><th id="entete-bernard">Depuis le point de départ commun</th></tr></thead>
+      <tbody id="bernard"></tbody>
     </table>
   </div>
 </div>
@@ -69,7 +92,8 @@
 <div class="card">
   <p class="muted">Page produite par Claude à partir des données communes du dépôt.
   Les stratégies académiques et celles de ChatGPT servent de comparaison et ne sont
-  jamais modifiées ici. Aucune donnée personnelle ne figure sur cette page.</p>
+  jamais modifiées ici. Aucune donnée personnelle ne figure sur cette page.
+  Toutes les valeurs sont exprimées en base 100 ou en pourcentage.</p>
 </div>
 
 </main>
@@ -79,6 +103,29 @@ const SOURCES = { web: "data/claude.json", claude: "data/claude-history.json" };
 
 const pct = v => (v === null || v === undefined || Number.isNaN(v))
   ? "—" : (v > 0 ? "+" : "") + Number(v).toFixed(2).replace(".", ",") + " %";
+const num = (v, d = 2) => (v === null || v === undefined || Number.isNaN(v))
+  ? "—" : Number(v).toFixed(d).replace(".", ",");
+const jour = d => !d ? "—" : d.slice(8, 10) + "/" + d.slice(5, 7) + "/" + d.slice(0, 4);
+const echappe = s => String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+let NOMS = {};
+const nomSupport = id => NOMS[id] || id;
+
+// Le graphique dépend d'une bibliothèque externe. Si elle ne se charge pas,
+// les tableaux et les fiches doivent rester lisibles.
+function dessiner(idCanvas, configuration, idNote) {
+  const canvas = document.getElementById(idCanvas);
+  if (typeof Chart === "undefined") {
+    canvas.hidden = true;
+    const note = idNote && document.getElementById(idNote);
+    if (note) {
+      note.textContent = "Le graphique n'a pas pu être chargé. Les chiffres du tableau "
+        + "ci-dessous restent valables.";
+    }
+    return;
+  }
+  new Chart(canvas, configuration);
+}
 
 function afficherEtat(message, alerte) {
   document.getElementById("etat").innerHTML = alerte
@@ -86,36 +133,99 @@ function afficherEtat(message, alerte) {
     : `<p class="muted">${message}</p>`;
 }
 
-function tableauIndicateurs(strategies, repere) {
+function afficherFenetre(d) {
+  if (!d) return;
+  const liste = t => (t || [])
+    .map(s => `<li>${echappe(s.nom)} <span class="muted">(${echappe(s.asset_id)})</span></li>`).join("");
+  const supports = liste(d.univers?.supports);
+  const elargi = d.univers?.elargi;
+  document.getElementById("fenetre").innerHTML = `
+    <div class="bloc"><h3>Fenêtre de test</h3>
+      <p>Cours disponibles du ${jour(d.premiere_seance)} au ${jour(d.derniere_seance)},
+         ${d.seances_disponibles} séances communes aux supports retenus.
+         Les premières séances amorcent les indicateurs et n'entrent pas dans la mesure :
+         ${d.seances_amorcage} au minimum, davantage pour une stratégie qui compare des
+         performances sur douze mois. La mesure commence le
+         ${jour(d.debut_fenetre_walk_forward)} pour les stratégies à moyenne mobile et le
+         ${jour(d.debut_fenetre_commune)} pour celles qui classent les supports.</p>
+      <p class="muted">À chaque date de décision, seules les séances antérieures ou égales à
+         cette date sont visibles. L'allocation décidée s'applique à partir de la séance
+         suivante, comme un arbitrage exécuté à une valeur liquidative inconnue au moment
+         de l'ordre. Les revues sont hebdomadaires.</p></div>
+    <details><summary>Univers des stratégies A, B et C, ${(d.univers?.supports || []).length} supports</summary>
+      <p class="muted">${echappe(d.univers?.regle || "")}
+         Le fonds en euros n'a pas de cotation publique : il est modélisé à
+         ${num(d.rendement_fonds_euros_modelise_pct, 2)} % par an.</p>
+      <ul class="journal">${supports}</ul></details>
+    ${elargi ? `<details><summary>Univers des stratégies D et E, ${(elargi.supports || []).length} supports</summary>
+      <p class="muted">${echappe(elargi.regle)}</p>
+      <p class="muted">${echappe(elargi.biais_connu)}</p>
+      <ul class="journal">${liste(elargi.supports)}</ul></details>` : ""}`;
+}
+
+function ligneIndicateurs(nom, i, arbitrages, classe) {
+  return `<tr class="${classe || ""}">
+    <td>${nom}</td>
+    <td>${pct(i.perf_origine_pct)}</td>
+    <td>${pct(i.perf_annualisee_pct)}</td>
+    <td>${pct(i.perf_5j_pct)}</td>
+    <td>${pct(i.perf_20j_pct)}</td>
+    <td>${pct(i.drawdown_max_pct)}</td>
+    <td>${i.vol_periode_pct != null ? num(i.vol_periode_pct, 2) + " %" : "—"}</td>
+    <td>${i.vol_20j_pct != null ? num(i.vol_20j_pct, 1) + " %" : "—"}</td>
+    <td>${arbitrages ?? "—"}</td>
+    <td>${num(i.valeur_base_100)}</td>
+  </tr>`;
+}
+
+function tableauIndicateurs(d) {
   const corps = document.getElementById("indicateurs");
   const lignes = [];
+  const comparaisons = d?.comparaisons || {};
+  const commun = o => o?.indicateurs_fenetre_commune || o?.indicateurs || {};
+  let retro = null;
 
-  if (repere) {
-    lignes.push(`<tr><td><strong>Bernard origine</strong></td>
-      <td>${pct(repere.perf)}</td><td colspan="6" class="muted">benchmark commun</td></tr>`);
+  const exemple = commun(Object.values(d?.strategies || {})[0]);
+  document.getElementById("note-indicateurs").textContent =
+    "Toutes les lignes sont ramenées au même point de départ, le "
+    + jour(d?.debut_fenetre_commune) + ", soit " + (exemple.nb_seances ?? "—")
+    + " séances : c'est la fenêtre commune à toutes les stratégies, celles qui ont besoin "
+    + "d'un an de données avant leur première décision comprises. La performance annualisée "
+    + "est calculée sur 252 séances par an.";
+
+  for (const [id, c] of Object.entries(comparaisons)) {
+    if (id === "bernard-retro-partiel") { retro = c; continue; }
+    lignes.push(ligneIndicateurs(echappe(c.label), commun(c), 0));
   }
 
-  for (const [id, s] of Object.entries(strategies)) {
-    const i = s.indicateurs || {};
-    lignes.push(`<tr>
-      <td>${s.label}</td>
-      <td>${pct(i.perf_origine_pct)}</td>
-      <td>${pct(i.perf_5j_pct)}</td>
-      <td>${pct(i.perf_20j_pct)}</td>
-      <td>${pct(i.drawdown_max_pct)}</td>
-      <td>${i.vol_20j_pct != null ? Number(i.vol_20j_pct).toFixed(1).replace(".", ",") + " %" : "—"}</td>
-      <td>${i.nb_arbitrages ?? "—"}</td>
-      <td>${i.valeur_base_100 ?? "—"}</td>
-    </tr>`);
+  for (const s of Object.values(d?.strategies || {})) {
+    for (const [v, version] of Object.entries(s.versions || {})) {
+      const active = v === s.version;
+      lignes.push(ligneIndicateurs(
+        `${echappe(s.label)} <span class="muted">${v}${active ? ", active" : ""}</span>`,
+        commun(version), commun(version).nb_arbitrages,
+        active ? "active" : ""));
+    }
+  }
+
+  if (retro) {
+    lignes.push(ligneIndicateurs(echappe(retro.label), commun(retro), 0));
+    document.getElementById("reserves-retro").innerHTML = `
+      <div class="reserve">
+        <strong>${echappe(retro.label)}</strong>
+        <p>${echappe(retro.description)}</p>
+        <ul>${(retro.reserves || []).map(r => `<li>${echappe(r)}</li>`).join("")}</ul>
+      </div>`;
   }
 
   corps.innerHTML = lignes.length
     ? lignes.join("")
-    : `<tr><td colspan="8" class="muted">Aucun résultat calculé.</td></tr>`;
+    : `<tr><td colspan="10" class="muted">Aucun résultat calculé.</td></tr>`;
 }
 
-function fiches(strategies) {
+function fiches(d) {
   const bloc = document.getElementById("strategies");
+  const strategies = d?.strategies || {};
   if (!Object.keys(strategies).length) {
     bloc.innerHTML = `<div class="card"><h2>Stratégies</h2>
       <p class="muted">Les définitions existent dans <code>strategies/claude/</code>.
@@ -127,31 +237,71 @@ function fiches(strategies) {
   bloc.innerHTML = Object.entries(strategies).map(([id, s]) => {
     const marque = s.status === "research_hypothesis"
       ? `<span class="marque">hypothèse, non validée</span>` : "";
+    const i = s.indicateurs || {};
 
     const lignes = (s.allocation_courante || []).length
       ? `<div class="defile"><table>
-           <thead><tr><th>Support</th><th>Pondération</th></tr></thead>
+           <thead><tr><th>Support</th><th>Pondération du contrat</th></tr></thead>
            <tbody>${s.allocation_courante.map(a =>
-             `<tr><td>${a.asset_id}</td><td>${Number(a.weight_pct).toFixed(2).replace(".", ",")} %</td></tr>`
-           ).join("")}</tbody></table></div>`
+             `<tr><td>${echappe(nomSupport(a.asset_id))}
+                <span class="muted">${echappe(a.asset_id)}</span></td>
+              <td>${num(a.weight_pct)} %</td></tr>`).join("")}</tbody></table></div>`
       : `<p class="muted">Aucune allocation calculée pour le moment.</p>`;
 
+    const versions = Object.entries(s.versions || {}).map(([v, version]) => {
+      const vi = version.indicateurs || {};
+      return `<tr class="${v === s.version ? "active" : ""}">
+        <td>${v}${v === s.version ? ", active" : ""}
+            <span class="muted">${echappe(version.filtre_tendance || "")}</span></td>
+        <td>${pct(vi.perf_origine_pct)}</td><td>${pct(vi.perf_annualisee_pct)}</td>
+        <td>${pct(vi.drawdown_max_pct)}</td>
+        <td>${vi.vol_periode_pct != null ? num(vi.vol_periode_pct) + " %" : "—"}</td>
+        <td>${vi.nb_arbitrages ?? "—"}</td></tr>`;
+    }).join("");
+
+    const journal = (s.decisions_recentes || []).slice().reverse().map(dec =>
+      `<li><strong>${jour(dec.date)}</strong> — ${echappe(dec.comment)}<br>
+         <span class="muted">${dec.allocations.map(a =>
+           echappe(nomSupport(a.asset_id)) + " " + num(a.weight_pct) + " %").join(" · ")}</span></li>`
+    ).join("");
+
+    const nonSimulees = (s.versions_non_simulees || []).length
+      ? `<p class="muted">Versions conservées mais non simulées ici :
+         ${s.versions_non_simulees.join(", ")}. Elles reposent sur un univers qui n'est pas
+         disponible en cotation euro.</p>` : "";
+
     return `<div class="card strategie">
-      <h2>${s.label}${marque}</h2>
-      <p class="resume">${s.regle}</p>
+      <h2>${echappe(s.label)}${marque}</h2>
+      <p class="resume">${echappe(s.resume)}</p>
 
-      <div class="bloc"><h3>Objectif</h3><p>${s.objectif}</p></div>
-      <div class="bloc"><h3>Version active</h3><p>${s.version}</p></div>
-      <div class="bloc"><h3>Actifs détenus et pondérations</h3>${lignes}</div>
+      <div class="bloc"><h3>Objectif</h3><p>${echappe(s.objectif)}</p></div>
+      <div class="bloc"><h3>Règle principale</h3><p>${echappe(s.regle)}</p></div>
+      <div class="bloc"><h3>Explication</h3>
+        <p>${echappe(s.explication)}</p>
+        ${s.motif_version ? `<p>${echappe(s.motif_version)}</p>` : ""}
+        <p class="muted">Version active : ${echappe(s.version)}. ${echappe(s.statut_public)}</p>
+        ${nonSimulees}</div>
+
+      <div class="bloc"><h3>Actifs détenus et pondérations</h3>${lignes}
+        <p class="muted">Allocation issue de la dernière décision de simulation.
+           Une position peut rester en place plusieurs semaines.</p></div>
+
       <div class="bloc"><h3>Performances</h3>
-        <p>Depuis l'origine ${pct(s.indicateurs?.perf_origine_pct)},
-           drawdown maximum ${pct(s.indicateurs?.drawdown_max_pct)},
-           ${s.indicateurs?.nb_arbitrages ?? 0} arbitrages.</p></div>
-      ${s.faiblesse ? `<div class="bloc"><h3>Limite connue</h3><p>${s.faiblesse}</p></div>` : ""}
+        <p>Sur la fenêtre du ${jour(i.debut)} au ${jour(i.fin)}, ${i.nb_seances ?? "—"} séances :
+           ${pct(i.perf_origine_pct)} au total, ${pct(i.perf_annualisee_pct)} par an,
+           drawdown maximum ${pct(i.drawdown_max_pct)},
+           volatilité ${num(i.vol_periode_pct)} %, ${i.nb_arbitrages ?? 0} arbitrages.</p>
+        <div class="defile"><table>
+          <thead><tr><th>Version</th><th>Total</th><th>Annualisée</th><th>Drawdown</th>
+            <th>Volatilité</th><th>Arbitrages</th></tr></thead>
+          <tbody>${versions}</tbody></table></div></div>
 
-      <details>
-        <summary>Historique des décisions (${s.nb_decisions ?? 0})</summary>
-        <p class="muted">Journal complet en append-only dans
+      ${s.faiblesse ? `<div class="bloc"><h3>Limite connue</h3><p>${echappe(s.faiblesse)}</p></div>` : ""}
+
+      <details ${journal ? "" : "hidden"}>
+        <summary>Historique des décisions (${s.nb_decisions ?? 0} pour la version active)</summary>
+        <ul class="journal">${journal}</ul>
+        <p class="muted">Journal complet en ajout seul dans
         <code>history/claude/decisions.jsonl</code>. Une décision passée n'est
         jamais réécrite ; un changement de logique crée une nouvelle version.</p>
       </details>
@@ -159,36 +309,122 @@ function fiches(strategies) {
   }).join("");
 }
 
-function tracer(donneesWeb, donneesClaude) {
-  const jeux = [];
+const courbeActive = s => (s.versions?.[s.version]?.courbe) || [];
 
-  if (donneesWeb?.series?.length && donneesWeb.dates?.length > 1) {
-    for (const s of donneesWeb.series) {
-      jeux.push({ label: s.label, data: s.values, borderWidth: 2, pointRadius: 0, tension: .1 });
-    }
-  }
+function alignerSurDates(courbe, dates) {
+  const valeurs = new Map((courbe || []).map(p => [p.date, p.valeur]));
+  return dates.map(d => valeurs.has(d) ? valeurs.get(d) : null);
+}
 
-  for (const s of Object.values(donneesClaude?.strategies || {})) {
-    if (!s.courbe?.length) continue;
-    jeux.push({
-      label: s.label,
-      data: s.courbe.map(p => ({ x: p.date, y: p.valeur })),
-      borderWidth: 2, pointRadius: 0, tension: .1, borderDash: [4, 3],
-    });
-  }
-
+function tracer(donneesClaude) {
   const note = document.getElementById("note-graphique");
-  if (!jeux.length) {
-    note.textContent = "Aucune série disponible. Le graphique apparaîtra dès la première collecte de cours.";
+  const jeux = [];
+  const strategies = Object.values(donneesClaude?.strategies || {});
+  const comparaisons = Object.values(donneesClaude?.comparaisons || {});
+
+  const reference = [...strategies.map(courbeActive),
+                     ...comparaisons.map(c => c.courbe || [])]
+    .sort((a, b) => b.length - a.length)[0] || [];
+  const dates = reference.map(p => p.date);
+
+  if (!dates.length) {
+    note.textContent = "Aucune série disponible. Le graphique apparaîtra dès la première "
+      + "collecte de cours.";
     return;
   }
 
-  note.textContent = "Base 100 au premier jour commun. Le fonds en euros est modélisé à "
-    + (donneesClaude?.rendement_fonds_euros_modelise_pct ?? 3) + " % par an, faute de cotation publique.";
+  for (const s of strategies) {
+    if (!courbeActive(s).length) continue;
+    jeux.push({ label: `${s.label} ${s.version}`, data: alignerSurDates(courbeActive(s), dates),
+                borderWidth: 2, pointRadius: 0, tension: .1, spanGaps: true });
+  }
+  for (const c of comparaisons) {
+    if (!c.courbe?.length) continue;
+    jeux.push({ label: c.label, data: alignerSurDates(c.courbe, dates),
+                borderWidth: 1.5, pointRadius: 0, tension: .1, spanGaps: true,
+                borderDash: [4, 3] });
+  }
 
-  new Chart(document.getElementById("graphique"), {
+  note.textContent = "Base 100 au " + jour(dates[0]) + ", début de la fenêtre walk-forward. "
+    + "Le fonds en euros est modélisé à "
+    + num(donneesClaude?.rendement_fonds_euros_modelise_pct ?? 3, 2)
+    + " % par an, faute de cotation publique. La ligne « Bernard actuel rétro-simulé, "
+    + "partiel » comporte un biais de sélection majeur, détaillé sous le tableau des "
+    + "indicateurs. Elle ne sert pas de référence.";
+
+  dessiner("graphique", {
     type: "line",
-    data: { labels: donneesWeb?.dates || [], datasets: jeux },
+    data: { labels: dates, datasets: jeux },
+    options: {
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      scales: {
+        x: { type: "category", ticks: { maxTicksLimit: 10, autoSkip: true } },
+        y: { title: { display: true, text: "Base 100" } },
+      },
+      plugins: { legend: { position: "bottom" } },
+    },
+  }, "note-graphique");
+}
+
+function comparerABernard(web, claude) {
+  const corps = document.getElementById("bernard");
+  const note = document.getElementById("note-bernard");
+  const repere = web?.series?.find(s => s.label === "Bernard origine");
+  const dates = web?.dates || [];
+
+  if (!repere || dates.length < 2) {
+    note.textContent = "Le benchmark Bernard origine n'est pas encore disponible.";
+    corps.innerHTML = `<tr><td colspan="2" class="muted">Aucune comparaison possible.</td></tr>`;
+    return;
+  }
+
+  const series = [];
+  for (const s of Object.values(claude?.strategies || {})) {
+    if (courbeActive(s).length) {
+      series.push({ label: `${s.label} ${s.version}`, courbe: courbeActive(s) });
+    }
+  }
+  for (const c of Object.values(claude?.comparaisons || {})) {
+    if (c.courbe?.length) series.push({ label: c.label, courbe: c.courbe });
+  }
+
+  const rebasee = courbe => {
+    const brut = alignerSurDates(courbe, dates);
+    const base = brut.find(v => v != null);
+    return base ? brut.map(v => v == null ? null : v / base * 100) : brut;
+  };
+
+  const baseRepere = repere.values.find(v => v != null) || 100;
+  const valeursRepere = repere.values.map(v => v == null ? null : v / baseRepere * 100);
+
+  const derniere = serie => { for (let i = serie.length - 1; i >= 0; i--) if (serie[i] != null) return serie[i]; return null; };
+
+  document.getElementById("entete-bernard").textContent = "Depuis le " + jour(dates[0]);
+  const lignes = [`<tr><td><strong>Bernard origine</strong></td>
+    <td>${pct(derniere(valeursRepere) - 100)}</td></tr>`];
+
+  const jeux = [{ label: "Bernard origine", data: valeursRepere, borderWidth: 2,
+                  pointRadius: 0, tension: .1, spanGaps: true }];
+
+  for (const s of series) {
+    const valeurs = rebasee(s.courbe);
+    const fin = derniere(valeurs);
+    if (fin == null) continue;
+    lignes.push(`<tr><td>${echappe(s.label)}</td><td>${pct(fin - 100)}</td></tr>`);
+    jeux.push({ label: s.label, data: valeurs, borderWidth: 1.5, pointRadius: 0,
+                tension: .1, spanGaps: true, borderDash: [4, 3] });
+  }
+
+  corps.innerHTML = lignes.join("");
+  note.textContent = "Le benchmark Bernard origine ne commence que le " + jour(dates[0])
+    + ". Cette comparaison porte donc sur quelques séances seulement et ne permet aucune "
+    + "conclusion. Toutes les lignes sont ramenées à 100 à cette date. Les stratégies "
+    + "Claude s'arrêtent à la dernière séance cotée des supports qu'elles utilisent.";
+
+  dessiner("graphique-bernard", {
+    type: "line",
+    data: { labels: dates, datasets: jeux },
     options: {
       responsive: true,
       interaction: { mode: "index", intersect: false },
@@ -208,10 +444,10 @@ async function lire(chemin) {
 (async function () {
   const [web, claude] = await Promise.all([lire(SOURCES.web), lire(SOURCES.claude)]);
 
+  NOMS = claude?.noms_supports || {};
   const seances = claude?.seances_disponibles ?? 0;
-  const aucuneDonnee = !claude || seances === 0;
 
-  if (aucuneDonnee) {
+  if (!claude || seances === 0) {
     afficherEtat(
       "La collecte automatique de cours n'a pas encore produit d'historique. "
       + "Les stratégies ci-dessous sont définies et leur code de simulation est prêt, "
@@ -223,17 +459,20 @@ async function lire(chemin) {
       + "Les résultats affichés portent sur une période trop courte pour conclure.", true);
   } else {
     afficherEtat(
-      `Données arrêtées au ${(claude.generated_at || "").slice(0, 10)}, `
-      + `${seances} séances d'historique.`, false);
+      `Résultats de simulation calculés le ${jour((claude.generated_at || "").slice(0, 10))} `
+      + `sur ${seances} séances. Aucune de ces stratégies n'est validée et aucune décision `
+      + `réelle n'a été prise à ces dates.`, true);
   }
 
-  const repere = web?.series?.find(s => s.label === "Bernard origine");
-  tableauIndicateurs(claude?.strategies || {},
-    repere?.values?.length > 1
-      ? { perf: repere.values.at(-1) / repere.values[0] * 100 - 100 } : null);
-
-  fiches(claude?.strategies || {});
-  tracer(web, claude);
+  for (const etape of [
+    () => afficherFenetre(claude),
+    () => tableauIndicateurs(claude),
+    () => fiches(claude),
+    () => tracer(claude),
+    () => comparerABernard(web, claude),
+  ]) {
+    try { etape(); } catch (e) { console.error(e); }
+  }
 })();
 </script>
 </body>

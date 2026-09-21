@@ -1,20 +1,34 @@
 id: claude-socle-satellites
 label: "Claude A — Socle mondial et satellites plafonnés"
 status: research_hypothesis
-active_version: v0.2
+active_version: v0.3
 decision_frequency: weekly
 execution_model: next_available_valuation
 history_mode: append_only
 
+summary: >
+  Un socle mondial large porte l'essentiel de la poche actions, quelques thèmes
+  la complètent sans jamais peser lourd, et toute ligne passée sous sa moyenne
+  200 jours attend sur le support monétaire.
+
 objective: >
-  Conserver une exposition actions elevee en supprimant la concentration
+  Conserver une exposition actions élevée en supprimant la concentration
   sectorielle involontaire du portefeuille d'origine.
 
 main_rule: >
-  Soixante pour cent de la poche actions dans un indice monde large. Le reste
-  sur quatre themes au maximum, plafonnes a huit pour cent du contrat chacun.
-  Toute ligne cloturant sous sa moyenne mobile 200 jours bascule sur le support
-  monetaire jusqu'a cinq clotures consecutives au-dessus.
+  Soixante pour cent de la poche actions dans un socle monde, réparti entre un
+  indice monde large et un indice monde à volatilité minimale. Le reste sur
+  quatre thèmes au maximum, plafonnés à huit pour cent du contrat chacun. Toute
+  ligne clôturant sous sa moyenne mobile 200 jours bascule sur le support
+  monétaire, et y reste tant qu'elle n'est pas repassée au-dessus. Revue
+  hebdomadaire, arbitrage seulement si l'allocation cible s'écarte de trois
+  points de l'allocation détenue.
+
+main_rule_scope: >
+  Ce texte décrit la version active, la v0.3. La v0.1 prévoyait en plus une
+  confirmation de rentrée à cinq clôtures consécutives, jamais implémentée, et
+  la v0.2 utilisait une moyenne 100 jours, imposée par un historique d'un an.
+  Les paramètres de ces deux versions restent en place et ne sont pas réécrits.
 
 research_basis:
   - diversification_reduces_idiosyncratic_risk
@@ -46,6 +60,32 @@ parameters:
     currency_universe: eur_quoted_only
     bad_tick_filter: reversal_over_5pct_next_session
 
+  v0.3:
+    note: >
+      Retour a la moyenne 200 jours, redevenue mesurable avec cinq ans
+      d'historique. Seul ce parametre change par rapport a la v0.2. La v0.1 et
+      la v0.2 restent en place et ne sont pas reecrites.
+    motif: >
+      Sur la fenetre walk-forward du 5 juillet 2022 au 18 septembre 2026, la
+      moyenne 200 jours rapporte 9,91 % par an contre 7,55 % pour la moyenne
+      100 jours, avec un drawdown maximum de -4,59 % contre -5,82 % et 60
+      arbitrages contre 94. La moyenne 100 jours de la v0.2 etait une adaptation
+      forcee par un historique d'un an, pas un choix de conception.
+    equity_target_pct: 50
+    core_share_of_equity_pct: 60
+    core_split: {world_index_pct: 70, min_volatility_pct: 30}
+    themes: [IE000I8KRLL9, LU1829219390, IE00BMG6Z448]
+    max_theme_weight_pct: 8
+    trend_filter: sma_200
+    rebalance_band_pct: 3
+    currency_universe: eur_quoted_only
+    bad_tick_filter: reversal_over_5pct_next_session
+    reentry_confirmation_sessions: null
+    reentry_note: >
+      La confirmation de rentree a cinq clotures consecutives, presente dans la
+      v0.1, n'est pas active depuis la v0.2. La regle principale ci-dessus la
+      mentionne pour memoire de la v0.1 ; le code ne l'applique pas.
+
 constraints:
   - no_daily_trading
   - weekly_review_only
@@ -53,5 +93,5 @@ constraints:
   - free_arbitrages_do_not_justify_churn
 
 known_weakness: >
-  Sur un marche sans direction, le filtre de tendance sort apres le debut des
-  baisses et rentre apres le debut des hausses. Chaque aller-retour coute.
+  Sur un marché sans direction, le filtre de tendance sort après le début des
+  baisses et rentre après le début des hausses. Chaque aller-retour coûte.

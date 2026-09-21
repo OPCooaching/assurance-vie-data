@@ -6,15 +6,25 @@ decision_frequency: weekly
 execution_model: next_available_valuation
 history_mode: append_only
 
+summary: >
+  La part actions n'est pas fixée d'avance : elle est calculée chaque semaine
+  pour viser un niveau de risque constant, et se réduit quand le marché
+  s'agite.
+
 objective: >
-  Maintenir constant le risque du contrat plutot que sa repartition. La part
-  actions monte quand les marches sont calmes et baisse quand ils s'agitent.
+  Maintenir constant le risque du contrat plutôt que sa répartition. La part
+  actions monte quand les marchés sont calmes et baisse quand ils s'agitent.
 
 main_rule: >
-  Part actions egale a la volatilite cible divisee par la volatilite realisee
-  sur soixante jours de la poche actions, bornee entre vingt et soixante pour
-  cent. Recalculee chaque semaine, appliquee seulement si l'ecart depasse cinq
-  points.
+  Part actions égale à la volatilité cible divisée par la volatilité réalisée
+  de la poche actions, bornée entre vingt et soixante pour cent. Recalculée
+  chaque semaine, appliquée seulement si l'écart dépasse cinq points. La
+  composition de cette poche actions est celle de Claude A.
+
+main_rule_scope: >
+  Ce texte décrit la version active, la v0.2, qui mesure la volatilité réalisée
+  sur quarante séances. La v0.1 la mesurait sur soixante séances ; ses
+  paramètres restent en place et ne sont pas réécrits.
 
 research_basis:
   - volatility_clustering
@@ -45,5 +55,5 @@ constraints:
   - execution_price_unknown_at_order_time
 
 known_weakness: >
-  Reduit l'exposition apres une hausse de volatilite, donc souvent apres le
-  debut d'une baisse. Manque une partie des rebonds rapides.
+  Réduit l'exposition après une hausse de volatilité, donc souvent après le
+  début d'une baisse. Manque une partie des rebonds rapides.

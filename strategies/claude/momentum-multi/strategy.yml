@@ -1,0 +1,58 @@
+id: claude-momentum-multi
+label: "Claude D — Momentum multi-horizon"
+status: research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+summary: >
+  Chaque semaine, les six supports qui progressent le plus sur les six et douze
+  derniers mois sont détenus à parts égales ; un support qui recule sur ces deux
+  horizons n'est pas détenu et sa part attend sur le support monétaire.
+
+objective: >
+  Utiliser l'ensemble des supports cotés en euros accessibles dans le contrat,
+  et non une liste de thèmes choisie d'avance, en laissant le classement décider
+  de la composition.
+
+main_rule: >
+  Chaque vendredi, chaque support de l'univers reçoit un score égal à la moyenne
+  de sa performance sur cent vingt-six séances et sur deux cent cinquante-deux
+  séances. Les six meilleurs scores strictement positifs sont détenus à parts
+  égales, pour la moitié du contrat. Chaque place non pourvue reste sur le
+  support monétaire. L'autre moitié du contrat reste en fonds en euros.
+
+main_rule_scope: >
+  Ce texte décrit la version active, la v0.1.
+
+research_basis:
+  - cross_sectional_momentum
+  - time_series_momentum_absolute_filter
+  - equal_weight_beats_concentrated_bets
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    selection: cross_sectional_momentum
+    lookbacks_sessions: [126, 252]
+    top_k: 6
+    weighting: equal
+    absolute_filter: score_strictly_positive
+    trend_filter: null
+    market_guard: false
+    rebalance_band_pct: 3
+    currency_universe: eur_quoted_only
+    universe: all_eur_quoted_funds
+
+constraints:
+  - no_daily_trading
+  - weekly_review_only
+  - execution_price_unknown_at_order_time
+  - free_arbitrages_do_not_justify_churn
+
+known_weakness: >
+  Le classement peut retenir deux supports très proches, par exemple deux ETF
+  sur le même indice, ce qui concentre le risque sans que la règle s'en aperçoive.
+  La stratégie subit aussi les retournements brutaux : un support acheté après
+  une forte hausse est vendu après le début de la baisse.

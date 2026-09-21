@@ -1,0 +1,2420 @@
+{
+  "generated_at": "2026-09-21T10:23:19+00:00",
+  "seances_disponibles": 1274,
+  "premiere_seance": "2021-09-20",
+  "derniere_seance": "2026-09-18",
+  "seances_amorcage": 200,
+  "debut_fenetre_walk_forward": "2022-07-05",
+  "debut_fenetre_commune": "2022-09-20",
+  "univers": {
+    "regle": "Uniquement des lignes cotées en euros sur une place de la zone euro.",
+    "supports": [
+      {
+        "asset_id": "IE00BKBF6H24",
+        "nom": "ISHARES CORE MSCI WORLD UCITS ETF"
+      },
+      {
+        "asset_id": "IE00BL25JN58",
+        "nom": "XTRACKERS MSCI WORLD MINIMUM VOLATILITY UCITS ETF"
+      },
+      {
+        "asset_id": "LU0290358497",
+        "nom": "XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF"
+      },
+      {
+        "asset_id": "IE000I8KRLL9",
+        "nom": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF"
+      },
+      {
+        "asset_id": "LU1829219390",
+        "nom": "AMUNDI EURO STOXX BANKS UCITS ETF ACC"
+      },
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "ISHARES MSCI EM EX-CHINA UCITS ETF"
+      }
+    ],
+    "elargi": {
+      "regle": "Tous les fonds cotés en euros sur une place de la zone euro disposant de cinq ans de cours. Les stratégies qui classent les supports choisissent dans cet ensemble.",
+      "biais_connu": "Cet ensemble est celui des supports encore référencés aujourd'hui. Un fonds fermé ou retiré du contrat depuis 2021 n'y figure pas, ce qui flatte légèrement le classement.",
+      "supports": [
+        {
+          "asset_id": "IE00BKBF6H24",
+          "nom": "ISHARES CORE MSCI WORLD UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BL25JN58",
+          "nom": "XTRACKERS MSCI WORLD MINIMUM VOLATILITY UCITS ETF"
+        },
+        {
+          "asset_id": "LU0290358497",
+          "nom": "XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF"
+        },
+        {
+          "asset_id": "IE000I8KRLL9",
+          "nom": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF"
+        },
+        {
+          "asset_id": "LU1829219390",
+          "nom": "AMUNDI EURO STOXX BANKS UCITS ETF ACC"
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "nom": "ISHARES MSCI EM EX-CHINA UCITS ETF"
+        },
+        {
+          "asset_id": "DE000A0F5UK5",
+          "nom": "ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE)"
+        },
+        {
+          "asset_id": "DE000A0Q4R28",
+          "nom": "ISHARES STOXX EUROPE 600 AUTOMOBILES & PARTS UCITS ETF (DE)"
+        },
+        {
+          "asset_id": "DE000A0Q4R85",
+          "nom": "ISHARES MSCI BRAZIL UCITS ETF (DE)"
+        },
+        {
+          "asset_id": "FR0000295230",
+          "nom": "COMGEST RENAISSANCE EUROPE"
+        },
+        {
+          "asset_id": "FR0007052782",
+          "nom": "AMUNDI CAC 40 UCITS ETF DIST"
+        },
+        {
+          "asset_id": "FR0007054358",
+          "nom": "AMUNDI EURO STOXX 50 II UCITS ETF ACC"
+        },
+        {
+          "asset_id": "FR0010261198",
+          "nom": "AMUNDI MSCI EUROPE II UCITS ETF ACC"
+        },
+        {
+          "asset_id": "FR0010315770",
+          "nom": "AMUNDI MSCI WORLD II UCITS ETF DIST"
+        },
+        {
+          "asset_id": "FR0011550193",
+          "nom": "BNP PARIBAS EASY STOXX EUROPE 600 UCITS ETF"
+        },
+        {
+          "asset_id": "IE000R85HL30",
+          "nom": "AMUNDI MSCI USA SRI CLIMATE NET ZERO AMBITION PAB UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BFMNHK08",
+          "nom": "XTRACKERS MSCI EUROPE ESG UCITS ETF 1C"
+        },
+        {
+          "asset_id": "IE00BHZPJ015",
+          "nom": "ISHARES MSCI EMU ESG ENHANCED UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BJ5JPH63",
+          "nom": "ISHARES J.P. MORGAN USD EM BOND UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BMDFDY08",
+          "nom": "ISHARES USD HIGH YIELD CORP BOND ESG SRI UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BYVQ9F29",
+          "nom": "ISHARES NASDAQ 100 UCITS ETF (HEDGED)"
+        },
+        {
+          "asset_id": "IE00BZ036J45",
+          "nom": "XTRACKERS USD CORPORATE BOND UCITS ETF"
+        },
+        {
+          "asset_id": "IE00BZ163G84",
+          "nom": "VANGUARD EUR CORPORATE BOND UCITS ETF"
+        },
+        {
+          "asset_id": "LU0274211480",
+          "nom": "XTRACKERS DAX UCITS ETF 1C"
+        },
+        {
+          "asset_id": "LU0290356871",
+          "nom": "XTRACKERS II EUROZONE GOVERNMENT BOND 1-3 UCITS ETF"
+        },
+        {
+          "asset_id": "LU0290357846",
+          "nom": "XTRACKERS II EUROZONE GOVERNMENT BOND 25+ UCITS ETF 1C"
+        },
+        {
+          "asset_id": "LU0290357929",
+          "nom": "XTRACKERS II GLOBAL INFLATION-LINKED BOND UCITS ETF 1C EUR HEDGED"
+        },
+        {
+          "asset_id": "LU0292096186",
+          "nom": "XTRACKERS STOXX GLOBAL SELECT DIVIDEND 100 SWAP UCITS ETF"
+        },
+        {
+          "asset_id": "LU0292103222",
+          "nom": "XTRACKERS MSCI EUROPE HEALTH CARE ESG SCREENED UCITS ETF 1C"
+        },
+        {
+          "asset_id": "LU0292105359",
+          "nom": "XTRACKERS MSCI EUROPE CONSUMER STAPLES ESG SCREENED UCITS ETF 1C"
+        },
+        {
+          "asset_id": "LU0478205379",
+          "nom": "XTRACKERS II EUR CORPORATE BOND UCITS ETF"
+        },
+        {
+          "asset_id": "LU0496786574",
+          "nom": "AMUNDI S&P 500 II UCITS ETF EUR DIST"
+        },
+        {
+          "asset_id": "LU0514695690",
+          "nom": "XTRACKERS MSCI CHINA UCITS ETF 1C"
+        },
+        {
+          "asset_id": "LU0533033667",
+          "nom": "AMUNDI MSCI WORLD INFORMATION TECHNOLOGY UCITS ETF EUR ACC"
+        },
+        {
+          "asset_id": "LU0839027447",
+          "nom": "XTRACKERS NIKKEI 225 UCITS ETF 1D"
+        },
+        {
+          "asset_id": "LU1109942653",
+          "nom": "XTRACKERS II EUR HIGH YIELD CORPORATE BOND UCITS ETF"
+        },
+        {
+          "asset_id": "LU1291097779",
+          "nom": "BNP PARIBAS EASY MSCI EMERGING ESG FILTERED MIN TE"
+        },
+        {
+          "asset_id": "LU1291098827",
+          "nom": "BNPP E MSCI EMU ESG FTD MIN TE EUR"
+        },
+        {
+          "asset_id": "LU1681043912",
+          "nom": "AMUNDI MSCI CHINA TECH ESG SCREENED UCITS ETF EUR ACC"
+        },
+        {
+          "asset_id": "LU1681044480",
+          "nom": "AMUNDI MSCI EM ASIA UCITS ET"
+        },
+        {
+          "asset_id": "LU1829221024",
+          "nom": "AMUNDI NASDAQ-100 II UCITS ETF ACC"
+        },
+        {
+          "asset_id": "LU1861137484",
+          "nom": "AMUNDI IS AMUNDI MSCI EUROPE SRI PAB"
+        },
+        {
+          "asset_id": "LU1900066462",
+          "nom": "AMUNDI MSCI EASTERN EUROPE EX RUSSIA UCITS ETF"
+        },
+        {
+          "asset_id": "LU1953136527",
+          "nom": "BNP EASY ECPI CIRCULAR ECONOMY LEADERS"
+        },
+        {
+          "asset_id": "LU2244387457",
+          "nom": "BNPP EASY JPM ESG EMU GOVT BD IG 3-5Y"
+        }
+      ]
+    }
+  },
+  "noms_supports": {
+    "IE00BKBF6H24": "ISHARES CORE MSCI WORLD UCITS ETF",
+    "IE00BL25JN58": "XTRACKERS MSCI WORLD MINIMUM VOLATILITY UCITS ETF",
+    "LU0290358497": "XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF",
+    "IE000I8KRLL9": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+    "LU1829219390": "AMUNDI EURO STOXX BANKS UCITS ETF ACC",
+    "IE00BMG6Z448": "ISHARES MSCI EM EX-CHINA UCITS ETF",
+    "DE000A0F5UK5": "ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE)",
+    "DE000A0Q4R28": "ISHARES STOXX EUROPE 600 AUTOMOBILES & PARTS UCITS ETF (DE)",
+    "DE000A0Q4R85": "ISHARES MSCI BRAZIL UCITS ETF (DE)",
+    "FR0000295230": "COMGEST RENAISSANCE EUROPE",
+    "FR0007052782": "AMUNDI CAC 40 UCITS ETF DIST",
+    "FR0007054358": "AMUNDI EURO STOXX 50 II UCITS ETF ACC",
+    "FR0010261198": "AMUNDI MSCI EUROPE II UCITS ETF ACC",
+    "FR0010315770": "AMUNDI MSCI WORLD II UCITS ETF DIST",
+    "FR0011550193": "BNP PARIBAS EASY STOXX EUROPE 600 UCITS ETF",
+    "IE000R85HL30": "AMUNDI MSCI USA SRI CLIMATE NET ZERO AMBITION PAB UCITS ETF",
+    "IE00BFMNHK08": "XTRACKERS MSCI EUROPE ESG UCITS ETF 1C",
+    "IE00BHZPJ015": "ISHARES MSCI EMU ESG ENHANCED UCITS ETF",
+    "IE00BJ5JPH63": "ISHARES J.P. MORGAN USD EM BOND UCITS ETF",
+    "IE00BMDFDY08": "ISHARES USD HIGH YIELD CORP BOND ESG SRI UCITS ETF",
+    "IE00BYVQ9F29": "ISHARES NASDAQ 100 UCITS ETF (HEDGED)",
+    "IE00BZ036J45": "XTRACKERS USD CORPORATE BOND UCITS ETF",
+    "IE00BZ163G84": "VANGUARD EUR CORPORATE BOND UCITS ETF",
+    "LU0274211480": "XTRACKERS DAX UCITS ETF 1C",
+    "LU0290356871": "XTRACKERS II EUROZONE GOVERNMENT BOND 1-3 UCITS ETF",
+    "LU0290357846": "XTRACKERS II EUROZONE GOVERNMENT BOND 25+ UCITS ETF 1C",
+    "LU0290357929": "XTRACKERS II GLOBAL INFLATION-LINKED BOND UCITS ETF 1C EUR HEDGED",
+    "LU0292096186": "XTRACKERS STOXX GLOBAL SELECT DIVIDEND 100 SWAP UCITS ETF",
+    "LU0292103222": "XTRACKERS MSCI EUROPE HEALTH CARE ESG SCREENED UCITS ETF 1C",
+    "LU0292105359": "XTRACKERS MSCI EUROPE CONSUMER STAPLES ESG SCREENED UCITS ETF 1C",
+    "LU0478205379": "XTRACKERS II EUR CORPORATE BOND UCITS ETF",
+    "LU0496786574": "AMUNDI S&P 500 II UCITS ETF EUR DIST",
+    "LU0514695690": "XTRACKERS MSCI CHINA UCITS ETF 1C",
+    "LU0533033667": "AMUNDI MSCI WORLD INFORMATION TECHNOLOGY UCITS ETF EUR ACC",
+    "LU0839027447": "XTRACKERS NIKKEI 225 UCITS ETF 1D",
+    "LU1109942653": "XTRACKERS II EUR HIGH YIELD CORPORATE BOND UCITS ETF",
+    "LU1291097779": "BNP PARIBAS EASY MSCI EMERGING ESG FILTERED MIN TE",
+    "LU1291098827": "BNPP E MSCI EMU ESG FTD MIN TE EUR",
+    "LU1681043912": "AMUNDI MSCI CHINA TECH ESG SCREENED UCITS ETF EUR ACC",
+    "LU1681044480": "AMUNDI MSCI EM ASIA UCITS ET",
+    "LU1829221024": "AMUNDI NASDAQ-100 II UCITS ETF ACC",
+    "LU1861137484": "AMUNDI IS AMUNDI MSCI EUROPE SRI PAB",
+    "LU1900066462": "AMUNDI MSCI EASTERN EUROPE EX RUSSIA UCITS ETF",
+    "LU1953136527": "BNP EASY ECPI CIRCULAR ECONOMY LEADERS",
+    "LU2244387457": "BNPP EASY JPM ESG EMU GOVT BD IG 3-5Y",
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": "Fonds en euros, rendement modelise"
+  },
+  "rendement_fonds_euros_modelise_pct": 3.0,
+  "strategies": {
+    "claude-socle-satellites": {
+      "label": "Claude A — Socle mondial et satellites plafonnés",
+      "status": "research_hypothesis",
+      "statut_public": "Hypothèse de recherche. Résultat de simulation, aucune décision réelle n'a été prise à ces dates.",
+      "version": "v0.3",
+      "resume": "Un socle mondial large porte l'essentiel de la poche actions, quelques thèmes la complètent sans jamais peser lourd, et toute ligne passée sous sa moyenne 200 jours attend sur le support monétaire.",
+      "objectif": "Conserver une exposition actions élevée en supprimant la concentration sectorielle involontaire du portefeuille d'origine.",
+      "regle": "Soixante pour cent de la poche actions dans un socle monde, réparti entre un indice monde large et un indice monde à volatilité minimale. Le reste sur quatre thèmes au maximum, plafonnés à huit pour cent du contrat chacun. Toute ligne clôturant sous sa moyenne mobile 200 jours bascule sur le support monétaire, et y reste tant qu'elle n'est pas repassée au-dessus. Revue hebdomadaire, arbitrage seulement si l'allocation cible s'écarte de trois points de l'allocation détenue.",
+      "explication": "Ce texte décrit la version active, la v0.3. La v0.1 prévoyait en plus une confirmation de rentrée à cinq clôtures consécutives, jamais implémentée, et la v0.2 utilisait une moyenne 100 jours, imposée par un historique d'un an. Les paramètres de ces deux versions restent en place et ne sont pas réécrits.",
+      "motif_version": "Sur la fenetre walk-forward du 5 juillet 2022 au 18 septembre 2026, la moyenne 200 jours rapporte 9,91 % par an contre 7,55 % pour la moyenne 100 jours, avec un drawdown maximum de -4,59 % contre -5,82 % et 60 arbitrages contre 94. La moyenne 100 jours de la v0.2 etait une adaptation forcee par un historique d'un an, pas un choix de conception.",
+      "faiblesse": "Sur un marché sans direction, le filtre de tendance sort après le début des baisses et rentre après le début des hausses. Chaque aller-retour coûte.",
+      "allocation_courante": [
+        {
+          "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+          "weight_pct": 50.0
+        },
+        {
+          "asset_id": "IE000I8KRLL9",
+          "weight_pct": 6.67
+        },
+        {
+          "asset_id": "IE00BKBF6H24",
+          "weight_pct": 21.0
+        },
+        {
+          "asset_id": "IE00BL25JN58",
+          "weight_pct": 9.0
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "weight_pct": 6.67
+        },
+        {
+          "asset_id": "LU1829219390",
+          "weight_pct": 6.67
+        }
+      ],
+      "indicateurs": {
+        "debut": "2022-07-05",
+        "fin": "2026-09-18",
+        "nb_seances": 1072,
+        "perf_origine_pct": 49.47,
+        "perf_annualisee_pct": 9.91,
+        "perf_5j_pct": -0.3,
+        "perf_20j_pct": 0.25,
+        "drawdown_max_pct": -4.59,
+        "vol_periode_pct": 5.4,
+        "vol_20j_pct": 5.15,
+        "nb_arbitrages": 60,
+        "valeur_base_100": 149.47
+      },
+      "nb_decisions": 60,
+      "versions": {
+        "v0.2": {
+          "indicateurs": {
+            "debut": "2022-07-05",
+            "fin": "2026-09-18",
+            "nb_seances": 1072,
+            "perf_origine_pct": 36.3,
+            "perf_annualisee_pct": 7.55,
+            "perf_5j_pct": -0.32,
+            "perf_20j_pct": -0.21,
+            "drawdown_max_pct": -5.82,
+            "vol_periode_pct": 5.22,
+            "vol_20j_pct": 3.87,
+            "nb_arbitrages": 94,
+            "valeur_base_100": 136.3
+          },
+          "note": "Adaptée à 253 séances d'historique. La v0.1 reste documentée, jamais réécrite.",
+          "filtre_tendance": "sma_100",
+          "nb_decisions": 94,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 41.25,
+            "perf_annualisee_pct": 8.94,
+            "perf_5j_pct": -0.32,
+            "perf_20j_pct": -0.21,
+            "drawdown_max_pct": -3.9,
+            "vol_periode_pct": 5.22,
+            "vol_20j_pct": 3.87,
+            "nb_arbitrages": 94,
+            "valeur_base_100": 141.25
+          }
+        },
+        "v0.3": {
+          "indicateurs": {
+            "debut": "2022-07-05",
+            "fin": "2026-09-18",
+            "nb_seances": 1072,
+            "perf_origine_pct": 49.47,
+            "perf_annualisee_pct": 9.91,
+            "perf_5j_pct": -0.3,
+            "perf_20j_pct": 0.25,
+            "drawdown_max_pct": -4.59,
+            "vol_periode_pct": 5.4,
+            "vol_20j_pct": 5.15,
+            "nb_arbitrages": 60,
+            "valeur_base_100": 149.47
+          },
+          "note": "Retour a la moyenne 200 jours, redevenue mesurable avec cinq ans d'historique. Seul ce parametre change par rapport a la v0.2. La v0.1 et la v0.2 restent en place et ne sont pas reecrites.",
+          "filtre_tendance": "sma_200",
+          "nb_decisions": 60,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 49.45,
+            "perf_annualisee_pct": 10.47,
+            "perf_5j_pct": -0.3,
+            "perf_20j_pct": 0.25,
+            "drawdown_max_pct": -4.59,
+            "vol_periode_pct": 5.54,
+            "vol_20j_pct": 5.15,
+            "nb_arbitrages": 60,
+            "valeur_base_100": 149.45
+          }
+        }
+      },
+      "versions_non_simulees": [
+        "v0.1"
+      ],
+      "decisions_recentes": [
+        {
+          "date": "2025-12-05",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-01-09",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-01-23",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-02-06",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-03-20",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 55.3 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 27.67
+            }
+          ]
+        },
+        {
+          "date": "2026-04-02",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 55.3 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-04-24",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-05-15",
+          "strategy_id": "claude-socle-satellites",
+          "strategy_version": "v0.3",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        }
+      ],
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 49.45,
+        "perf_annualisee_pct": 10.47,
+        "perf_5j_pct": -0.3,
+        "perf_20j_pct": 0.25,
+        "drawdown_max_pct": -4.59,
+        "vol_periode_pct": 5.54,
+        "vol_20j_pct": 5.15,
+        "nb_arbitrages": 60,
+        "valeur_base_100": 149.45
+      }
+    },
+    "claude-risque-cible": {
+      "label": "Claude B — Risque cible constant",
+      "status": "research_hypothesis",
+      "statut_public": "Hypothèse de recherche. Résultat de simulation, aucune décision réelle n'a été prise à ces dates.",
+      "version": "v0.2",
+      "resume": "La part actions n'est pas fixée d'avance : elle est calculée chaque semaine pour viser un niveau de risque constant, et se réduit quand le marché s'agite.",
+      "objectif": "Maintenir constant le risque du contrat plutôt que sa répartition. La part actions monte quand les marchés sont calmes et baisse quand ils s'agitent.",
+      "regle": "Part actions égale à la volatilité cible divisée par la volatilité réalisée de la poche actions, bornée entre vingt et soixante pour cent. Recalculée chaque semaine, appliquée seulement si l'écart dépasse cinq points. La composition de cette poche actions est celle de Claude A.",
+      "explication": "Ce texte décrit la version active, la v0.2, qui mesure la volatilité réalisée sur quarante séances. La v0.1 la mesurait sur soixante séances ; ses paramètres restent en place et ne sont pas réécrits.",
+      "motif_version": "",
+      "faiblesse": "Réduit l'exposition après une hausse de volatilité, donc souvent après le début d'une baisse. Manque une partie des rebonds rapides.",
+      "allocation_courante": [
+        {
+          "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+          "weight_pct": 40.0
+        },
+        {
+          "asset_id": "IE000I8KRLL9",
+          "weight_pct": 8.0
+        },
+        {
+          "asset_id": "IE00BKBF6H24",
+          "weight_pct": 25.2
+        },
+        {
+          "asset_id": "IE00BL25JN58",
+          "weight_pct": 10.8
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "weight_pct": 8.0
+        },
+        {
+          "asset_id": "LU1829219390",
+          "weight_pct": 8.0
+        }
+      ],
+      "indicateurs": {
+        "debut": "2022-07-05",
+        "fin": "2026-09-18",
+        "nb_seances": 1072,
+        "perf_origine_pct": 55.83,
+        "perf_annualisee_pct": 10.99,
+        "perf_5j_pct": -0.37,
+        "perf_20j_pct": 0.25,
+        "drawdown_max_pct": -5.52,
+        "vol_periode_pct": 6.44,
+        "vol_20j_pct": 6.18,
+        "nb_arbitrages": 70,
+        "valeur_base_100": 155.83
+      },
+      "nb_decisions": 70,
+      "versions": {
+        "v0.2": {
+          "indicateurs": {
+            "debut": "2022-07-05",
+            "fin": "2026-09-18",
+            "nb_seances": 1072,
+            "perf_origine_pct": 55.83,
+            "perf_annualisee_pct": 10.99,
+            "perf_5j_pct": -0.37,
+            "perf_20j_pct": 0.25,
+            "drawdown_max_pct": -5.52,
+            "vol_periode_pct": 6.44,
+            "vol_20j_pct": 6.18,
+            "nb_arbitrages": 70,
+            "valeur_base_100": 155.83
+          },
+          "note": "Fenêtre de volatilité ramenée à 40 séances, faute de profondeur.",
+          "filtre_tendance": "sma_200",
+          "nb_decisions": 70,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 56.03,
+            "perf_annualisee_pct": 11.65,
+            "perf_5j_pct": -0.37,
+            "perf_20j_pct": 0.25,
+            "drawdown_max_pct": -5.52,
+            "vol_periode_pct": 6.61,
+            "vol_20j_pct": 6.18,
+            "nb_arbitrages": 70,
+            "valeur_base_100": 156.03
+          }
+        }
+      },
+      "versions_non_simulees": [
+        "v0.1"
+      ],
+      "decisions_recentes": [
+        {
+          "date": "2026-01-23",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 21.6 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ]
+        },
+        {
+          "date": "2026-02-06",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 21.6 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ]
+        },
+        {
+          "date": "2026-03-20",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 66.4 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 33.2
+            }
+          ]
+        },
+        {
+          "date": "2026-04-02",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 66.4 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ]
+        },
+        {
+          "date": "2026-04-17",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 6.6 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 43.3
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 7.56
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 23.81
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.21
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 7.56
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 7.56
+            }
+          ]
+        },
+        {
+          "date": "2026-04-24",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 21.8 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 42.6
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 7.65
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 24.11
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 7.65
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 10.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 7.65
+            }
+          ]
+        },
+        {
+          "date": "2026-05-08",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 5.2 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ]
+        },
+        {
+          "date": "2026-05-15",
+          "strategy_id": "claude-risque-cible",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 21.6 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 40.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 25.2
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 10.8
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.0
+            }
+          ]
+        }
+      ],
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 56.03,
+        "perf_annualisee_pct": 11.65,
+        "perf_5j_pct": -0.37,
+        "perf_20j_pct": 0.25,
+        "drawdown_max_pct": -5.52,
+        "vol_periode_pct": 6.61,
+        "vol_20j_pct": 6.18,
+        "nb_arbitrages": 70,
+        "valeur_base_100": 156.03
+      }
+    },
+    "claude-double-filtre": {
+      "label": "Claude C — Tendance confirmée par l'ampleur",
+      "status": "research_hypothesis",
+      "statut_public": "Hypothèse de recherche. Résultat de simulation, aucune décision réelle n'a été prise à ces dates.",
+      "version": "v0.2",
+      "resume": "L'exposition ne passe au maximum que si l'indice monde et la majorité des supports suivis montent ensemble ; une seule des deux conditions donne une demi-exposition, aucune des deux renvoie au support monétaire.",
+      "objectif": "N'être pleinement exposé que lorsque la tendance est confirmée par un nombre suffisant de supports, et non par un seul indice.",
+      "regle": "Indice monde au-dessus de sa moyenne mobile et plus de la moitié des supports suivis au-dessus de la leur, exposition pleine. Une seule des deux conditions remplie, moitié de l'exposition. Aucune des deux, tout sur le support monétaire.",
+      "explication": "Ce texte décrit la version active, la v0.2, qui utilise une moyenne 100 jours et trois thèmes, seuls supports disponibles en cotation euro. Le délai minimal de vingt séances entre deux changements d'état, prévu par la v0.1, n'est pas implémenté : le rétablir relève d'une version suivante, pas d'une retouche. Les paramètres de la v0.1 restent en place et ne sont pas réécrits.",
+      "motif_version": "",
+      "faiblesse": "Trois états seulement. Les passages d'un état à l'autre sont brutaux et peuvent se produire près d'un point de retournement.",
+      "allocation_courante": [
+        {
+          "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+          "weight_pct": 50.0
+        },
+        {
+          "asset_id": "IE00BKBF6H24",
+          "weight_pct": 21.0
+        },
+        {
+          "asset_id": "IE00BL25JN58",
+          "weight_pct": 9.0
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "weight_pct": 6.67
+        },
+        {
+          "asset_id": "LU0290358497",
+          "weight_pct": 6.67
+        },
+        {
+          "asset_id": "LU1829219390",
+          "weight_pct": 6.67
+        }
+      ],
+      "indicateurs": {
+        "debut": "2022-07-05",
+        "fin": "2026-09-18",
+        "nb_seances": 1072,
+        "perf_origine_pct": 31.66,
+        "perf_annualisee_pct": 6.68,
+        "perf_5j_pct": -0.32,
+        "perf_20j_pct": -0.21,
+        "drawdown_max_pct": -5.94,
+        "vol_periode_pct": 5.08,
+        "vol_20j_pct": 3.87,
+        "nb_arbitrages": 85,
+        "valeur_base_100": 131.66
+      },
+      "nb_decisions": 85,
+      "versions": {
+        "v0.2": {
+          "indicateurs": {
+            "debut": "2022-07-05",
+            "fin": "2026-09-18",
+            "nb_seances": 1072,
+            "perf_origine_pct": 31.66,
+            "perf_annualisee_pct": 6.68,
+            "perf_5j_pct": -0.32,
+            "perf_20j_pct": -0.21,
+            "drawdown_max_pct": -5.94,
+            "vol_periode_pct": 5.08,
+            "vol_20j_pct": 3.87,
+            "nb_arbitrages": 85,
+            "valeur_base_100": 131.66
+          },
+          "note": "Moyenne 100 jours et trois thèmes, seuls supports EUR disponibles.",
+          "filtre_tendance": "sma_100",
+          "nb_decisions": 85,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 37.29,
+            "perf_annualisee_pct": 8.17,
+            "perf_5j_pct": -0.32,
+            "perf_20j_pct": -0.21,
+            "drawdown_max_pct": -4.57,
+            "vol_periode_pct": 5.09,
+            "vol_20j_pct": 3.87,
+            "nb_arbitrages": 85,
+            "valeur_base_100": 137.29
+          }
+        }
+      },
+      "versions_non_simulees": [
+        "v0.1"
+      ],
+      "decisions_recentes": [
+        {
+          "date": "2026-04-10",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 68.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-04-17",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-04-24",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 31.3 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 15.67
+            }
+          ]
+        },
+        {
+          "date": "2026-04-30",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 13.3 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-05-15",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-06-19",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-06-26",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 18.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        },
+        {
+          "date": "2026-08-21",
+          "strategy_id": "claude-double-filtre",
+          "strategy_version": "v0.2",
+          "comment": "Revue hebdomadaire, ecart d'allocation 13.3 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "IE00BKBF6H24",
+              "weight_pct": 21.0
+            },
+            {
+              "asset_id": "IE00BL25JN58",
+              "weight_pct": 9.0
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 6.67
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 6.67
+            }
+          ]
+        }
+      ],
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 37.29,
+        "perf_annualisee_pct": 8.17,
+        "perf_5j_pct": -0.32,
+        "perf_20j_pct": -0.21,
+        "drawdown_max_pct": -4.57,
+        "vol_periode_pct": 5.09,
+        "vol_20j_pct": 3.87,
+        "nb_arbitrages": 85,
+        "valeur_base_100": 137.29
+      }
+    },
+    "claude-momentum-multi": {
+      "label": "Claude D — Momentum multi-horizon",
+      "status": "research_hypothesis",
+      "statut_public": "Hypothèse de recherche. Résultat de simulation, aucune décision réelle n'a été prise à ces dates.",
+      "version": "v0.1",
+      "resume": "Chaque semaine, les six supports qui progressent le plus sur les six et douze derniers mois sont détenus à parts égales ; un support qui recule sur ces deux horizons n'est pas détenu et sa part attend sur le support monétaire.",
+      "objectif": "Utiliser l'ensemble des supports cotés en euros accessibles dans le contrat, et non une liste de thèmes choisie d'avance, en laissant le classement décider de la composition.",
+      "regle": "Chaque vendredi, chaque support de l'univers reçoit un score égal à la moyenne de sa performance sur cent vingt-six séances et sur deux cent cinquante-deux séances. Les six meilleurs scores strictement positifs sont détenus à parts égales, pour la moitié du contrat. Chaque place non pourvue reste sur le support monétaire. L'autre moitié du contrat reste en fonds en euros.",
+      "explication": "Ce texte décrit la version active, la v0.1.",
+      "motif_version": "",
+      "faiblesse": "Le classement peut retenir deux supports très proches, par exemple deux ETF sur le même indice, ce qui concentre le risque sans que la règle s'en aperçoive. La stratégie subit aussi les retournements brutaux : un support acheté après une forte hausse est vendu après le début de la baisse.",
+      "allocation_courante": [
+        {
+          "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+          "weight_pct": 50.0
+        },
+        {
+          "asset_id": "DE000A0F5UK5",
+          "weight_pct": 8.33
+        },
+        {
+          "asset_id": "IE000I8KRLL9",
+          "weight_pct": 8.33
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "weight_pct": 8.33
+        },
+        {
+          "asset_id": "LU0839027447",
+          "weight_pct": 8.33
+        },
+        {
+          "asset_id": "LU1829219390",
+          "weight_pct": 8.33
+        },
+        {
+          "asset_id": "LU1900066462",
+          "weight_pct": 8.33
+        }
+      ],
+      "indicateurs": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 64.94,
+        "perf_annualisee_pct": 13.2,
+        "perf_5j_pct": -0.69,
+        "perf_20j_pct": 0.54,
+        "drawdown_max_pct": -9.12,
+        "vol_periode_pct": 8.82,
+        "vol_20j_pct": 8.4,
+        "nb_arbitrages": 105,
+        "valeur_base_100": 165.23
+      },
+      "nb_decisions": 105,
+      "versions": {
+        "v0.1": {
+          "indicateurs": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 64.94,
+            "perf_annualisee_pct": 13.2,
+            "perf_5j_pct": -0.69,
+            "perf_20j_pct": 0.54,
+            "drawdown_max_pct": -9.12,
+            "vol_periode_pct": 8.82,
+            "vol_20j_pct": 8.4,
+            "nb_arbitrages": 105,
+            "valeur_base_100": 165.23
+          },
+          "note": "",
+          "filtre_tendance": null,
+          "nb_decisions": 105,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 64.94,
+            "perf_annualisee_pct": 13.2,
+            "perf_5j_pct": -0.69,
+            "perf_20j_pct": 0.54,
+            "drawdown_max_pct": -9.12,
+            "vol_periode_pct": 8.82,
+            "vol_20j_pct": 8.4,
+            "nb_arbitrages": 105,
+            "valeur_base_100": 164.94
+          }
+        }
+      },
+      "versions_non_simulees": [],
+      "decisions_recentes": [
+        {
+          "date": "2026-06-12",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-06-19",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1291097779",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-07-03",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-07-17",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-08-07",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-08-21",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-08-28",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "strategy_id": "claude-momentum-multi",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.7 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 8.33
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 8.33
+            }
+          ]
+        }
+      ],
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 64.94,
+        "perf_annualisee_pct": 13.2,
+        "perf_5j_pct": -0.69,
+        "perf_20j_pct": 0.54,
+        "drawdown_max_pct": -9.12,
+        "vol_periode_pct": 8.82,
+        "vol_20j_pct": 8.4,
+        "nb_arbitrages": 105,
+        "valeur_base_100": 164.94
+      }
+    },
+    "claude-momentum-prudent": {
+      "label": "Claude E — Momentum sous garde-fou",
+      "status": "research_hypothesis",
+      "statut_public": "Hypothèse de recherche. Résultat de simulation, aucune décision réelle n'a été prise à ces dates.",
+      "version": "v0.1",
+      "resume": "Même sélection que Claude D, mais les supports les plus agités pèsent moins que les plus calmes, et toute la poche actions part sur le support monétaire tant que l'indice monde clôture sous sa moyenne 200 jours.",
+      "objectif": "Obtenir l'essentiel du rendement d'une sélection par le classement, en acceptant d'en perdre une part pour réduire la profondeur des baisses.",
+      "regle": "Sélection identique à celle de Claude D. Les six supports retenus sont pondérés à l'inverse de leur volatilité des soixante dernières séances, donc un support deux fois plus agité reçoit deux fois moins. Si l'indice monde large clôture sous sa moyenne 200 jours, aucune ligne action n'est détenue et toute la poche va sur le support monétaire jusqu'à la revue suivante.",
+      "explication": "Ce texte décrit la version active, la v0.1.",
+      "motif_version": "",
+      "faiblesse": "Le garde-fou sort après le début d'une baisse et rentre après le début du rebond. Sur la première moitié de la période testée, il a coûté près de trois points de rendement annuel par rapport à Claude D. Ses résultats sont aussi plus sensibles au jour de la semaine retenu pour la revue.",
+      "allocation_courante": [
+        {
+          "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+          "weight_pct": 50.0
+        },
+        {
+          "asset_id": "DE000A0F5UK5",
+          "weight_pct": 7.85
+        },
+        {
+          "asset_id": "IE000I8KRLL9",
+          "weight_pct": 3.98
+        },
+        {
+          "asset_id": "IE00BMG6Z448",
+          "weight_pct": 6.73
+        },
+        {
+          "asset_id": "LU0839027447",
+          "weight_pct": 7.22
+        },
+        {
+          "asset_id": "LU1829219390",
+          "weight_pct": 10.96
+        },
+        {
+          "asset_id": "LU1900066462",
+          "weight_pct": 13.26
+        }
+      ],
+      "indicateurs": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 57.33,
+        "perf_annualisee_pct": 11.88,
+        "perf_5j_pct": -0.81,
+        "perf_20j_pct": 0.38,
+        "drawdown_max_pct": -6.18,
+        "vol_periode_pct": 7.76,
+        "vol_20j_pct": 7.38,
+        "nb_arbitrages": 107,
+        "valeur_base_100": 157.34
+      },
+      "nb_decisions": 107,
+      "versions": {
+        "v0.1": {
+          "indicateurs": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 57.33,
+            "perf_annualisee_pct": 11.88,
+            "perf_5j_pct": -0.81,
+            "perf_20j_pct": 0.38,
+            "drawdown_max_pct": -6.18,
+            "vol_periode_pct": 7.76,
+            "vol_20j_pct": 7.38,
+            "nb_arbitrages": 107,
+            "valeur_base_100": 157.34
+          },
+          "note": "",
+          "filtre_tendance": "sma_200",
+          "nb_decisions": 107,
+          "allocation_finale": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.85
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 3.98
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.73
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 7.22
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 10.96
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 13.26
+            }
+          ],
+          "indicateurs_fenetre_commune": {
+            "debut": "2022-09-20",
+            "fin": "2026-09-18",
+            "nb_seances": 1017,
+            "perf_origine_pct": 57.33,
+            "perf_annualisee_pct": 11.88,
+            "perf_5j_pct": -0.81,
+            "perf_20j_pct": 0.38,
+            "drawdown_max_pct": -6.18,
+            "vol_periode_pct": 7.76,
+            "vol_20j_pct": 7.38,
+            "nb_arbitrages": 107,
+            "valeur_base_100": 157.33
+          }
+        }
+      },
+      "versions_non_simulees": [],
+      "decisions_recentes": [
+        {
+          "date": "2026-06-12",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 22.2 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.56
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 5.77
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.25
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.67
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 9.08
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 10.67
+            }
+          ]
+        },
+        {
+          "date": "2026-06-19",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 21.5 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.93
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 5.71
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.41
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.91
+            },
+            {
+              "asset_id": "LU1291097779",
+              "weight_pct": 10.0
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 9.05
+            }
+          ]
+        },
+        {
+          "date": "2026-07-03",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 23.0 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.13
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 5.17
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 8.04
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 9.54
+            },
+            {
+              "asset_id": "LU1681044480",
+              "weight_pct": 8.48
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 10.64
+            }
+          ]
+        },
+        {
+          "date": "2026-07-17",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 23.9 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.3
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 4.41
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 7.27
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.45
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 10.62
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 11.95
+            }
+          ]
+        },
+        {
+          "date": "2026-08-07",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 23.9 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 8.53
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 4.47
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 7.63
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 9.41
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 8.44
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 11.52
+            }
+          ]
+        },
+        {
+          "date": "2026-08-21",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 27.6 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.9
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 4.27
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 7.15
+            },
+            {
+              "asset_id": "LU0290358497",
+              "weight_pct": 0.0
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 9.03
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 7.83
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 13.81
+            }
+          ]
+        },
+        {
+          "date": "2026-08-28",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 20.9 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.65
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 3.96
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.75
+            },
+            {
+              "asset_id": "LU0533033667",
+              "weight_pct": 8.38
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 10.43
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 12.83
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "strategy_id": "claude-momentum-prudent",
+          "strategy_version": "v0.1",
+          "comment": "Revue hebdomadaire, ecart d'allocation 16.8 points",
+          "allocations": [
+            {
+              "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+              "weight_pct": 50.0
+            },
+            {
+              "asset_id": "DE000A0F5UK5",
+              "weight_pct": 7.85
+            },
+            {
+              "asset_id": "IE000I8KRLL9",
+              "weight_pct": 3.98
+            },
+            {
+              "asset_id": "IE00BMG6Z448",
+              "weight_pct": 6.73
+            },
+            {
+              "asset_id": "LU0839027447",
+              "weight_pct": 7.22
+            },
+            {
+              "asset_id": "LU1829219390",
+              "weight_pct": 10.96
+            },
+            {
+              "asset_id": "LU1900066462",
+              "weight_pct": 13.26
+            }
+          ]
+        }
+      ],
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 57.33,
+        "perf_annualisee_pct": 11.88,
+        "perf_5j_pct": -0.81,
+        "perf_20j_pct": 0.38,
+        "drawdown_max_pct": -6.18,
+        "vol_periode_pct": 7.76,
+        "vol_20j_pct": 7.38,
+        "nb_arbitrages": 107,
+        "valeur_base_100": 157.33
+      }
+    }
+  },
+  "comparaisons": {
+    "socle-monde-50": {
+      "label": "Socle monde 50 % passif",
+      "description": "Cinquante pour cent d'indice monde large conserves sans arbitrage, cinquante pour cent de fonds en euros modelise. Aucun filtre.",
+      "indicateurs": {
+        "debut": "2022-07-05",
+        "fin": "2026-09-18",
+        "nb_seances": 1072,
+        "perf_origine_pct": 51.87,
+        "perf_annualisee_pct": 10.32,
+        "perf_5j_pct": -0.29,
+        "perf_20j_pct": -0.61,
+        "drawdown_max_pct": -10.17,
+        "vol_periode_pct": 7.52,
+        "vol_20j_pct": 5.21,
+        "nb_arbitrages": 0,
+        "valeur_base_100": 151.87
+      },
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 49.6,
+        "perf_annualisee_pct": 10.5,
+        "perf_5j_pct": -0.29,
+        "perf_20j_pct": -0.61,
+        "drawdown_max_pct": -10.17,
+        "vol_periode_pct": 7.43,
+        "vol_20j_pct": 5.21,
+        "nb_arbitrages": 0,
+        "valeur_base_100": 149.6
+      }
+    },
+    "bernard-retro-partiel": {
+      "label": "Bernard actuel rétro-simulé, partiel",
+      "description": "La composition connue en septembre 2026 appliquée en arrière sur toute la fenêtre. Trois lignes seulement, celles cotées en euros, remises à l'échelle pour 50 % du contrat.",
+      "reserves": [
+        "Biais de sélection majeur : appliquer en arrière une composition connue aujourd'hui revient à savoir dès 2022 quelles lignes seraient détenues en 2026. Cet ensemble contient les deux thèmes qui ont le plus progressé sur la période.",
+        "Trois lignes sur douze. Les neuf autres supports du contrat sont absents, faute de cotation en euros ou d'historique suffisant.",
+        "Pondérations reconstruites à l'échelle de 50 % du contrat, alors que la part actions réelle est inférieure.",
+        "Aucun arbitrage et aucun rachat ne sont simulés.",
+        "Cette ligne ne représente pas la performance réelle du contrat et ne sert jamais de référence."
+      ],
+      "indicateurs": {
+        "debut": "2022-07-05",
+        "fin": "2026-09-18",
+        "nb_seances": 1072,
+        "perf_origine_pct": 193.98,
+        "perf_annualisee_pct": 28.85,
+        "perf_5j_pct": -0.77,
+        "perf_20j_pct": 1.82,
+        "drawdown_max_pct": -15.64,
+        "vol_periode_pct": 16.73,
+        "vol_20j_pct": 17.67,
+        "nb_arbitrages": 0,
+        "valeur_base_100": 293.98
+      },
+      "indicateurs_fenetre_commune": {
+        "debut": "2022-09-20",
+        "fin": "2026-09-18",
+        "nb_seances": 1017,
+        "perf_origine_pct": 179.43,
+        "perf_annualisee_pct": 29.0,
+        "perf_5j_pct": -0.77,
+        "perf_20j_pct": 1.82,
+        "drawdown_max_pct": -15.64,
+        "vol_periode_pct": 16.86,
+        "vol_20j_pct": 17.67,
+        "nb_arbitrages": 0,
+        "valeur_base_100": 279.43
+      }
+    }
+  }
+}
