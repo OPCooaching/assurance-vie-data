@@ -124,6 +124,9 @@ def main():
         return
 
     px, universe, cfg = load_inputs()
+    # The defensive support is common to the three distinct rule sets.
+    for name in ("impulsion", "adaptative", "rotation_diversifiee"):
+        cfg[name]["defensive_asset"] = cfg["defensive_asset"]
     baseline_dates = pd.to_datetime(pd.read_csv(BASELINE)["date"])
     dates = [dt for dt in baseline_dates if dt in px.index]
     if not dates:
