@@ -56,6 +56,9 @@ jobs:
       - name: Compute common indicators
         run: python scripts/compute_indicators.py
 
+      - name: Build common screener
+        run: python scripts/build_screener.py
+
       - name: Compute Bernard origin benchmark
         run: python scripts/compute_baseline.py
 
