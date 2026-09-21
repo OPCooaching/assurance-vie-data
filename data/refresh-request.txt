@@ -1,2 +1,2 @@
-Rafraichissement demande le 2026-09-21 : recalculer les suivis ChatGPT, Claude et academique uniquement sur les dates de valorisation communes reelles de Bernard, sans rendement journalier invente du fonds euros.
+Rafraichissement demande le 2026-09-21 : publier uniquement les descriptions et suivis quotidiens reels des strategies, sans metadonnees de backtest ou decisions retroconstruites.
 Ce fichier declenche uniquement le workflow de mise a jour; il ne contient aucune donnee de contrat.
