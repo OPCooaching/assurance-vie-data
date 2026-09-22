@@ -19,11 +19,20 @@ def last_value(frame: pd.DataFrame, column: str) -> tuple[pd.Timestamp, float]:
 def asset_rows(latest: pd.DataFrame, universe: pd.DataFrame, assets: list[str]) -> list[dict]:
     names = universe.set_index("asset_id")["support_name"].to_dict()
     by_id = latest.set_index("asset_id")
-    return [{"asset_id": asset, "name": names.get(asset, asset),
-             "volatility_60d": round(float(by_id.loc[asset, "vol_60d_ann"]) * 100, 1),
-             "return_60d": round(float(by_id.loc[asset, "ret_60d"]) * 100, 1),
-             "above_sma200": bool(float(by_id.loc[asset, "sma200_ratio"]) > 0)}
-            for asset in assets]
+    rows = []
+    for asset in assets:
+        row = by_id.loc[asset]
+        volatility = float(row["vol_60d_ann"])
+        result = float(row["ret_60d"])
+        if not pd.notna(volatility) or not pd.notna(result) or volatility <= 0:
+            continue
+        rows.append({"asset_id": asset, "name": names.get(asset, asset),
+                     "volatility_60d": round(volatility * 100, 1),
+                     "return_60d": round(result * 100, 1),
+                     "above_sma200": bool(float(row["sma200_ratio"]) > 0)})
+    if len(rows) < 2:
+        raise ValueError("Budget de risque impossible : moins de deux supports ont un historique valide.")
+    return rows
 
 def main() -> None:
     cfg = yaml.safe_load(Path("config/chatgpt_strategy_lab.yml").read_text())
