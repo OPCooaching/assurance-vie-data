@@ -6,7 +6,11 @@ on:
     paths:
       - "data/refresh-request.txt"
   schedule:
+    # First pass after the European close, Monday to Friday (UTC).
     - cron: "45 20 * * 1-5"
+    # Retry overnight once every provider has had time to publish final closes.
+    # Saturday captures the complete Friday close.
+    - cron: "30 4 * * 2-6"
 
 permissions:
   contents: write
