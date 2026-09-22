@@ -17,6 +17,8 @@ import yaml
 
 CONFIG = Path("config/context_series.yml")
 OUT = Path("data/context/daily.csv")
+SNAPSHOTS = Path("data/context/snapshots")
+SNAPSHOT_RETENTION_DAYS = 14
 WINDOW_YEARS = 5
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv"
 
@@ -72,7 +74,22 @@ def main() -> None:
     output = output.reset_index()
     output["date"] = output["date"].dt.date.astype(str)
     OUT.parent.mkdir(parents=True, exist_ok=True)
+    SNAPSHOTS.mkdir(parents=True, exist_ok=True)
     output.to_csv(OUT, index=False, float_format="%.10g")
+
+    # The current file is overwritten on each daily refresh.  Keep the last
+    # fourteen dated copies so the weekly review can be checked afterwards.
+    today = date.today()
+    snapshot = SNAPSHOTS / f"{today.isoformat()}.csv"
+    output.to_csv(snapshot, index=False, float_format="%.10g")
+    for old_snapshot in SNAPSHOTS.glob("*.csv"):
+        try:
+            snapshot_date = date.fromisoformat(old_snapshot.stem)
+        except ValueError:
+            continue
+        if (today - snapshot_date).days > SNAPSHOT_RETENTION_DAYS:
+            old_snapshot.unlink()
+
     print(f"Saved {len(output)} published dates and {len(series)} context series.")
 
 
