@@ -1,0 +1,234 @@
+{
+  "generated_at": "2026-09-22T12:48:09+00:00",
+  "price_as_of_date": "2026-09-22",
+  "summary": {
+    "title": "Indicateurs et stratégies possibles",
+    "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
+    "price_ready": 337,
+    "volume_ready": 174,
+    "external_ready": 5
+  },
+  "groups": [
+    {
+      "id": "price",
+      "title": "1. Ce que les prix permettent déjà de calculer",
+      "intro": "Ce ne sont pas de nouvelles données. Ce sont des calculs effectués à partir des prix réellement publiés. Ils servent aux stratégies de tendance, de momentum et de contrôle du risque.",
+      "cards": [
+        {
+          "name": "Tendance de fond",
+          "question": "Le prix reste-t-il au-dessus de sa trajectoire de long terme ?",
+          "indicator": "Prix comparé à sa moyenne des 20, 50 et 200 dernières séances",
+          "strategy_use": "Filtre de tendance : rester investi ou réduire l’exposition.",
+          "availability": "available",
+          "availability_label": "Disponible pour 335 supports avec au moins 200 séances.",
+          "is_new_data": false
+        },
+        {
+          "name": "Force relative",
+          "question": "Quels supports ont le plus progressé sur une période définie ?",
+          "indicator": "Variation réellement observée sur 1, 3 et 6 mois",
+          "strategy_use": "Momentum et rotation : comparer des supports selon une règle fixée à l’avance.",
+          "availability": "available",
+          "availability_label": "Disponible pour 337 supports avec au moins 120 séances.",
+          "is_new_data": false
+        },
+        {
+          "name": "Risque du parcours",
+          "question": "Quelle a été l’ampleur des mouvements et de la pire baisse ?",
+          "indicator": "Volatilité sur 20/60 séances et baisse maximale sur 60/252 séances",
+          "strategy_use": "Risque cible : diminuer ou répartir l’exposition quand le parcours devient trop instable.",
+          "availability": "available",
+          "availability_label": "Disponible pour 337 supports avec historique suffisant.",
+          "is_new_data": false
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "title": "2. Nouvelles données externes, indépendantes des prix des supports",
+      "intro": "Ces séries ont été ajoutées pour permettre des stratégies qui ne regardent pas seulement le prix passé des ETF. Elles sont publiées par leurs sources avec leur propre date ; les séries hebdomadaires ne sont jamais transformées en valeurs quotidiennes.",
+      "cards": [
+        {
+          "name": "Incertitude économique et politique américaine",
+          "question": "Mesurer si l'environnement d'information devient exceptionnellement incertain.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-20 · daily.",
+          "is_new_data": true,
+          "external_id": "USEPUINDXD"
+        },
+        {
+          "name": "Conditions financières américaines",
+          "question": "Mesurer si le crédit et le financement deviennent plus faciles ou plus contraints.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-11 · weekly.",
+          "is_new_data": true,
+          "external_id": "NFCI"
+        },
+        {
+          "name": "Dollar américain pondéré par le commerce",
+          "question": "Observer la force globale du dollar, sans se limiter à la paire EUR/USD.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-18 · daily.",
+          "is_new_data": true,
+          "external_id": "DTWEXBGS"
+        },
+        {
+          "name": "Pétrole Brent Europe",
+          "question": "Observer la pression énergétique mondiale, différente du prix des supports du contrat.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-15 · daily.",
+          "is_new_data": true,
+          "external_id": "DCOILBRENTEU"
+        },
+        {
+          "name": "Activité économique hebdomadaire américaine",
+          "question": "Observer l'évolution récente de l'activité économique sans attendre les indicateurs mensuels.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-12 · weekly.",
+          "is_new_data": true,
+          "external_id": "WEI"
+        }
+      ]
+    },
+    {
+      "id": "volume",
+      "title": "3. Activité de cotation",
+      "intro": "Le volume mesure combien de titres ont été échangés. Il peut servir à confirmer un mouvement de marché, mais il n’existe pas pour la plupart des fonds non cotés.",
+      "cards": [
+        {
+          "name": "Volume relatif",
+          "question": "Le volume du jour est-il inhabituel par rapport aux 20 dernières séances ?",
+          "indicator": "Volume du jour ÷ volume moyen des 20 séances précédentes",
+          "strategy_use": "Confirmation de mouvement sur les actions et ETF qui publient un volume fiable.",
+          "availability": "partial",
+          "availability_label": "Disponible pour 174 supports seulement.",
+          "is_new_data": false
+        }
+      ]
+    }
+  ],
+  "strategy_paths": [
+    {
+      "name": "Allocation fixe diversifiée",
+      "question": "Répartir durablement entre plusieurs familles d’actifs, sans prédire le prochain gagnant.",
+      "needs": "Aucun indicateur de prévision ; seulement des supports représentatifs et une fréquence de rééquilibrage.",
+      "status": "ready",
+      "status_label": "Déjà testable",
+      "current": "Les références académiques 60/40 et Harry Browne relèvent de cette famille."
+    },
+    {
+      "name": "Tendance et protection",
+      "question": "Rester exposé lorsque la tendance est saine, réduire l’exposition lorsqu’elle se dégrade.",
+      "needs": "Tendance de fond et règle de révision mensuelle ou hebdomadaire.",
+      "status": "ready",
+      "status_label": "Données prêtes",
+      "current": "Le prix suffit ; une version nouvelle doit toutefois être définie puis testée séparément."
+    },
+    {
+      "name": "Risque cible et diversification",
+      "question": "Donner moins de poids aux supports qui deviennent très instables et éviter les expositions trop semblables.",
+      "needs": "Volatilité, baisse maximale et calcul de relations entre les supports retenus.",
+      "status": "ready",
+      "status_label": "Données prêtes",
+      "current": "La volatilité et les baisses sont déjà disponibles ; les relations sont calculées au moment de définir les candidats."
+    },
+    {
+      "name": "Régime économique et financier",
+      "question": "Adapter l’exposition au contexte : incertitude, crédit, dollar, énergie et activité économique.",
+      "needs": "Les cinq séries externes ci-dessous et une règle explicite de mise à jour.",
+      "status": "ready",
+      "status_label": "Nouvelles données prêtes",
+      "current": "Aucune courbe ne les utilise encore : il faut d’abord écrire une règle et la tester sans regarder le résultat à l’avance."
+    },
+    {
+      "name": "Confirmation par l’activité de marché",
+      "question": "Ne retenir un mouvement que lorsqu’il s’accompagne d’une activité de cotation inhabituelle.",
+      "needs": "Volume relatif fiable.",
+      "status": "partial",
+      "status_label": "Partiel",
+      "current": "Possible seulement sur les actions et ETF disposant d’un volume quotidien fiable."
+    },
+    {
+      "name": "Sélection par valorisation fondamentale",
+      "question": "Comparer bénéfices, prix et qualité financière des entreprises.",
+      "needs": "Bénéfices, P/E et données de bilan datées de façon homogène.",
+      "status": "unavailable",
+      "status_label": "Non utilisable proprement",
+      "current": "Ces données ne couvrent pas équitablement tout l’univers et ne sont donc pas intégrées dans une stratégie."
+    }
+  ],
+  "external_observations": [
+    {
+      "id": "USEPUINDXD",
+      "label": "Incertitude économique et politique américaine",
+      "purpose": "Mesurer si l'environnement d'information devient exceptionnellement incertain.",
+      "frequency": "daily",
+      "source": "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/USEPUINDXD",
+      "last_observation_date": "2026-09-20",
+      "value": 202.77,
+      "kind": "raw_external"
+    },
+    {
+      "id": "NFCI",
+      "label": "Conditions financières américaines",
+      "purpose": "Mesurer si le crédit et le financement deviennent plus faciles ou plus contraints.",
+      "frequency": "weekly",
+      "source": "Chicago Fed, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/NFCI",
+      "last_observation_date": "2026-09-11",
+      "value": -0.56,
+      "kind": "raw_external"
+    },
+    {
+      "id": "DTWEXBGS",
+      "label": "Dollar américain pondéré par le commerce",
+      "purpose": "Observer la force globale du dollar, sans se limiter à la paire EUR/USD.",
+      "frequency": "daily",
+      "source": "Federal Reserve Board, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/DTWEXBGS",
+      "last_observation_date": "2026-09-18",
+      "value": 119.5133,
+      "kind": "raw_external"
+    },
+    {
+      "id": "DCOILBRENTEU",
+      "label": "Pétrole Brent Europe",
+      "purpose": "Observer la pression énergétique mondiale, différente du prix des supports du contrat.",
+      "frequency": "daily",
+      "source": "U.S. Energy Information Administration, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+      "last_observation_date": "2026-09-15",
+      "value": 130.8,
+      "kind": "raw_external"
+    },
+    {
+      "id": "WEI",
+      "label": "Activité économique hebdomadaire américaine",
+      "purpose": "Observer l'évolution récente de l'activité économique sans attendre les indicateurs mensuels.",
+      "frequency": "weekly",
+      "source": "Lewis-Mertens-Stock Weekly Economic Index, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/WEI",
+      "last_observation_date": "2026-09-12",
+      "value": 3.07,
+      "kind": "raw_external"
+    }
+  ],
+  "unavailable": [
+    {
+      "name": "Valorisation fondamentale homogène",
+      "reason": "Pas de source gratuite, quotidienne et comparable pour les bénéfices, P/E et bilans de tous les types de supports du contrat.",
+      "consequence": "Aucune stratégie value n’est construite à partir de données incomplètes."
+    }
+  ]
+}
