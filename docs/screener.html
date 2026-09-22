@@ -1,60 +1,9 @@
 <!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Indicateurs et stratégies possibles</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260922-indicators">
-</head>
-<body>
-<header>
-  <h1>Indicateurs et stratégies possibles</h1>
-  <nav>
-    <a href="index.html">Synthèse</a>
-    <a href="academic.html">Académiques</a>
-    <a href="chatgpt.html">ChatGPT</a>
-    <a href="claude.html">Claude</a>
-    <a href="screener.html">Indicateurs</a>
-  </nav>
-</header>
-<main class="indicator-main">
-  <section class="indicator-hero">
-    <p class="kicker">Avant d’inventer une nouvelle stratégie</p>
-    <h2>Quelles informations avons-nous vraiment, et qu’est-ce qu’elles permettent de tester ?</h2>
-    <p class="lead">Cette page ne classe aucun support et ne conseille aucun achat. Elle sépare clairement les données, les indicateurs calculés à partir de ces données, et les stratégies qu’il sera possible de définir puis de tester.</p>
-    <div id="indicator-status" class="indicator-status">Chargement…</div>
-  </section>
-
-  <section class="card decision-card">
-    <h2>Ce que cette page conclut aujourd’hui</h2>
-    <div id="indicator-summary" class="indicator-summary"></div>
-    <p class="decision-note"><strong>Important :</strong> les stratégies actuellement suivies restent fondées sur leurs règles déjà documentées. Les nouvelles séries externes sont disponibles, mais aucune courbe réelle ne prétend encore les utiliser. Une stratégie sera d’abord écrite, testée, puis suivie séparément.</p>
-  </section>
-
-  <section class="card">
-    <h2>Les stratégies que les données permettent de construire</h2>
-    <p class="muted">Chaque ligne part d’une question de gestion concrète. La couleur indique si toutes les données nécessaires sont là, si elles ne couvrent qu’une partie de l’univers, ou si l’idée est écartée faute de données fiables.</p>
-    <div id="strategy-paths" class="path-grid"></div>
-  </section>
-
-  <section class="card">
-    <h2>Les indicateurs, séparés de l’analyse</h2>
-    <p class="muted">Un indicateur est une information mesurée ou calculée. Il ne devient utile qu’à l’intérieur d’une règle précise : « si telle condition est remplie, alors faire ceci ». C’est cette règle qui sera testée ; l’indicateur seul ne décide rien.</p>
-    <div id="indicator-groups" class="indicator-groups"></div>
-  </section>
-
-  <section class="card">
-    <h2>Les cinq nouvelles données externes : dernière valeur réellement publiée</h2>
-    <p class="muted">Elles ne proviennent pas des cours des supports du contrat. Elles servent à tester des stratégies de contexte économique et financier. Les dates affichées sont celles de la publication réelle ; aucune valeur n’est répétée pour remplir les jours sans publication.</p>
-    <div id="external-observations" class="external-grid"></div>
-  </section>
-
-  <section class="card unavailable-card">
-    <h2>Ce que nous ne faisons pas</h2>
-    <div id="unavailable-data"></div>
-  </section>
-</main>
-<script src="assets/dashboard.js?v=20260922-indicators"></script>
-<script>initIndicators("data/indicators.json").catch(console.error)</script>
-</body>
-</html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Règles et résultats du jour</title><link rel="stylesheet" href="assets/style.css?v=20260922-strategy-lab"></head>
+<body><header><h1>Règles et résultats du jour</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a><a href="screener.html">Indicateurs</a></nav></header>
+<main class="lab-main"><section class="lab-hero"><p class="kicker">Pas de score opaque. Pas de courbe inventée.</p><h2>Trois règles réellement différentes, avec leurs résultats calculés aujourd’hui</h2><p>Chaque bloc montre les nombres utilisés, puis la conséquence exacte de la règle. Ce sont des propositions de stratégie : elles ne réécrivent pas les décisions ni les courbes du suivi réel déjà commencé.</p><div id="lab-status">Chargement des résultats…</div></section>
+<section class="card"><h2>Ce qui existe déjà</h2><p class="lab-intro">ChatGPT A, B et C restent des variantes de momentum. Elles ne sont pas supprimées : leur suivi réel reste visible sur la page ChatGPT. Cette page sert à construire les approches qui leur manquaient, sans prétendre qu’elles existaient le 9 septembre.</p></section>
+<div id="strategy-lab"></div>
+<section class="card lab-rule"><h2>Ce que signifie « résultat du jour »</h2><p>Un résultat est la valeur mesurée et l’allocation que la règle donnerait aujourd’hui. Il ne devient pas une performance passée. Si une règle est retenue, son suivi commencera à sa première date réelle de décision ; avant cette date, il n’y aura aucune ligne sur le graphique.</p></section>
+</main><script src="assets/dashboard.js?v=20260922-strategy-lab"></script><script>initStrategyLab("data/strategy-lab.json").catch(console.error)</script></body></html>
