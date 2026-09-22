@@ -3,57 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Screener commun</title>
-  <link rel="stylesheet" href="assets/style.css?v=20260922-readable">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <title>Indicateurs et stratégies possibles</title>
+  <link rel="stylesheet" href="assets/style.css?v=20260922-indicators">
 </head>
 <body>
 <header>
-  <h1>Screener commun</h1>
+  <h1>Indicateurs et stratégies possibles</h1>
   <nav>
     <a href="index.html">Synthèse</a>
     <a href="academic.html">Académiques</a>
     <a href="chatgpt.html">ChatGPT</a>
     <a href="claude.html">Claude</a>
-    <a href="screener.html">Screener</a>
+    <a href="screener.html">Indicateurs</a>
   </nav>
 </header>
-<main class="screener-main">
-  <section class="card">
-    <div id="screener-status" class="muted">Chargement des données…</div>
-    <h2>À quoi sert cette page ?</h2>
-    <p class="lead">Avant de choisir une stratégie, il faut savoir ce que chaque support a réellement fait et quelles données sont assez solides pour le comparer aux autres. Cette page ne décide rien : elle prépare une liste de candidats à examiner avec des règles différentes.</p>
-    <div id="screener-counts" class="screener-counts"></div>
+<main class="indicator-main">
+  <section class="indicator-hero">
+    <p class="kicker">Avant d’inventer une nouvelle stratégie</p>
+    <h2>Quelles informations avons-nous vraiment, et qu’est-ce qu’elles permettent de tester ?</h2>
+    <p class="lead">Cette page ne classe aucun support et ne conseille aucun achat. Elle sépare clairement les données, les indicateurs calculés à partir de ces données, et les stratégies qu’il sera possible de définir puis de tester.</p>
+    <div id="indicator-status" class="indicator-status">Chargement…</div>
   </section>
-  <section class="card">
-    <h2>Ce que nous savons analyser aujourd’hui</h2>
-    <p class="muted">Le graphique ne juge pas les supports exclus. Il explique simplement pourquoi certains peuvent être comparés avec les mêmes chiffres et pourquoi d’autres doivent être étudiés autrement.</p>
-    <div class="visual-grid">
-      <article class="visual-card"><h3>Peut-on comparer ce support avec les autres ?</h3><p><strong>Oui</strong> signifie qu’il a assez de prix réels. Les autres restent dans la liste, mais ne sont pas classés pour ne pas mélanger des choses incomparables.</p><canvas id="coverage-chart"></canvas></article>
-      <article class="visual-card"><h3>Prix en hausse et parcours moins brutal</h3><p>Chaque point est un support. En haut, son prix a davantage monté récemment. À droite, il a moins varié et moins fortement chuté que les autres. Le coin en haut à droite donne des candidats à étudier, pas des achats automatiques.</p><canvas id="map-chart"></canvas><p id="map-selection" class="map-selection">Survolez un point pour lire son nom. Cliquez dessus pour garder son explication affichée ici.</p></article>
-      <article class="visual-card wide"><h3>Par où commencer la recherche ?</h3><p><strong>Il n’y a aucune nouvelle donnée dans cette barre.</strong> C’est un simple tri des chiffres détaillés plus bas : 65 % de progression des prix sur un, trois et six mois, puis 35 % de parcours moins instable. Le résultat aide seulement à choisir quels supports examiner en premier.</p><canvas id="top-chart"></canvas></article>
-    </div>
+
+  <section class="card decision-card">
+    <h2>Ce que cette page conclut aujourd’hui</h2>
+    <div id="indicator-summary" class="indicator-summary"></div>
+    <p class="decision-note"><strong>Important :</strong> les stratégies actuellement suivies restent fondées sur leurs règles déjà documentées. Les nouvelles séries externes sont disponibles, mais aucune courbe réelle ne prétend encore les utiliser. Une stratégie sera d’abord écrite, testée, puis suivie séparément.</p>
   </section>
+
   <section class="card">
-    <h2>Les trois informations réellement utilisées</h2>
-    <p class="muted">Pas de P/E fantôme, pas d’indicateur posé pour faire savant : chaque carte ci-dessous décrit une donnée calculée aujourd’hui et son rôle.</p>
-    <div id="data-contract" class="contract-grid"></div>
+    <h2>Les stratégies que les données permettent de construire</h2>
+    <p class="muted">Chaque ligne part d’une question de gestion concrète. La couleur indique si toutes les données nécessaires sont là, si elles ne couvrent qu’une partie de l’univers, ou si l’idée est écartée faute de données fiables.</p>
+    <div id="strategy-paths" class="path-grid"></div>
   </section>
+
   <section class="card">
-    <h2>La liste complète, expliquée colonne par colonne</h2>
-    <div class="reading-guide">
-      <p><strong>Résultat du filtre de départ</strong> : ce n’est pas une donnée nouvelle. C’est une étiquette de tri calculée avec les cinq colonnes de prix et de risque qui suivent : progression sur 1, 3 et 6 mois, variations sur 3 mois et pire baisse sur un an.</p>
-      <p><strong>Variation 1 / 3 / 6 mois</strong> : ce que le prix a réellement fait, sans prédiction. <strong>Variations sur 3 mois</strong> : plus le chiffre est élevé, plus le prix a fait le yoyo. <strong>Pire baisse sur un an</strong> : par exemple, −25 % veut dire qu’à un moment le support a été 25 % sous son plus haut de l’année.</p>
-      <p><strong>Activité de cotation</strong> : 2,0 × signifie que le volume du jour est deux fois sa moyenne récente. C’est une information supplémentaire, pas une preuve que le support va monter.</p>
-    </div>
-    <div class="screener-controls">
-      <label>Rechercher <input id="screener-search" type="search" placeholder="Nom, ISIN, catégorie…"></label>
-      <label>Afficher <select id="screener-filter"><option value="">Tous les supports</option><option value="analysable par les prix">Comparables aujourd’hui</option><option value="hors screener de marché">À étudier autrement</option><option value="données à résoudre">Cotation à résoudre</option><option value="devise à vérifier">Devise à vérifier</option><option value="historique insuffisant">Historique trop court</option></select></label>
-    </div>
-    <div class="table-wrap"><table class="screener-table"><thead><tr><th>Support</th><th>Type</th><th>Peut-on le comparer ?</th><th>Résultat du<br>filtre de départ</th><th>Variation<br>1 mois</th><th>Variation<br>3 mois</th><th>Variation<br>6 mois</th><th>Variations<br>sur 3 mois</th><th>Pire baisse<br>sur 1 an</th><th>Activité de<br>cotation</th></tr></thead><tbody id="screener-body"></tbody></table></div>
+    <h2>Les indicateurs, séparés de l’analyse</h2>
+    <p class="muted">Un indicateur est une information mesurée ou calculée. Il ne devient utile qu’à l’intérieur d’une règle précise : « si telle condition est remplie, alors faire ceci ». C’est cette règle qui sera testée ; l’indicateur seul ne décide rien.</p>
+    <div id="indicator-groups" class="indicator-groups"></div>
+  </section>
+
+  <section class="card">
+    <h2>Les cinq nouvelles données externes : dernière valeur réellement publiée</h2>
+    <p class="muted">Elles ne proviennent pas des cours des supports du contrat. Elles servent à tester des stratégies de contexte économique et financier. Les dates affichées sont celles de la publication réelle ; aucune valeur n’est répétée pour remplir les jours sans publication.</p>
+    <div id="external-observations" class="external-grid"></div>
+  </section>
+
+  <section class="card unavailable-card">
+    <h2>Ce que nous ne faisons pas</h2>
+    <div id="unavailable-data"></div>
   </section>
 </main>
-<script src="assets/dashboard.js?v=20260922-live3"></script>
-<script>initScreener("data/screener.json").catch(console.error)</script>
+<script src="assets/dashboard.js?v=20260922-indicators"></script>
+<script>initIndicators("data/indicators.json").catch(console.error)</script>
 </body>
 </html>
