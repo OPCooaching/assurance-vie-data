@@ -8,7 +8,7 @@ strategies:
     rule: "À chaque revue, le poids de chaque actif est inversement proportionnel à sa volatilité observée sur 60 séances. Aucun actif ne dépasse 40 % de la poche."
     assets:
       - FR0010315770
-      - LU0290357259
+      - LU0290357846
       - LU0478205379
       - LU2611731824
   macro_regime:
@@ -18,11 +18,11 @@ strategies:
     rule: "Prudence si au moins deux conditions sont vraies : NFCI positif ; incertitude économique au-dessus de son 75e percentile sur un an ; dollar large en hausse de plus de 3 % sur 60 séances. Sinon allocation normale."
     normal_assets:
       FR0010315770: 0.60
-      LU0290357259: 0.20
+      LU0290357846: 0.20
       LU2611731824: 0.20
     cautious_assets:
       FR0010315770: 0.25
-      LU0290357259: 0.50
+      LU2533811910: 0.50
       LU0290358497: 0.25
   volume_confirmation:
     label: "ChatGPT F — Tendance confirmée par le volume"
