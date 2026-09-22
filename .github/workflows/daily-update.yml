@@ -6,11 +6,7 @@ on:
     paths:
       - "data/refresh-request.txt"
   schedule:
-    # First pass after the European close, Monday to Friday (UTC).
     - cron: "45 20 * * 1-5"
-    # Retry overnight once every provider has had time to publish final closes.
-    # Saturday captures the complete Friday close.
-    - cron: "30 4 * * 2-6"
 
 permissions:
   contents: write
@@ -37,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Validate strategy entrypoints
-        run: python -m py_compile strategies/claude/backtest.py
-
       - name: Build universe
         run: python scripts/build_universe.py
 
@@ -54,32 +47,23 @@ jobs:
       - name: Update prices
         run: python scripts/update_market_data.py
 
-      - name: Update ChatGPT external context data
-        run: python scripts/update_context_data.py
-
       - name: Validate normalised market data
         run: python scripts/validate_market_data.py
 
+      - name: Update external market context
+        run: python scripts/update_context_data.py
+
+      - name: Validate external market context
+        run: python scripts/validate_context_data.py
+
       - name: Compute common indicators
         run: python scripts/compute_indicators.py
-
-      - name: Build indicator and strategy catalogue
-        run: python scripts/build_indicator_catalog.py
-
-      - name: Calculate current distinct ChatGPT strategy rules
-        run: python scripts/build_strategy_lab.py
 
       - name: Compute Bernard origin benchmark
         run: python scripts/compute_baseline.py
 
       - name: Compute academic strategies
         run: python scripts/compute_academic_strategies.py
-
-      - name: Compute ChatGPT live strategies
-        run: python scripts/compute_chatgpt_strategies.py
-
-      - name: Compute Claude live strategies
-        run: python scripts/compute_claude_strategies.py
 
       - name: Build dashboard data
         run: python scripts/build_dashboard_data.py
@@ -91,20 +75,10 @@ jobs:
         run: |
           git config user.name "assurance-vie-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          # Data files are modified locally by the preceding steps. Commit them first.
-          # If another page/configuration change arrives while the run executes,
-          # rebase that local commit and safely retry the publication.
           git add config/universe.csv config/symbol_map.csv data/ docs/data/
           if git diff --cached --quiet; then
             echo "No data change."
           else
             git commit -m "data: daily market update $(date -u +%F)"
-            for attempt in 1 2 3; do
-              if git push; then
-                exit 0
-              fi
-              git pull --rebase origin main
-            done
-            echo "Could not publish generated data after three safe retries."
-            exit 1
+            git push
           fi
