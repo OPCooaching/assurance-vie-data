@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-09-22T13:05:10+00:00",
+  "strategies": [
+    {
+      "label": "ChatGPT D — Budget de risque",
+      "review": "Mensuelle",
+      "purpose": "Répartir une même poche entre actifs peu ou très instables, au lieu de donner le même poids à chacun.",
+      "rule": "À chaque revue, le poids de chaque actif est inversement proportionnel à sa volatilité observée sur 60 séances. Aucun actif ne dépasse 40 % de la poche.",
+      "assets": [
+        "FR0010315770",
+        "LU0290357259",
+        "LU0478205379",
+        "LU2611731824"
+      ],
+      "kind": "risk_budget",
+      "as_of": "2026-09-22",
+      "state": "Allocation calculée",
+      "rows": [
+        {
+          "asset_id": "FR0010315770",
+          "name": "AMUNDI MSCI WORLD II UCITS ETF DIST",
+          "volatility_60d": 9.7,
+          "return_60d": 3.3,
+          "above_sma200": true,
+          "suggested_weight": NaN
+        },
+        {
+          "asset_id": "LU0290357259",
+          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 7-10 UCITS ETF 1C",
+          "volatility_60d": NaN,
+          "return_60d": NaN,
+          "above_sma200": false,
+          "suggested_weight": NaN
+        },
+        {
+          "asset_id": "LU0478205379",
+          "name": "XTRACKERS II EUR CORPORATE BOND UCITS ETF",
+          "volatility_60d": 3.1,
+          "return_60d": -2.0,
+          "above_sma200": false,
+          "suggested_weight": NaN
+        },
+        {
+          "asset_id": "LU2611731824",
+          "name": "AMUNDI NYSE ARCA GOLD BUGS UCITS ETF DIST",
+          "volatility_60d": 49.3,
+          "return_60d": 25.7,
+          "above_sma200": true,
+          "suggested_weight": NaN
+        }
+      ]
+    },
+    {
+      "label": "ChatGPT E — Régime macro-financier",
+      "review": "Hebdomadaire, après la dernière publication disponible",
+      "purpose": "Réduire la part actions lorsque plusieurs données externes signalent un contexte financier tendu.",
+      "rule": "Prudence si au moins deux conditions sont vraies : NFCI positif ; incertitude économique au-dessus de son 75e percentile sur un an ; dollar large en hausse de plus de 3 % sur 60 séances. Sinon allocation normale.",
+      "normal_assets": {
+        "FR0010315770": 0.6,
+        "LU0290357259": 0.2,
+        "LU2611731824": 0.2
+      },
+      "cautious_assets": {
+        "FR0010315770": 0.25,
+        "LU0290357259": 0.5,
+        "LU0290358497": 0.25
+      },
+      "kind": "macro_regime",
+      "as_of": "2026-09-21",
+      "state": "Allocation normale",
+      "checks": [
+        {
+          "name": "Conditions financières",
+          "value": -0.56,
+          "date": "2026-09-11",
+          "test": "NFCI supérieur à 0",
+          "met": false
+        },
+        {
+          "name": "Incertitude économique",
+          "value": 220.0,
+          "date": "2026-09-21",
+          "test": "au-dessus de 387.7",
+          "met": false
+        },
+        {
+          "name": "Dollar large",
+          "value": -1.6,
+          "date": "2026-09-18",
+          "test": "hausse supérieure à 3 % sur 60 séances",
+          "met": false
+        }
+      ],
+      "allocation": [
+        {
+          "asset_id": "FR0010315770",
+          "name": "AMUNDI MSCI WORLD II UCITS ETF DIST",
+          "weight": 60.0
+        },
+        {
+          "asset_id": "LU0290357259",
+          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 7-10 UCITS ETF 1C",
+          "weight": 20.0
+        },
+        {
+          "asset_id": "LU2611731824",
+          "name": "AMUNDI NYSE ARCA GOLD BUGS UCITS ETF DIST",
+          "weight": 20.0
+        }
+      ]
+    },
+    {
+      "label": "ChatGPT F — Tendance confirmée par le volume",
+      "review": "Hebdomadaire",
+      "purpose": "Ne retenir que des ETF dont la tendance et l'activité de cotation vont dans le même sens.",
+      "rule": "Parmi les ETF avec volume fiable, retenir au plus cinq supports : prix au-dessus de la moyenne 200 séances, hausse sur 60 séances et volume du dernier jour au moins 1,3 fois sa moyenne des 20 séances. À défaut, la poche reste sur le support monétaire.",
+      "top_n": 5,
+      "volume_ratio_min": 1.3,
+      "defensive_asset": "LU0290358497",
+      "kind": "volume_confirmation",
+      "as_of": "2026-09-22",
+      "state": "Aucun ETF ne remplit les trois conditions",
+      "rows": []
+    }
+  ]
+}

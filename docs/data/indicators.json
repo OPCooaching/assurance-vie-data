@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T12:48:09+00:00",
+  "generated_at": "2026-09-22T13:05:09+00:00",
   "price_as_of_date": "2026-09-22",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
@@ -54,7 +54,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-20 · daily.",
+          "availability_label": "Dernière publication : 2026-09-21 · daily.",
           "is_new_data": true,
           "external_id": "USEPUINDXD"
         },
@@ -175,8 +175,8 @@
       "frequency": "daily",
       "source": "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED",
       "source_url": "https://fred.stlouisfed.org/series/USEPUINDXD",
-      "last_observation_date": "2026-09-20",
-      "value": 202.77,
+      "last_observation_date": "2026-09-21",
+      "value": 220.02,
       "kind": "raw_external"
     },
     {
