@@ -50,12 +50,6 @@ jobs:
       - name: Validate normalised market data
         run: python scripts/validate_market_data.py
 
-      - name: Update external market context
-        run: python scripts/update_context_data.py
-
-      - name: Validate external market context
-        run: python scripts/validate_context_data.py
-
       - name: Compute common indicators
         run: python scripts/compute_indicators.py
 
