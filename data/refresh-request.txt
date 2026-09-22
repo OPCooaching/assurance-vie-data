@@ -1,2 +1,3 @@
 Rafraîchissement demandé le 2026-09-22 : recalculer les résultats actuels des règles ChatGPT après exclusion des supports sans historique exploitable. Ne pas créer de courbe ni de date de décision antérieure, et ne pas modifier les stratégies suivies ni les historiques de décisions.
 Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient aucune donnée de contrat.
+2026-09-22: refresh external context and retain 14 daily snapshots.
