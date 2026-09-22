@@ -1,2 +1,2 @@
-Rafraîchissement demandé le 2026-09-22 : produire le catalogue des indicateurs et stratégies possibles avec les données réellement publiées. Ne pas classer les supports, ne pas créer de date de cotation, ne pas modifier les stratégies suivies ni les historiques de décisions.
+Rafraîchissement demandé le 2026-09-22 : calculer et publier les résultats actuels des trois nouvelles règles ChatGPT (budget de risque, régime macro-financier, tendance confirmée par volume) avec les données réellement publiées. Ne pas créer de courbe ni de date de décision antérieure, et ne pas modifier les stratégies suivies ni les historiques de décisions.
 Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient aucune donnée de contrat.
