@@ -109,3 +109,26 @@ function initScreener(path){return loadJSON(path).then(data=>{
   const refresh=()=>{const query=(search?.value||"").trim().toLocaleLowerCase("fr"),state=filter?.value||"";renderScreenerRows(rows.filter(row=>(!state||row.status===state)&&(!query||[row.name,row.asset_id,row.category,row.symbol].filter(Boolean).join(" ").toLocaleLowerCase("fr").includes(query))));};
   search?.addEventListener("input",refresh);filter?.addEventListener("change",refresh);refresh();
 });}
+
+function availabilityClass(status){return status==="ready"||status==="available"?"is-ready":status==="partial"?"is-partial":"is-unavailable";}
+function availabilityText(status){return status==="ready"||status==="available"?"Données disponibles":status==="partial"?"Données partielles":"Données absentes";}
+function readableValue(value){if(!Number.isFinite(value))return "—";return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2}).format(value);}
+function initIndicators(path){return loadJSON(path).then(data=>{
+  const summary=data.summary||{};
+  const status=document.querySelector("#indicator-status");
+  if(status)status.innerHTML="Prix arrêtés au <strong>"+htmlEscape(formatDate(data.price_as_of_date))+"</strong> · catalogue produit le "+htmlEscape(new Date(data.generated_at).toLocaleString("fr-FR"))+".";
+  const summaryBox=document.querySelector("#indicator-summary");
+  if(summaryBox)summaryBox.innerHTML=[
+    ["Ce qui existe déjà",summary.price_ready+" supports avec assez d’historique de prix pour étudier tendance, momentum ou risque."],
+    ["Ce qui est nouveau",summary.external_ready+" séries externes indépendantes des prix des supports, disponibles pour tester des règles de contexte."],
+    ["Ce qui reste limité",summary.volume_ready+" supports seulement avec un volume quotidien suffisamment fiable ; la valorisation fondamentale est volontairement écartée."],
+  ].map(([title,text])=>'<article class="summary-fact"><h3>'+htmlEscape(title)+'</h3><p>'+htmlEscape(text)+'</p></article>').join("");
+  const paths=document.querySelector("#strategy-paths");
+  if(paths)paths.innerHTML=(data.strategy_paths||[]).map(item=>'<article class="path-card '+availabilityClass(item.status)+'"><span class="availability">'+htmlEscape(item.status_label||availabilityText(item.status))+'</span><h3>'+htmlEscape(item.name)+'</h3><p class="path-question">'+htmlEscape(item.question)+'</p><dl><div><dt>Il faut</dt><dd>'+htmlEscape(item.needs)+'</dd></div><div><dt>État actuel</dt><dd>'+htmlEscape(item.current)+'</dd></div></dl></article>').join("");
+  const groups=document.querySelector("#indicator-groups");
+  if(groups)groups.innerHTML=(data.groups||[]).map(group=>'<section class="indicator-group"><div class="indicator-group-heading"><h3>'+htmlEscape(group.title)+'</h3><p>'+htmlEscape(group.intro)+'</p></div><div class="indicator-card-grid">'+(group.cards||[]).map(item=>'<article class="indicator-card '+availabilityClass(item.availability)+'"><span class="availability">'+htmlEscape(item.availability_label||availabilityText(item.availability))+'</span><h4>'+htmlEscape(item.name)+'</h4><p><strong>Question :</strong> '+htmlEscape(item.question)+'</p><p><strong>Indicateur :</strong> '+htmlEscape(item.indicator)+'</p><p><strong>Ce qu’il peut servir à tester :</strong> '+htmlEscape(item.strategy_use)+'</p>'+(!item.is_new_data?'<p class="derived-note">Calculé à partir de prix déjà collectés : ce n’est pas une nouvelle donnée.</p>':'<p class="external-note">Donnée brute externe : elle n’est pas dérivée du prix des supports.</p>')+'</article>').join("")+'</div></section>').join("");
+  const external=document.querySelector("#external-observations");
+  if(external)external.innerHTML=(data.external_observations||[]).map(item=>'<article class="external-card"><p class="external-source">'+htmlEscape(item.source)+'</p><h3>'+htmlEscape(item.label)+'</h3><p>'+htmlEscape(item.purpose)+'</p><div class="external-value"><b>'+htmlEscape(readableValue(item.value))+'</b><span>publiée le '+htmlEscape(formatDate(item.last_observation_date))+' · '+htmlEscape(item.frequency==="weekly"?"hebdomadaire":"quotidienne")+'</span></div><a href="'+htmlEscape(item.source_url)+'" target="_blank" rel="noopener">Voir la source →</a></article>').join("");
+  const unavailable=document.querySelector("#unavailable-data");
+  if(unavailable)unavailable.innerHTML=(data.unavailable||[]).map(item=>'<article class="unavailable-item"><h3>'+htmlEscape(item.name)+'</h3><p><strong>Pourquoi ce n’est pas utilisé :</strong> '+htmlEscape(item.reason)+'</p><p><strong>Conséquence :</strong> '+htmlEscape(item.consequence)+'</p></article>').join("");
+});}
