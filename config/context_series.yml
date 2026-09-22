@@ -37,3 +37,25 @@ series:
     source: "Lewis-Mertens-Stock Weekly Economic Index, via FRED"
     purpose: "Observer l'évolution récente de l'activité économique sans attendre les indicateurs mensuels."
     url: "https://fred.stlouisfed.org/series/WEI"
+
+  - id: VIXCLS
+    column: vix_us_equity_volatility
+    label: "VIX — volatilité anticipée des actions américaines"
+    frequency: daily
+    source: "Cboe, via FRED"
+    purpose: "Mesurer la tension anticipée sur les marchés actions américains."
+    url: "https://fred.stlouisfed.org/series/VIXCLS"
+  - id: DEXUSEU
+    column: usd_per_eur
+    label: "Euro/dollar"
+    frequency: daily
+    source: "Federal Reserve Board, via FRED"
+    purpose: "Mesurer l'effet du change sur les supports exposés au dollar."
+    url: "https://fred.stlouisfed.org/series/DEXUSEU"
+  - id: ECBDFR
+    column: ecb_deposit_rate
+    label: "Taux de dépôt de la Banque centrale européenne"
+    frequency: daily
+    source: "Banque centrale européenne, via FRED"
+    purpose: "Situer le niveau des taux courts en euro."
+    url: "https://fred.stlouisfed.org/series/ECBDFR"
