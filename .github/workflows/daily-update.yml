@@ -66,6 +66,9 @@ jobs:
       - name: Build indicator and strategy catalogue
         run: python scripts/build_indicator_catalog.py
 
+      - name: Calculate current distinct ChatGPT strategy rules
+        run: python scripts/build_strategy_lab.py
+
       - name: Compute Bernard origin benchmark
         run: python scripts/compute_baseline.py
 
