@@ -88,9 +88,9 @@ jobs:
         run: |
           git config user.name "assurance-vie-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          # Page or configuration edits can arrive while data are downloading.
-          # Rebase immediately before staging, then retry a non-fast-forward push.
-          git pull --rebase origin main
+          # Data files are modified locally by the preceding steps. Commit them first.
+          # If another page/configuration change arrives while the run executes,
+          # rebase that local commit and safely retry the publication.
           git add config/universe.csv config/symbol_map.csv data/ docs/data/
           if git diff --cached --quiet; then
             echo "No data change."
@@ -100,7 +100,6 @@ jobs:
               if git push; then
                 exit 0
               fi
-              git rebase --abort || true
               git pull --rebase origin main
             done
             echo "Could not publish generated data after three safe retries."
