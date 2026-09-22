@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T13:05:10+00:00",
+  "generated_at": "2026-09-22T13:08:32+00:00",
   "strategies": [
     {
       "label": "ChatGPT D — Budget de risque",
@@ -8,7 +8,7 @@
       "rule": "À chaque revue, le poids de chaque actif est inversement proportionnel à sa volatilité observée sur 60 séances. Aucun actif ne dépasse 40 % de la poche.",
       "assets": [
         "FR0010315770",
-        "LU0290357259",
+        "LU0290357846",
         "LU0478205379",
         "LU2611731824"
       ],
@@ -22,15 +22,15 @@
           "volatility_60d": 9.7,
           "return_60d": 3.3,
           "above_sma200": true,
-          "suggested_weight": NaN
+          "suggested_weight": 23.1
         },
         {
-          "asset_id": "LU0290357259",
-          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 7-10 UCITS ETF 1C",
-          "volatility_60d": NaN,
-          "return_60d": NaN,
+          "asset_id": "LU0290357846",
+          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 25+ UCITS ETF 1C",
+          "volatility_60d": 9.7,
+          "return_60d": -7.5,
           "above_sma200": false,
-          "suggested_weight": NaN
+          "suggested_weight": 23.1
         },
         {
           "asset_id": "LU0478205379",
@@ -38,7 +38,7 @@
           "volatility_60d": 3.1,
           "return_60d": -2.0,
           "above_sma200": false,
-          "suggested_weight": NaN
+          "suggested_weight": 49.2
         },
         {
           "asset_id": "LU2611731824",
@@ -46,7 +46,7 @@
           "volatility_60d": 49.3,
           "return_60d": 25.7,
           "above_sma200": true,
-          "suggested_weight": NaN
+          "suggested_weight": 4.5
         }
       ]
     },
@@ -57,12 +57,12 @@
       "rule": "Prudence si au moins deux conditions sont vraies : NFCI positif ; incertitude économique au-dessus de son 75e percentile sur un an ; dollar large en hausse de plus de 3 % sur 60 séances. Sinon allocation normale.",
       "normal_assets": {
         "FR0010315770": 0.6,
-        "LU0290357259": 0.2,
+        "LU0290357846": 0.2,
         "LU2611731824": 0.2
       },
       "cautious_assets": {
         "FR0010315770": 0.25,
-        "LU0290357259": 0.5,
+        "LU2533811910": 0.5,
         "LU0290358497": 0.25
       },
       "kind": "macro_regime",
@@ -98,8 +98,8 @@
           "weight": 60.0
         },
         {
-          "asset_id": "LU0290357259",
-          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 7-10 UCITS ETF 1C",
+          "asset_id": "LU0290357846",
+          "name": "XTRACKERS II EUROZONE GOVERNMENT BOND 25+ UCITS ETF 1C",
           "weight": 20.0
         },
         {
