@@ -2,39 +2,39 @@
   "strategies": {
     "chatgpt-momentum-mensuel": {
       "label": "ChatGPT A — Momentum mensuel multi-horizons",
-      "status": "research_hypothesis", "version": "v0.1",
+      "status": "backtest", "version": "v0.1",
       "resume": "Sélection mensuelle des supports dont la dynamique relative est la plus robuste.",
       "objectif": "Tester une source de rendement fondée sur la force relative, sans confondre cette hypothèse avec les anciennes variantes hebdomadaires.",
       "regle": "Les paramètres chiffrés seront figés avant le backtest ; aucun portefeuille n'est suivi tant que ce gel n'est pas terminé.",
       "frequence": "Revue mensuelle.",
-      "statut_public": "Hypothèse documentée. Backtest non commencé : aucune allocation ni courbe de suivi n'est affichée."
+      "statut_public": "Backtest v0.1 exécuté. Son résultat historique est affiché ci-dessous ; aucune allocation de suivi n'est encore active."
     },
     "chatgpt-volatilite-pilotee": {
       "label": "ChatGPT B — Exposition pilotée par le risque",
-      "status": "research_hypothesis", "version": "v0.1",
+      "status": "backtest", "version": "v0.1",
       "resume": "Ajuster l'exposition d'une poche diversifiée lorsque son risque observé change, sans levier.",
       "objectif": "Tester si une réduction disciplinée du risque en période de tension améliore le profil du portefeuille.",
       "regle": "La poche, la cible de risque et les seuils seront figés avant le backtest ; aucun changement d'allocation n'est encore exécuté.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Hypothèse documentée. Backtest non commencé : aucune allocation ni courbe de suivi n'est affichée."
+      "statut_public": "Backtest v0.1 exécuté. Son résultat historique est affiché ci-dessous ; aucune allocation de suivi n'est encore active."
     },
     "chatgpt-regime-macro-financier": {
       "label": "ChatGPT C — Régime macro-financier",
-      "status": "research_hypothesis", "version": "v0.1",
+      "status": "backtest", "version": "v0.1",
       "resume": "Adapter l'allocation à des conditions financières, de volatilité et d'incertitude réellement publiées.",
       "objectif": "Tester une famille de règles différente du momentum, en respectant les dates de publication et les révisions des données externes.",
       "regle": "Les régimes et leurs seuils seront figés avant le backtest. Les observations macro révisées devront être traitées comme une limite explicite.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Hypothèse documentée. Backtest non commencé : aucune allocation ni courbe de suivi n'est affichée."
+      "statut_public": "Backtest v0.1 exécuté. Son résultat reste provisoire tant que les données macro ne sont pas disponibles en version historique publiée."
     },
     "chatgpt-hybride-selection-protection": {
       "label": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
-      "status": "research_hypothesis", "version": "v0.1",
+      "status": "backtest", "version": "v0.1",
       "resume": "Sélection lente des supports, complétée par des garde-fous rapides lorsque le risque se détériore.",
       "objectif": "Tester si la séparation entre choix mensuel et protection hebdomadaire apporte une réaction utile sans rotation permanente.",
       "regle": "La sélection et les garde-fous seront figés avant le backtest ; la revue hebdomadaire ne déclenchera rien sans règle validée.",
       "frequence": "Sélection mensuelle, protection hebdomadaire.",
-      "statut_public": "Hypothèse documentée. Backtest non commencé : aucune allocation ni courbe de suivi n'est affichée."
+      "statut_public": "Backtest v0.1 exécuté. Son résultat reste provisoire tant que les données macro ne sont pas disponibles en version historique publiée."
     }
   }
 }
