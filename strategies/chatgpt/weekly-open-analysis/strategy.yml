@@ -1,0 +1,37 @@
+id: chatgpt-weekly-open-analysis
+label: ChatGPT E — Décision hebdomadaire à partir de tous les indicateurs
+version: v0.1
+type: revue_ia_hebdomadaire
+status: research_hypothesis
+universe: tous les supports du contrat disposant de données exploitables
+frequency: weekly
+
+purpose: >
+  Chaque semaine, ChatGPT examine les prix disponibles de tous les supports
+  et l'ensemble des indicateurs externes disponibles. Il choisit lui-même
+  lesquels sont utiles dans le contexte courant, puis propose une allocation
+  pour la semaine suivante. Il n'y a ni score fixe, ni formule immuable,
+  ni nombre de lignes imposé.
+
+decision_requirements:
+  - utiliser uniquement les données disponibles à la date de la revue
+  - passer en revue tous les supports comparables, sans présélection manuelle
+  - expliquer les indicateurs finalement retenus et ceux écartés
+  - préciser les éléments qui contredisent la décision
+  - choisir librement le nombre de supports et leurs poids
+  - publier une allocation cible dont le total est de 100 pour cent
+  - conserver la décision, ses données et son raisonnement avant la semaine suivante
+
+evaluation:
+  principle: >
+    Chaque décision est figée avant d'observer la semaine suivante. La
+    performance est ensuite calculée sur les prix réellement publiés.
+  historical_backtest: >
+    Aucun résultat historique n'est inventé : cette méthode ne recevra une
+    courbe qu'à partir de ses décisions hebdomadaires réellement archivées.
+
+guardrails:
+  - aucune exécution d'ordre
+  - aucune utilisation d'information future
+  - signaler explicitement toute donnée absente ou ancienne
+  - ne pas présenter une décision comme une garantie de gain
