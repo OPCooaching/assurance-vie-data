@@ -130,6 +130,10 @@ def load_actor_performance(name: str, strategies):
         return []
 
     labels = {
+        "chatgpt-momentum-mensuel": "ChatGPT A — Momentum mensuel multi-horizons",
+        "chatgpt-volatilite-pilotee": "ChatGPT B — Exposition pilotée par le risque",
+        "chatgpt-regime-macro-financier": "ChatGPT C — Régime macro-financier",
+        "chatgpt-hybride-selection-protection": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
         "chatgpt_impulsion": "ChatGPT A — Momentum hebdomadaire",
         "chatgpt_adaptative": "ChatGPT B — Momentum adaptatif",
         "chatgpt_rotation_diversifiee": "ChatGPT C — Momentum diversifié",
