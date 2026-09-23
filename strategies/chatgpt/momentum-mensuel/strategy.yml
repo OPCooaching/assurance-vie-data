@@ -1,0 +1,46 @@
+id: chatgpt-momentum-mensuel
+label: Momentum mensuel multi-horizons
+owner: chatgpt
+status: research_hypothesis
+active_version: v0.1
+strategy_family: cross_sectional_momentum
+decision_frequency: monthly
+decision_timing: last_available_valuation_of_month
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Choisir chaque mois, parmi les 473 supports éligibles, ceux dont la dynamique
+  relative est la plus robuste. Cette stratégie cherche une source de rendement
+  différente d'un simple portefeuille statique.
+data_required:
+  - path: data/prices/daily.csv
+    fields: [date, asset_id, close_eur]
+    use: calculer les performances et contrôler la couverture de prix
+  - path: config/universe.csv
+    use: limiter le calcul aux supports réellement disponibles
+signals_to_test:
+  - rendement_3_mois
+  - rendement_6_mois
+  - rendement_12_mois
+  - tendance_prix
+portfolio_logic: >
+  Un score combinera les horizons retenus, puis classera les supports. La règle
+  exacte de score, le nombre de lignes, les conditions de sortie et le traitement
+  défensif seront figés dans une version ultérieure avant tout backtest.
+eligibility_guards:
+  - prix EUR disponible sur toute la fenêtre de calcul
+  - support présent dans l'univers courant
+  - aucune donnée future, aucune interpolation fictive
+output_expected:
+  - allocation cible totalisant 100 pour cent
+  - écarts avec l'allocation précédente
+  - explication des règles déclenchées et des données utilisées
+pre_backtest_freeze:
+  - paramètres numériques
+  - règles de sélection et de sortie
+  - fréquence effective et date de décision
+  - hypothèses de valorisation et de coûts
+known_limits:
+  - la tendance peut se retourner brutalement
+  - des performances passées ne garantissent aucun rendement futur
