@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "template_not_a_decision",
+  "decision_id": "YYYY-Www--strategy-id",
+  "decided_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "effective_valuation_date": "YYYY-MM-DD",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-example",
+  "strategy_version": "v1.0",
+  "decision_type": "rebalance | no_change | no_trade | research_only",
+  "data_review_snapshot_ref": "data/review-snapshots/YYYY-Www/",
+  "data_as_of": {
+    "prices": "YYYY-MM-DD",
+    "context": "YYYY-MM-DD",
+    "publication_notes": []
+  },
+  "previous_allocation_percent": {},
+  "target_allocation_percent": {},
+  "allocation_changes_percent": {},
+  "rule_outcomes": [],
+  "rationale": "Explication lisible de la décision ou de l'absence de décision.",
+  "warnings": [],
+  "validation": {
+    "allocation_total_percent": 100,
+    "universe_checked": true,
+    "price_coverage_checked": true,
+    "no_lookahead_checked": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "supersedes": null
+}
