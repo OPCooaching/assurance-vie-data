@@ -1,0 +1,39 @@
+id: chatgpt-ai-allocation-review
+label: "ChatGPT G — Allocation synthétique hebdomadaire"
+status: superseded_research_hypothesis
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+universe: all_available_supports
+target_positions: adaptive
+history_mode: append_only
+
+objective: >
+  Produire chaque semaine une allocation à partir de l'ensemble des données
+  autorisées, en expliquant les risques, les concentrations et les arbitrages.
+
+inputs:
+  prices: data/prices/daily.csv
+  market_indicators: data/indicators/latest.csv
+  external_context: data/context/daily.csv
+  required_external_series:
+    - VIXCLS
+    - USEPUINDXD
+    - NFCI
+    - DTWEXBGS
+    - DEXUSEU
+    - ECBDFR
+    - DCOILBRENTEU
+    - WEI
+
+core_logic: >
+  Analyser conjointement le portefeuille précédent, les prix, le contexte
+  externe et les expositions connues des supports. Produire une nouvelle
+  allocation seulement si les raisons sont plus fortes que le coût pratique du
+  changement. La version du modèle, les données consultées et la justification
+  devront être archivées avec chaque décision.
+
+known_limits:
+  - Cette stratégie doit être comparée aux règles mécaniques, pas présumée supérieure.
+  - Les données futures ou les informations non archivées sont interdites.
+  - Une justification textuelle ne remplace pas les tests hors échantillon.
