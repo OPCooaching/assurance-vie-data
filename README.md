@@ -5,7 +5,7 @@ Dépôt unique, public et anonymisé pour les données, stratégies, historiques
 ## État initial
 
 - **473 supports Altaprofits** importés depuis la liste du 08/09/2026.
-- Portefeuille courant stocké uniquement en pourcentages au 07/09/2026.
+- Répartition et valorisation anonymisées du portefeuille au 07/09/2026 ; total de départ : 323 892,53 €.
 - Benchmark immuable **Bernard origine** en base 100.
 - Mise à jour automatique prévue les jours ouvrés.
 - Aucune donnée personnelle, numéro de contrat ou document contractuel brut stocké.
@@ -79,7 +79,7 @@ Interdit dans le dépôt :
 - identifiant client ;
 - document contractuel brut ;
 - clause bénéficiaire ;
-- montant exact du contrat stocké en clair.
+- aucune donnée personnelle ; les montants par support sont autorisés par le propriétaire et restent dissociés de toute identité.
 
 Le prénom **Bernard** peut être utilisé comme alias.
 
