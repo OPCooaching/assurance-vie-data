@@ -1,0 +1,17 @@
+backtest:
+  version: v0.1
+  start_after_sessions: 260
+  execution_model: next_available_valuation
+  defensive_asset: LU0290358497
+  costs_round_trip_pct: 0.0
+strategy:
+  decision_frequency: weekly
+  risk_assets:
+  - FR0010315770
+  - LU0290357846
+  - LU0478205379
+  - LU2611731824
+  volatility_window_sessions: 20
+  target_volatility_annual: 0.1
+  minimum_risk_exposure: 0.25
+  maximum_risk_exposure: 1.0
