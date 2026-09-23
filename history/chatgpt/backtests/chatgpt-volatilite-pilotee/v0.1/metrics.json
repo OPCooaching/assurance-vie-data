@@ -1,0 +1,17 @@
+{
+  "strategy_id": "chatgpt-volatilite-pilotee",
+  "status": "backtest",
+  "metrics": {
+    "start": "2022-09-19",
+    "end": "2026-09-22",
+    "final_value": 158.0995,
+    "annualized_return": 0.116673,
+    "annualized_volatility": 0.100585,
+    "max_drawdown": -0.08865,
+    "decisions": 210
+  },
+  "data_quality": "price_data_walk_forward",
+  "limitations": [
+    "current_universe_only"
+  ]
+}
