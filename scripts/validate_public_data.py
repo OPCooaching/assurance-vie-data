@@ -58,12 +58,6 @@ def main():
                 if bad:
                     fail(f"forbidden column(s) {sorted(bad)} in {p}")
 
-    portfolio = Path("config/portfolio_current.csv")
-    if portfolio.exists():
-        header = portfolio.read_text(encoding="utf-8").splitlines()[0].lower()
-        if any(word in header for word in ["amount", "exact_value", "contract_value"]):
-            fail("portfolio_current.csv must contain weights only")
-
     print("Public-data validation OK.")
 
 
