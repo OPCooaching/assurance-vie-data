@@ -35,6 +35,7 @@ core_logic: >
   leurs corrélations et leur apport réel par rapport à Bernard.
 
 research_protocol: strategies/chatgpt/ai-allocation-review/RESEARCH_PROTOCOL.md
+availability_rules: strategies/chatgpt/ai-allocation-review/availability_rules.yml
 
 selection_controls:
   - rolling_out_of_sample_validation
