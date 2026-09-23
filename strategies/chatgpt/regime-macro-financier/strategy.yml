@@ -1,0 +1,54 @@
+id: chatgpt-regime-macro-financier
+label: Allocation par régime macro-financier
+owner: chatgpt
+status: research_hypothesis
+active_version: v0.1
+strategy_family: macro_financial_regime
+decision_frequency: weekly
+decision_timing: after_last_available_friday_valuation
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Classer l'environnement en régimes lisibles — apaisé, sous tension, inflation
+  ou ralentissement — puis adapter la répartition entre les catégories de
+  supports autorisées. Cette famille est distincte du classement momentum :
+  elle part des conditions macro-financières, non des seuls gagnants récents.
+data_required:
+  - path: data/context/daily.csv
+    fields:
+      - policy_uncertainty_us
+      - financial_conditions_us
+      - broad_us_dollar
+      - brent_europe_usd
+      - weekly_economic_activity_us
+      - vix_us_equity_volatility
+      - usd_per_eur
+      - ecb_deposit_rate
+    use: construire et expliquer le régime, avec la date de publication de chaque série
+  - path: data/prices/daily.csv
+    fields: [date, asset_id, close_eur]
+    use: mesurer les supports et contrôler la valeur disponible
+  - path: config/universe.csv
+    use: relier la décision aux seuls supports disponibles
+portfolio_logic: >
+  Les régimes, leurs seuils, les catégories privilégiées et les règles de sortie
+  doivent être définis puis gelés avant le test. Une variable non publiée ou
+  obsolète déclenche une règle prudente explicitement documentée, pas une valeur
+  inventée.
+eligibility_guards:
+  - utiliser la dernière publication connue à la date de décision
+  - conserver la fréquence source et signaler les révisions
+  - aucune donnée future ni remplissage artificiel
+  - allocation cible égale à 100 pour cent
+output_expected:
+  - régime retenu et contributions des indicateurs
+  - allocation cible et écarts avec la semaine précédente
+  - avertissements sur données absentes, anciennes ou révisées
+pre_backtest_freeze:
+  - définition vérifiable de chaque régime
+  - cartographie des catégories de supports disponibles
+  - règles d'arbitrage et de repli
+known_limits:
+  - les indicateurs macro sont publiés avec retard et peuvent être révisés
+  - un régime est une simplification, non une prévision certaine
