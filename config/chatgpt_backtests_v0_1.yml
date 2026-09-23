@@ -1,0 +1,48 @@
+backtest:
+  version: v0.1
+  start_after_sessions: 260
+  execution_model: next_available_valuation
+  defensive_asset: LU0290358497
+  costs_round_trip_pct: 0.0
+
+strategies:
+  chatgpt-momentum-mensuel:
+    decision_frequency: monthly
+    top_n: 5
+    lookbacks_sessions: [63, 126, 252]
+    trend_days: 200
+
+  chatgpt-volatilite-pilotee:
+    decision_frequency: weekly
+    risk_assets: [FR0010315770, LU0290357846, LU0478205379, LU2611731824]
+    volatility_window_sessions: 20
+    target_volatility_annual: 0.10
+    minimum_risk_exposure: 0.25
+    maximum_risk_exposure: 1.0
+
+  chatgpt-regime-macro-financier:
+    decision_frequency: weekly
+    normal_allocation:
+      FR0010315770: 0.60
+      LU0290357846: 0.20
+      LU2611731824: 0.20
+    cautious_allocation:
+      FR0010315770: 0.25
+      LU2533811910: 0.50
+      LU0290358497: 0.25
+    conditions:
+      nfci_above: 0.0
+      uncertainty_quantile: 0.75
+      uncertainty_window_observations: 52
+      vix_above: 25.0
+    data_quality_label: provisional_revised_macro_data
+
+  chatgpt-hybride-selection-protection:
+    selection_frequency: monthly
+    protection_frequency: weekly
+    top_n: 5
+    lookbacks_sessions: [63, 126, 252]
+    trend_days: 200
+    protective_vix_above: 25.0
+    protective_nfci_above: 0.0
+    protective_risk_exposure: 0.50
