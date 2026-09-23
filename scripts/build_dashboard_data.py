@@ -14,7 +14,15 @@ ACADEMIC_CFG = Path("config/academic_strategies.yml")
 UNIVERSE = Path("config/universe.csv")
 STRATEGIES = Path("strategies")
 OUT = Path("docs/data")
-START_EUR = os.getenv("PORTFOLIO_START_EUR")
+BASELINE_CFG = Path("config/baseline_bernard.yml")
+
+
+def initial_portfolio_value_eur():
+    if not BASELINE_CFG.exists():
+        return None
+    config = yaml.safe_load(BASELINE_CFG.read_text(encoding="utf-8")) or {}
+    value = config.get("initial_portfolio_value_eur")
+    return float(value) if value is not None else None
 
 
 def read_series(path: Path):
@@ -217,6 +225,7 @@ def aligned_series(label, values_by_date, dates):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    start_eur = initial_portfolio_value_eur()
 
     baseline = read_series(BASELINE)
     academic = read_series(ACADEMIC)
@@ -255,7 +264,7 @@ def main():
 
     academic_info = attach_allocations(academic_metadata(), "academic", asset_names())
     (OUT / "academic.json").write_text(
-        json.dumps(payload(series, dates, START_EUR, {"strategies": academic_info}), ensure_ascii=False),
+        json.dumps(payload(series, dates, start_eur, {"strategies": academic_info}), ensure_ascii=False),
         encoding="utf-8",
     )
 
@@ -283,7 +292,7 @@ def main():
             for curve in actor_curves
         )
         (OUT / f"{name}.json").write_text(
-            json.dumps(payload(actor_series, actor_dates, START_EUR, metadata), ensure_ascii=False),
+            json.dumps(payload(actor_series, actor_dates, start_eur, metadata), ensure_ascii=False),
             encoding="utf-8",
         )
 
