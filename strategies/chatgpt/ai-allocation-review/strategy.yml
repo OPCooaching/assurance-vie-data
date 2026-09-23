@@ -36,6 +36,11 @@ core_logic: >
 
 research_protocol: strategies/chatgpt/ai-allocation-review/RESEARCH_PROTOCOL.md
 availability_rules: strategies/chatgpt/ai-allocation-review/availability_rules.yml
+backtest_program: strategies/chatgpt/ai-allocation-review/backtest_v0_2.py
+backtest_outputs:
+  - strategies/chatgpt/ai-allocation-review/backtest_v0.2.csv
+  - strategies/chatgpt/ai-allocation-review/backtest_v0.2-decisions.jsonl
+  - docs/data/chatgpt-backtests.json
 
 selection_controls:
   - rolling_out_of_sample_validation
