@@ -168,7 +168,10 @@ def load_actor_results(name: str):
     # allocations remain in the actor's private research area.
     raw = data.get("strategies", {})
     public = {}
-    allowed = (\n        "label", "version", "resume", "objectif", "regle", "frequence", "faiblesse",\n        "tracking_start", "status", "statut_public",\n    )
+    allowed = (
+        "label", "version", "resume", "objectif", "regle", "frequence", "faiblesse",
+        "tracking_start", "status", "statut_public",
+    )
     if isinstance(raw, dict):
         for strategy_id, spec in raw.items():
             if not isinstance(spec, dict):
