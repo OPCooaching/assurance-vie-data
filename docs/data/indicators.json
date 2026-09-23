@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-22T13:08:31+00:00",
-  "price_as_of_date": "2026-09-22",
+  "generated_at": "2026-09-23T12:55:33+00:00",
+  "price_as_of_date": "2026-09-23",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
     "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
     "price_ready": 337,
     "volume_ready": 174,
-    "external_ready": 5
+    "external_ready": 8
   },
   "groups": [
     {
@@ -64,7 +64,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-11 · weekly.",
+          "availability_label": "Dernière publication : 2026-09-18 · weekly.",
           "is_new_data": true,
           "external_id": "NFCI"
         },
@@ -97,6 +97,36 @@
           "availability_label": "Dernière publication : 2026-09-12 · weekly.",
           "is_new_data": true,
           "external_id": "WEI"
+        },
+        {
+          "name": "VIX — volatilité anticipée des actions américaines",
+          "question": "Mesurer la tension anticipée sur les marchés actions américains.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-21 · daily.",
+          "is_new_data": true,
+          "external_id": "VIXCLS"
+        },
+        {
+          "name": "Euro/dollar",
+          "question": "Mesurer l'effet du change sur les supports exposés au dollar.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-18 · daily.",
+          "is_new_data": true,
+          "external_id": "DEXUSEU"
+        },
+        {
+          "name": "Taux de dépôt de la Banque centrale européenne",
+          "question": "Situer le niveau des taux courts en euro.",
+          "indicator": "Valeur brute publiée par la source externe",
+          "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
+          "availability": "available",
+          "availability_label": "Dernière publication : 2026-09-23 · daily.",
+          "is_new_data": true,
+          "external_id": "ECBDFR"
         }
       ]
     },
@@ -186,8 +216,8 @@
       "frequency": "weekly",
       "source": "Chicago Fed, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/NFCI",
-      "last_observation_date": "2026-09-11",
-      "value": -0.56,
+      "last_observation_date": "2026-09-18",
+      "value": -0.555,
       "kind": "raw_external"
     },
     {
@@ -221,6 +251,39 @@
       "source_url": "https://fred.stlouisfed.org/series/WEI",
       "last_observation_date": "2026-09-12",
       "value": 3.07,
+      "kind": "raw_external"
+    },
+    {
+      "id": "VIXCLS",
+      "label": "VIX — volatilité anticipée des actions américaines",
+      "purpose": "Mesurer la tension anticipée sur les marchés actions américains.",
+      "frequency": "daily",
+      "source": "Cboe, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
+      "last_observation_date": "2026-09-21",
+      "value": 14.87,
+      "kind": "raw_external"
+    },
+    {
+      "id": "DEXUSEU",
+      "label": "Euro/dollar",
+      "purpose": "Mesurer l'effet du change sur les supports exposés au dollar.",
+      "frequency": "daily",
+      "source": "Federal Reserve Board, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/DEXUSEU",
+      "last_observation_date": "2026-09-18",
+      "value": 1.1464,
+      "kind": "raw_external"
+    },
+    {
+      "id": "ECBDFR",
+      "label": "Taux de dépôt de la Banque centrale européenne",
+      "purpose": "Situer le niveau des taux courts en euro.",
+      "frequency": "daily",
+      "source": "Banque centrale européenne, via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/ECBDFR",
+      "last_observation_date": "2026-09-23",
+      "value": 2.5,
       "kind": "raw_external"
     }
   ],
