@@ -1,0 +1,45 @@
+id: chatgpt-volatilite-pilotee
+label: Exposition pilotée par le risque
+owner: chatgpt
+status: research_hypothesis
+active_version: v0.1
+strategy_family: volatility_managed_allocation
+decision_frequency: weekly
+decision_timing: after_last_available_friday_valuation
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Ajuster chaque semaine le niveau de risque d'une poche diversifiée : réduire
+  l'exposition lorsque le risque mesuré devient anormalement élevé et la
+  réaugmenter lorsque les conditions redeviennent plus calmes. Il ne s'agit pas
+  de levier : l'exposition reste comprise entre zéro et 100 pour cent.
+data_required:
+  - path: data/prices/daily.csv
+    fields: [date, asset_id, close_eur]
+    use: volatilité observée des supports et de la poche
+  - path: data/context/daily.csv
+    fields: [vix_us_equity_volatility]
+    use: signal externe de tension des marchés actions
+  - path: config/universe.csv
+    use: univers disponible et catégories de supports
+portfolio_logic: >
+  La composition de la poche de risque, l'actif défensif utilisable et la cible
+  de risque seront définis explicitement. La règle testera ensuite une modulation
+  progressive de l'exposition, jamais une prédiction discrétionnaire.
+eligibility_guards:
+  - dernière observation réellement publiée disponible
+  - contrôle de couverture des prix avant tout calcul
+  - absence de levier et somme des allocations égale à 100 pour cent
+  - aucune utilisation d'une donnée publiée après la date de décision
+output_expected:
+  - exposition de risque et poche défensive
+  - allocation cible, écarts et motif du changement ou du non-changement
+  - date des données et avertissements de qualité
+pre_backtest_freeze:
+  - définition de la poche de risque et de la poche défensive
+  - fenêtre de volatilité et seuils de modulation
+  - règle en cas de donnée manquante ou révisée
+known_limits:
+  - un signal de volatilité américain ne résume pas tous les risques des fonds
+  - réduire le risque peut faire manquer un rebond rapide
