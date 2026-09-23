@@ -3,3 +3,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-09-22: refresh external context and retain 14 daily snapshots.
 2026-09-22: download all eight external context series.
 2026-09-23T12:00:00Z — rebuild euro portfolio dashboard after anonymized valuation import
+2026-09-23T14:45:00Z — refresh screener and complete indicator catalogue
