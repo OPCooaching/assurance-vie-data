@@ -1,0 +1,14 @@
+backtest:
+  version: v0.1
+  start_after_sessions: 260
+  execution_model: next_available_valuation
+  defensive_asset: LU0290358497
+  costs_round_trip_pct: 0.0
+strategy:
+  decision_frequency: monthly
+  top_n: 5
+  lookbacks_sessions:
+  - 63
+  - 126
+  - 252
+  trend_days: 200
