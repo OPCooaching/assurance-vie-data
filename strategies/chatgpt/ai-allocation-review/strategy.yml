@@ -1,0 +1,51 @@
+id: chatgpt-ai-allocation-review
+label: "ChatGPT G — Allocation synthétique hebdomadaire"
+status: research_hypothesis
+active_version: v0.2
+decision_frequency: weekly
+execution_model: next_available_valuation
+universe: all_available_supports
+target_positions: adaptive
+history_mode: append_only
+
+objective: >
+  Produire chaque semaine une allocation à partir de l'ensemble des données
+  autorisées, en expliquant les risques, les concentrations et les arbitrages.
+
+inputs:
+  prices: data/prices/daily.csv
+  market_indicators: data/indicators/latest.csv
+  external_context: data/context/daily.csv
+  required_external_series:
+    - VIXCLS
+    - USEPUINDXD
+    - NFCI
+    - DTWEXBGS
+    - DEXUSEU
+    - ECBDFR
+    - DCOILBRENTEU
+    - WEI
+
+core_logic: >
+  À chaque date de décision, réapprendre sur les seules semaines antérieures
+  quels signaux de prix et de contexte ont une utilité stable selon le régime
+  observé. Les poids des signaux, les supports retenus et le nombre de lignes
+  résultent du test hors échantillon ; aucun top-N ni score fixe ne les impose.
+  Les portefeuilles candidats sont aussi comparés selon leur concentration,
+  leurs corrélations et leur apport réel par rapport à Bernard.
+
+research_protocol: strategies/chatgpt/ai-allocation-review/RESEARCH_PROTOCOL.md
+
+selection_controls:
+  - rolling_out_of_sample_validation
+  - availability_date_for_every_input
+  - learned_signal_weights_not_fixed_score
+  - adaptive_portfolio_width_without_top_n
+  - correlation_and_risk_contribution_report
+  - reject_redundant_portfolios_without_incremental_benefit
+
+known_limits:
+  - Cette stratégie doit être comparée aux règles mécaniques, pas présumée supérieure.
+  - Les données futures ou les informations non archivées sont interdites.
+  - Une justification textuelle ne remplace pas les tests hors échantillon.
+  - Aucun portefeuille de suivi ne peut être créé avant le test reproductible.
