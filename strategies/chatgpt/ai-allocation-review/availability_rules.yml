@@ -1,0 +1,42 @@
+version: v0.1
+purpose: >
+  Définir les informations réellement visibles avant une décision hebdomadaire.
+  Ces décalages empêchent le test de lire une valeur publiée après la date
+  à laquelle l'allocation aurait été choisie.
+
+decision_clock:
+  frequency: weekly
+  decision_after: friday_market_data_workflow
+  application: next_available_contract_valuation
+
+daily_fred_series:
+  ids:
+    - VIXCLS
+    - USEPUINDXD
+    - DTWEXBGS
+    - DEXUSEU
+    - ECBDFR
+    - DCOILBRENTEU
+  rule: use_previous_business_day_observation
+  reason: >
+    La collecte quotidienne et la publication FRED ne garantissent pas qu'une
+    valeur datée du vendredi soit visible après la clôture du vendredi. Le
+    dernier jour ouvré complet est donc utilisé.
+
+weekly_series:
+  NFCI:
+    observation_period: week_ending_previous_friday
+    availability: following_wednesday_0830_new_york
+    source: Chicago_Fed
+  WEI:
+    observation_period: week_ending_previous_saturday
+    availability: following_thursday_1030_central_time
+    source: FRED_release_calendar
+
+revision_policy:
+  live_decisions: >
+    Sauvegarder et référencer la copie datée téléchargée avant la décision.
+  historical_test: >
+    Appliquer les décalages ci-dessus. Les révisions historiques de FRED ne
+    sont pas complètement reconstituables avant le début des copies datées ;
+    le test doit le signaler comme une limite et ne pas la masquer.
