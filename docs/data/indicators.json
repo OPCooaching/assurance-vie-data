@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T13:32:38+00:00",
+  "generated_at": "2026-09-23T23:11:09+00:00",
   "price_as_of_date": "2026-09-23",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
@@ -84,7 +84,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-15 · daily.",
+          "availability_label": "Dernière publication : 2026-09-22 · daily.",
           "is_new_data": true,
           "external_id": "DCOILBRENTEU"
         },
@@ -104,7 +104,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-21 · daily.",
+          "availability_label": "Dernière publication : 2026-09-22 · daily.",
           "is_new_data": true,
           "external_id": "VIXCLS"
         },
@@ -238,8 +238,8 @@
       "frequency": "daily",
       "source": "U.S. Energy Information Administration, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
-      "last_observation_date": "2026-09-15",
-      "value": 130.8,
+      "last_observation_date": "2026-09-22",
+      "value": 114.89,
       "kind": "raw_external"
     },
     {
@@ -260,8 +260,8 @@
       "frequency": "daily",
       "source": "Cboe, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
-      "last_observation_date": "2026-09-21",
-      "value": 14.87,
+      "last_observation_date": "2026-09-22",
+      "value": 14.21,
       "kind": "raw_external"
     },
     {
