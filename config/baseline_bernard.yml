@@ -1,6 +1,7 @@
 baseline_id: bernard-origin
 as_of_date: 2026-09-07
 normalization: 100
+initial_portfolio_value_eur: 323892.53
 method: buy_and_hold
 cashflows_in_performance: excluded
 
