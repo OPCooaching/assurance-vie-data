@@ -1,0 +1,18 @@
+{
+  "strategy_id": "chatgpt-regime-macro-financier",
+  "status": "backtest",
+  "metrics": {
+    "start": "2022-09-19",
+    "end": "2026-09-22",
+    "final_value": 188.0287,
+    "annualized_return": 0.164302,
+    "annualized_volatility": 0.12303,
+    "max_drawdown": -0.144594,
+    "decisions": 210
+  },
+  "data_quality": "provisional_revised_macro_data",
+  "limitations": [
+    "current_universe_only",
+    "macro_data_not_yet_point_in_time"
+  ]
+}
