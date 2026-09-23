@@ -19,6 +19,9 @@ def main():
     cfg = yaml.safe_load(CFG.read_text(encoding="utf-8"))
     start = pd.Timestamp(cfg["as_of_date"])
     base = float(cfg.get("normalization", 100))
+    initial_value_eur = float(cfg["initial_portfolio_value_eur"])
+    if initial_value_eur <= 0:
+        raise SystemExit("initial_portfolio_value_eur must be strictly positive")
     portfolio = pd.read_csv(PORTFOLIO)
     portfolio["weight"] = portfolio["allocation_pct"] / 100.0
 
@@ -67,6 +70,7 @@ def main():
         result["baseline"] += weight * values.div(first).to_numpy()
 
     result["baseline"] = base * result["baseline"] / represented
+    result["value_eur"] = (initial_value_eur * result["baseline"] / base).round(2)
     result["coverage_pct"] = represented * 100.0
     result["fund_euro_return_status"] = "held_at_initial_value_pending_credit"
     OUT.parent.mkdir(parents=True, exist_ok=True)
