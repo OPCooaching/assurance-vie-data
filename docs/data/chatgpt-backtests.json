@@ -1,5 +1,5 @@
 {
-  "version": "v0.1",
+  "version": "v0.2",
   "start": "2022-09-19",
   "end": "2026-09-22",
   "results": [
@@ -71,6 +71,29 @@
       "limitations": [
         "current_universe_only",
         "macro_data_not_yet_point_in_time"
+      ]
+    },
+    {
+      "strategy_id": "chatgpt-ai-allocation-review",
+      "label": "ChatGPT G — Stratégie qui réapprend chaque semaine",
+      "status": "backtest",
+      "metrics": {
+        "start": "2023-09-11",
+        "end": "2026-09-23",
+        "final_value": 161.6223,
+        "annualized_return": 0.170223,
+        "annualized_volatility": 0.133324,
+        "max_drawdown": -0.15125,
+        "decisions": 158,
+        "average_holdings": 64.09,
+        "average_effective_holdings": 39.08,
+        "average_positive_correlation": 0.2603
+      },
+      "data_quality": "provisional_revised_macro_data",
+      "limitations": [
+        "current_universe_only",
+        "macro_data_uses_conservative_publication_lags",
+        "historical_macro_revisions_not_fully_reconstructible"
       ]
     }
   ]
