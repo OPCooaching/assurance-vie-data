@@ -94,6 +94,34 @@ def load_existing_metadata(name: str):
         return {}
 
 
+def load_decision_history(name: str):
+    """Read immutable decisions for display; malformed records stay private."""
+    root = Path("history") / name / "decisions"
+    if not root.exists():
+        return []
+    records = []
+    for path in sorted(root.rglob("*.json")):
+        try:
+            record = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(record, dict) or record.get("status") == "template_not_a_decision":
+            continue
+        if not record.get("strategy_id") or not record.get("decision_type"):
+            continue
+        records.append({
+            "decision_id": record.get("decision_id"),
+            "date": record.get("effective_valuation_date") or record.get("decided_at_utc"),
+            "strategy_id": record["strategy_id"],
+            "strategy_version": record.get("strategy_version"),
+            "decision_type": record["decision_type"],
+            "rationale": record.get("rationale"),
+            "target_allocation_percent": record.get("target_allocation_percent", {}),
+            "warnings": record.get("warnings", []),
+        })
+    return sorted(records, key=lambda item: str(item.get("date") or ""), reverse=True)
+
+
 def load_actor_performance(name: str, strategies):
     """Read daily live paper-tracking values produced by the common workflow."""
     path = Path("data") / name / "performance.csv"
@@ -140,7 +168,7 @@ def load_actor_results(name: str):
     # allocations remain in the actor's private research area.
     raw = data.get("strategies", {})
     public = {}
-    allowed = ("label", "version", "resume", "objectif", "regle", "frequence", "faiblesse", "tracking_start")
+    allowed = (\n        "label", "version", "resume", "objectif", "regle", "frequence", "faiblesse",\n        "tracking_start", "status", "statut_public",\n    )
     if isinstance(raw, dict):
         for strategy_id, spec in raw.items():
             if not isinstance(spec, dict):
@@ -149,11 +177,14 @@ def load_actor_results(name: str):
             item["frequence"] = item.get("frequence") or (
                 "Revue hebdomadaire, chaque lundi ; l’allocation décidée s’applique à la valorisation suivante."
             )
-            item["status"] = "live_paper_tracking"
-            item["statut_public"] = (
-                "Suivi quotidien depuis le 09/09/2026 sur prix réellement observés. "
-                "Aucune courbe antérieure ni résultat de backtest n’est publié ici."
-            )
+            item.setdefault("status", "live_paper_tracking")
+            if item["status"] == "live_paper_tracking":
+                item.setdefault("statut_public", (
+                    "Suivi quotidien depuis le 09/09/2026 sur prix réellement observés. "
+                    "Aucune courbe antérieure ni résultat de backtest n’est publié ici."
+                ))
+            else:
+                item.setdefault("statut_public", "Hypothèse documentée ; pas encore de suivi de portefeuille.")
             public[strategy_id] = item
     return public, []
 
@@ -231,6 +262,7 @@ def main():
         metadata["strategies"] = attach_allocations(
             metadata.get("strategies", {}), name, asset_names()
         )
+        metadata["decision_history"] = load_decision_history(name)
         # Only workflow-produced tracking files may add public actor curves.
         # Their dates begin at the declared live-tracking start, never in a
         # reconstructed historical period.
