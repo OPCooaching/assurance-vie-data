@@ -53,6 +53,9 @@ jobs:
       - name: Update existing external context data
         run: python scripts/update_context_data.py
 
+      - name: Validate external market context
+        run: python scripts/validate_context_data.py
+
       - name: Compute common indicators
         run: python scripts/compute_indicators.py
 
