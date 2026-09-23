@@ -52,7 +52,7 @@ Un portefeuille presque identique à Bernard n'est conservé que s'il apporte un
 
 ## Test à construire avant tout suivi à blanc
 
-Le test avancera semaine par semaine. Pour une semaine ancienne, il bloque les données à cette semaine, apprend uniquement sur les semaines précédentes, décide l'allocation suivante, puis enregistre le résultat observé. Les données publiées après la décision, y compris les séries hebdomadaires pas encore publiées, sont exclues.
+Le test avancera semaine par semaine. Pour une semaine ancienne, il bloque les données à cette semaine, apprend uniquement sur les semaines précédentes, décide l'allocation suivante, puis enregistre le résultat observé. Les données publiées après la décision, y compris les séries hebdomadaires pas encore publiées, sont exclues. Les décalages de publication sont définis dans `availability_rules.yml` : ils sont volontairement prudents. Les anciennes valeurs FRED peuvent avoir été révisées ; le test signalera cette limite plutôt que de faire croire qu'il reconstitue parfaitement ce qui était connu à l'époque.
 
 Le résultat devra comparer cette stratégie aux références existantes sur : rendement, volatilité, baisse maximale, nombre et ampleur des arbitrages, concentration et corrélation avec Bernard. Une amélioration visible sur une seule courte période ne suffira pas. Si le test ne montre pas d'avantage robuste, la stratégie restera un échec documenté et ne deviendra pas une allocation suivie.
 
