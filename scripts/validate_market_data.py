@@ -62,6 +62,11 @@ def main():
     if not (prices["close"].round(10) == prices["close_eur"].round(10)).all():
         raise SystemExit("Market-data quality gate: compatibility close is not EUR-normalised.")
 
+    latest_date = pd.to_datetime(prices["date"], errors="coerce").max().normalize()
+    today = pd.Timestamp.now(tz="UTC").normalize().tz_localize(None)
+    if pd.isna(latest_date) or (today - latest_date).days > 7:
+        raise SystemExit("Market-data quality gate: prices are more than seven days old.")
+
     raw = reversible_ticks(prices, "close_raw")
     clean = reversible_ticks(prices, "close_eur", suspicious_only=True)
     ANOMALIES.parent.mkdir(parents=True, exist_ok=True)
@@ -72,7 +77,7 @@ def main():
             f"Market-data quality gate: {len(clean)} suspect reversible tick(s) remain in EUR-normalised prices."
         )
     print(
-        f"Market-data quality gate passed: {len(prices)} rows, "
+        f"Market-data quality gate passed through {latest_date.date().isoformat()}: {len(prices)} rows, "
         f"{prices.asset_id.nunique()} assets; {len(raw)} raw reversals audited, "
         f"{sum(prices.quality_status.eq('reversible_tick_neutralised'))} suspect tick(s) neutralised."
     )
