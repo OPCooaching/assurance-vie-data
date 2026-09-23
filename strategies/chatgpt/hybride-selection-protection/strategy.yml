@@ -1,0 +1,47 @@
+id: chatgpt-hybride-selection-protection
+label: Sélection mensuelle et protection hebdomadaire
+owner: chatgpt
+status: research_hypothesis
+active_version: v0.1
+strategy_family: hybrid_selection_protection
+decision_frequency: hybrid_monthly_selection_weekly_protection
+decision_timing: monthly_selection_plus_weekly_protection_review
+execution_model: next_available_valuation
+history_mode: append_only
+
+objective: >
+  Séparer deux décisions : choisir mensuellement les supports porteurs, puis
+  examiner chaque semaine si une protection temporaire est justifiée. Cela évite
+  de refaire sans cesse toute la sélection tout en restant réactif face à une
+  détérioration nette.
+data_required:
+  - path: data/prices/daily.csv
+    fields: [date, asset_id, close_eur]
+    use: sélection mensuelle et contrôle de tendance
+  - path: data/context/daily.csv
+    fields: [financial_conditions_us, vix_us_equity_volatility, policy_uncertainty_us]
+    use: garde-fous hebdomadaires de risque
+  - path: config/universe.csv
+    use: univers et actifs de repli réellement disponibles
+monthly_logic: >
+  La sélection principale est effectuée à fréquence mensuelle selon une règle de
+  force relative et de tendance à figer avant le test.
+weekly_protection_logic: >
+  La revue hebdomadaire ne remplace pas la sélection principale. Elle ne peut
+  agir que selon des garde-fous prédéfinis : maintenir, réduire temporairement
+  le risque ou revenir à la sélection mensuelle.
+eligibility_guards:
+  - séparer strictement date de décision et prochaine valorisation disponible
+  - n'utiliser que les observations publiées à la date de revue
+  - aucune allocation hors univers et somme égale à 100 pour cent
+output_expected:
+  - sélection mensuelle en vigueur
+  - statut hebdomadaire de protection
+  - allocation cible, écarts et motif clair du changement ou du maintien
+pre_backtest_freeze:
+  - règle de sélection mensuelle
+  - garde-fous hebdomadaires et conditions de retour
+  - support défensif, limites d'exposition et traitement des données manquantes
+known_limits:
+  - l'architecture est plus complexe et doit prouver son utilité nette
+  - une protection trop fréquente peut réduire la participation aux hausses
