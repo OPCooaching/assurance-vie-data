@@ -17,4 +17,4 @@ Chaque fiche indique son objectif, ses données nécessaires, sa fréquence, ses
 
 Les trois anciennes variantes momentum ont été retirées, avec leurs courbes et leur moteur de calcul. Elles ne sont plus présentées comme un suivi actif et ne participent plus aux pages publiques.
 
-Les décisions, allocations et changements de version seront conservés de façon append-only dans `history/chatgpt/`. Le cadre commun est décrit dans [le modèle opérationnel](../../history/chatgpt/2026-09-23-modele-operationnel-v1.md).
+Les décisions, allocations et changements de version seront conservés de façon append-only dans `history/chatgpt/`. Le cadre commun est décrit dans [le modèle opérationnel](../../history/chatgpt/2026-09-23-modele-operationnel-v1.md) et le test est encadré par [le protocole de backtest](../../history/chatgpt/2026-09-23-protocole-backtest-v1.md).
