@@ -48,7 +48,7 @@ Pour chaque portefeuille candidat, le test calcule :
 - la concentration sur des supports qui évoluent presque pareil ;
 - le gain réel apporté par le portefeuille lorsqu'il est combiné à Bernard.
 
-Un portefeuille presque identique à Bernard n'est conservé que s'il apporte un bénéfice mesurable : meilleur rendement à risque comparable, ou baisse/risk sensiblement moindre. Il n'est pas rejeté simplement parce qu'il est corrélé ; il est rejeté s'il ne fait que dupliquer Bernard sans bénéfice démontré.
+Un portefeuille presque identique à Bernard n'est conservé que s'il apporte un bénéfice mesurable : meilleur rendement à risque comparable, ou baisse ou risque sensiblement moindre. Il n'est pas rejeté simplement parce qu'il est corrélé ; il est rejeté s'il ne fait que dupliquer Bernard sans bénéfice démontré.
 
 ## Test à construire avant tout suivi à blanc
 
