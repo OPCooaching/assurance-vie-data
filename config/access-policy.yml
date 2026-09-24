@@ -28,21 +28,24 @@ actors:
 
 forbidden_data:
   - surname
+  - given_name
   - email
   - postal_address
   - phone
   - birth_date_full
   - contract_number
   - client_identifier
-  - raw_contract_document
-  - exact_contract_value_in_repository
   - beneficiary_clause
+  - raw_contract_document
 
 allowed_identity:
   alias: Bernard
 
 portfolio_representation:
-  exact_euro_amounts_in_repository: false
+  exact_euro_amounts_in_repository: true
+  exact_value_on_public_page: true
+  condition: >-
+    Les montants peuvent être publiés car ils ne permettent pas d'identifier
+    Bernard. Aucun nom, prénom, date de naissance, adresse, numéro de contrat
+    ou autre identifiant personnel ne doit apparaître.
   percentages: true
-  base_100: true
-  exact_value_on_public_page_via_secret: true
