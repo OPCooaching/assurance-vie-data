@@ -297,6 +297,14 @@ def main():
             encoding="utf-8",
         )
 
+    # The public page loads this JavaScript companion directly. It avoids a
+    # browser-specific block on JSON fetches while preserving chatgpt.json as
+    # the machine-readable source.
+    chatgpt_payload = (OUT / "chatgpt.json").read_text(encoding="utf-8")
+    (OUT / "chatgpt-data.js").write_text(
+        "window.CHATGPT_DATA = " + chatgpt_payload + ";\n",
+        encoding="utf-8",
+    )
     print("Dashboard JSON generated.")
 
 
