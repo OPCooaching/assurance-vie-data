@@ -2,39 +2,49 @@
   "strategies": {
     "chatgpt-momentum-mensuel": {
       "label": "ChatGPT A — Momentum mensuel multi-horizons",
-      "status": "backtest", "version": "v0.1",
-      "resume": "Sélection mensuelle des supports dont la dynamique relative est la plus robuste.",
-      "objectif": "Tester une source de rendement fondée sur la force relative, sans confondre cette hypothèse avec les anciennes variantes hebdomadaires.",
-      "regle": "Les paramètres chiffrés seront figés avant le backtest ; aucun portefeuille n'est suivi tant que ce gel n'est pas terminé.",
-      "frequence": "Revue mensuelle.",
-      "statut_public": "Backtest v0.1 exécuté. Son résultat historique est affiché ci-dessous ; aucune allocation de suivi n'est encore active."
+      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "resume": "Une règle écrite sélectionne chaque mois les supports dont la progression récente est la plus solide.",
+      "objectif": "Comparer cette règle de tendance à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
+      "regle": "La sélection déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
+      "frequence": "Sélection mensuelle.",
+      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-volatilite-pilotee": {
       "label": "ChatGPT B — Exposition pilotée par le risque",
-      "status": "backtest", "version": "v0.1",
-      "resume": "Ajuster l'exposition d'une poche diversifiée lorsque son risque observé change, sans levier.",
-      "objectif": "Tester si une réduction disciplinée du risque en période de tension améliore le profil du portefeuille.",
-      "regle": "La poche, la cible de risque et les seuils seront figés avant le backtest ; aucun changement d'allocation n'est encore exécuté.",
+      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "resume": "Une règle réduit ou augmente l’exposition d’une poche diversifiée selon son risque observé.",
+      "objectif": "Comparer une protection contre les périodes instables à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
+      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Backtest v0.1 exécuté. Son résultat historique est affiché ci-dessous ; aucune allocation de suivi n'est encore active."
+      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-regime-macro-financier": {
       "label": "ChatGPT C — Régime macro-financier",
-      "status": "backtest", "version": "v0.1",
-      "resume": "Adapter l'allocation à des conditions financières, de volatilité et d'incertitude réellement publiées.",
-      "objectif": "Tester une famille de règles différente du momentum, en respectant les dates de publication et les révisions des données externes.",
-      "regle": "Les régimes et leurs seuils seront figés avant le backtest. Les observations macro révisées devront être traitées comme une limite explicite.",
+      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "resume": "Une règle adapte le portefeuille selon la volatilité, les conditions financières et l’incertitude publiées.",
+      "objectif": "Comparer une approche qui tient compte du contexte économique et financier à Bernard.",
+      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Les données macro utilisées doivent être celles publiées avant la décision.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Backtest v0.1 exécuté. Son résultat reste provisoire tant que les données macro ne sont pas disponibles en version historique publiée."
+      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-hybride-selection-protection": {
       "label": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
-      "status": "backtest", "version": "v0.1",
-      "resume": "Sélection lente des supports, complétée par des garde-fous rapides lorsque le risque se détériore.",
-      "objectif": "Tester si la séparation entre choix mensuel et protection hebdomadaire apporte une réaction utile sans rotation permanente.",
-      "regle": "La sélection et les garde-fous seront figés avant le backtest ; la revue hebdomadaire ne déclenchera rien sans règle validée.",
+      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "resume": "Une sélection mensuelle est complétée par des protections plus rapides si le risque se détériore.",
+      "objectif": "Comparer une règle qui sépare le choix des supports et la protection contre les baisses à Bernard.",
+      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
       "frequence": "Sélection mensuelle, protection hebdomadaire.",
-      "statut_public": "Backtest v0.1 exécuté. Son résultat reste provisoire tant que les données macro ne sont pas disponibles en version historique publiée."
+      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
+    },
+    "chatgpt-weekly-open-analysis": {
+      "label": "ChatGPT E — Analyse hebdomadaire complète",
+      "status": "awaiting_first_decision", "version": "v0.1",
+      "resume": "Chaque semaine, ChatGPT examine tous les supports comparables et les indicateurs disponibles, puis choisit librement les actifs et leurs poids.",
+      "objectif": "Tester une décision réellement adaptée à la semaine, sans imposer d’avance un score, cinq lignes ou une même règle immuable.",
+      "regle": "Avant chaque semaine, ChatGPT explique les indicateurs retenus, les signaux contraires, l’allocation à 100 % et archive la décision. La courbe commence à cette date et suit ensuite les cours réels.",
+      "frequence": "Décision chaque samedi pour la semaine suivante.",
+      "faiblesse": "Elle dépend d’une analyse ChatGPT effectivement exécutée et archivée chaque semaine ; elle ne peut pas être inventée après coup.",
+      "statut_public": "En attente de la première décision datée. Elle apparaîtra avec son allocation et sa courbe dès que cette décision aura été archivée."
     }
   }
 }
