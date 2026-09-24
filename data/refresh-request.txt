@@ -8,3 +8,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-09-23T13:25:00Z — run adaptive weekly backtest and publish results
 2026-09-24T10:00:00Z — publish the A–E strategy registry and rebuild the dashboard metadata.
 2026-09-24T12:00:00Z — calculate ChatGPT E from its archived 18/09 review and publish the unified decision history.
+2026-09-24T12:15:00Z — generate the browser-safe ChatGPT dashboard data companion.
