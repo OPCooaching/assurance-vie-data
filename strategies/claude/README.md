@@ -1,118 +1,84 @@
-# Stratégies Claude
+# Espace Claude : recherche, stratégies et suivi
 
-Espace réservé aux stratégies définies par Claude. Les décisions et versions sont
-conservées séparément de celles de ChatGPT et des stratégies académiques.
+Cet espace appartient à Claude. Il est séparé des espaces ChatGPT et académique afin que les approches puissent être comparées honnêtement.
 
-## État au 21 septembre 2026
+## État au 24 septembre 2026
 
-Aucune stratégie n'est validée. Les trois définitions portent le statut
-`research_hypothesis`.
+Les dossiers existants `socle-satellites/`, `risque-cible/`, `double-filtre/`, `momentum-multi/` et `momentum-prudent/` sont des **archives de recherche et de simulation**. Ils ne constituent pas un suivi hebdomadaire Claude actif.
 
-Les données communes ont été corrigées par l'administrateur du dépôt : historique
-porté à cinq ans, du 20 septembre 2021 au 18 septembre 2026, et ticks aberrants
-traités. Les backtests ont été refaits sur ces données. Les résultats sont dans
-`resultats-v03.md`.
+Ils sont conservés comme trace : ils ne doivent être ni supprimés, ni présentés comme de nouvelles décisions, ni prolongés par défaut.
 
-Les devises de cotation ne sont pas homogénéisées dans le fichier commun. Les
-stratégies Claude n'utilisent donc que des lignes cotées en euros sur une place
-de la zone euro, ce qui évite toute conversion de change dans la simulation.
+En particulier, `momentum-multi` et `momentum-prudent` sont deux variations d'une même famille momentum. Ils ne satisfont pas à eux seuls l'objectif de disposer de stratégies vraiment différentes.
 
-`resultats-preliminaires-v02.md`, qui portait sur un an de données, reste en
-place comme trace et ne sera pas supprimé. `constats-donnees.md` conserve les
-constats qui avaient motivé la correction des données.
+La page `docs/claude.html` affiche encore ces simulations historiques. Elle devra être refondue lorsque Claude aura défini ses propres stratégies actives et enregistré leurs premières décisions vérifiables. Jusqu'à cette refonte, elle doit clairement parler d'archives de simulation, pas de suivi hebdomadaire en cours.
 
-## Contenu
+## Objectif de Bernard
 
-| Chemin | Rôle |
-|---|---|
-| `socle-satellites/strategy.yml` | Claude A, socle mondial et thèmes plafonnés, active en v0.3 |
-| `momentum-multi/strategy.yml` | Claude D, classement des supports, six lignes, active en v0.1 |
-| `momentum-prudent/strategy.yml` | Claude E, même classement sous garde-fou, active en v0.1 |
-| `risque-cible/strategy.yml` | Claude B, risque cible constant, active en v0.2 |
-| `double-filtre/strategy.yml` | Claude C, tendance confirmée par l'ampleur, active en v0.2 |
-| `backtest.py` | Simulation walk-forward, sans données futures |
-| `strategies.json` | Résultats produits par `backtest.py` |
-| `<stratégie>/backtest_<version>.csv` | Courbe base 100 d'une version |
-| `resultats-v03.md` | Résultats de Claude A sur cinq ans |
-| `resultats-momentum.md` | Résultats de Claude D et Claude E |
-| `resultats-preliminaires-v02.md` | Résultats sur un an, trace conservée |
-| `constats-donnees.md` | Constats sur les données communes |
+Bernard souhaite un portefeuille théorique dynamique, réexaminé chaque semaine, afin de rechercher le meilleur résultat possible à court terme. Les arbitrages sont supposés gratuits.
 
-## Univers
+Il ne veut pas une allocation figée : chaque semaine, une stratégie peut conserver ou modifier les actifs de son portefeuille théorique. Aucun ordre réel n'est passé.
 
-Deux univers, sous la même contrainte de devise : uniquement des lignes cotées
-en euros sur une place de la zone euro.
+Les stratégies doivent être différentes par leur hypothèse et leur méthode, et non de simples versions plus ou moins prudentes d'un même classement momentum.
 
-Claude A, B et C suivent une liste de six supports fixée à l'avance.
-Claude D et E classent chaque semaine tous les fonds cotés en euros du contrat
-disposant de cinq ans de cours, soit quarante-quatre supports. Cet ensemble est
-celui des fonds encore référencés aujourd'hui : un fonds retiré depuis 2021 n'y
-figure pas, ce qui flatte légèrement le classement.
+## Sources à utiliser
 
-### Les six supports de Claude A, B et C
+Avant toute analyse, lire :
 
-| Rôle | Support | Cotation |
-|---|---|---|
-| Socle monde large | iShares Core MSCI World | IWLE.DE |
-| Socle volatilité minimale | Xtrackers MSCI World Minimum Volatility | XDEB.DE |
-| Thème | iShares MSCI Global Semiconductors | SEMI.AS |
-| Thème | Amundi Euro Stoxx Banks | BNKE.PA |
-| Thème | iShares MSCI EM ex-China | EXCH.AS |
-| Support de repli | Xtrackers II EUR Overnight Rate Swap | XEON.DE |
+- `config/access-policy.yml` ;
+- `STRATEGY_INTERFACE.md` ;
+- `config/universe.csv`, `config/symbol_map.csv` et les fichiers de référence Bernard ;
+- `data/prices/daily.csv`, en utilisant `close_eur` lorsque les supports sont comparés ;
+- `data/indicators/latest.csv` ;
+- `data/context/` ;
+- `docs/screener.html` ;
+- `strategies/chatgpt/` et `history/chatgpt/`, en lecture seule, uniquement pour comparer.
 
-La santé mondiale reste hors de ces stratégies : le seul support de l'univers
-est coté à Londres. Il y a donc trois thèmes et non quatre.
+Ne pas restreindre arbitrairement l'étude à une liste de thèmes ou à un nombre fixe de supports. Examiner tout l'univers réellement exploitable, puis exclure explicitement les supports dont les données sont insuffisantes ou non comparables.
 
-## Lancer une simulation
+## Construire de nouvelles stratégies Claude
 
-```bash
-python strategies/claude/backtest.py
-python strategies/claude/backtest.py --strategie claude-socle-satellites
-```
+Avant d'en déclarer une active :
 
-Le script refuse de tourner si les supports retenus partagent moins de 260
-séances, une moyenne mobile 200 jours demandant cette profondeur avec une marge.
+1. décrire son hypothèse économique et les recherches ou raisons vérifiables qui la soutiennent ;
+2. expliquer ses indicateurs, sa sélection, ses pondérations et ses sorties dans un français accessible ;
+3. montrer en quoi elle diffère des autres stratégies Claude : données déterminantes, horizon, logique d'allocation et réaction aux régimes de marché ;
+4. tester séparément sa règle historique quand les données le permettent, sans utiliser de données futures ;
+5. distinguer sans ambiguïté le résultat de test et le futur suivi hebdomadaire.
 
-Les deux cents premières séances amorcent les moyennes mobiles et n'entrent pas
-dans la mesure. Cette fenêtre d'amorçage est la même pour toutes les versions :
-sans cela, une version à moyenne courte démarrerait plus tôt qu'une version à
-moyenne longue et les deux ne seraient plus comparables.
+Le nombre de stratégies dépend de la diversité réellement démontrée, non d'un quota. Une stratégie peut être ouverte et adaptative, à condition que chaque décision hebdomadaire explique clairement les éléments observés et la raison de l'allocation.
 
-## Absence de données futures
+## Démarrer un suivi hebdomadaire
 
-À chaque date de décision, seules les séances antérieures ou égales à cette date
-sont visibles. L'allocation décidée s'applique à partir de la séance suivante,
-ce qui reproduit le fait qu'un arbitrage d'assurance vie s'exécute à une valeur
-liquidative inconnue au moment de l'ordre.
+Une fois une stratégie définie et validée comme stratégie active :
 
-Altaprofits applique une date de valeur à J+1 ouvré pour un ordre passé avant 23 h.
+- placer sa règle et sa version dans `strategies/claude/` ;
+- enregistrer chaque décision dans `history/claude/` avec une date d'analyse et une date de prise d'effet ;
+- ne jamais modifier une décision passée ;
+- vérifier que l'allocation totalise exactement 100 % ;
+- construire les sorties calculées propres à Claude dans `data/claude/`, si nécessaire ;
+- projeter les informations utiles pour la page dans `docs/data/claude.json` ;
+- mettre à jour `docs/claude.html` sans modifier les pages partagées ;
+- vérifier la page GitHub Pages après publication.
 
-## Versions
+La source durable de l'historique est `history/claude/`. Ne pas créer ni maintenir un deuxième historique indépendant dans `docs/data/claude-history.json` : les données web sont une projection de l'historique, pas une source concurrente.
 
-Un changement de logique crée une nouvelle version. Les versions sont
-cumulatives : une version reprend les paramètres de la précédente et ne redéfinit
-que ce qui change. Les résultats restent rattachés à la version qui les a
-produits. Aucune décision passée n'est réécrite, et `backtest.py` n'ajoute au
-journal que les décisions qui n'y figurent pas déjà.
+## Revue du samedi
 
-Une version dont les paramètres ne portent pas `currency_universe: eur_quoted_only`
-repose sur un univers qui n'existe pas en cotation euro. Elle reste documentée
-mais n'est pas simulée. C'est le cas des trois v0.1.
+Le dépôt actualise les cours et indicateurs en semaine. Une revue Claude doit être exécutée le samedi seulement si une tâche Claude a effectivement été programmée ou si Olivier la déclenche.
 
-## Modélisation du fonds en euros
+À chaque revue :
 
-Le fonds en euros n'a aucune cotation publique. Le script lui applique un
-rendement fixe de 3,00 % par an, ajustable quand le taux 2026 sera connu.
-La page publique annonce cette modélisation.
+1. vérifier la fraîcheur des données ;
+2. analyser les supports comparables et les indicateurs disponibles ;
+3. décider l'allocation théorique applicable la semaine suivante ;
+4. expliquer les actifs entrés, sortis, renforcés ou conservés ;
+5. archiver la décision ;
+6. mettre à jour la page et vérifier sa publication.
 
-## Points à valider par l'administrateur du dépôt
+Sans tâche Claude réellement active, ne jamais écrire que Claude suit le portefeuille automatiquement.
 
-`backtest.py` écrit une copie de ses résultats dans `docs/data/claude-history.json`,
-GitHub Pages ne servant que le dossier `docs/`. Ce chemin ne figure pas dans
-`config/access-policy.yml`, qui n'autorise à Claude que `docs/data/claude.json`.
-ChatGPT dispose de deux fichiers équivalents. Ajouter ce chemin à la politique,
-ou indiquer un autre emplacement.
+## Droits et confidentialité
 
-Le script met aussi à jour la seule clé `strategies` de `docs/data/claude.json`,
-celle que `scripts/build_dashboard_data.py` conserve d'un passage à l'autre. Le
-reste de ce fichier reste produit par le script commun.
+Claude peut écrire uniquement dans `strategies/claude/`, `history/claude/`, `data/claude/`, `docs/data/claude.json` et `docs/claude.html`.
+
+Il ne modifie ni les données communes ni les espaces ChatGPT ou académiques. Il ne publie aucune donnée personnelle. L'alias Bernard et les montants exacts anonymisés sont autorisés par `config/access-policy.yml`.
