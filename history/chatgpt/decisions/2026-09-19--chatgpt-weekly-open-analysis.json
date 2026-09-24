@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "reconstructed_with_real_prices",
+  "decision_id": "2026-W39--chatgpt-weekly-open-analysis",
+  "reconstructed_at_utc": "2026-09-24T11:45:00Z",
+  "effective_valuation_date": "2026-09-21",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-weekly-open-analysis",
+  "strategy_version": "v0.1",
+  "decision_type": "reconstructed_allocation",
+  "data_as_of": {
+    "prices": "2026-09-18",
+    "context": "2026-09-18",
+    "publication_notes": [
+      "Décision reconstruite le 24/09 à partir des seules données disponibles à la clôture du 18/09.",
+      "Les valeurs suivantes de la courbe utilisent uniquement les cours réellement publiés après cette date."
+    ]
+  },
+  "reviewed_universe": {
+    "price_comparable_supports": 337,
+    "method": "Revue de l'ensemble des supports comparables ; comparaison des évolutions 20, 60 et 120 séances, volatilité, recul maximal et position par rapport à la tendance longue."
+  },
+  "reviewed_context": {
+    "VIXCLS": {
+      "value": 14.81,
+      "date": "2026-09-18",
+      "interpretation": "Tension anticipée faible par rapport aux séances précédentes."
+    },
+    "NFCI": {
+      "value": -0.56,
+      "date": "2026-09-11",
+      "interpretation": "Conditions financières encore plutôt accommodantes ; publication hebdomadaire la plus récente alors disponible."
+    },
+    "DTWEXBGS": {
+      "value": 119.5133,
+      "date": "2026-09-18",
+      "interpretation": "Dollar fort : risque de change à conserver comme réserve."
+    },
+    "DEXUSEU": {
+      "value": 1.1464,
+      "date": "2026-09-18",
+      "interpretation": "Exposition dollar présente dans certains ETF ; les prix sont déjà convertis en euros."
+    },
+    "ECBDFR": {
+      "value": 2.5,
+      "date": "2026-09-18",
+      "interpretation": "Taux euro court stable."
+    }
+  },
+  "selected_signals": [
+    "Les tendances 60 et 120 séances sont positives pour les supports retenus.",
+    "La volatilité anticipée américaine est restée modérée le 18/09.",
+    "Les conditions financières connues à cette date ne signalaient pas de stress."
+  ],
+  "contrary_signals": [
+    "Le dollar était élevé ; les ETF cotés en dollar restent exposés à un retournement de change.",
+    "Europe de l'Est et marchés émergents ont des variations plus fortes ; leurs poids sont plafonnés."
+  ],
+  "previous_allocation_percent": {},
+  "target_allocation_percent": {
+    "IE00BL25JM42": 20,
+    "LU1900066462": 15,
+    "FR0010380675": 15,
+    "LU0496786574": 15,
+    "LU0292096186": 15,
+    "FR0010315770": 10,
+    "IE00069JGT58": 10
+  },
+  "allocation_changes_percent": {
+    "IE00BL25JM42": 20,
+    "LU1900066462": 15,
+    "FR0010380675": 15,
+    "LU0496786574": 15,
+    "LU0292096186": 15,
+    "FR0010315770": 10,
+    "IE00069JGT58": 10
+  },
+  "rationale": "La revue complète du 18/09 privilégie une exposition actions, car la tendance générale est positive et les indicateurs de tension disponibles ne justifient pas une protection dominante. La répartition ne reprend pas simplement les cinq premiers supports : elle associe valeur mondiale, États-Unis, dividendes mondiaux, pays émergents et Europe de l'Est, avec des poids limités pour les poches les plus volatiles.",
+  "warnings": [
+    "Ceci est un portefeuille de comparaison, sans ordre transmis au contrat de Bernard.",
+    "La première décision est reconstruite a posteriori pour démarrer la courbe ; les décisions ultérieures seront archivées avant la semaine concernée."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "universe_checked": true,
+    "price_coverage_checked": true,
+    "no_lookahead_checked": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "supersedes": null
+}
