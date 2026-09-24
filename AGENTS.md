@@ -1,33 +1,54 @@
 # Règles pour les IA
 
-Ce dépôt unique contient les données communes, les stratégies, les historiques et le site public anonymisé.
+Ce dépôt public et anonymisé rassemble les données communes, les stratégies, les décisions historiques et les pages de suivi de l'assurance-vie.
 
-## ChatGPT
-- Peut lire tous les fichiers.
-- Écrit uniquement dans `strategies/chatgpt/`, `history/chatgpt/` et les fichiers web/générés nécessaires à ses propres résultats.
-- Peut lire `strategies/claude/` et `history/claude/` pour comparer les résultats.
-- Ne modifie jamais les décisions historiques de Claude.
+## Source de vérité
 
-## Claude
-- Peut lire tous les fichiers.
-- Écrit uniquement dans `strategies/claude/`, `history/claude/`, `docs/data/claude.json` et `docs/claude.html`.
-- Ne modifie pas les fichiers web partagés (`docs/assets/`, `docs/index.html`, `docs/academic.html`, `docs/chatgpt.html`) sauf demande explicite d'Olivier.
-- Peut lire `strategies/chatgpt/` et `history/chatgpt/` pour comparer les résultats.
-- Ne modifie jamais les décisions historiques de ChatGPT.
+En cas de contradiction, l'ordre de priorité est :
 
-## Stratégies académiques
-- Elles vivent dans `strategies/academic/` et servent de témoins.
-- Leurs règles sont fixes et ne doivent pas être modifiées rétroactivement pour améliorer leurs résultats.
+1. `config/access-policy.yml` pour les droits d'écriture et la confidentialité ;
+2. les données et décisions datées réellement présentes dans le dépôt ;
+3. `contracts/` pour le format commun ;
+4. les README et les pages explicatives.
 
-## Historique
-- Une décision passée est append-only.
-- Une évolution de logique crée une nouvelle version de stratégie.
-- Les performances historiques restent rattachées à la version qui les a produites.
+Une documentation ancienne ne doit jamais justifier une modification des données, d'une décision passée ou de la politique de confidentialité.
 
 ## Données communes
-Les mises à jour régulières sont faites par les workflows automatiques. Olivier reste administrateur du dépôt.
+
+Les workflows automatiques actualisent les données de marché les jours ouvrés. Les agents lisent les données communes mais ne les modifient pas.
+
+Pour comparer des supports cotés dans des devises différentes, les calculs communs utilisent `close_eur`, après le contrôle de qualité. Une donnée manquante, trop courte ou non résolue reste explicitement indisponible : elle ne doit jamais être remplacée par une valeur inventée.
+
+## ChatGPT
+
+- Peut lire tous les fichiers.
+- Écrit uniquement dans `strategies/chatgpt/`, `history/chatgpt/` et les sorties web propres à ChatGPT autorisées par `config/access-policy.yml`.
+- Peut lire l'espace Claude pour comparer les résultats.
+- Ne modifie jamais les décisions ni les règles historiques de Claude.
+
+## Claude
+
+- Peut lire tous les fichiers.
+- Écrit uniquement dans `strategies/claude/`, `history/claude/`, `data/claude/`, `docs/data/claude.json` et `docs/claude.html`.
+- Peut lire l'espace ChatGPT pour comparer les résultats.
+- Ne modifie jamais les décisions ni les règles historiques de ChatGPT.
+- Ne modifie pas les pages ou données partagées (`docs/index.html`, `docs/academic.html`, `docs/chatgpt.html`, `docs/assets/`, `config/`, `data/prices/`, `data/indicators/`) sans demande explicite d'Olivier.
+- Ne doit jamais prétendre qu'une revue Claude est automatique tant qu'une automatisation Claude distincte n'a pas été réellement créée et vérifiée.
+
+## Stratégies académiques
+
+Les stratégies de `strategies/academic/` servent de témoins. Leurs règles et leurs résultats historiques ne sont pas réécrits pour améliorer une performance a posteriori.
+
+## Décisions et versions
+
+- Toute décision effectivement enregistrée est append-only.
+- Toute modification de logique crée une nouvelle version de stratégie.
+- Une reconstitution ou un backtest est clairement étiqueté comme tel ; il ne devient jamais une décision hebdomadaire réellement prise à l'époque.
+- Une allocation de portefeuille doit totaliser exactement 100 %.
+- Aucun ordre réel n'est jamais transmis depuis ce dépôt.
 
 ## Confidentialité
-Ne jamais ajouter : nom de famille, e-mail, adresse, téléphone, numéro de contrat, identifiant client, document contractuel brut, valeur exacte du contrat ou autre donnée permettant d'identifier Bernard.
 
-Le prénom Bernard est un alias autorisé. Les données publiques sont exprimées en pourcentages, base 100 ou valeurs calculées à partir d'un secret de publication.
+Le dépôt est public mais anonymisé. Il est interdit d'y ajouter : nom de famille, prénom réel, e-mail, adresse, téléphone, date de naissance complète, numéro de contrat, identifiant client, clause bénéficiaire ou document contractuel brut.
+
+L'alias `Bernard` est autorisé. Les montants exacts en euros et leur affichage public sont autorisés, à condition qu'ils restent dissociés de toute identité personnelle. Les règles détaillées et à jour sont dans `config/access-policy.yml`.
