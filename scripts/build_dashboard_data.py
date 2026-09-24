@@ -142,6 +142,7 @@ def load_actor_performance(name: str, strategies):
         "chatgpt-volatilite-pilotee": "ChatGPT B — Exposition pilotée par le risque",
         "chatgpt-regime-macro-financier": "ChatGPT C — Régime macro-financier",
         "chatgpt-hybride-selection-protection": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
+        "chatgpt-weekly-open-analysis": "ChatGPT E — Analyse hebdomadaire complète",
         "chatgpt_impulsion": "ChatGPT A — Momentum hebdomadaire",
         "chatgpt_adaptative": "ChatGPT B — Momentum adaptatif",
         "chatgpt_rotation_diversifiee": "ChatGPT C — Momentum diversifié",
