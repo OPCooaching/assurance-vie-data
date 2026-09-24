@@ -2,7 +2,8 @@
   "strategies": {
     "chatgpt-momentum-mensuel": {
       "label": "ChatGPT A — Momentum mensuel multi-horizons",
-      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "status": "reconstruction_with_real_prices",
+      "version": "v0.1",
       "resume": "Une règle écrite sélectionne chaque mois les supports dont la progression récente est la plus solide.",
       "objectif": "Comparer cette règle de tendance à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
       "regle": "La sélection déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
@@ -11,7 +12,8 @@
     },
     "chatgpt-volatilite-pilotee": {
       "label": "ChatGPT B — Exposition pilotée par le risque",
-      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "status": "reconstruction_with_real_prices",
+      "version": "v0.1",
       "resume": "Une règle réduit ou augmente l’exposition d’une poche diversifiée selon son risque observé.",
       "objectif": "Comparer une protection contre les périodes instables à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
       "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
@@ -20,7 +22,8 @@
     },
     "chatgpt-regime-macro-financier": {
       "label": "ChatGPT C — Régime macro-financier",
-      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "status": "reconstruction_with_real_prices",
+      "version": "v0.1",
       "resume": "Une règle adapte le portefeuille selon la volatilité, les conditions financières et l’incertitude publiées.",
       "objectif": "Comparer une approche qui tient compte du contexte économique et financier à Bernard.",
       "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Les données macro utilisées doivent être celles publiées avant la décision.",
@@ -29,7 +32,8 @@
     },
     "chatgpt-hybride-selection-protection": {
       "label": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
-      "status": "reconstruction_with_real_prices", "version": "v0.1",
+      "status": "reconstruction_with_real_prices",
+      "version": "v0.1",
       "resume": "Une sélection mensuelle est complétée par des protections plus rapides si le risque se détériore.",
       "objectif": "Comparer une règle qui sépare le choix des supports et la protection contre les baisses à Bernard.",
       "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
@@ -38,13 +42,14 @@
     },
     "chatgpt-weekly-open-analysis": {
       "label": "ChatGPT E — Analyse hebdomadaire complète",
-      "status": "awaiting_first_decision", "version": "v0.1",
+      "status": "reconstruction_with_real_prices",
+      "version": "v0.1",
       "resume": "Chaque semaine, ChatGPT examine tous les supports comparables et les indicateurs disponibles, puis choisit librement les actifs et leurs poids.",
       "objectif": "Tester une décision réellement adaptée à la semaine, sans imposer d’avance un score, cinq lignes ou une même règle immuable.",
       "regle": "Avant chaque semaine, ChatGPT explique les indicateurs retenus, les signaux contraires, l’allocation à 100 % et archive la décision. La courbe commence à cette date et suit ensuite les cours réels.",
       "frequence": "Décision chaque samedi pour la semaine suivante.",
-      "faiblesse": "Elle dépend d’une analyse ChatGPT effectivement exécutée et archivée chaque semaine ; elle ne peut pas être inventée après coup.",
-      "statut_public": "En attente de la première décision datée. Elle apparaîtra avec son allocation et sa courbe dès que cette décision aura été archivée."
+      "faiblesse": "La première décision sert à démarrer la comparaison. À partir de maintenant, toute décision devra être écrite le samedi avant de produire ses effets la semaine suivante.",
+      "statut_public": "Première allocation reconstituée avec les seules données disponibles le 18/09/2026 ; elle s’applique à partir du 21/09. La courbe utilise ensuite les cours réellement publiés. Les décisions suivantes seront archivées avant la semaine concernée."
     }
   }
 }
