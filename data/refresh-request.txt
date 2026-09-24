@@ -1,4 +1,4 @@
-Rafraîchissement demandé le 2026-09-22 : recalculer les résultats actuels des règles ChatGPT après exclusion des supports sans historique exploitable. Ne pas créer de courbe ni de date de décision antérieure, et ne pas modifier les stratégies suivies ni les historiques de décisions.
+Rafraîchissement demandé le 2026-09-22 : recalculer les résultats actuels des règles ChatGPT après exclusion des supports sans historique exploitable. Ne pas modifier les décisions archivées.
 Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient aucune donnée de contrat.
 2026-09-22: refresh external context and retain 14 daily snapshots.
 2026-09-22: download all eight external context series.
@@ -7,3 +7,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-09-23T13:10:07Z — validate daily refresh quality gates
 2026-09-23T13:25:00Z — run adaptive weekly backtest and publish results
 2026-09-24T10:00:00Z — publish the A–E strategy registry and rebuild the dashboard metadata.
+2026-09-24T12:00:00Z — calculate ChatGPT E from its archived 18/09 review and publish the unified decision history.
