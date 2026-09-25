@@ -11,3 +11,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-09-24T12:15:00Z — generate the browser-safe ChatGPT dashboard data companion.
 2026-09-25T12:00:00Z — publish daily provisional valuation and identify delayed official closes.
 2026-09-25T12:05:00Z — identify the remaining suspect market tick before publishing valuations.
+2026-09-25T12:10:00Z — neutralise audited cross-batch EUR reversal and rebuild daily valuation.
