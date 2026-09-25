@@ -247,6 +247,44 @@ def clean_reversible_ticks(part):
     return part
 
 
+def neutralise_merged_eur_ticks(frame):
+    """Neutralise a provider outlier detected only after all EUR rows are merged.
+
+    Download batches can cut a three-day reversal at their edge. Rechecking
+    the final EUR-normalised table closes that gap while preserving close_raw
+    as the audit record. Only near-complete, high-magnitude reversals with
+    zero volume (or a 50%+ move) are changed.
+    """
+    frame = frame.sort_values(["asset_id", "date"]).copy()
+    neutralised = 0
+    for _, group in frame.groupby("asset_id", sort=False):
+        close = pd.to_numeric(group["close_eur"], errors="coerce")
+        previous = close.shift(1)
+        following = close.shift(-1)
+        up = close / previous - 1.0
+        down = following / close - 1.0
+        round_trip = following / previous - 1.0
+        volume = pd.to_numeric(group["volume"], errors="coerce").fillna(0.0)
+        candidate = (
+            (up.abs() >= 0.12)
+            & (down.abs() >= 0.10)
+            & (round_trip.abs() <= 0.02)
+            & ((volume == 0) | (up.abs() >= 0.50) | (down.abs() >= 0.50))
+        )
+        for index in group.index[candidate]:
+            old_eur = float(frame.loc[index, "close_eur"])
+            new_eur = float((previous.loc[index] * following.loc[index]) ** 0.5)
+            if not old_eur > 0:
+                continue
+            ratio = new_eur / old_eur
+            frame.loc[index, "close_eur"] = new_eur
+            frame.loc[index, "close"] = new_eur
+            frame.loc[index, "close_native"] = float(frame.loc[index, "close_native"]) * ratio
+            frame.loc[index, "quality_status"] = "reversible_tick_neutralised"
+            neutralised += 1
+    return frame, neutralised
+
+
 def fetch_rows(rows, period):
     parts = []
     for i in range(0, len(rows), BATCH):
@@ -309,6 +347,7 @@ def main():
     kept = existing.loc[~existing["asset_id"].isin(bootstrap_ids)].copy() if not existing.empty else existing
     all_data = pd.concat([kept, new], ignore_index=True) if not kept.empty else new
     all_data = all_data.drop_duplicates(["date", "asset_id"], keep="last")
+    all_data, neutralised = neutralise_merged_eur_ticks(all_data)
     all_data = all_data.sort_values(["date", "asset_id"])
     all_data.to_csv(OUT, index=False)
     refresh_history_status(map_rows, all_data)
@@ -316,7 +355,7 @@ def main():
 
     print(
         f"Saved {len(all_data)} price rows for "
-        f"{all_data.asset_id.nunique()} assets."
+        f"{all_data.asset_id.nunique()} assets; {neutralised} merged EUR tick(s) neutralised."
     )
 
 
