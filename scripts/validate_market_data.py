@@ -73,6 +73,10 @@ def main():
     raw.to_csv(ANOMALIES, index=False)
 
     if not clean.empty:
+        # Keep the quality gate closed, but expose enough audit information in
+        # the workflow log to correct the provider data without guessing.
+        print("Suspect EUR-normalised reversible ticks:")
+        print(clean.to_csv(index=False))
         raise SystemExit(
             f"Market-data quality gate: {len(clean)} suspect reversible tick(s) remain in EUR-normalised prices."
         )
