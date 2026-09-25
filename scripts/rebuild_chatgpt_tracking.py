@@ -1,8 +1,9 @@
-"""Rebuild ChatGPT paper-tracking curves from actual published prices.
+"""Rebuild ChatGPT paper-tracking curves from published market prices.
 
 A-D reuse their preserved rule decisions. New weekly decisions, including E,
-are read from one append-only decision archive. No order is sent to Bernard's
-contract: these are comparison portfolios only.
+are read from one append-only decision archive. When a support's close is
+delayed, the curve temporarily keeps its last published close, exactly as the
+Bernard dashboard does. No order is sent to Bernard's contract.
 """
 from __future__ import annotations
 
@@ -78,6 +79,10 @@ def strategy_ids():
 
 
 def curve_for_strategy(px, dates, strategy_id):
+    # The dashboard may include a provisional valuation date. Forward filling
+    # only uses a support's prior published close; it never pulls a later price
+    # back into an earlier day.
+    px = px.reindex(dates).ffill()
     decisions = read_decisions(strategy_id)
     weights, latest = {}, {}
     value, rows, previous = None, [], None
@@ -131,7 +136,7 @@ def main():
     result.index.name = "date"
     result.to_csv(OUT / "performance.csv")
     pd.DataFrame(allocations).to_csv(OUT / "latest_allocations.csv", index=False)
-    print(f"Rebuilt {len(curves)} ChatGPT comparison curve(s) from actual published prices through {dates[-1].date()}.")
+    print(f"Rebuilt {len(curves)} ChatGPT comparison curve(s) through {dates[-1].date()} using published closes and explicit temporary carry-forward when a close is delayed.")
 
 
 if __name__ == "__main__":
