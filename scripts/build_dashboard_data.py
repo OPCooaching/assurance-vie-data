@@ -9,6 +9,7 @@ import pandas as pd
 import yaml
 
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
+VALUATION_STATUS = Path("data/benchmarks/bernard_valuation_status.json")
 ACADEMIC = Path("data/academic/performance.csv")
 ACADEMIC_CFG = Path("config/academic_strategies.yml")
 UNIVERSE = Path("config/universe.csv")
@@ -32,6 +33,17 @@ def read_series(path: Path):
     if df.empty or "date" not in df.columns:
         return None
     return df
+
+
+def read_valuation_status():
+    """Expose the freshness state next to the chart, not as a hidden assumption."""
+    if not VALUATION_STATUS.exists():
+        return {}
+    try:
+        value = json.loads(VALUATION_STATUS.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
 
 
 def asset_names():
@@ -229,6 +241,7 @@ def main():
     start_eur = initial_portfolio_value_eur()
 
     baseline = read_series(BASELINE)
+    valuation = read_valuation_status()
     academic = read_series(ACADEMIC)
 
     if baseline is not None:
@@ -265,7 +278,7 @@ def main():
 
     academic_info = attach_allocations(academic_metadata(), "academic", asset_names())
     (OUT / "academic.json").write_text(
-        json.dumps(payload(series, dates, start_eur, {"strategies": academic_info}), ensure_ascii=False),
+        json.dumps(payload(series, dates, start_eur, {"strategies": academic_info, "valuation": valuation}), ensure_ascii=False),
         encoding="utf-8",
     )
 
@@ -280,6 +293,7 @@ def main():
             metadata.get("strategies", {}), name, asset_names()
         )
         metadata["decision_history"] = load_decision_history(name)
+        metadata["valuation"] = valuation
         # Only workflow-produced tracking files may add public actor curves.
         # Their dates begin at the declared live-tracking start, never in a
         # reconstructed historical period.
