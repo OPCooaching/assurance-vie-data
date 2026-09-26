@@ -42,3 +42,13 @@
 .backtest-card{margin-top:34px;border-color:rgba(246,189,96,.38);background:linear-gradient(135deg,rgba(46,42,28,.98),rgba(19,35,43,.98));}.backtest-kicker{margin:0 0 6px;color:#f6bd60;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.backtest-version{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:400}.backtest-note{margin:13px 0 0;font-size:14px}
 
 .chatgpt-summary{grid-template-columns:repeat(6,minmax(0,1fr))}.chatgpt-summary .metric:nth-child(1){grid-column:2/span 2}.chatgpt-summary .metric:nth-child(2){grid-column:4/span 2}.chatgpt-summary .metric:nth-child(n+3){grid-column:span 2}@media(max-width:650px){.chatgpt-summary{grid-template-columns:1fr}.chatgpt-summary .metric:nth-child(n){grid-column:auto}}
+
+
+/* Dashboard ChatGPT: chart enlarged and labels deliberately readable. */
+.chatgpt-main{max-width:1540px}
+.chatgpt-main .chart-card{padding:28px 30px 24px}
+.chatgpt-main .chart-card canvas{height:500px!important;width:100%!important}
+.chatgpt-main .chart-card h2{font-size:29px}
+.chatgpt-main .chart-card .muted{font-size:16px}
+@media(max-width:900px){.chatgpt-main .chart-card canvas{height:430px!important}}
+@media(max-width:650px){.chatgpt-main .chart-card{padding:18px 14px}.chatgpt-main .chart-card canvas{height:350px!important}.chatgpt-main .chart-card h2{font-size:25px}}
