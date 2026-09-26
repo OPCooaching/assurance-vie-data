@@ -12,3 +12,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-09-25T12:00:00Z — publish daily provisional valuation and identify delayed official closes.
 2026-09-25T12:05:00Z — identify the remaining suspect market tick before publishing valuations.
 2026-09-25T12:10:00Z — neutralise audited cross-batch EUR reversal and rebuild daily valuation.
+2026-09-26T09:30:56Z — weekly ChatGPT E review archived for 2026-W40; refresh data and publish the decision without modifying historical decisions.
