@@ -1,9 +1,50 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Règles et résultats du jour</title><link rel="stylesheet" href="assets/style.css?v=20260922-strategy-lab"></head>
-<body><header><h1>Règles et résultats du jour</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a><a href="screener.html">Indicateurs</a></nav></header>
-<main class="lab-main"><section class="lab-hero"><p class="kicker">Pas de score opaque. Pas de courbe inventée.</p><h2>Trois règles réellement différentes, avec leurs résultats calculés aujourd’hui</h2><p>Chaque bloc montre les nombres utilisés, puis la conséquence exacte de la règle. Ce sont des propositions de stratégie : elles ne réécrivent pas les décisions ni les courbes du suivi réel déjà commencé.</p><div id="lab-status">Chargement des résultats…</div></section>
-<section class="card"><h2>Ce qui existe déjà</h2><p class="lab-intro">ChatGPT A, B et C restent des variantes de momentum. Elles ne sont pas supprimées : leur suivi réel reste visible sur la page ChatGPT. Cette page sert à construire les approches qui leur manquaient, sans prétendre qu’elles existaient le 9 septembre.</p></section>
-<div id="strategy-lab"></div>
-<section class="card lab-rule"><h2>Ce que signifie « résultat du jour »</h2><p>Un résultat est la valeur mesurée et l’allocation que la règle donnerait aujourd’hui. Il ne devient pas une performance passée. Si une règle est retenue, son suivi commencera à sa première date réelle de décision ; avant cette date, il n’y aura aucune ligne sur le graphique.</p></section>
-</main><script src="assets/dashboard.js?v=20260922-strategy-lab"></script><script>initStrategyLab("data/strategy-lab.json").catch(console.error)</script></body></html>
+<title>Indicateurs disponibles</title><link rel="stylesheet" href="assets/style.css?v=20260926-indicators-current"></head>
+<body><header><h1>Indicateurs disponibles</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a><a href="screener.html" aria-current="page">Indicateurs</a></nav></header>
+<main class="indicator-main">
+  <section class="indicator-hero">
+    <p class="kicker">Données réellement disponibles</p>
+    <h2>Ce que les données permettent d’analyser aujourd’hui</h2>
+    <p class="lead">Cette page décrit les données utilisées pour étudier les supports et le contexte de marché. Elle ne recommande aucun achat et ne remplace pas les décisions publiées sur la page ChatGPT.</p>
+    <p id="indicator-status" class="status-note">Chargement des données…</p>
+  </section>
+  <section class="indicator-counts" id="indicator-counts"></section>
+  <section id="indicator-groups"></section>
+  <section class="card"><h2>Indicateurs externes</h2><p class="muted">Ces données viennent de sources indépendantes. Leur date dépend de leur rythme réel de publication : quotidien ou hebdomadaire.</p><div id="external-observations" class="external-grid"></div></section>
+  <section class="card"><h2>Ce que ces données rendent possible</h2><div id="strategy-paths" class="path-grid"></div></section>
+  <section class="card"><h2>Ce qui n’est pas utilisé</h2><div id="unavailable" class="unavailable-list"></div></section>
+</main>
+<script>
+const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dateFR=value=>{const [y,m,d]=String(value||"").slice(0,10).split("-");return y&&m&&d?d+"/"+m+"/"+y:"—"};
+const labelForFrequency=value=>({daily:"quotidienne",weekly:"hebdomadaire"}[value]||value||"—");
+const valueFR=value=>Number.isFinite(Number(value))?new Intl.NumberFormat("fr-FR",{maximumFractionDigits:3}).format(Number(value)):"—";
+function renderCounts(summary){
+  const box=document.querySelector("#indicator-counts");
+  const cards=[
+    [summary.price_ready,"supports analysables par les prix","Tendance, force relative et risque calculables."],
+    [summary.volume_ready,"supports avec volume exploitable","Le volume est disponible pour une partie de l’univers seulement."],
+    [summary.external_ready,"séries externes disponibles","Contexte économique et financier, avec leurs dates de publication."]
+  ];
+  box.innerHTML=cards.map(([value,label,detail])=>'<article class="metric"><span class="eyebrow">'+esc(label)+'</span><b>'+esc(value)+'</b><small>'+esc(detail)+'</small></article>').join("");
+}
+function renderGroups(groups){
+  const root=document.querySelector("#indicator-groups");
+  root.innerHTML=(groups||[]).map(group=>'<section class="card indicator-section"><div class="indicator-group-heading"><p class="kicker">'+esc(group.title)+'</p><p class="muted">'+esc(group.intro)+'</p></div><div class="indicator-grid">'+(group.cards||[]).map(card=>'<article class="indicator-card"><span class="availability '+esc(card.availability||"")+'">'+esc(card.availability_label||"Disponibilité inconnue")+'</span><h3>'+esc(card.name)+'</h3><p><strong>Question :</strong> '+esc(card.question)+'</p><p><strong>Mesure :</strong> '+esc(card.indicator)+'</p><p><strong>Utilisation possible :</strong> '+esc(card.strategy_use)+'</p></article>').join("")+'</div></section>').join("");
+}
+function renderExternal(rows){
+  document.querySelector("#external-observations").innerHTML=(rows||[]).map(row=>'<article class="external-card"><span class="availability available">'+esc(labelForFrequency(row.frequency))+'</span><h3>'+esc(row.label)+'</h3><b>'+esc(valueFR(row.value))+'</b><p>'+esc(row.purpose)+'</p><small>Dernière publication : '+esc(dateFR(row.last_observation_date))+'</small>'+(row.source_url?'<a href="'+esc(row.source_url)+'" target="_blank" rel="noopener">Source : '+esc(row.source)+'</a>':'')+'</article>').join("")||'<p class="muted">Aucune série externe publiée.</p>';
+}
+function renderPaths(rows){
+  document.querySelector("#strategy-paths").innerHTML=(rows||[]).map(row=>'<article class="path-card '+esc(row.status||"")+'"><span class="availability '+esc(row.status||"")+'">'+esc(row.status_label||row.status)+'</span><h3>'+esc(row.name)+'</h3><p><strong>Question :</strong> '+esc(row.question)+'</p><p><strong>Données nécessaires :</strong> '+esc(row.needs)+'</p><p class="muted">'+esc(row.current)+'</p></article>').join("");
+}
+function renderUnavailable(rows){
+  document.querySelector("#unavailable").innerHTML=(rows||[]).map(row=>'<article><h3>'+esc(row.name)+'</h3><p>'+esc(row.reason)+'</p><p class="muted">'+esc(row.consequence)+'</p></article>').join("")||'<p class="muted">Aucune limite recensée.</p>';
+}
+fetch("data/indicators.json").then(r=>{if(!r.ok)throw new Error("Données indisponibles");return r.json()}).then(data=>{
+  const summary=data.summary||{};
+  document.querySelector("#indicator-status").textContent="Prix disponibles jusqu’au "+dateFR(data.price_as_of_date)+" · Données générées le "+dateFR(data.generated_at)+". Chaque série externe garde sa propre date de publication.";
+  renderCounts(summary);renderGroups(data.groups);renderExternal(data.external_observations);renderPaths(data.strategy_paths);renderUnavailable(data.unavailable);
+}).catch(()=>{document.querySelector("#indicator-status").textContent="Les données des indicateurs ne sont pas disponibles pour le moment."});
+</script></body></html>
