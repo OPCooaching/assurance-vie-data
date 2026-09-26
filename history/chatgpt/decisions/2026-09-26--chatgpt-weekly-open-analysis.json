@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W40--chatgpt-weekly-open-analysis",
+  "decided_at_utc": "2026-09-26T09:30:56Z",
+  "effective_valuation_date": "2026-09-28",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-weekly-open-analysis",
+  "strategy_version": "v0.1",
+  "decision_type": "no_change",
+  "data_as_of": {
+    "prices": "2026-09-25",
+    "context": {
+      "USEPUINDXD": "2026-09-24",
+      "NFCI": "2026-09-18",
+      "DTWEXBGS": "2026-09-18",
+      "DCOILBRENTEU": "2026-09-22",
+      "WEI": "2026-09-19",
+      "VIXCLS": "2026-09-22",
+      "DEXUSEU": "2026-09-18",
+      "ECBDFR": "2026-09-25"
+    },
+    "publication_notes": [
+      "Décision archivée le samedi 26/09 avant la semaine du 28/09, à partir des cours publiés au 25/09 et des dernières publications externes réellement disponibles.",
+      "Le support FR0010380675 n'avait pas encore publié de cours officiel postérieur au 23/09 ; cette absence est explicitement prise en compte et aucun cours ultérieur n'est utilisé."
+    ]
+  },
+  "reviewed_universe": {
+    "price_comparable_supports": 337,
+    "total_supports": 473,
+    "method": "Revue des 337 supports comparables par les prix, sans nombre de lignes fixé à l'avance. La comparaison utilise les variations à 20, 60 et 120 séances, la volatilité à 60 séances et le recul maximal à 252 séances, tous calculés avec des prix normalisés en euros. Les 136 autres supports ne disposent pas d'un prix quotidien comparable et ne sont donc pas classés."
+  },
+  "reviewed_context": {
+    "USEPUINDXD": {
+      "value": 306.28,
+      "date": "2026-09-24",
+      "interpretation": "L'incertitude économique et politique américaine a remonté après le creux des 22 et 23 septembre ; c'est un motif de vigilance, pas à lui seul un signal de vente."
+    },
+    "NFCI": {
+      "value": -0.555,
+      "date": "2026-09-18",
+      "interpretation": "Les conditions financières restent plutôt accommodantes à la dernière publication hebdomadaire."
+    },
+    "VIXCLS": {
+      "value": 14.21,
+      "date": "2026-09-22",
+      "interpretation": "La volatilité anticipée des actions américaines demeure modérée à la dernière publication disponible."
+    },
+    "DCOILBRENTEU": {
+      "value": 114.89,
+      "date": "2026-09-22",
+      "interpretation": "Le pétrole est surveillé comme risque de pression énergétique ; une seule observation ne justifie pas une rotation automatique."
+    },
+    "WEI": {
+      "value": 3.03,
+      "date": "2026-09-19",
+      "interpretation": "L'indicateur hebdomadaire d'activité reste positif à sa dernière publication."
+    },
+    "DTWEXBGS": {
+      "value": 119.5133,
+      "date": "2026-09-18",
+      "interpretation": "Le dollar reste un risque de change pour les expositions mondiales et américaines ; les rendements du screener sont toutefois comparés en euros."
+    },
+    "DEXUSEU": {
+      "value": 1.1464,
+      "date": "2026-09-18",
+      "interpretation": "La parité euro/dollar est conservée comme indicateur de contexte, sans transformer mécaniquement l'allocation."
+    },
+    "ECBDFR": {
+      "value": 2.5,
+      "date": "2026-09-25",
+      "interpretation": "Le taux de dépôt de la BCE est inchangé à la dernière publication disponible."
+    }
+  },
+  "selected_signals": [
+    "Les sept supports déjà détenus restent tous comparables par les prix. Six conservent une progression positive sur 20, 60 et 120 séances ; le support de dividendes mondiaux est gardé pour sa stabilité très supérieure malgré son recul sur 20 séances.",
+    "Parmi les 337 supports examinés, les nouveaux candidats les mieux classés sont pour beaucoup des variantes très proches d'une exposition déjà présente aux actions mondiales ou américaines. Les ajouter ne diversifierait pas réellement le portefeuille.",
+    "Les conditions financières publiées sont encore accommodantes et le VIX disponible est modéré ; ces deux constats ne justifient pas de transformer la poche actions en poche défensive.",
+    "Le portefeuille conserve des rôles distincts : valeur mondiale, États-Unis, dividendes mondiaux, émergents et Europe de l'Est. Les poids les plus élevés restent sur les expositions mondiales et les poches plus volatiles restent plafonnées."
+  ],
+  "contrary_signals": [
+    "L'indice d'incertitude américain a remonté à 306,28 le 24/09 : il justifie de ne pas augmenter les poches les plus volatiles cette semaine.",
+    "Le cours officiel du fonds Lazard Actions Émergentes s'arrête au 23/09. L'allocation est maintenue sans lui attribuer une information de marché inexistante ; sa prochaine publication sera contrôlée avant la prochaine décision.",
+    "Le dollar et le pétrole restent des sources de risque pour les actifs mondiaux. La décision ne promet aucun rendement."
+  ],
+  "previous_allocation_percent": {
+    "IE00BL25JM42": 20,
+    "LU1900066462": 15,
+    "FR0010380675": 15,
+    "LU0496786574": 15,
+    "LU0292096186": 15,
+    "FR0010315770": 10,
+    "IE00069JGT58": 10
+  },
+  "target_allocation_percent": {
+    "IE00BL25JM42": 20,
+    "LU1900066462": 15,
+    "FR0010380675": 15,
+    "LU0496786574": 15,
+    "LU0292096186": 15,
+    "FR0010315770": 10,
+    "IE00069JGT58": 10
+  },
+  "allocation_changes_percent": {
+    "IE00BL25JM42": 0,
+    "LU1900066462": 0,
+    "FR0010380675": 0,
+    "LU0496786574": 0,
+    "LU0292096186": 0,
+    "FR0010315770": 0,
+    "IE00069JGT58": 0
+  },
+  "rationale": "Après examen de l'ensemble des supports comparables et des indicateurs externes disponibles, la décision est de conserver l'allocation E pour la semaine du 28 septembre. Ce n'est pas une absence d'analyse : aucune nouvelle exposition ne ressort à la fois comme plus solide et réellement différente des positions mondiales et américaines déjà détenues. Le contexte ne donne pas de signal suffisamment cohérent pour augmenter le risque ou basculer en défensif. Le maintien évite donc une rotation artificielle tout en laissant les prix réellement publiés trancher la semaine suivante.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n'est envoyé au contrat de Bernard.",
+    "Cette décision est figée avant sa prise d'effet le 28/09/2026 et ne sera jamais réécrite avec des informations postérieures.",
+    "Une partie des indicateurs externes est hebdomadaire ou publiée avec décalage ; les dates exactes utilisées sont conservées dans ce document.",
+    "La valorisation quotidienne peut être provisoire lorsqu'un support publie en retard ; elle sera corrigée lorsque le cours officiel arrivera."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "universe_checked": true,
+    "price_coverage_checked": true,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "supersedes": "2026-W39--chatgpt-weekly-open-analysis"
+}
