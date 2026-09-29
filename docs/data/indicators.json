@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-29T00:35:33+00:00",
-  "price_as_of_date": "2026-09-28",
+  "generated_at": "2026-09-29T23:58:57+00:00",
+  "price_as_of_date": "2026-09-29",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
     "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
     "price_ready": 337,
-    "volume_ready": 174,
+    "volume_ready": 173,
     "external_ready": 8
   },
   "groups": [
@@ -54,7 +54,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-27 · daily.",
+          "availability_label": "Dernière publication : 2026-09-28 · daily.",
           "is_new_data": true,
           "external_id": "USEPUINDXD"
         },
@@ -104,7 +104,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-22 · daily.",
+          "availability_label": "Dernière publication : 2026-09-28 · daily.",
           "is_new_data": true,
           "external_id": "VIXCLS"
         },
@@ -124,7 +124,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-28 · daily.",
+          "availability_label": "Dernière publication : 2026-09-29 · daily.",
           "is_new_data": true,
           "external_id": "ECBDFR"
         }
@@ -141,7 +141,7 @@
           "indicator": "Volume du jour ÷ volume moyen des 20 séances précédentes",
           "strategy_use": "Confirmation de mouvement sur les actions et ETF qui publient un volume fiable.",
           "availability": "partial",
-          "availability_label": "Disponible pour 174 supports seulement.",
+          "availability_label": "Disponible pour 173 supports seulement.",
           "is_new_data": false
         }
       ]
@@ -205,8 +205,8 @@
       "frequency": "daily",
       "source": "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED",
       "source_url": "https://fred.stlouisfed.org/series/USEPUINDXD",
-      "last_observation_date": "2026-09-27",
-      "value": 628.37,
+      "last_observation_date": "2026-09-28",
+      "value": 193.14,
       "kind": "raw_external"
     },
     {
@@ -260,8 +260,8 @@
       "frequency": "daily",
       "source": "Cboe, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
-      "last_observation_date": "2026-09-22",
-      "value": 14.21,
+      "last_observation_date": "2026-09-28",
+      "value": 16.07,
       "kind": "raw_external"
     },
     {
@@ -282,7 +282,7 @@
       "frequency": "daily",
       "source": "Banque centrale européenne, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/ECBDFR",
-      "last_observation_date": "2026-09-28",
+      "last_observation_date": "2026-09-29",
       "value": 2.5,
       "kind": "raw_external"
     }
