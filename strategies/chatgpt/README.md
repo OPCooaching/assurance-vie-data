@@ -1,5 +1,13 @@
 # Stratégies ChatGPT
 
+## Règle d'univers à partir du 30/09/2026
+
+Par défaut, une stratégie ChatGPT qui sélectionne des supports doit examiner **tout l'univers du contrat disposant de données de marché exploitables**, sans filtre implicite « ETF seulement ». Une restriction à une catégorie n'est admise que si elle fait partie explicitement de l'hypothèse testée.
+
+Le premier contrôle univers complet du 30/09/2026 a trouvé 333 supports avec au moins 260 observations EUR exploitables : 156 OPCVM/FI, 98 actions et 79 ETF. Les résultats reproductibles sont dans `history/chatgpt/full-universe-research/2026-09-30/`.
+
+Le premier passage montre que le momentum 12 mois simple, appliqué à l'univers complet et aux cinq meilleurs supports positifs, mérite une validation de robustesse supplémentaire. Ce résultat reste un backtest de recherche : il comporte notamment un biais possible d'univers actuel/survivants et ne devient pas automatiquement une allocation suivie.
+
 Ce dossier sépare explicitement les hypothèses de recherche des stratégies qui pourront un jour être suivies en portefeuille.
 
 ## Familles nouvelles, réellement distinctes
