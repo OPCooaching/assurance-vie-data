@@ -1,0 +1,38 @@
+name: Full universe strategy research
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/backtest_full_universe_20260930.py"
+      - ".github/workflows/full-universe-research.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run full-universe research
+        run: python scripts/backtest_full_universe_20260930.py
+      - name: Privacy check
+        run: python scripts/validate_public_data.py
+      - name: Commit research outputs
+        run: |
+          git config user.name "assurance-vie-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add history/chatgpt/full-universe-research/2026-09-30/
+          if git diff --cached --quiet; then
+            echo "No research output change."
+          else
+            git commit -m "research: full-universe strategy results 2026-09-30"
+            git push
+          fi
