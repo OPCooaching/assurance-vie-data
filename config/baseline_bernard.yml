@@ -11,7 +11,7 @@ fund_euro:
   confirmed_annual_rate: null
   note: "Aucun rendement journalier n'est inventé. La valeur reste inchangée jusqu'à l'enregistrement d'un taux effectivement crédité."
 
-source_portfolio: config/portfolio_current.csv
+source_portfolio: config/portfolio_origin_2026-09-07.csv
 output_series: data/benchmarks/bernard_origin.csv
 
 comparison_metrics:

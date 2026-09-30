@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-29T23:58:57+00:00",
-  "price_as_of_date": "2026-09-29",
+  "generated_at": "2026-09-30T15:44:34+00:00",
+  "price_as_of_date": "2026-09-30",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
     "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
@@ -20,7 +20,7 @@
           "indicator": "Prix comparé à sa moyenne des 20, 50 et 200 dernières séances",
           "strategy_use": "Filtre de tendance : rester investi ou réduire l’exposition.",
           "availability": "available",
-          "availability_label": "Disponible pour 335 supports avec au moins 200 séances.",
+          "availability_label": "Disponible pour 336 supports avec au moins 200 séances.",
           "is_new_data": false
         },
         {
@@ -54,7 +54,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-28 · daily.",
+          "availability_label": "Dernière publication : 2026-09-29 · daily.",
           "is_new_data": true,
           "external_id": "USEPUINDXD"
         },
@@ -64,7 +64,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-18 · weekly.",
+          "availability_label": "Dernière publication : 2026-09-25 · weekly.",
           "is_new_data": true,
           "external_id": "NFCI"
         },
@@ -104,7 +104,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-28 · daily.",
+          "availability_label": "Dernière publication : 2026-09-29 · daily.",
           "is_new_data": true,
           "external_id": "VIXCLS"
         },
@@ -124,7 +124,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-09-29 · daily.",
+          "availability_label": "Dernière publication : 2026-09-30 · daily.",
           "is_new_data": true,
           "external_id": "ECBDFR"
         }
@@ -205,8 +205,8 @@
       "frequency": "daily",
       "source": "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED",
       "source_url": "https://fred.stlouisfed.org/series/USEPUINDXD",
-      "last_observation_date": "2026-09-28",
-      "value": 193.14,
+      "last_observation_date": "2026-09-29",
+      "value": 120.6,
       "kind": "raw_external"
     },
     {
@@ -216,8 +216,8 @@
       "frequency": "weekly",
       "source": "Chicago Fed, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/NFCI",
-      "last_observation_date": "2026-09-18",
-      "value": -0.555,
+      "last_observation_date": "2026-09-25",
+      "value": -0.548,
       "kind": "raw_external"
     },
     {
@@ -260,8 +260,8 @@
       "frequency": "daily",
       "source": "Cboe, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
-      "last_observation_date": "2026-09-28",
-      "value": 16.07,
+      "last_observation_date": "2026-09-29",
+      "value": 16.04,
       "kind": "raw_external"
     },
     {
@@ -282,7 +282,7 @@
       "frequency": "daily",
       "source": "Banque centrale européenne, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/ECBDFR",
-      "last_observation_date": "2026-09-29",
+      "last_observation_date": "2026-09-30",
       "value": 2.5,
       "kind": "raw_external"
     }

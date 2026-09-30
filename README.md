@@ -6,7 +6,8 @@ Dépôt unique, public et anonymisé pour les données, stratégies, historiques
 
 - **473 supports Altaprofits** importés depuis la liste du 08/09/2026.
 - Répartition et valorisation anonymisées du portefeuille au 07/09/2026 ; total de départ : 323 892,53 €.
-- Benchmark immuable **Bernard origine** en base 100.
+- Benchmark immuable **Bernard origine** en base 100, calculé uniquement depuis `config/portfolio_origin_2026-09-07.csv`.
+- Portefeuille réel courant séparé dans `config/portfolio_current.csv`, avec arbitrages réels tracés dans `config/portfolio_events.csv` (voir `PORTFOLIO_REAL.md`).
 - Mise à jour automatique prévue les jours ouvrés.
 - Aucune donnée personnelle, numéro de contrat ou document contractuel brut stocké.
 

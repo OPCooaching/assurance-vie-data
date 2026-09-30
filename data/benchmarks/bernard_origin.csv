@@ -13,3 +13,5 @@ date,baseline,value_eur,coverage_pct,fund_euro_return_status,valuation_status
 2026-09-24,100.07202041900989,324125.8,100.0,held_at_initial_value_pending_credit,provisional
 2026-09-25,100.44852692830062,325345.28,100.0,held_at_initial_value_pending_credit,consolidated
 2026-09-28,100.0350055873778,324005.91,100.0,held_at_initial_value_pending_credit,consolidated
+2026-09-29,99.90777286200682,323593.81,100.0,held_at_initial_value_pending_credit,provisional
+2026-09-30,100.13767272365565,324338.44,100.0,held_at_initial_value_pending_credit,provisional
