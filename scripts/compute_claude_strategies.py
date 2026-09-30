@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import pandas as pd
 
 UNIVERSE = Path("config/universe.csv")
@@ -10,6 +11,7 @@ PRICES = Path("data/prices/daily.csv")
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
 OUT = Path("data/claude/performance.csv")
 ALLOC_OUT = Path("data/claude/latest_allocations.csv")
+TRACKING_STATE = Path("data/claude/tracking_state.json")
 
 # Same 50% market sleeve as Claude's documented rules; the other half is the
 # uncredited fund-in-euros sleeve and consequently has a zero daily return.
@@ -129,35 +131,130 @@ def momentum_prudent(table, date, universe):
     return {a: w for a, w in weights.items() if w > 0}
 
 
-def live_curve(table, dates, signal, universe):
-    value, weights, previous, latest = 1.0, None, None, {}
+def continuation_curve(table, dates, signal, universe, start_value):
+    """Compute only the post-restart segment.
+
+    The first restart date is an anchor: no return is invented across the gap.
+    A fresh allocation is decided on that date and performance resumes from the
+    following observed valuation date.
+    """
+    value = float(start_value)
+    weights = None
+    previous = None
+    latest = {}
     points = []
-    for date in dates:
+
+    for index, date in enumerate(dates):
         prices = table.loc[date]
-        if previous is not None and weights:
+        if index == 0:
+            weights = signal(table, date, universe)
+            latest = dict(weights)
+            points.append((date, value))
+            previous = prices
+            continue
+
+        if weights:
             daily_return = sum(
                 float(weight) * (float(prices[asset]) / float(previous[asset]) - 1)
                 for asset, weight in weights.items()
-                if asset in prices and pd.notna(prices[asset]) and pd.notna(previous[asset]) and previous[asset] > 0
+                if asset in prices
+                and pd.notna(prices[asset])
+                and pd.notna(previous[asset])
+                and previous[asset] > 0
             )
             value *= 1 + daily_return
-        if date == dates[0] or date.weekday() == 0:
-            weights, latest = signal(table, date, universe), {}
-            latest.update(weights)
+
+        # Same convention as the historical tracker: Monday's close belongs to
+        # the previous allocation, then the new weekly allocation applies.
+        if date.weekday() == 0:
+            weights = signal(table, date, universe)
+            latest = dict(weights)
+
         points.append((date, value))
         previous = prices
+
     return pd.Series(dict(points)), latest
 
 
+def load_existing():
+    if not OUT.exists():
+        raise RuntimeError(
+            "Claude append-only recovery requires the existing performance.csv; "
+            "refusing to recreate history from scratch."
+        )
+    existing = pd.read_csv(OUT)
+    if existing.empty or "date" not in existing.columns:
+        raise RuntimeError("Claude performance history is empty or malformed.")
+    existing["date"] = pd.to_datetime(existing["date"])
+    if existing["date"].duplicated().any():
+        raise RuntimeError("Claude performance history contains duplicate dates.")
+    return existing.sort_values("date")
+
+
+def load_or_create_tracking_state(existing, available_dates):
+    if TRACKING_STATE.exists():
+        state = json.loads(TRACKING_STATE.read_text(encoding="utf-8"))
+        anchor = pd.Timestamp(state["anchor_date"])
+        resume = pd.Timestamp(state["resume_date"])
+        return state, anchor, resume
+
+    anchor = pd.Timestamp(existing["date"].max())
+    candidates = [date for date in available_dates if date > anchor]
+    if not candidates:
+        return None, anchor, None
+
+    # First restored execution starts at the latest actually available valuation
+    # date. Intermediate dates are deliberately not backfilled.
+    resume = pd.Timestamp(max(candidates))
+    state = {
+        "mode": "append_only_after_interruption",
+        "anchor_date": anchor.date().isoformat(),
+        "resume_date": resume.date().isoformat(),
+        "gap_reason": (
+            "Claude daily computation was absent from the repository workflow. "
+            "No values or decisions are reconstructed for the interruption."
+        ),
+    }
+    TRACKING_STATE.parent.mkdir(parents=True, exist_ok=True)
+    TRACKING_STATE.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return state, anchor, resume
+
+
+def append_new_rows(existing, candidate):
+    last_existing = pd.Timestamp(existing["date"].max())
+    new_rows = candidate.loc[candidate.index > last_existing]
+    if new_rows.empty:
+        return 0
+
+    # Append bytes only: historical rows are not rewritten or reformatted.
+    new_rows.to_csv(
+        OUT,
+        mode="a",
+        header=False,
+        index=True,
+        date_format="%Y-%m-%d",
+    )
+    return len(new_rows)
+
+
 def main():
-    if not all(path.exists() for path in (UNIVERSE, SYMBOLS, PRICES, BASELINE)):
+    if not all(path.exists() for path in (UNIVERSE, SYMBOLS, PRICES, BASELINE, OUT)):
         print("Claude strategies skipped: required data not available yet.")
         return
+
     table, rows = load_prices()
-    dates = [date for date in pd.to_datetime(pd.read_csv(BASELINE)["date"]) if date in table.index]
-    if not dates:
+    available_dates = [
+        date
+        for date in pd.to_datetime(pd.read_csv(BASELINE)["date"])
+        if date in table.index
+    ]
+    if not available_dates:
         print("Claude strategies skipped: no common actual valuation dates.")
         return
+
     for asset in [SOCLE, SOCLE_MIN_VOL, MONETAIRE, *THEMES]:
         if asset not in table.columns:
             raise ValueError(f"Claude support missing from normalised prices: {asset}")
@@ -170,19 +267,69 @@ def main():
         "claude_momentum_multi": momentum_multi,
         "claude_momentum_prudent": momentum_prudent,
     }
-    curves, allocations = {}, []
-    for strategy_id, signal in signals.items():
-        curve, latest = live_curve(table, dates, signal, universe)
-        curves[strategy_id] = 100 * curve / float(curve.iloc[0])
-        allocations.extend({"strategy_id": strategy_id, "asset_id": asset, "weight_pct": round(100 * weight, 6)} for asset, weight in latest.items())
-        allocations.append({"strategy_id": strategy_id, "asset_id": FONDS_EURO, "weight_pct": round(100 * (1 - sum(latest.values())), 6)})
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    output = pd.DataFrame(curves)
-    output.index.name = "date"
-    output.to_csv(OUT)
+    existing = load_existing()
+    required_columns = {"date", *signals.keys()}
+    if not required_columns.issubset(existing.columns):
+        raise RuntimeError("Claude performance history does not contain all five strategies.")
+
+    state, anchor, resume = load_or_create_tracking_state(existing, available_dates)
+    if resume is None:
+        print("Claude strategies: no valuation date available after the existing history yet.")
+        return
+    if resume <= anchor:
+        raise RuntimeError("Claude tracking resume date must be after the historical anchor.")
+
+    forbidden = existing.loc[
+        (existing["date"] > anchor) & (existing["date"] < resume)
+    ]
+    if not forbidden.empty:
+        raise RuntimeError(
+            "Claude history already contains rows inside the declared interruption; "
+            "manual review required."
+        )
+
+    run_dates = [date for date in available_dates if date >= resume]
+    if not run_dates:
+        print("Claude strategies: declared resume date is not available yet.")
+        return
+
+    anchor_row = existing.loc[existing["date"] == anchor]
+    if len(anchor_row) != 1:
+        raise RuntimeError("Claude anchor row is missing or ambiguous.")
+
+    curves = {}
+    allocations = []
+    for strategy_id, signal in signals.items():
+        start_value = float(anchor_row.iloc[0][strategy_id])
+        curve, latest = continuation_curve(
+            table, run_dates, signal, universe, start_value
+        )
+        curves[strategy_id] = curve
+        allocations.extend(
+            {
+                "strategy_id": strategy_id,
+                "asset_id": asset,
+                "weight_pct": round(100 * weight, 6),
+            }
+            for asset, weight in latest.items()
+        )
+        allocations.append({
+            "strategy_id": strategy_id,
+            "asset_id": FONDS_EURO,
+            "weight_pct": round(100 * (1 - sum(latest.values())), 6),
+        })
+
+    candidate = pd.DataFrame(curves)
+    candidate.index.name = "date"
+    appended = append_new_rows(existing, candidate)
+
     pd.DataFrame(allocations).to_csv(ALLOC_OUT, index=False)
-    print(f"Computed {len(curves)} Claude curves across {len(output)} actual valuation dates.")
+    print(
+        f"Claude append-only tracking: anchor={anchor.date()}, "
+        f"resume={resume.date()}, appended={appended}, "
+        f"latest={pd.Timestamp(run_dates[-1]).date()}."
+    )
 
 
 if __name__ == "__main__":
