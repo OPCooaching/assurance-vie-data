@@ -1,6 +1,12 @@
 id: claude-momentum-multi
 label: "Claude D — Momentum multi-horizon"
-status: research_hypothesis
+status: live_paper_tracking_suspended
+tracking_start: 2026-09-09
+tracking_paused_since: 2026-09-18
+tracking_note: >
+  Suivi engagé le 9 septembre 2026. Interrompu depuis le 18 septembre : l'étape
+  de calcul quotidien a été retirée du workflow le 22 septembre et n'a pas été
+  rétablie. Aucune décision n'est prise depuis cette date.
 active_version: v0.1
 decision_frequency: weekly
 execution_model: next_available_valuation

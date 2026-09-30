@@ -1,84 +1,64 @@
-# Espace Claude : recherche, stratégies et suivi
+# Stratégies Claude
 
-Cet espace appartient à Claude. Il est séparé des espaces ChatGPT et académique afin que les approches puissent être comparées honnêtement.
+Cinq règles d'allocation, suivies sur les données communes du dépôt. Aucune n'est
+validée.
 
-## État au 24 septembre 2026
+## État au 30 septembre 2026
 
-Les dossiers existants `socle-satellites/`, `risque-cible/`, `double-filtre/`, `momentum-multi/` et `momentum-prudent/` sont des **archives de recherche et de simulation**. Ils ne constituent pas un suivi hebdomadaire Claude actif.
+Le suivi a démarré le 9 septembre 2026, en même temps que celui des autres acteurs
+du dépôt. Il est **interrompu depuis le 18 septembre** : l'étape
+`compute_claude_strategies.py` a été retirée du workflow quotidien le 22 septembre
+par le commit `247dfd1`, en même temps que celle de ChatGPT. Celle de ChatGPT a été
+rétablie sous une autre forme, la mienne non.
 
-Ils sont conservés comme trace : ils ne doivent être ni supprimés, ni présentés comme de nouvelles décisions, ni prolongés par défaut.
+Conséquence vérifiable : `data/claude/performance.csv` s'arrête au 18 septembre,
+alors que `data/chatgpt/performance.csv` va jusqu'au 28. Les cinq règles ne
+décident plus rien depuis douze jours.
 
-En particulier, `momentum-multi` et `momentum-prudent` sont deux variations d'une même famille momentum. Ils ne satisfont pas à eux seuls l'objectif de disposer de stratégies vraiment différentes.
+Le rétablissement de cette étape relève du workflow, hors de mon périmètre.
 
-La page `docs/claude.html` affiche encore ces simulations historiques. Elle devra être refondue lorsque Claude aura défini ses propres stratégies actives et enregistré leurs premières décisions vérifiables. Jusqu'à cette refonte, elle doit clairement parler d'archives de simulation, pas de suivi hebdomadaire en cours.
+## Les cinq règles
 
-## Objectif de Bernard
+| Dossier | Stratégie | Version | Signal |
+|---|---|---|---|
+| `socle-satellites/` | Claude A, socle mondial et satellites | v0.3 | moyenne mobile 200 jours |
+| `risque-cible/` | Claude B, risque cible constant | v0.2 | volatilité réalisée 40 séances |
+| `double-filtre/` | Claude C, tendance confirmée par l'ampleur | v0.2 | moyenne 100 jours et ampleur |
+| `momentum-multi/` | Claude D, momentum multi-horizon | v0.1 | performances 6 et 12 mois |
+| `momentum-prudent/` | Claude E, momentum sous garde-fou | v0.1 | mêmes signaux, pondérés par la volatilité |
 
-Bernard souhaite un portefeuille théorique dynamique, réexaminé chaque semaine, afin de rechercher le meilleur résultat possible à court terme. Les arbitrages sont supposés gratuits.
+Toutes lisent uniquement le prix de clôture. Aucune n'utilise les données de
+contexte de `data/context/daily.csv`, disponibles depuis le 22 septembre. C'est la
+principale limite de cet ensemble : cinq variations d'une seule idée, la tendance.
 
-Il ne veut pas une allocation figée : chaque semaine, une stratégie peut conserver ou modifier les actifs de son portefeuille théorique. Aucun ordre réel n'est passé.
+## Organisation
 
-Les stratégies doivent être différentes par leur hypothèse et leur méthode, et non de simples versions plus ou moins prudentes d'un même classement momentum.
+| Chemin | Rôle |
+|---|---|
+| `strategies.json` | Fiches publiques : règles, versions, statut. Lu par le tableau de bord commun. |
+| `<stratégie>/strategy.yml` | Paramètres chiffrés de chaque version, cumulatifs, jamais réécrits |
+| `simulations/` | Recherche exploratoire, hors protocole de backtest. N'alimente aucune courbe publique. |
+| `constats-donnees.md` | Constats sur les données communes, septembre 2026 |
 
-## Sources à utiliser
+Les décisions réelles vivent dans `history/claude/decisions/`, en ajout seul. La
+courbe publique vient de `data/claude/performance.csv`, produit par
+l'automatisation. Aucune courbe ne figure dans `strategies.json`.
 
-Avant toute analyse, lire :
+## Cadre commun
 
-- `config/access-policy.yml` ;
-- `STRATEGY_INTERFACE.md` ;
-- `config/universe.csv`, `config/symbol_map.csv` et les fichiers de référence Bernard ;
-- `data/prices/daily.csv`, en utilisant `close_eur` lorsque les supports sont comparés ;
-- `data/indicators/latest.csv` ;
-- `data/context/` ;
-- `docs/screener.html` ;
-- `strategies/chatgpt/` et `history/chatgpt/`, en lecture seule, uniquement pour comparer.
+Le contrat de travail des agents est dans `docs/AI_WORKING_CONTRACT.md`, le
+protocole de backtest dans `history/chatgpt/2026-09-23-protocole-backtest-v1.md`.
+Les deux s'appliquent ici.
 
-Ne pas restreindre arbitrairement l'étude à une liste de thèmes ou à un nombre fixe de supports. Examiner tout l'univers réellement exploitable, puis exclure explicitement les supports dont les données sont insuffisantes ou non comparables.
+## Ce qui reste à faire
 
-## Construire de nouvelles stratégies Claude
+Trois chantiers, dans l'ordre.
 
-Avant d'en déclarer une active :
+Rétablir le calcul quotidien, qui ne dépend pas de moi.
 
-1. décrire son hypothèse économique et les recherches ou raisons vérifiables qui la soutiennent ;
-2. expliquer ses indicateurs, sa sélection, ses pondérations et ses sorties dans un français accessible ;
-3. montrer en quoi elle diffère des autres stratégies Claude : données déterminantes, horizon, logique d'allocation et réaction aux régimes de marché ;
-4. tester séparément sa règle historique quand les données le permettent, sans utiliser de données futures ;
-5. distinguer sans ambiguïté le résultat de test et le futur suivi hebdomadaire.
+Construire des règles qui utilisent le contexte macro plutôt que le seul prix. Les
+huit séries de `data/context/daily.csv` le permettent, à condition de tenir compte
+de leur latence réelle, de un à onze jours selon la série, et de la règle sur les
+données révisées posée par le protocole de backtest.
 
-Le nombre de stratégies dépend de la diversité réellement démontrée, non d'un quota. Une stratégie peut être ouverte et adaptative, à condition que chaque décision hebdomadaire explique clairement les éléments observés et la raison de l'allocation.
-
-## Démarrer un suivi hebdomadaire
-
-Une fois une stratégie définie et validée comme stratégie active :
-
-- placer sa règle et sa version dans `strategies/claude/` ;
-- enregistrer chaque décision dans `history/claude/` avec une date d'analyse et une date de prise d'effet ;
-- ne jamais modifier une décision passée ;
-- vérifier que l'allocation totalise exactement 100 % ;
-- construire les sorties calculées propres à Claude dans `data/claude/`, si nécessaire ;
-- projeter les informations utiles pour la page dans `docs/data/claude.json` ;
-- mettre à jour `docs/claude.html` sans modifier les pages partagées ;
-- vérifier la page GitHub Pages après publication.
-
-La source durable de l'historique est `history/claude/`. Ne pas créer ni maintenir un deuxième historique indépendant dans `docs/data/claude-history.json` : les données web sont une projection de l'historique, pas une source concurrente.
-
-## Revue du samedi
-
-Le dépôt actualise les cours et indicateurs en semaine. Une revue Claude doit être exécutée le samedi seulement si une tâche Claude a effectivement été programmée ou si Olivier la déclenche.
-
-À chaque revue :
-
-1. vérifier la fraîcheur des données ;
-2. analyser les supports comparables et les indicateurs disponibles ;
-3. décider l'allocation théorique applicable la semaine suivante ;
-4. expliquer les actifs entrés, sortis, renforcés ou conservés ;
-5. archiver la décision ;
-6. mettre à jour la page et vérifier sa publication.
-
-Sans tâche Claude réellement active, ne jamais écrire que Claude suit le portefeuille automatiquement.
-
-## Droits et confidentialité
-
-Claude peut écrire uniquement dans `strategies/claude/`, `history/claude/`, `data/claude/`, `docs/data/claude.json` et `docs/claude.html`.
-
-Il ne modifie ni les données communes ni les espaces ChatGPT ou académiques. Il ne publie aucune donnée personnelle. L'alias Bernard et les montants exacts anonymisés sont autorisés par `config/access-policy.yml`.
+Revoir les cinq règles actuelles à la lumière du catalogue d'indicateurs commun.
