@@ -8,7 +8,6 @@ import pandas as pd
 import yaml
 
 CFG = Path("config/baseline_bernard.yml")
-PORTFOLIO = Path("config/portfolio_current.csv")
 PRICES = Path("data/prices/daily.csv")
 OUT = Path("data/benchmarks/bernard_origin.csv")
 CONSOLIDATED_OUT = Path("data/benchmarks/bernard_origin_consolidated.csv")
@@ -41,18 +40,22 @@ def normalised_result(dates, portfolio, series_by_asset, euro_weight, base, init
 
 
 def main():
-    if not CFG.exists() or not PORTFOLIO.exists() or not PRICES.exists():
+    if not CFG.exists() or not PRICES.exists():
         print("Baseline skipped: required data not available yet.")
         return
 
     cfg = yaml.safe_load(CFG.read_text(encoding="utf-8"))
+    portfolio_path = Path(cfg.get("source_portfolio", "config/portfolio_origin_2026-09-07.csv"))
+    if not portfolio_path.exists():
+        print(f"Baseline skipped: source portfolio missing: {portfolio_path}")
+        return
     start = pd.Timestamp(cfg["as_of_date"])
     base = float(cfg.get("normalization", 100))
     initial_value_eur = float(cfg["initial_portfolio_value_eur"])
     if initial_value_eur <= 0:
         raise SystemExit("initial_portfolio_value_eur must be strictly positive")
 
-    portfolio = pd.read_csv(PORTFOLIO)
+    portfolio = pd.read_csv(portfolio_path)
     portfolio["weight"] = portfolio["allocation_pct"] / 100.0
 
     prices = pd.read_csv(PRICES)
