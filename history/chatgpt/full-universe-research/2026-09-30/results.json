@@ -1,0 +1,230 @@
+{
+  "status": "research_backtest",
+  "as_of": "2026-09-30",
+  "universe_rule": "all supports with valid EUR-normalised daily prices and >=260 observations; no ETF-only filter",
+  "eligible_assets": 333,
+  "eligible_by_category": {
+    "Opcvm/FI": 156,
+    "Actions": 98,
+    "ETF": 79
+  },
+  "strategies": [
+    {
+      "strategy_id": "momentum_12m_top5_full_universe",
+      "metrics": {
+        "start": "2022-10-03",
+        "end": "2026-09-30",
+        "final_value": 296.4326,
+        "annualized_return": 0.30677,
+        "annualized_volatility": 0.275406,
+        "max_drawdown": -0.230566,
+        "positive_12m_windows_pct": 92.29,
+        "decisions": 48,
+        "cumulative_turnover": 16.7
+      }
+    },
+    {
+      "strategy_id": "momentum_multi_top5_full_universe",
+      "metrics": {
+        "start": "2022-10-03",
+        "end": "2026-09-30",
+        "final_value": 198.9836,
+        "annualized_return": 0.184795,
+        "annualized_volatility": 0.281317,
+        "max_drawdown": -0.271415,
+        "positive_12m_windows_pct": 73.32,
+        "decisions": 48,
+        "cumulative_turnover": 20.3
+      }
+    },
+    {
+      "strategy_id": "momentum_multi_invvol_top8_full_universe",
+      "metrics": {
+        "start": "2022-10-03",
+        "end": "2026-09-30",
+        "final_value": 156.2954,
+        "annualized_return": 0.116294,
+        "annualized_volatility": 0.224268,
+        "max_drawdown": -0.277566,
+        "positive_12m_windows_pct": 78.38,
+        "decisions": 48,
+        "cumulative_turnover": 22.571
+      }
+    },
+    {
+      "strategy_id": "momentum_multi_corr_diversified_full_universe",
+      "metrics": {
+        "start": "2022-10-03",
+        "end": "2026-09-30",
+        "final_value": 198.9741,
+        "annualized_return": 0.185933,
+        "annualized_volatility": 0.259013,
+        "max_drawdown": -0.305258,
+        "positive_12m_windows_pct": 74.72,
+        "decisions": 48,
+        "cumulative_turnover": 20.6667
+      }
+    }
+  ],
+  "latest_allocations": {
+    "momentum_12m_top5_full_universe": [
+      {
+        "asset_id": "FR0013227113",
+        "name": "SOITEC",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "FI0009000681",
+        "name": "NOKIA OYJ",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "NL0010273215",
+        "name": "ASML HOLDING N.V.",
+        "category": "Actions",
+        "weight_pct": 20.0
+      }
+    ],
+    "momentum_multi_top5_full_universe": [
+      {
+        "asset_id": "FR0013227113",
+        "name": "SOITEC",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "FR0010908533",
+        "name": "EDENRED SE",
+        "category": "Actions",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "DE000BAY0017",
+        "name": "BAYER AG",
+        "category": "Actions",
+        "weight_pct": 20.0
+      }
+    ],
+    "momentum_multi_invvol_top8_full_universe": [
+      {
+        "asset_id": "ES0113211835",
+        "name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
+        "category": "Actions",
+        "weight_pct": 23.280939
+      },
+      {
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 14.979928
+      },
+      {
+        "asset_id": "FR0010908533",
+        "name": "EDENRED SE",
+        "category": "Actions",
+        "weight_pct": 12.525302
+      },
+      {
+        "asset_id": "NL0010273215",
+        "name": "ASML HOLDING N.V.",
+        "category": "Actions",
+        "weight_pct": 12.084634
+      },
+      {
+        "asset_id": "DE000BAY0017",
+        "name": "BAYER AG",
+        "category": "Actions",
+        "weight_pct": 11.606532
+      },
+      {
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 10.660612
+      },
+      {
+        "asset_id": "FI0009000681",
+        "name": "NOKIA OYJ",
+        "category": "Actions",
+        "weight_pct": 9.2307
+      },
+      {
+        "asset_id": "FR0013227113",
+        "name": "SOITEC",
+        "category": "Actions",
+        "weight_pct": 5.631352
+      }
+    ],
+    "momentum_multi_corr_diversified_full_universe": [
+      {
+        "asset_id": "FR0013227113",
+        "name": "SOITEC",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "FR0010908533",
+        "name": "EDENRED SE",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "DE000BAY0017",
+        "name": "BAYER AG",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "ES0113211835",
+        "name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      }
+    ]
+  },
+  "limitations": [
+    "current contract universe only",
+    "mechanical price-driven research, not a recommendation",
+    "free arbitration cost assumption",
+    "fund euro is not given an invented daily return",
+    "survivorship/current-universe bias remains possible"
+  ]
+}
