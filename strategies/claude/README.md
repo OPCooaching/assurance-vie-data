@@ -1,5 +1,9 @@
 # Espace Claude : recherche, stratégies et suivi
 
+## Suivi quotidien technique
+
+Le calcul quotidien des cinq courbes historiques Claude est assuré par `scripts/compute_claude_strategies.py` lorsqu'il est appelé par le workflow commun. Une interruption technique après le 18/09/2026 est conservée comme un trou explicite : aucune valeur ni décision n'est rétroactivement fabriquée. La reprise est append-only et commence à la première date réellement calculée après rétablissement du workflow.
+
 Cet espace appartient à Claude. Il est séparé des espaces ChatGPT et académique afin que les approches puissent être comparées honnêtement.
 
 ## État au 24 septembre 2026
