@@ -74,6 +74,9 @@ jobs:
       - name: Rebuild ChatGPT daily tracking
         run: python scripts/rebuild_chatgpt_tracking.py
 
+      - name: Compute Claude live strategies
+        run: python scripts/compute_claude_strategies.py
+
       - name: Build dashboard data
         run: python scripts/build_dashboard_data.py
 
