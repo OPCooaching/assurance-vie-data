@@ -8,9 +8,9 @@ Supports éligibles au test : **333**.
 
 | Stratégie | Valeur finale | Rendement annualisé | Volatilité | Drawdown max | Fenêtres 12m positives |
 |---|---:|---:|---:|---:|---:|
-| momentum_12m_top5_full_universe | 296.43 | 30.7% | 27.5% | -23.1% | 92.29% |
-| momentum_multi_top5_full_universe | 198.98 | 18.5% | 28.1% | -27.1% | 73.32% |
-| momentum_multi_invvol_top8_full_universe | 156.30 | 11.6% | 22.4% | -27.8% | 78.38% |
-| momentum_multi_corr_diversified_full_universe | 198.97 | 18.6% | 25.9% | -30.5% | 74.72% |
+| momentum_12m_top5_full_universe | 310.15 | 32.1% | 27.6% | -23.1% | 92.31% |
+| momentum_multi_top5_full_universe | 205.90 | 19.5% | 28.2% | -27.1% | 73.39% |
+| momentum_multi_invvol_top8_full_universe | 154.55 | 11.3% | 22.5% | -27.8% | 78.44% |
+| momentum_multi_corr_diversified_full_universe | 201.44 | 18.9% | 25.9% | -30.5% | 74.78% |
 
 Ces résultats sont des backtests de recherche. Ils ne remplacent pas le suivi réel de Bernard et ne doivent pas être rétroactivement présentés comme des décisions prises à l'époque.
