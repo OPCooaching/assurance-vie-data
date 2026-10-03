@@ -1,0 +1,6 @@
+{
+  "mode": "append_only_after_interruption",
+  "anchor_date": "2026-09-18",
+  "resume_date": "2026-09-30",
+  "gap_reason": "Claude daily computation was absent from the repository workflow. No values or decisions are reconstructed for the interruption."
+}

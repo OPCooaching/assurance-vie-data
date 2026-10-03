@@ -1,9 +1,8 @@
 {
   "tracking_start": "2026-09-09",
-  "tracking_paused_since": "2026-09-18",
   "poche_de_marche_pct": 50,
   "cadre": "Cinquante pour cent du contrat sont exposés aux marchés, le reste étant le fonds en euros, tenu à sa valeur initiale tant que les intérêts ne sont pas crédités. Les supports retenus sont uniquement des lignes cotées en euros sur une place de la zone euro, pour qu'aucun effet de change n'entre dans le calcul.",
-  "avertissement": "Ces cinq règles ont été mises au point en observant des données passées. Ce choix est fait après coup et n'a aucune valeur de prédiction. Seul un suivi qui avance sans rien réécrire mesurera quelque chose.",
+  "avertissement": "Ces cinq règles ont été mises au point en observant des données passées, et trois d'entre elles ne sont que des variations d'un même classement par la tendance. Ce sont des archives de recherche : elles ne constituent pas l'ensemble de stratégies réellement différentes demandé.",
   "signaux_utilises": "Les cinq règles actuelles ne lisent que le prix de clôture. Aucune n'utilise les données de contexte de data/context/daily.csv.",
   "recherche": "Les backtests et les simulations sont conservés dans strategies/claude/simulations/. Ils n'alimentent aucune courbe publique et ne respectent pas le protocole de backtest du 23/09/2026 : leurs règles ont été choisies après avoir vu les résultats.",
   "strategies": {
@@ -18,14 +17,15 @@
       "conservation": "Une ligne retenue est conservée tant qu'elle reste au-dessus de sa moyenne mobile 200 jours, sans limite de durée. Aucune prise de bénéfice, aucun rééquilibrage de confort.",
       "remplacement": "Une ligne qui clôture sous sa moyenne mobile 200 jours est vendue à la revue suivante et sa part va sur le support monétaire. Elle n'est rachetée que lorsqu'elle repasse au-dessus. Aucun autre support ne la remplace : la liste des six est fixe.",
       "faiblesse": "Sur un marché sans direction, le filtre sort après le début des baisses et rentre après le début des hausses. Chaque aller-retour coûte.",
-      "status": "live_paper_tracking_suspended",
+      "status": "research_simulation",
       "tracking_start": "2026-09-09",
-      "tracking_paused_since": "2026-09-18",
       "frequence": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours. L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
       "frequence_revue": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours.",
       "moment_application": "L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
-      "statut_public": "Suivi engagé le 09/09/2026 sur des prix réellement observés et cotés en euros. Interrompu depuis le 18/09/2026 : l'étape de calcul quotidien a été retirée de l'automatisation le 22/09/2026 et n'a pas été rétablie. Aucune décision n'a donc été prise depuis cette date, et la courbe s'arrête là.",
-      "regle": "Soixante pour cent de la poche de marché au socle, réparti entre soixante-dix pour cent d'indice monde large et trente pour cent d'indice monde à volatilité minimale. Les quarante pour cent restants à parts égales entre les trois thèmes. Une ligne n'est retenue que si son dernier cours connu dépasse sa moyenne mobile 200 jours. Une ligne retenue est conservée tant qu'elle reste au-dessus de sa moyenne mobile 200 jours, sans limite de durée. Aucune prise de bénéfice, aucun rééquilibrage de confort. Une ligne qui clôture sous sa moyenne mobile 200 jours est vendue à la revue suivante et sa part va sur le support monétaire. Elle n'est rachetée que lorsqu'elle repasse au-dessus. Aucun autre support ne la remplace : la liste des six est fixe."
+      "statut_public": "Règle de recherche, pas un suivi hebdomadaire validé. Sa courbe est recalculée chaque jour sur des prix réellement observés depuis le 09/09/2026, avec un trou du 18 au 30 septembre dû à l'absence de l'étape de calcul dans le workflow, trou laissé explicite et jamais comblé. Aucune décision n'est enregistrée dans history/claude/decisions/ : tant que ce n'est pas le cas, rien ici ne constitue un suivi hebdomadaire au sens du cahier des charges.",
+      "regle": "Soixante pour cent de la poche de marché au socle, réparti entre soixante-dix pour cent d'indice monde large et trente pour cent d'indice monde à volatilité minimale. Les quarante pour cent restants à parts égales entre les trois thèmes. Une ligne n'est retenue que si son dernier cours connu dépasse sa moyenne mobile 200 jours. Une ligne retenue est conservée tant qu'elle reste au-dessus de sa moyenne mobile 200 jours, sans limite de durée. Aucune prise de bénéfice, aucun rééquilibrage de confort. Une ligne qui clôture sous sa moyenne mobile 200 jours est vendue à la revue suivante et sa part va sur le support monétaire. Elle n'est rachetée que lorsqu'elle repasse au-dessus. Aucun autre support ne la remplace : la liste des six est fixe.",
+      "courbe_interrompue_du": "2026-09-18",
+      "courbe_reprise_le": "2026-09-30"
     },
     "claude-risque-cible": {
       "label": "Claude B — Risque cible constant",
@@ -38,14 +38,15 @@
       "conservation": "Les lignes retenues sont conservées tant qu'elles restent au-dessus de leur moyenne mobile. La part exposée, elle, est ajustée à chaque revue.",
       "remplacement": "Mêmes sorties que Claude A, plus une réduction générale de toutes les lignes quand la volatilité augmente, le solde allant au support monétaire, et l'inverse quand elle retombe.",
       "faiblesse": "Réduit l'exposition après une hausse de volatilité, donc souvent après le début d'une baisse, et manque une partie des rebonds rapides.",
-      "status": "live_paper_tracking_suspended",
+      "status": "research_simulation",
       "tracking_start": "2026-09-09",
-      "tracking_paused_since": "2026-09-18",
       "frequence": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours. L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
       "frequence_revue": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours.",
       "moment_application": "L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
-      "statut_public": "Suivi engagé le 09/09/2026 sur des prix réellement observés et cotés en euros. Interrompu depuis le 18/09/2026 : l'étape de calcul quotidien a été retirée de l'automatisation le 22/09/2026 et n'a pas été rétablie. Aucune décision n'a donc été prise depuis cette date, et la courbe s'arrête là.",
-      "regle": "La part exposée est égale à la volatilité cible de dix pour cent divisée par la volatilité réalisée de l'indice monde sur les quarante dernières séances, bornée entre vingt et soixante pour cent. Cette part est répartie comme dans Claude A, avec le même filtre de moyenne mobile. Les lignes retenues sont conservées tant qu'elles restent au-dessus de leur moyenne mobile. La part exposée, elle, est ajustée à chaque revue. Mêmes sorties que Claude A, plus une réduction générale de toutes les lignes quand la volatilité augmente, le solde allant au support monétaire, et l'inverse quand elle retombe."
+      "statut_public": "Règle de recherche, pas un suivi hebdomadaire validé. Sa courbe est recalculée chaque jour sur des prix réellement observés depuis le 09/09/2026, avec un trou du 18 au 30 septembre dû à l'absence de l'étape de calcul dans le workflow, trou laissé explicite et jamais comblé. Aucune décision n'est enregistrée dans history/claude/decisions/ : tant que ce n'est pas le cas, rien ici ne constitue un suivi hebdomadaire au sens du cahier des charges.",
+      "regle": "La part exposée est égale à la volatilité cible de dix pour cent divisée par la volatilité réalisée de l'indice monde sur les quarante dernières séances, bornée entre vingt et soixante pour cent. Cette part est répartie comme dans Claude A, avec le même filtre de moyenne mobile. Les lignes retenues sont conservées tant qu'elles restent au-dessus de leur moyenne mobile. La part exposée, elle, est ajustée à chaque revue. Mêmes sorties que Claude A, plus une réduction générale de toutes les lignes quand la volatilité augmente, le solde allant au support monétaire, et l'inverse quand elle retombe.",
+      "courbe_interrompue_du": "2026-09-18",
+      "courbe_reprise_le": "2026-09-30"
     },
     "claude-double-filtre": {
       "label": "Claude C — Tendance confirmée par l'ampleur",
@@ -58,14 +59,15 @@
       "conservation": "L'état en cours est conservé tant que les deux conditions ne changent pas, ce qui peut durer plusieurs mois.",
       "remplacement": "Le passage d'un état à l'autre vend ou rachète en bloc la moitié ou la totalité des lignes, le solde allant au support monétaire.",
       "faiblesse": "Trois états seulement. Les passages d'un état à l'autre sont brutaux et peuvent se produire tout près d'un point de retournement.",
-      "status": "live_paper_tracking_suspended",
+      "status": "research_simulation",
       "tracking_start": "2026-09-09",
-      "tracking_paused_since": "2026-09-18",
       "frequence": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours. L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
       "frequence_revue": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours.",
       "moment_application": "L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
-      "statut_public": "Suivi engagé le 09/09/2026 sur des prix réellement observés et cotés en euros. Interrompu depuis le 18/09/2026 : l'étape de calcul quotidien a été retirée de l'automatisation le 22/09/2026 et n'a pas été rétablie. Aucune décision n'a donc été prise depuis cette date, et la courbe s'arrête là.",
-      "regle": "Deux conditions sont examinées : l'indice monde au-dessus de sa moyenne mobile 100 jours, et plus de la moitié des thèmes suivis au-dessus de la leur. Les deux remplies, la poche de marché est investie en totalité selon la répartition de Claude A. Une seule remplie, la moitié. Aucune, rien n'est investi. L'état en cours est conservé tant que les deux conditions ne changent pas, ce qui peut durer plusieurs mois. Le passage d'un état à l'autre vend ou rachète en bloc la moitié ou la totalité des lignes, le solde allant au support monétaire."
+      "statut_public": "Règle de recherche, pas un suivi hebdomadaire validé. Sa courbe est recalculée chaque jour sur des prix réellement observés depuis le 09/09/2026, avec un trou du 18 au 30 septembre dû à l'absence de l'étape de calcul dans le workflow, trou laissé explicite et jamais comblé. Aucune décision n'est enregistrée dans history/claude/decisions/ : tant que ce n'est pas le cas, rien ici ne constitue un suivi hebdomadaire au sens du cahier des charges.",
+      "regle": "Deux conditions sont examinées : l'indice monde au-dessus de sa moyenne mobile 100 jours, et plus de la moitié des thèmes suivis au-dessus de la leur. Les deux remplies, la poche de marché est investie en totalité selon la répartition de Claude A. Une seule remplie, la moitié. Aucune, rien n'est investi. L'état en cours est conservé tant que les deux conditions ne changent pas, ce qui peut durer plusieurs mois. Le passage d'un état à l'autre vend ou rachète en bloc la moitié ou la totalité des lignes, le solde allant au support monétaire.",
+      "courbe_interrompue_du": "2026-09-18",
+      "courbe_reprise_le": "2026-09-30"
     },
     "claude-momentum-multi": {
       "label": "Claude D — Momentum multi-horizon",
@@ -78,14 +80,15 @@
       "conservation": "Un support est conservé tant qu'il reste dans les six premiers du classement et que son score demeure positif. Aucune durée minimale ni maximale.",
       "remplacement": "À chaque revue, un support sorti des six premiers est vendu et remplacé par celui qui prend sa place. Si moins de six supports ont un score positif, les places vacantes restent sur le support monétaire.",
       "faiblesse": "Le classement peut retenir deux supports très proches, par exemple deux fonds sur le même indice, et concentrer le risque sans s'en apercevoir. La règle achète après la hausse et vend après le début de la baisse.",
-      "status": "live_paper_tracking_suspended",
+      "status": "research_simulation",
       "tracking_start": "2026-09-09",
-      "tracking_paused_since": "2026-09-18",
       "frequence": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours. L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
       "frequence_revue": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours.",
       "moment_application": "L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
-      "statut_public": "Suivi engagé le 09/09/2026 sur des prix réellement observés et cotés en euros. Interrompu depuis le 18/09/2026 : l'étape de calcul quotidien a été retirée de l'automatisation le 22/09/2026 et n'a pas été rétablie. Aucune décision n'a donc été prise depuis cette date, et la courbe s'arrête là.",
-      "regle": "Chaque support reçoit un score égal à la moyenne de sa performance sur cent vingt-six séances et sur deux cent cinquante-deux séances. Les six meilleurs scores strictement positifs sont retenus, à parts égales. Un support est conservé tant qu'il reste dans les six premiers du classement et que son score demeure positif. Aucune durée minimale ni maximale. À chaque revue, un support sorti des six premiers est vendu et remplacé par celui qui prend sa place. Si moins de six supports ont un score positif, les places vacantes restent sur le support monétaire."
+      "statut_public": "Règle de recherche, pas un suivi hebdomadaire validé. Sa courbe est recalculée chaque jour sur des prix réellement observés depuis le 09/09/2026, avec un trou du 18 au 30 septembre dû à l'absence de l'étape de calcul dans le workflow, trou laissé explicite et jamais comblé. Aucune décision n'est enregistrée dans history/claude/decisions/ : tant que ce n'est pas le cas, rien ici ne constitue un suivi hebdomadaire au sens du cahier des charges.",
+      "regle": "Chaque support reçoit un score égal à la moyenne de sa performance sur cent vingt-six séances et sur deux cent cinquante-deux séances. Les six meilleurs scores strictement positifs sont retenus, à parts égales. Un support est conservé tant qu'il reste dans les six premiers du classement et que son score demeure positif. Aucune durée minimale ni maximale. À chaque revue, un support sorti des six premiers est vendu et remplacé par celui qui prend sa place. Si moins de six supports ont un score positif, les places vacantes restent sur le support monétaire.",
+      "courbe_interrompue_du": "2026-09-18",
+      "courbe_reprise_le": "2026-09-30"
     },
     "claude-momentum-prudent": {
       "label": "Claude E — Momentum sous garde-fou",
@@ -98,14 +101,16 @@
       "conservation": "Mêmes conditions que Claude D tant que le garde-fou reste levé. Les poids sont recalculés à chaque revue, donc ils bougent même sans changement de composition.",
       "remplacement": "Mêmes remplacements que Claude D, plus une sortie totale vers le support monétaire dès que l'indice monde passe sous sa moyenne, et un retour complet lorsqu'il repasse au-dessus.",
       "faiblesse": "Le garde-fou sort après le début d'une baisse et rentre après le début du rebond. Ses résultats sont plus sensibles au jour de revue retenu que ceux de Claude D.",
-      "status": "live_paper_tracking_suspended",
+      "status": "research_simulation",
       "tracking_start": "2026-09-09",
-      "tracking_paused_since": "2026-09-18",
       "frequence": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours. L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
       "frequence_revue": "Une revue par semaine, le lundi, sur la dernière valorisation disponible. Aucune décision les autres jours.",
       "moment_application": "L'allocation décidée lors de la revue s'applique à la valorisation suivante, jamais à celle du jour de la décision : un arbitrage d'assurance vie s'exécute à une valeur liquidative inconnue au moment de l'ordre.",
-      "statut_public": "Suivi engagé le 09/09/2026 sur des prix réellement observés et cotés en euros. Interrompu depuis le 18/09/2026 : l'étape de calcul quotidien a été retirée de l'automatisation le 22/09/2026 et n'a pas été rétablie. Aucune décision n'a donc été prise depuis cette date, et la courbe s'arrête là.",
-      "regle": "Sélection identique à Claude D, à deux réserves près. Si l'indice monde clôture sous sa moyenne mobile 200 jours, aucune ligne n'est retenue. Sinon, les six supports retenus sont pondérés à l'inverse de leur volatilité des soixante dernières séances. Mêmes conditions que Claude D tant que le garde-fou reste levé. Les poids sont recalculés à chaque revue, donc ils bougent même sans changement de composition. Mêmes remplacements que Claude D, plus une sortie totale vers le support monétaire dès que l'indice monde passe sous sa moyenne, et un retour complet lorsqu'il repasse au-dessus."
+      "statut_public": "Règle de recherche, pas un suivi hebdomadaire validé. Sa courbe est recalculée chaque jour sur des prix réellement observés depuis le 09/09/2026, avec un trou du 18 au 30 septembre dû à l'absence de l'étape de calcul dans le workflow, trou laissé explicite et jamais comblé. Aucune décision n'est enregistrée dans history/claude/decisions/ : tant que ce n'est pas le cas, rien ici ne constitue un suivi hebdomadaire au sens du cahier des charges.",
+      "regle": "Sélection identique à Claude D, à deux réserves près. Si l'indice monde clôture sous sa moyenne mobile 200 jours, aucune ligne n'est retenue. Sinon, les six supports retenus sont pondérés à l'inverse de leur volatilité des soixante dernières séances. Mêmes conditions que Claude D tant que le garde-fou reste levé. Les poids sont recalculés à chaque revue, donc ils bougent même sans changement de composition. Mêmes remplacements que Claude D, plus une sortie totale vers le support monétaire dès que l'indice monde passe sous sa moyenne, et un retour complet lorsqu'il repasse au-dessus.",
+      "courbe_interrompue_du": "2026-09-18",
+      "courbe_reprise_le": "2026-09-30"
     }
-  }
+  },
+  "courbe": "Calculée quotidiennement par scripts/compute_claude_strategies.py depuis le 09/09/2026. Interrompue du 18 au 30 septembre, reprise en ajout seul, sans reconstruction des valeurs manquantes."
 }

@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W41--chatgpt-weekly-open-analysis",
+  "decided_at_utc": "2026-10-03T09:31:18Z",
+  "effective_valuation_date": "2026-10-05",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-weekly-open-analysis",
+  "strategy_version": "v0.1",
+  "decision_type": "rebalance",
+  "data_as_of": {
+    "prices": "2026-10-02",
+    "context": {
+      "USEPUINDXD": "2026-10-01",
+      "NFCI": "2026-09-25",
+      "DTWEXBGS": "2026-09-25",
+      "DCOILBRENTEU": "2026-09-29",
+      "WEI": "2026-09-26",
+      "VIXCLS": "2026-10-01",
+      "DEXUSEU": "2026-09-25",
+      "ECBDFR": "2026-10-02"
+    },
+    "publication_notes": [
+      "Décision archivée le samedi 03/10 avant la semaine du 05/10, à partir des cours publiés au 02/10 et des dernières publications externes réellement disponibles.",
+      "Les séries externes ne sont pas toutes quotidiennes : leurs dates de publication sont conservées séparément et aucun chiffre postérieur à la décision n'est utilisé.",
+      "Le screener recense 337 supports comparables par les prix au 02/10 ; les 136 autres supports ne sont pas classés faute de série quotidienne comparable."
+    ]
+  },
+  "reviewed_universe": {
+    "price_comparable_supports": 337,
+    "total_supports": 473,
+    "method": "Revue des 337 supports comparables par les prix, sans nombre de lignes fixé à l'avance ni présélection de type de support. La comparaison utilise les variations à 20, 60 et 120 séances, la volatilité à 60 séances et le recul maximal à 252 séances, calculés avec des prix normalisés en euros. Les catégories couvertes comprennent actions, OPCVM/fonds et ETF lorsqu'un prix comparable existe."
+  },
+  "reviewed_context": {
+    "USEPUINDXD": {
+      "value": 160.6,
+      "date": "2026-10-01",
+      "interpretation": "L'incertitude économique et politique américaine a fortement reculé par rapport au niveau observé lors de la revue précédente ; c'est un facteur favorable, sans être une garantie de hausse."
+    },
+    "NFCI": {
+      "value": -0.548,
+      "date": "2026-09-25",
+      "interpretation": "Les conditions financières restent plutôt accommodantes à la dernière publication hebdomadaire."
+    },
+    "VIXCLS": {
+      "value": 16.39,
+      "date": "2026-10-01",
+      "interpretation": "La volatilité anticipée des actions américaines reste loin d'un épisode de stress, mais elle est plus élevée que lors de la revue précédente ; une poche liquide est donc maintenue."
+    },
+    "DCOILBRENTEU": {
+      "value": 113.96,
+      "date": "2026-09-29",
+      "interpretation": "Le pétrole reste élevé et constitue un risque de pression énergétique ; il ne déclenche pas seul une rotation sectorielle."
+    },
+    "WEI": {
+      "value": 2.93,
+      "date": "2026-09-26",
+      "interpretation": "L'indicateur hebdomadaire d'activité reste positif à sa dernière publication."
+    },
+    "DTWEXBGS": {
+      "value": 120.33,
+      "date": "2026-09-25",
+      "interpretation": "Le dollar pondéré des échanges est un risque de change pour les expositions mondiales et américaines ; les rendements du screener sont néanmoins comparés en euros."
+    },
+    "DEXUSEU": {
+      "value": 1.14,
+      "date": "2026-09-25",
+      "interpretation": "La parité euro/dollar est conservée comme indicateur de contexte, sans déclencher mécaniquement l'allocation."
+    },
+    "ECBDFR": {
+      "value": 2.5,
+      "date": "2026-10-02",
+      "interpretation": "Le taux de dépôt de la BCE est inchangé à la dernière publication disponible."
+    }
+  },
+  "selected_signals": [
+    "La revue complète fait ressortir 59 supports positifs simultanément sur 20, 60 et 120 séances. Les six supports retenus ne proviennent donc pas d'une limite fixée à l'avance : ce sont les expositions qui restent après avoir écarté les doublons de marché proches et les candidats plus volatils.",
+    "Les quatre supports actions retenus sont tous positifs sur les trois horizons examinés. HSBC Sustainable Global Equity et Arkéa Indiciel US sont les deux meilleurs scores globaux du screener ; Xtrackers World Quality et Groupama Global Active Equity apportent des expositions mondiales de styles différents.",
+    "Les deux poches de trésorerie/obligations ultra-courtes sont aussi positives sur les trois horizons. Elles représentent 25 % de l'allocation afin de garder une capacité de réaction sans prétendre prévoir le marché.",
+    "Les conditions financières disponibles restent accommodantes et l'indicateur d'activité est positif. Cela justifie de conserver une majorité d'actions, plutôt qu'un basculement intégral vers le défensif."
+  ],
+  "contrary_signals": [
+    "L'univers qui ressort le mieux reste fortement concentré sur les actions mondiales et américaines. Même si les supports retenus ont des modes de gestion différents, leurs marchés sous-jacents se recouvrent partiellement.",
+    "La volatilité VIX a augmenté depuis la revue précédente et le pétrole demeure élevé. Ces éléments expliquent la poche liquide de 25 %, mais ne permettent pas de prévoir une baisse.",
+    "Les indicateurs macroéconomiques sont publiés avec des dates différentes de celles des prix. Ils servent à mettre les résultats de prix en perspective, pas à inventer une certitude."
+  ],
+  "previous_allocation_percent": {
+    "IE00BL25JM42": 20,
+    "LU1900066462": 15,
+    "FR0010380675": 15,
+    "LU0496786574": 15,
+    "LU0292096186": 15,
+    "FR0010315770": 10,
+    "IE00069JGT58": 10
+  },
+  "target_allocation_percent": {
+    "FR0000438905": 30,
+    "FR0000988057": 20,
+    "IE00BL25JL35": 15,
+    "FR0000097156": 10,
+    "IE00BM97MR69": 15,
+    "LU0290358497": 10
+  },
+  "allocation_changes_percent": {
+    "IE00BL25JM42": -20,
+    "LU1900066462": -15,
+    "FR0010380675": -15,
+    "LU0496786574": -15,
+    "LU0292096186": -15,
+    "FR0010315770": -10,
+    "IE00069JGT58": -10,
+    "FR0000438905": 30,
+    "FR0000988057": 20,
+    "IE00BL25JL35": 15,
+    "FR0000097156": 10,
+    "IE00BM97MR69": 15,
+    "LU0290358497": 10
+  },
+  "rationale": "Après examen des 337 supports comparables, E remplace l'allocation de la semaine précédente. Le nombre de six lignes n'est pas un plafond : il résulte cette semaine de l'élimination des expositions presque équivalentes et des supports dont la dynamique récente est moins complète. La nouvelle allocation garde 75 % sur quatre expositions actions ayant des progrès positifs sur 20, 60 et 120 séances, avec un poids plus fort sur les deux meilleurs résultats globaux. Les 25 % restants sont placés sur une obligation américaine ultra-courte et une rémunération monétaire en euros : elles limitent l'obligation de rester totalement investi quand la volatilité remonte. Cette décision est une hypothèse de portefeuille théorique pour la semaine du 05/10 ; elle ne prétend ni trouver le meilleur portefeuille ni garantir un gain.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n'est envoyé au contrat de Bernard.",
+    "Cette décision est figée avant sa prise d'effet le 05/10/2026 et ne sera jamais réécrite avec des informations postérieures.",
+    "Les quatre fonds actions retenus restent largement exposés aux marchés mondiaux et américains ; le portefeuille n'est pas une diversification complète de toutes les zones et classes d'actifs.",
+    "Une partie des indicateurs externes est hebdomadaire ou publiée avec décalage ; les dates exactes utilisées sont conservées dans ce document.",
+    "La valorisation quotidienne peut être provisoire lorsqu'un support publie en retard ; elle sera corrigée lorsque le cours officiel arrivera."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "universe_checked": true,
+    "price_coverage_checked": true,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "supersedes": "2026-W40--chatgpt-weekly-open-analysis"
+}
