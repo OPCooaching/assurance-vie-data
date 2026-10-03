@@ -1,0 +1,98 @@
+id: claude-dollar-energie
+label: "Claude H — Dollar et énergie"
+status: proposed
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+summary: >
+  Cette règle choisit les zones géographiques et les secteurs selon deux prix
+  extérieurs aux supports détenus : la force du dollar et le prix du pétrole.
+  Elle ne regarde pas la performance passée des supports pour les sélectionner.
+
+hypothese_economique: >
+  Le dollar et l'énergie sont deux prix qui redistribuent la rentabilité entre
+  zones et entre secteurs, indépendamment de la tendance des marchés.
+
+  Un dollar qui se renforce durcit les conditions de financement des économies
+  endettées en dollars, pèse sur les marchés émergents et sur les matières
+  premières, et avantage les exportateurs de la zone euro dont les ventes sont
+  libellées en dollars. Un dollar qui faiblit produit l'inverse.
+
+  Un pétrole qui s'envole transfère du revenu des pays importateurs vers les
+  producteurs, comprime les marges des secteurs consommateurs d'énergie et
+  soutient les ressources de base. Un pétrole qui s'effondre produit l'inverse.
+
+  Ces deux prix bougent souvent avant que les effets apparaissent dans les
+  résultats des entreprises, et donc avant que les tendances boursières ne les
+  reflètent. La règle les traite comme deux axes et retient quatre régimes.
+
+difference_avec_les_autres: >
+  La famille macro de ChatGPT utilise le VIX, les conditions financières et
+  l'incertitude politique, c'est-à-dire des mesures de tension et de risque.
+  Celle-ci utilise deux prix d'échange, le dollar et le brent, qui ne figurent
+  dans aucune autre règle du dépôt. Elle décide d'une composition par zone et
+  par secteur, là où les autres décident d'un niveau d'exposition.
+
+main_rule: >
+  Chaque lundi, la variation sur soixante séances du dollar pondéré par le
+  commerce et celle du brent déterminent un régime parmi quatre. Chaque régime a
+  une composition fixée d'avance, choisie pour la logique économique du régime
+  et non pour sa performance passée.
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    fenetre_regime_seances: 60
+    seuil_variation_dollar_pct: 2.0
+    seuil_variation_brent_pct: 10.0
+    latence_maximale_donnee_jours: 10
+    support_defensif: LU0290358497
+    currency_universe: eur_quoted_only
+    regimes:
+      dollar_fort_energie_chere:
+        libelle: "Dollar fort et pétrole cher"
+        logique: "Pression sur les émergents et sur les secteurs consommateurs d'énergie ; les ressources de base et les exportateurs européens résistent mieux."
+        composition: {DE000A0F5UK5: 20, LU1900066462: 10, IE00BKBF6H24: 20}
+      dollar_fort_energie_basse:
+        libelle: "Dollar fort et pétrole bon marché"
+        logique: "Transfert de revenu vers les importateurs d'énergie ; la zone euro et le Japon en profitent, les producteurs souffrent."
+        composition: {FR0007054358: 20, LU0839027447: 15, IE00BKBF6H24: 15}
+      dollar_faible_energie_chere:
+        libelle: "Dollar faible et pétrole cher"
+        logique: "Configuration historiquement favorable aux matières premières et aux marchés émergents."
+        composition: {DE000A0F5UK5: 20, IE00BMG6Z448: 15, LU1900066462: 15}
+      dollar_faible_energie_basse:
+        libelle: "Dollar faible et pétrole bon marché"
+        logique: "Conditions les plus souples : les actifs de croissance et les émergents sont avantagés."
+        composition: {IE00BMG6Z448: 15, LU0533033667: 20, IE00BKBF6H24: 15}
+
+regle_detaillee:
+  selection: >
+    Le régime est déterminé par le signe de la variation du dollar pondéré sur
+    soixante séances, au-delà de deux pour cent en valeur absolue, et par celle
+    du brent, au-delà de dix pour cent. En deçà de ces seuils, le régime
+    précédent est conservé : un mouvement faible ne justifie pas de recomposer.
+    La composition du régime est alors appliquée telle quelle.
+  conservation: >
+    La composition reste inchangée tant que le régime ne change pas. Ces deux
+    prix évoluant lentement, les changements seront rares, de l'ordre de
+    quelques-uns par an.
+  remplacement: >
+    Un changement de régime remplace la composition en une fois, à la
+    valorisation suivante.
+  donnees_manquantes: >
+    Les séries de contexte sont publiées avec un retard variable, d'un à dix
+    jours selon la série. La règle lit la dernière valeur réellement publiée. Si
+    elle date de plus de dix jours, aucun changement de régime n'est décidé et
+    la composition en cours est conservée.
+
+known_weakness: >
+  Les compositions par régime sont choisies sur un raisonnement économique, pas
+  sur un ajustement statistique. C'est voulu, et cela veut dire qu'elles peuvent
+  être simplement fausses : le lien entre ces deux prix et la performance des
+  supports retenus est réel mais lâche, variable dans le temps, et d'autres
+  forces peuvent le dominer. Le nombre de supports disponibles en cotation euro
+  limite aussi la finesse des compositions : certaines zones et certains
+  secteurs n'ont aucun représentant utilisable.
