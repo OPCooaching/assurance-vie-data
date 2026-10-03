@@ -114,7 +114,7 @@ def load_existing_metadata(name: str):
         return {}
 
 
-def load_decision_history(name: str):
+def load_decision_history(name: str, names: dict[str, str]):
     """Read immutable decisions for display; malformed records stay private."""
     root = Path("history") / name / "decisions"
     if not root.exists():
@@ -136,7 +136,7 @@ def load_decision_history(name: str):
             "strategy_version": record.get("strategy_version"),
             "decision_type": record["decision_type"],
             "rationale": record.get("rationale"),
-            "target_allocation_percent": record.get("target_allocation_percent", {}),
+            "target_allocation_percent": {\n                names.get(str(asset_id), str(asset_id)): weight\n                for asset_id, weight in record.get("target_allocation_percent", {}).items()\n            },
             "warnings": record.get("warnings", []),
         })
     return sorted(records, key=lambda item: str(item.get("date") or ""), reverse=True)
@@ -276,7 +276,7 @@ def main():
                     "values": [None if pd.isna(x) else float(x) for x in vals],
                 })
 
-    academic_info = attach_allocations(academic_metadata(), "academic", asset_names())
+    names = asset_names()\n    academic_info = attach_allocations(academic_metadata(), "academic", names)
     (OUT / "academic.json").write_text(
         json.dumps(payload(series, dates, start_eur, {"strategies": academic_info, "valuation": valuation}), ensure_ascii=False),
         encoding="utf-8",
@@ -290,9 +290,9 @@ def main():
             else load_existing_metadata(name)
         )
         metadata["strategies"] = attach_allocations(
-            metadata.get("strategies", {}), name, asset_names()
+            metadata.get("strategies", {}), name, names
         )
-        metadata["decision_history"] = load_decision_history(name)
+        metadata["decision_history"] = load_decision_history(name, names)
         metadata["valuation"] = valuation
         # Only workflow-produced tracking files may add public actor curves.
         # Their dates begin at the declared live-tracking start, never in a
