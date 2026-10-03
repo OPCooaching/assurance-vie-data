@@ -74,8 +74,14 @@ jobs:
       - name: Rebuild ChatGPT daily tracking
         run: python scripts/rebuild_chatgpt_tracking.py
 
+      # Le moteur Claude vit dans l'espace Claude depuis le 03/10/2026, afin
+      # qu'une stratégie nouvelle n'exige plus de modifier un fichier commun.
+      # Mêmes sorties et mêmes formats qu'avant : data/claude/performance.csv
+      # et data/claude/latest_allocations.csv. L'ancien script
+      # scripts/compute_claude_strategies.py ne doit plus être appelé : il
+      # écrirait cinq colonnes sur un fichier qui en compte huit.
       - name: Compute Claude live strategies
-        run: python scripts/compute_claude_strategies.py
+        run: python strategies/claude/moteur.py
 
       - name: Build dashboard data
         run: python scripts/build_dashboard_data.py
