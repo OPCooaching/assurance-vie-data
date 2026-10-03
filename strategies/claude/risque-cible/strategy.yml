@@ -1,6 +1,17 @@
 id: claude-risque-cible
 label: "Claude B — Risque cible constant"
-status: research_hypothesis
+status: research_witness
+tracking_start: 2026-09-09
+courbe_interrompue_du: 2026-09-18
+courbe_reprise_le: 2026-09-30
+tracking_note: >
+  Archive de recherche. La courbe est recalculée chaque jour depuis le
+  9 septembre 2026, avec un trou du 18 au 30 septembre laissé explicite.
+  Aucune décision hebdomadaire n'est encore enregistrée dans history/claude/.
+tracking_note: >
+  Suivi engagé le 9 septembre 2026. Interrompu depuis le 18 septembre : l'étape
+  de calcul quotidien a été retirée du workflow le 22 septembre et n'a pas été
+  rétablie. Aucune décision n'est prise depuis cette date.
 active_version: v0.2
 decision_frequency: weekly
 execution_model: next_available_valuation

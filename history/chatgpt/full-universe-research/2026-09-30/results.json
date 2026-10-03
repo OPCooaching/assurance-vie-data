@@ -13,56 +13,56 @@
       "strategy_id": "momentum_12m_top5_full_universe",
       "metrics": {
         "start": "2022-10-03",
-        "end": "2026-09-30",
-        "final_value": 296.4326,
-        "annualized_return": 0.30677,
-        "annualized_volatility": 0.275406,
+        "end": "2026-10-02",
+        "final_value": 310.1504,
+        "annualized_return": 0.321158,
+        "annualized_volatility": 0.276012,
         "max_drawdown": -0.230566,
-        "positive_12m_windows_pct": 92.29,
-        "decisions": 48,
-        "cumulative_turnover": 16.7
+        "positive_12m_windows_pct": 92.31,
+        "decisions": 49,
+        "cumulative_turnover": 16.9
       }
     },
     {
       "strategy_id": "momentum_multi_top5_full_universe",
       "metrics": {
         "start": "2022-10-03",
-        "end": "2026-09-30",
-        "final_value": 198.9836,
-        "annualized_return": 0.184795,
-        "annualized_volatility": 0.281317,
+        "end": "2026-10-02",
+        "final_value": 205.8963,
+        "annualized_return": 0.194683,
+        "annualized_volatility": 0.281709,
         "max_drawdown": -0.271415,
-        "positive_12m_windows_pct": 73.32,
-        "decisions": 48,
-        "cumulative_turnover": 20.3
+        "positive_12m_windows_pct": 73.39,
+        "decisions": 49,
+        "cumulative_turnover": 20.7
       }
     },
     {
       "strategy_id": "momentum_multi_invvol_top8_full_universe",
       "metrics": {
         "start": "2022-10-03",
-        "end": "2026-09-30",
-        "final_value": 156.2954,
-        "annualized_return": 0.116294,
-        "annualized_volatility": 0.224268,
+        "end": "2026-10-02",
+        "final_value": 154.5478,
+        "annualized_return": 0.112991,
+        "annualized_volatility": 0.224622,
         "max_drawdown": -0.277566,
-        "positive_12m_windows_pct": 78.38,
-        "decisions": 48,
-        "cumulative_turnover": 22.571
+        "positive_12m_windows_pct": 78.44,
+        "decisions": 49,
+        "cumulative_turnover": 22.8709
       }
     },
     {
       "strategy_id": "momentum_multi_corr_diversified_full_universe",
       "metrics": {
         "start": "2022-10-03",
-        "end": "2026-09-30",
-        "final_value": 198.9741,
-        "annualized_return": 0.185933,
-        "annualized_volatility": 0.259013,
+        "end": "2026-10-02",
+        "final_value": 201.4423,
+        "annualized_return": 0.189319,
+        "annualized_volatility": 0.259329,
         "max_drawdown": -0.305258,
-        "positive_12m_windows_pct": 74.72,
-        "decisions": 48,
-        "cumulative_turnover": 20.6667
+        "positive_12m_windows_pct": 74.78,
+        "decisions": 49,
+        "cumulative_turnover": 21.0
       }
     }
   ],
@@ -75,21 +75,21 @@
         "weight_pct": 20.0
       },
       {
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 20.0
+      },
+      {
         "asset_id": "FI0009000681",
         "name": "NOKIA OYJ",
         "category": "Actions",
         "weight_pct": 20.0
       },
       {
-        "asset_id": "LU1598757687",
-        "name": "ARCELORMITTAL",
+        "asset_id": "NL0000226223",
+        "name": "STMICROELECTRONICS N.V.",
         "category": "Actions",
-        "weight_pct": 20.0
-      },
-      {
-        "asset_id": "IE000I8KRLL9",
-        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
-        "category": "ETF",
         "weight_pct": 20.0
       },
       {
@@ -107,8 +107,14 @@
         "weight_pct": 20.0
       },
       {
-        "asset_id": "LU1598757687",
-        "name": "ARCELORMITTAL",
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
+        "weight_pct": 20.0
+      },
+      {
+        "asset_id": "NL0010273215",
+        "name": "ASML HOLDING N.V.",
         "category": "Actions",
         "weight_pct": 20.0
       },
@@ -119,66 +125,60 @@
         "weight_pct": 20.0
       },
       {
-        "asset_id": "IE000I8KRLL9",
-        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
-        "category": "ETF",
-        "weight_pct": 20.0
-      },
-      {
-        "asset_id": "DE000BAY0017",
-        "name": "BAYER AG",
+        "asset_id": "NL0000226223",
+        "name": "STMICROELECTRONICS N.V.",
         "category": "Actions",
         "weight_pct": 20.0
       }
     ],
     "momentum_multi_invvol_top8_full_universe": [
       {
+        "asset_id": "NL0011821202",
+        "name": "ING GROEP N.V.",
+        "category": "Actions",
+        "weight_pct": 20.917644
+      },
+      {
         "asset_id": "ES0113211835",
         "name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
         "category": "Actions",
-        "weight_pct": 23.280939
-      },
-      {
-        "asset_id": "LU1598757687",
-        "name": "ARCELORMITTAL",
-        "category": "Actions",
-        "weight_pct": 14.979928
+        "weight_pct": 19.345013
       },
       {
         "asset_id": "FR0010908533",
         "name": "EDENRED SE",
         "category": "Actions",
-        "weight_pct": 12.525302
+        "weight_pct": 14.560194
+      },
+      {
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 14.495877
       },
       {
         "asset_id": "NL0010273215",
         "name": "ASML HOLDING N.V.",
         "category": "Actions",
-        "weight_pct": 12.084634
-      },
-      {
-        "asset_id": "DE000BAY0017",
-        "name": "BAYER AG",
-        "category": "Actions",
-        "weight_pct": 11.606532
+        "weight_pct": 10.306553
       },
       {
         "asset_id": "IE000I8KRLL9",
         "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
         "category": "ETF",
-        "weight_pct": 10.660612
+        "weight_pct": 9.102923
       },
       {
-        "asset_id": "FI0009000681",
-        "name": "NOKIA OYJ",
+        "asset_id": "NL0000226223",
+        "name": "STMICROELECTRONICS N.V.",
         "category": "Actions",
-        "weight_pct": 9.2307
+        "weight_pct": 7.041799
       },
       {
         "asset_id": "FR0013227113",
         "name": "SOITEC",
         "category": "Actions",
-        "weight_pct": 5.631352
+        "weight_pct": 4.229997
       }
     ],
     "momentum_multi_corr_diversified_full_universe": [
@@ -189,9 +189,9 @@
         "weight_pct": 16.666667
       },
       {
-        "asset_id": "LU1598757687",
-        "name": "ARCELORMITTAL",
-        "category": "Actions",
+        "asset_id": "IE000I8KRLL9",
+        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+        "category": "ETF",
         "weight_pct": 16.666667
       },
       {
@@ -201,20 +201,20 @@
         "weight_pct": 16.666667
       },
       {
-        "asset_id": "IE000I8KRLL9",
-        "name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
-        "category": "ETF",
-        "weight_pct": 16.666667
-      },
-      {
-        "asset_id": "DE000BAY0017",
-        "name": "BAYER AG",
+        "asset_id": "NL0000226223",
+        "name": "STMICROELECTRONICS N.V.",
         "category": "Actions",
         "weight_pct": 16.666667
       },
       {
-        "asset_id": "ES0113211835",
-        "name": "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
+        "asset_id": "LU1598757687",
+        "name": "ARCELORMITTAL",
+        "category": "Actions",
+        "weight_pct": 16.666667
+      },
+      {
+        "asset_id": "NL0011821202",
+        "name": "ING GROEP N.V.",
         "category": "Actions",
         "weight_pct": 16.666667
       }

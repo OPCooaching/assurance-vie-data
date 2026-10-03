@@ -166,6 +166,9 @@ def load_actor_performance(name: str, strategies):
         "claude_double_filtre": "Claude C — Tendance confirmée par l’ampleur",
         "claude_momentum_multi": "Claude D — Momentum multi-horizon",
         "claude_momentum_prudent": "Claude E — Momentum sous garde-fou",
+        "claude_dispersion": "Claude F — Structure du marché",
+        "claude_contrarien": "Claude G — Retour à la moyenne",
+        "claude_dollar_energie": "Claude H — Dollar et énergie",
     }
     result = []
     for column in frame.columns:

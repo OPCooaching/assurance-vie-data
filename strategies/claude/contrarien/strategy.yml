@@ -1,0 +1,77 @@
+id: claude-contrarien
+label: "Claude G — Retour à la moyenne"
+status: proposed
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+summary: >
+  Parmi les supports qui montent depuis un an, cette règle achète ceux qui
+  viennent de reculer le plus fortement sur un mois. Elle fait donc l'inverse
+  des règles de momentum, qui achètent ce qui vient de monter.
+
+hypothese_economique: >
+  Deux effets opposés coexistent selon l'horizon. Sur six à douze mois, les
+  tendances ont tendance à se prolonger, et c'est sur quoi reposent toutes les
+  règles de momentum du dépôt. Sur quelques semaines, l'effet s'inverse : un
+  support qui vient de décrocher fortement sans que rien de durable n'ait changé
+  a tendance à se redresser. Ce phénomène de réversion court terme est l'un des
+  plus anciennement documentés en finance de marché, et il s'explique
+  simplement : un mouvement brutal sur quelques séances traduit souvent un
+  déséquilibre temporaire entre acheteurs et vendeurs plutôt qu'une information
+  nouvelle.
+
+  La règle combine les deux horizons au lieu de les opposer : elle n'achète que
+  des supports dont la tendance longue reste positive, ce qui écarte les lignes
+  réellement en train de se dégrader, et choisit parmi eux les plus décalés à
+  court terme.
+
+difference_avec_les_autres: >
+  C'est la seule règle du dépôt qui parie contre le mouvement récent. Quand
+  Claude D, Claude E et les quatre familles ChatGPT achètent ce qui vient de
+  monter, celle-ci achète ce qui vient de baisser. Sa composition sera
+  régulièrement l'opposée de la leur, ce qui en fait un contrepoids et non une
+  variante.
+
+main_rule: >
+  Chaque lundi, parmi les supports dont la performance sur douze mois reste
+  positive, les cinq qui ont le plus reculé sur les vingt dernières séances sont
+  détenus à parts égales. Un support qui a trop reculé est écarté : au-delà du
+  seuil de rupture, le recul n'est plus un excès passager.
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    filtre_tendance_longue_seances: 252
+    fenetre_reversion_seances: 20
+    nombre_de_lignes: 5
+    recul_maximal_admis_pct: -20
+    recul_minimal_requis_pct: -1
+    support_defensif: LU0290358497
+    currency_universe: eur_quoted_only
+    universe: all_eur_quoted_funds
+
+regle_detaillee:
+  selection: >
+    Sont éligibles les supports dont la performance sur deux cent cinquante-deux
+    séances est strictement positive. Parmi eux, sont classés ceux dont la
+    performance sur vingt séances est négative mais supérieure à moins vingt
+    pour cent. Les cinq plus en retard sont retenus à parts égales. Si moins de
+    cinq remplissent la condition, les places vacantes restent sur le support
+    monétaire.
+  conservation: >
+    Un support est conservé tant qu'il figure parmi les cinq plus en retard. En
+    pratique, un support qui se redresse sort du classement à la revue suivante :
+    la règle vend ce qui a rebondi, ce qui est le comportement attendu.
+  remplacement: >
+    À chaque revue, le classement est refait entièrement. La rotation sera plus
+    rapide que celle des règles de momentum.
+
+known_weakness: >
+  La réversion court terme ne fonctionne pas dans les baisses durables : un
+  support qui recule chaque semaine sera racheté chaque semaine, et la règle
+  accumulera les pertes tant que le filtre de tendance longue n'a pas basculé.
+  Le seuil de rupture à moins vingt pour cent limite ce cas sans l'éliminer. La
+  rotation élevée suppose aussi que les arbitrages restent gratuits et exécutés
+  sans décalage, hypothèse déjà faite ailleurs mais plus engageante ici.

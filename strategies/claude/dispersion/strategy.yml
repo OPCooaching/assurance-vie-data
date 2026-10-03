@@ -1,0 +1,90 @@
+id: claude-dispersion
+label: "Claude F — Structure du marché"
+status: proposed
+active_version: v0.1
+decision_frequency: weekly
+execution_model: next_available_valuation
+history_mode: append_only
+
+summary: >
+  Cette règle ne regarde ni la hausse ni la baisse des supports, mais la manière
+  dont ils bougent les uns par rapport aux autres. Quand ils se mettent tous à
+  bouger ensemble, elle réduit le nombre de lignes et se replie. Quand ils
+  divergent, elle se diversifie largement.
+
+hypothese_economique: >
+  La diversification repose sur une condition qui n'est pas toujours vérifiée :
+  que les supports ne baissent pas en même temps. Or la corrélation entre actifs
+  n'est pas stable. Elle s'élève fortement dans les phases de tension, au moment
+  précis où la protection serait utile, phénomène documenté sous le nom de
+  rupture de diversification. Détenir dix lignes très corrélées revient alors à
+  détenir une seule ligne de taille dix.
+
+  Symétriquement, quand la dispersion des rendements est forte, les écarts entre
+  supports sont réels et le choix des lignes a de la valeur. Quand elle est
+  faible, tout le monde fait la même chose et la sélection ne rapporte rien,
+  seul le niveau d'exposition compte.
+
+  La règle mesure donc l'état du marché plutôt que sa direction, et ajuste à la
+  fois la largeur du portefeuille et sa part exposée.
+
+difference_avec_les_autres: >
+  Les cinq premières règles Claude et les quatre familles ChatGPT lisent le
+  niveau ou l'amplitude des prix : tendance, momentum, volatilité, régime macro.
+  Celle-ci lit leur structure interne, c'est-à-dire la corrélation moyenne entre
+  supports et la dispersion de leurs rendements. Ces deux mesures peuvent
+  s'élever alors que les prix montent, et redescendre alors qu'ils baissent.
+  Elle décidera donc autrement que les autres, y compris quand elles sont
+  d'accord entre elles.
+
+main_rule: >
+  Chaque lundi, la corrélation moyenne entre tous les supports éligibles et la
+  dispersion de leurs rendements sont mesurées sur soixante séances. La part
+  exposée et le nombre de lignes détenues dépendent de ces deux mesures, et
+  d'elles seules.
+
+parameters:
+  v0.1:
+    equity_target_pct: 50
+    fenetre_mesure_seances: 60
+    correlation_seuil_haut: 0.55
+    correlation_seuil_bas: 0.35
+    dispersion_seuil_haut_pct: 0.90
+    dispersion_seuil_bas_pct: 0.55
+    lignes_marche_disperse: 10
+    lignes_marche_normal: 6
+    lignes_marche_groupe: 3
+    part_marche_groupe_pct: 50
+    selection: equipondere_parmi_les_moins_correles
+    support_defensif: LU0290358497
+    currency_universe: eur_quoted_only
+    universe: all_eur_quoted_funds
+
+regle_detaillee:
+  mesure: >
+    Corrélation moyenne de toutes les paires de supports éligibles sur soixante
+    séances, et moyenne de l'écart type transversal quotidien des rendements sur
+    la même fenêtre.
+  selection: >
+    Au-dessus de 0,55 de corrélation moyenne, le marché est groupé : trois
+    lignes seulement, et la moitié de la part exposée va sur le support
+    monétaire. Entre 0,35 et 0,55, six lignes. Sous 0,35, le marché est
+    dispersé : dix lignes. Les lignes retenues sont celles dont la corrélation
+    moyenne aux autres est la plus basse, à parts égales, et non celles qui
+    montent le plus.
+  conservation: >
+    Une ligne est conservée tant qu'elle reste dans le nombre retenu du régime
+    en cours. Un changement de régime recompose le portefeuille en une fois.
+  remplacement: >
+    À chaque revue, les supports sont reclassés par corrélation moyenne
+    croissante. Ceux qui sortent du rang retenu sont vendus, ceux qui y entrent
+    sont achetés à parts égales.
+
+known_weakness: >
+  La corrélation se mesure sur le passé récent et saute brutalement : la règle
+  constatera un marché groupé après le début de la tension, pas avant.
+  Sélectionner les supports les moins corrélés revient souvent à retenir les
+  plus marginaux, qui peuvent être peu liquides ou simplement atypiques, et le
+  portefeuille obtenu peut paraître étrange. Enfin, trois lignes en marché
+  groupé concentrent le risque au moment où il est le plus élevé, ce qui est
+  assumé mais discutable.

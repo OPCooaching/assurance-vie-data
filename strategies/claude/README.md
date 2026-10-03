@@ -2,9 +2,70 @@
 
 ## Suivi quotidien technique
 
-Le calcul quotidien des cinq courbes historiques Claude est assuré par `scripts/compute_claude_strategies.py` lorsqu'il est appelé par le workflow commun. Une interruption technique après le 18/09/2026 est conservée comme un trou explicite : aucune valeur ni décision n'est rétroactivement fabriquée. La reprise est append-only et commence à la première date réellement calculée après rétablissement du workflow.
+Le calcul quotidien des huit courbes Claude est assuré par `strategies/claude/moteur.py`, appelé par le workflow commun. Il a remplacé `scripts/compute_claude_strategies.py` le 3 octobre 2026, qui ne doit plus être exécuté. Une interruption technique après le 18/09/2026 est conservée comme un trou explicite : aucune valeur ni décision n'est rétroactivement fabriquée. La reprise est append-only et commence à la première date réellement calculée après rétablissement du workflow.
 
 Cet espace appartient à Claude. Il est séparé des espaces ChatGPT et académique afin que les approches puissent être comparées honnêtement.
+
+## Modifications faites hors de l'espace Claude, le 3 octobre 2026
+
+Olivier a demandé explicitement ces deux changements, n'ayant plus accès à
+l'agent qui gère les fichiers communs. Ils sont consignés ici pour que cet agent
+les retrouve. Les deux ne concernent que Claude et ont été vérifiés avant
+publication : les sorties de ChatGPT et des stratégies académiques sont
+rigoureusement identiques après exécution complète de la chaîne, horodatage mis
+à part.
+
+### `.github/workflows/daily-update.yml`
+
+Une ligne changée dans l'étape « Compute Claude live strategies », qui appelle
+désormais `strategies/claude/moteur.py` au lieu de
+`scripts/compute_claude_strategies.py`. Six lignes de commentaire expliquent
+pourquoi, juste au-dessus. Aucune autre étape n'est touchée.
+
+Motif : Claude est passé de cinq à huit stratégies et en ajoutera d'autres.
+Chaque ajout exigeait jusqu'ici de modifier un fichier commun. Le moteur déplacé
+dans l'espace Claude supprime cette dépendance.
+
+**Point de vigilance.** `scripts/compute_claude_strategies.py` ne doit plus être
+exécuté. Il écrirait cinq colonnes sur un fichier qui en compte huit. Le fichier
+est laissé en place, mais plus aucune étape ne l'appelle.
+
+### `scripts/build_dashboard_data.py`
+
+Trois entrées ajoutées au dictionnaire `labels`, pour que les stratégies F, G et
+H s'affichent sous leur nom et non sous leur identifiant technique :
+
+```python
+"claude_dispersion": "Claude F — Structure du marché",
+"claude_contrarien": "Claude G — Retour à la moyenne",
+"claude_dollar_energie": "Claude H — Dollar et énergie",
+```
+
+Aucune ligne existante n'est modifiée.
+
+### Une demande qui reste ouverte
+
+Le workflow `full-universe-research.yml` se déclenche sur n'importe quelle
+branche et y pousse ses résultats. Il s'est exécuté sur la branche de travail
+Claude et y a écrit sept fichiers de l'espace ChatGPT. Sans gravité, mais le
+limiter à la branche principale éviterait que les demandes d'intégration se
+mélangent. Je n'y ai pas touché : cet espace n'est pas le mien.
+
+## État au 3 octobre 2026
+
+Le calcul quotidien est rétabli depuis le 30 septembre et couvre huit
+stratégies. Les cinq premières sont conservées sans modification, comme
+témoins : trois recouvrent des familles déjà traitées par ChatGPT, et deux sont
+deux variations d'une même idée. Trois règles nouvelles les complètent, écrites
+le 3 octobre et publiées avant tout résultat : Claude F lit la structure du
+marché, Claude G parie contre le mouvement récent, Claude H décide par le dollar
+et le prix de l'énergie. Chacune a son hypothèse économique, ses règles de
+sélection, de conservation et de remplacement, et sa faiblesse connue, dans son
+`strategy.yml` et dans `strategies.json`.
+
+Aucune décision hebdomadaire n'est encore archivée dans
+`history/claude/decisions/` : la première sera inscrite au prochain lundi
+réellement calculé.
 
 ## État au 24 septembre 2026
 
