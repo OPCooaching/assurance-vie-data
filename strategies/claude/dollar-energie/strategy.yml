@@ -47,6 +47,8 @@ parameters:
     fenetre_regime_seances: 60
     seuil_variation_dollar_pct: 2.0
     seuil_variation_brent_pct: 10.0
+    axes_evalues_separement: true
+    initialisation_sans_seuil: true
     latence_maximale_donnee_jours: 10
     support_defensif: LU0290358497
     currency_universe: eur_quoted_only
@@ -70,11 +72,14 @@ parameters:
 
 regle_detaillee:
   selection: >
-    Le régime est déterminé par le signe de la variation du dollar pondéré sur
-    soixante séances, au-delà de deux pour cent en valeur absolue, et par celle
-    du brent, au-delà de dix pour cent. En deçà de ces seuils, le régime
-    précédent est conservé : un mouvement faible ne justifie pas de recomposer.
-    La composition du régime est alors appliquée telle quelle.
+    Les deux axes sont évalués séparément. L'axe dollar bascule quand la
+    variation du dollar pondéré sur soixante séances dépasse deux pour cent en
+    valeur absolue ; l'axe énergie bascule quand celle du brent dépasse dix pour
+    cent. En deçà de son seuil, un axe conserve son état précédent : un mouvement
+    faible ne justifie pas de recomposer. À la toute première décision, faute
+    d'état précédent, chaque axe prend simplement le signe de sa variation. Le
+    croisement des deux axes donne le régime, dont la composition est appliquée
+    telle quelle.
   conservation: >
     La composition reste inchangée tant que le régime ne change pas. Ces deux
     prix évoluant lentement, les changements seront rares, de l'ordre de
