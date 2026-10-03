@@ -136,7 +136,10 @@ def load_decision_history(name: str, names: dict[str, str]):
             "strategy_version": record.get("strategy_version"),
             "decision_type": record["decision_type"],
             "rationale": record.get("rationale"),
-            "target_allocation_percent": {\n                names.get(str(asset_id), str(asset_id)): weight\n                for asset_id, weight in record.get("target_allocation_percent", {}).items()\n            },
+            "target_allocation_percent": {
+                names.get(str(asset_id), str(asset_id)): weight
+                for asset_id, weight in record.get("target_allocation_percent", {}).items()
+            },
             "warnings": record.get("warnings", []),
         })
     return sorted(records, key=lambda item: str(item.get("date") or ""), reverse=True)
