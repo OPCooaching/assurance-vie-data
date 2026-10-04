@@ -3,13 +3,13 @@
   "record_kind": "weekly_strategy_decision",
   "status": "decided_on_published_prices",
   "decision_id": "2026-10-02--claude_dispersion",
-  "decided_at_utc": "2026-10-04T15:23:40+00:00",
+  "decided_at_utc": "2026-10-04T15:29:23+00:00",
   "effective_valuation_date": "2026-10-02",
   "author": "claude",
   "strategy_id": "claude_dispersion",
   "strategy_version": "v0.2",
   "decision_type": "weekly_allocation",
-  "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+  "rationale": "Première allocation : 6 support(s) retenu(s).",
   "target_allocation_percent": {
     "DE000A0Q4R85": 8.33,
     "FR0010147603": 8.33,
@@ -18,6 +18,46 @@
     "LU0292103222": 8.33,
     "LU0514695690": 8.33,
     "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.02
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "DE000A0Q4R85",
+        "nom": "iShares MSCI Brazil UCITS ETF (Allemagne)",
+        "poids_pct": 8.33
+      },
+      {
+        "asset_id": "FR0010147603",
+        "nom": "Carmignac Investissement Latitude A EUR capitalisant",
+        "poids_pct": 8.33
+      },
+      {
+        "asset_id": "IE000R85HL30",
+        "nom": "Amundi MSCI USA SRI Climate Net Zero Ambition PAB UCITS ETF",
+        "poids_pct": 8.33
+      },
+      {
+        "asset_id": "IE00BL25JN58",
+        "nom": "Xtrackers MSCI World Minimum Volatility UCITS ETF",
+        "poids_pct": 8.33
+      },
+      {
+        "asset_id": "LU0292103222",
+        "nom": "Xtrackers MSCI Europe Health Care ESG Screened UCITS ETF 1C",
+        "poids_pct": 8.33
+      },
+      {
+        "asset_id": "LU0514695690",
+        "nom": "Xtrackers MSCI China UCITS ETF 1C",
+        "poids_pct": 8.33
+      }
+    ],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 49.98,
+    "part_exposee_precedente_pct": 0
   },
   "warnings": []
 }

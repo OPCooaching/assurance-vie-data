@@ -84,6 +84,19 @@ H s'affichent sous leur nom et non sous leur identifiant technique :
 
 Aucune ligne existante n'est modifiée.
 
+Le 4 octobre, trois lignes ajoutées dans `load_decision_history`, pour que le
+détail des mouvements enregistré par Claude soit recopié dans les données web :
+
+```python
+        if isinstance(record.get("mouvements"), dict):
+            records[-1]["mouvements"] = record["mouvements"]
+```
+
+La clé `mouvements` n'existe que dans les décisions Claude. Pour tout autre
+acteur, la condition est fausse et la sortie reste identique au caractère près.
+Vérifié après exécution complète : `academic.json`, `chatgpt.json` et
+`chatgpt-data.js` sont inchangés, horodatage mis à part.
+
 ### Une demande qui reste ouverte
 
 Le workflow `full-universe-research.yml` se déclenche sur n'importe quelle

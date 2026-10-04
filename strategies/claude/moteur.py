@@ -312,6 +312,94 @@ def versions_actives() -> dict[str, str]:
 VERSIONS = versions_actives()
 
 
+
+def noms_lisibles() -> dict[str, str]:
+    """Nom complet de chaque support, pour que les mouvements soient lisibles."""
+    acronymes = {"Ishares": "iShares", "Msci": "MSCI", "Ucits": "UCITS", "Etf": "ETF",
+                 "Eur": "EUR", "Em": "EM", "Ii": "II", "Esg": "ESG", "Sri": "SRI",
+                 "Us": "US", "Usa": "USA", "Dax": "DAX", "Cac": "CAC", "Bnp": "BNP",
+                 "Jpm": "JPM", "Pab": "PAB", "Stoxx": "STOXX", "Acc": "capitalisant",
+                 "Dist": "distribuant", "Ex-China": "ex-Chine"}
+    noms = {}
+    if UNIVERS.exists():
+        for ligne in pd.read_csv(UNIVERS).itertuples():
+            mots = [acronymes.get(m, m) for m in str(ligne.support_name).title().split()]
+            noms[str(ligne.asset_id)] = " ".join(mots).replace("(De)", "(Allemagne)")
+    noms[FONDS_EURO] = "Fonds en euros du contrat"
+    return noms
+
+
+def derniere_decision(identifiant: str) -> dict:
+    """Décision précédente d'une stratégie, pour mesurer ce qui a changé."""
+    if not DECISIONS.exists():
+        return {}
+    fichiers = sorted(DECISIONS.glob(f"*--{identifiant.replace('_', '-')}.json"))
+    if not fichiers:
+        return {}
+    try:
+        return json.loads(fichiers[-1].read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def mouvements(avant: dict, apres: dict, noms: dict) -> tuple[dict, str]:
+    """Ce qui entre, sort, est renforcé ou allégé entre deux allocations.
+
+    Le fonds en euros est la poche non exposée : il n'est pas un choix de
+    sélection et reste hors du récit des mouvements.
+    """
+    marche = lambda d: {a: w for a, w in d.items() if a != FONDS_EURO}
+    a, b = marche(avant), marche(apres)
+    entrees = sorted(set(b) - set(a))
+    sorties = sorted(set(a) - set(b))
+    communs = sorted(set(a) & set(b))
+    renforces = [x for x in communs if b[x] - a[x] > 0.05]
+    alleges = [x for x in communs if a[x] - b[x] > 0.05]
+    inchanges = [x for x in communs if abs(b[x] - a[x]) <= 0.05]
+
+    detail = {
+        "entrees": [{"asset_id": x, "nom": noms.get(x, x), "poids_pct": b[x]} for x in entrees],
+        "sorties": [{"asset_id": x, "nom": noms.get(x, x), "poids_pct_precedent": a[x]} for x in sorties],
+        "renforces": [{"asset_id": x, "nom": noms.get(x, x), "de_pct": a[x], "a_pct": b[x]} for x in renforces],
+        "alleges": [{"asset_id": x, "nom": noms.get(x, x), "de_pct": a[x], "a_pct": b[x]} for x in alleges],
+        "inchanges": [{"asset_id": x, "nom": noms.get(x, x), "poids_pct": b[x]} for x in inchanges],
+        "part_exposee_pct": round(sum(b.values()), 2),
+        "part_exposee_precedente_pct": round(sum(a.values()), 2),
+    }
+
+    if not avant:
+        if b:
+            phrases = ["Première allocation : " + ", ".join(
+                f"{noms.get(x, x)} à {b[x]:.2f} %" for x in sorted(b, key=lambda x: -b[x])) + ".",
+                f"Part exposée aux marchés : {detail['part_exposee_pct']:.2f} %."]
+        else:
+            phrases = ["Première allocation : aucun support exposé, "
+                       "la totalité reste sur le fonds en euros."]
+    else:
+        phrases = []
+        if entrees:
+            phrases.append("Entrées : " + ", ".join(
+                f"{noms.get(x, x)} à {b[x]:.2f} %" for x in entrees) + ".")
+        if sorties:
+            phrases.append("Sorties : " + ", ".join(
+                f"{noms.get(x, x)}, qui pesait {a[x]:.2f} %" for x in sorties) + ".")
+        if renforces:
+            phrases.append("Renforcés : " + ", ".join(
+                f"{noms.get(x, x)} de {a[x]:.2f} à {b[x]:.2f} %" for x in renforces) + ".")
+        if alleges:
+            phrases.append("Allégés : " + ", ".join(
+                f"{noms.get(x, x)} de {a[x]:.2f} à {b[x]:.2f} %" for x in alleges) + ".")
+        if inchanges:
+            phrases.append(f"Inchangés : {len(inchanges)} support(s).")
+        if not entrees and not sorties and not renforces and not alleges:
+            phrases = ["Aucun mouvement : l'allocation de la semaine précédente est conservée."]
+        ecart = detail["part_exposee_pct"] - detail["part_exposee_precedente_pct"]
+        if abs(ecart) > 0.05:
+            phrases.append(f"Part exposée aux marchés : {detail['part_exposee_precedente_pct']:.2f} "
+                           f"% puis {detail['part_exposee_pct']:.2f} %.")
+    return detail, " ".join(phrases)
+
+
 def courbe(table, dates, signal, univers, contexte, valeur_depart):
     """Base 100 au départ, décision le lundi, application à la valorisation suivante."""
     valeur = float(valeur_depart)
@@ -427,12 +515,16 @@ def main() -> int:
         DECISIONS.mkdir(parents=True, exist_ok=True)
         jour = a_calculer[-1].date().isoformat()
         maintenant = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        noms = noms_lisibles()
         for identifiant, date, poids, liquide in decisions:
             chemin = DECISIONS / f"{jour}--{identifiant.replace('_', '-')}.json"
             if chemin.exists():
                 continue
             cible = {a: round(100 * w, 2) for a, w in sorted(poids.items())}
             cible[FONDS_EURO] = round(100 - sum(cible.values()), 2)
+            precedente = derniere_decision(identifiant)
+            detail, recit = mouvements(
+                precedente.get("target_allocation_percent", {}), cible, noms)
             chemin.write_text(json.dumps({
                 "schema_version": "1.0",
                 "record_kind": "weekly_strategy_decision",
@@ -444,8 +536,9 @@ def main() -> int:
                 "strategy_id": identifiant,
                 "strategy_version": VERSIONS[identifiant],
                 "decision_type": "weekly_allocation",
-                "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+                "rationale": recit,
                 "target_allocation_percent": cible,
+                "mouvements": detail,
                 "warnings": [],
             }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             inscrites += 1

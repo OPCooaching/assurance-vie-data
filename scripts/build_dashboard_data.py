@@ -142,6 +142,8 @@ def load_decision_history(name: str, names: dict[str, str]):
             },
             "warnings": record.get("warnings", []),
         })
+        if isinstance(record.get("mouvements"), dict):
+            records[-1]["mouvements"] = record["mouvements"]
     return sorted(records, key=lambda item: str(item.get("date") or ""), reverse=True)
 
 

@@ -3,18 +3,43 @@
   "record_kind": "weekly_strategy_decision",
   "status": "decided_on_published_prices",
   "decision_id": "2026-10-02--claude_dollar_energie",
-  "decided_at_utc": "2026-10-04T15:23:40+00:00",
+  "decided_at_utc": "2026-10-04T15:29:23+00:00",
   "effective_valuation_date": "2026-10-02",
   "author": "claude",
   "strategy_id": "claude_dollar_energie",
   "strategy_version": "v0.2",
   "decision_type": "weekly_allocation",
-  "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+  "rationale": "Première allocation : 3 support(s) retenu(s).",
   "target_allocation_percent": {
     "DE000A0F5UK5": 20.0,
     "IE00BMG6Z448": 15.0,
     "LU1900066462": 15.0,
     "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "DE000A0F5UK5",
+        "nom": "iShares STOXX Europe 600 Basic Resources UCITS ETF (Allemagne)",
+        "poids_pct": 20.0
+      },
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "iShares MSCI EM ex-Chine UCITS ETF",
+        "poids_pct": 15.0
+      },
+      {
+        "asset_id": "LU1900066462",
+        "nom": "Amundi MSCI Eastern Europe Ex Russia UCITS ETF",
+        "poids_pct": 15.0
+      }
+    ],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 0
   },
   "warnings": []
 }

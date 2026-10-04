@@ -3,13 +3,13 @@
   "record_kind": "weekly_strategy_decision",
   "status": "decided_on_published_prices",
   "decision_id": "2026-10-02--claude_socle_satellites",
-  "decided_at_utc": "2026-10-04T15:23:40+00:00",
+  "decided_at_utc": "2026-10-04T15:29:23+00:00",
   "effective_valuation_date": "2026-10-02",
   "author": "claude",
   "strategy_id": "claude_socle_satellites",
   "strategy_version": "v0.4",
   "decision_type": "weekly_allocation",
-  "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+  "rationale": "Première allocation : 5 support(s) retenu(s).",
   "target_allocation_percent": {
     "IE000I8KRLL9": 6.67,
     "IE00BKBF6H24": 21.0,
@@ -17,6 +17,41 @@
     "IE00BMG6Z448": 6.67,
     "LU1829219390": 6.67,
     "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 49.99
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "IE000I8KRLL9",
+        "nom": "iShares MSCI Global Semiconductors UCITS ETF",
+        "poids_pct": 6.67
+      },
+      {
+        "asset_id": "IE00BKBF6H24",
+        "nom": "iShares Core MSCI World UCITS ETF",
+        "poids_pct": 21.0
+      },
+      {
+        "asset_id": "IE00BL25JN58",
+        "nom": "Xtrackers MSCI World Minimum Volatility UCITS ETF",
+        "poids_pct": 9.0
+      },
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "iShares MSCI EM ex-Chine UCITS ETF",
+        "poids_pct": 6.67
+      },
+      {
+        "asset_id": "LU1829219390",
+        "nom": "Amundi Euro STOXX Banks UCITS ETF capitalisant",
+        "poids_pct": 6.67
+      }
+    ],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 50.01,
+    "part_exposee_precedente_pct": 0
   },
   "warnings": []
 }

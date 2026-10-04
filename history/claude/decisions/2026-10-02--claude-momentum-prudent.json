@@ -3,13 +3,13 @@
   "record_kind": "weekly_strategy_decision",
   "status": "decided_on_published_prices",
   "decision_id": "2026-10-02--claude_momentum_prudent",
-  "decided_at_utc": "2026-10-04T15:23:40+00:00",
+  "decided_at_utc": "2026-10-04T15:29:23+00:00",
   "effective_valuation_date": "2026-10-02",
   "author": "claude",
   "strategy_id": "claude_momentum_prudent",
   "strategy_version": "v0.2",
   "decision_type": "weekly_allocation",
-  "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+  "rationale": "Première allocation : 6 support(s) retenu(s).",
   "target_allocation_percent": {
     "IE000I8KRLL9": 4.36,
     "IE00BMG6Z448": 7.12,
@@ -18,6 +18,46 @@
     "LU1829219390": 9.84,
     "LU1900066462": 11.71,
     "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "IE000I8KRLL9",
+        "nom": "iShares MSCI Global Semiconductors UCITS ETF",
+        "poids_pct": 4.36
+      },
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "iShares MSCI EM ex-Chine UCITS ETF",
+        "poids_pct": 7.12
+      },
+      {
+        "asset_id": "LU0533033667",
+        "nom": "Amundi MSCI World Information Technology UCITS ETF EUR capitalisant",
+        "poids_pct": 9.41
+      },
+      {
+        "asset_id": "LU0839027447",
+        "nom": "Xtrackers Nikkei 225 UCITS ETF 1D",
+        "poids_pct": 7.56
+      },
+      {
+        "asset_id": "LU1829219390",
+        "nom": "Amundi Euro STOXX Banks UCITS ETF capitalisant",
+        "poids_pct": 9.84
+      },
+      {
+        "asset_id": "LU1900066462",
+        "nom": "Amundi MSCI Eastern Europe Ex Russia UCITS ETF",
+        "poids_pct": 11.71
+      }
+    ],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 0
   },
   "warnings": []
 }
