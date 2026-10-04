@@ -63,6 +63,13 @@ Le 4 octobre, une ligne de programmation ajoutée pour la revue du samedi,
 `cron: "0 12 * * 6"`, décrite plus haut. Les horaires des jours ouvrés ne sont pas
 modifiés.
 
+Toujours le 4 octobre, `history/claude/` ajouté à la commande `git add` de
+l'étape « Commit generated data », avec trois lignes de commentaire. Sans cela,
+les décisions hebdomadaires écrites par le moteur restaient dans le conteneur et
+disparaissaient à la fin du passage : la revue suivante ne retrouvait aucune
+allocation précédente et ne pouvait plus dire ce qui entre et ce qui sort. Seul
+l'espace Claude est concerné, aucun autre chemin n'est ajouté.
+
 Motif de la première : Claude est passé de cinq à huit stratégies et en ajoutera d'autres.
 Chaque ajout exigeait jusqu'ici de modifier un fichier commun. Le moteur déplacé
 dans l'espace Claude supprime cette dépendance.
