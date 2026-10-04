@@ -1,75 +1,79 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stratégies Claude</title><link rel="stylesheet" href="assets/style.css?v=20260922-readable"><script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script></head><body><header><h1>Stratégies Claude</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a><a href="screener.html">Indicateurs</a></nav></header><main><section class="card"><div id="status" class="muted"></div><h2>Huit stratégies, une même enveloppe</h2><p class="muted">Cinq stratégies ont été suivies à partir du 09/09/2026, trois autres depuis le 30/09/2026, avec 50 % de poche de marché et 50 % de fonds euros maintenu stable jusqu’à un crédit réellement enregistré. Le suivi quotidien a été interrompu après le 18/09/2026 parce que l’étape Claude avait disparu du workflow. Le trou visible sur la courbe est volontaire : aucune valeur ni décision n’est reconstruite pendant cette période. Le suivi reprend uniquement à partir de la première exécution réelle du workflow rétabli.</p><div id="summary" class="grid"></div></section><section class="card"><h2>Bernard et les huit stratégies Claude</h2><p class="muted">Toutes les lignes utilisent les mêmes cours officiels publiés. Si un support publie avec retard, son dernier cours officiel est conservé provisoirement, puis corrigé automatiquement ; la page le précise. Cliquer sur un nom dans la légende permet d’isoler une stratégie.</p><canvas id="comparison-chart"></canvas><div id="chart-legend" class="chart-legend" aria-label="Légende du graphique"></div></section><section class="card"><h2>Règles et limites</h2><div id="strategy-details"></div></section><section class="card"><h2>Comparaison détaillée</h2><table><thead><tr><th>Stratégie</th><th>Depuis le 09/09</th><th>5 j</th><th>20 j</th><th>Drawdown</th><th>Vol. 20 j</th><th>Valeur estimée</th></tr></thead><tbody id="metrics-body"></tbody></table></section><section class="card"><h2>Mouvements de la semaine</h2><p class="muted" id="mouvements-note"></p><div id="mouvements"></div></section></main><script src="assets/dashboard.js?v=20260925-provisional"></script><script>
-const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-const jourFr = d => d ? d.slice(8, 10) + "/" + d.slice(5, 7) + "/" + d.slice(0, 4) : "—";
-const pct = v => Number(v).toFixed(2).replace(".", ",") + " %";
+// Portée locale : la page partage dashboard.js, qui déclare déjà
+// certains noms. Une collision ferait échouer tout le script.
+(function () {
+  const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const jourFr = d => d ? d.slice(8, 10) + "/" + d.slice(5, 7) + "/" + d.slice(0, 4) : "—";
+  const part = v => Number(v).toFixed(2).replace(".", ",") + " %";
 
-function bloc(titre, items, rendu) {
-  if (!items || !items.length) return "";
-  return "<li><strong>" + esc(titre) + "</strong> : "
-    + items.map(rendu).map(esc).join(" ; ") + ".</li>";
-}
+  function bloc(titre, items, rendu) {
+    if (!items || !items.length) return "";
+    return "<li><strong>" + esc(titre) + "</strong> : "
+      + items.map(rendu).map(esc).join(" ; ") + ".</li>";
+  }
 
-function renderMouvements(data) {
-  const box = document.querySelector("#mouvements");
-  const note = document.querySelector("#mouvements-note");
-  if (!box) return;
-  const histoire = data.decision_history || [];
-  if (!histoire.length) {
-    box.innerHTML = '<p class="muted">Aucune décision enregistrée pour le moment.</p>';
-    return;
-  }
-  const derniere = histoire[0].date;
-  const semaine = histoire.filter(d => d.date === derniere);
-  if (note) {
-    note.textContent = "Revue du " + jourFr(derniere) + ", calculée sur la dernière "
-      + "valorisation disponible de la semaine. L’allocation retenue s’applique à la "
-      + "valorisation suivante, donc au lundi. Pour chaque stratégie figurent les supports "
-      + "retirés, les supports ajoutés, ceux dont le poids bouge, et le total.";
-  }
-  box.innerHTML = semaine.map(d => {
-    const fiche = (data.strategies || {})[d.strategy_id.replace(/_/g, "-")] || {};
-    const titre = fiche.label || d.strategy_id;
-    const m = d.mouvements;
-    const lignes = Object.entries(d.target_allocation_percent || {})
-      .sort((a, b) => b[1] - a[1]);
-    let corps;
-    if (!m) {
-      corps = "<p>" + esc(d.rationale || "") + "</p>";
-    } else {
-      const expose = Number(m.part_exposee_pct || 0);
-      const listes = [
-        bloc("Retirés", m.sorties, x => x.nom + ", qui pesait " + pct(x.poids_pct_precedent)),
-        bloc("Ajoutés", m.entrees, x => x.nom + " à " + pct(x.poids_pct)),
-        bloc("Renforcés", m.renforces, x => x.nom + ", de " + pct(x.de_pct) + " à " + pct(x.a_pct)),
-        bloc("Allégés", m.alleges, x => x.nom + ", de " + pct(x.de_pct) + " à " + pct(x.a_pct)),
-        bloc("Conservés au même poids", m.inchanges, x => x.nom + " à " + pct(x.poids_pct)),
-      ].join("");
-      const rien = !listes
-        ? '<p class="muted">Aucun mouvement : l’allocation de la semaine précédente est conservée.</p>'
-        : "";
-      corps = rien + (listes ? "<ul>" + listes + "</ul>" : "")
-        + "<p><strong>Total</strong> : " + pct(expose) + " exposés aux marchés, "
-        + pct(100 - expose) + " sur le fonds en euros, soit 100 % du contrat."
-        + (m.part_exposee_precedente_pct
-            ? " La semaine précédente, la part exposée était de "
-              + pct(m.part_exposee_precedente_pct) + "."
-            : "")
-        + "</p>";
+  function renderMouvements(data) {
+    const box = document.querySelector("#mouvements");
+    const note = document.querySelector("#mouvements-note");
+    if (!box) return;
+    const histoire = data.decision_history || [];
+    if (!histoire.length) {
+      box.innerHTML = '<p class="muted">Aucune décision enregistrée pour le moment.</p>';
+      return;
     }
-    return `<article class="strategy">
-      <h3>${esc(titre)} <small>${esc(d.strategy_version || "")}</small></h3>
-      ${corps}
-      <details><summary>Allocation complète retenue, ${lignes.length} ligne(s)</summary>
-        <table><thead><tr><th>Support</th><th>Part du contrat</th></tr></thead>
-        <tbody>${lignes.map(([a, w]) =>
-          `<tr><td>${esc(a)}</td><td>${pct(w)}</td></tr>`
-        ).join("")}</tbody></table></details>
-    </article>`;
-  }).join("");
-}
+    const derniere = histoire[0].date;
+    const semaine = histoire.filter(d => d.date === derniere);
+    if (note) {
+      note.textContent = "Revue du " + jourFr(derniere) + ", calculée sur la dernière "
+        + "valorisation disponible de la semaine. L’allocation retenue s’applique à la "
+        + "valorisation suivante, donc au lundi. Pour chaque stratégie figurent les supports "
+        + "retirés, les supports ajoutés, ceux dont le poids bouge, et le total.";
+    }
+    box.innerHTML = semaine.map(d => {
+      const fiche = (data.strategies || {})[d.strategy_id.replace(/_/g, "-")] || {};
+      const titre = fiche.label || d.strategy_id;
+      const m = d.mouvements;
+      const lignes = Object.entries(d.target_allocation_percent || {})
+        .sort((a, b) => b[1] - a[1]);
+      let corps;
+      if (!m) {
+        corps = "<p>" + esc(d.rationale || "") + "</p>";
+      } else {
+        const expose = Number(m.part_exposee_pct || 0);
+        const listes = [
+          bloc("Retirés", m.sorties, x => x.nom + ", qui pesait " + part(x.poids_pct_precedent)),
+          bloc("Ajoutés", m.entrees, x => x.nom + " à " + part(x.poids_pct)),
+          bloc("Renforcés", m.renforces, x => x.nom + ", de " + part(x.de_pct) + " à " + part(x.a_pct)),
+          bloc("Allégés", m.alleges, x => x.nom + ", de " + part(x.de_pct) + " à " + part(x.a_pct)),
+          bloc("Conservés au même poids", m.inchanges, x => x.nom + " à " + part(x.poids_pct)),
+        ].join("");
+        const rien = !listes
+          ? '<p class="muted">Aucun mouvement : l’allocation de la semaine précédente est conservée.</p>'
+          : "";
+        corps = rien + (listes ? "<ul>" + listes + "</ul>" : "")
+          + "<p><strong>Total</strong> : " + part(expose) + " exposés aux marchés, "
+          + part(100 - expose) + " sur le fonds en euros, soit 100 % du contrat."
+          + (m.part_exposee_precedente_pct
+              ? " La semaine précédente, la part exposée était de "
+                + part(m.part_exposee_precedente_pct) + "."
+              : "")
+          + "</p>";
+      }
+      return `<article class="strategy">
+        <h3>${esc(titre)} <small>${esc(d.strategy_version || "")}</small></h3>
+        ${corps}
+        <details><summary>Allocation complète retenue, ${lignes.length} ligne(s)</summary>
+          <table><thead><tr><th>Support</th><th>Part du contrat</th></tr></thead>
+          <tbody>${lignes.map(([a, w]) =>
+            `<tr><td>${esc(a)}</td><td>${part(w)}</td></tr>`
+          ).join("")}</tbody></table></details>
+      </article>`;
+    }).join("");
+  }
 
-initDashboard("data/claude.json")
-  .then(() => fetch("data/claude.json", { cache: "no-store" }).then(r => r.json()))
-  .then(renderMouvements)
-  .catch(console.error);
+  initDashboard("data/claude.json")
+    .then(() => fetch("data/claude.json", { cache: "no-store" }).then(r => r.json()))
+    .then(renderMouvements)
+    .catch(console.error);
+})();
 </script></body></html>
