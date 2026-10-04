@@ -12,7 +12,7 @@ tracking_note: >
   Suivi engagé le 9 septembre 2026. Interrompu depuis le 18 septembre : l'étape
   de calcul quotidien a été retirée du workflow le 22 septembre et n'a pas été
   rétablie. Aucune décision n'est prise depuis cette date.
-active_version: v0.1
+active_version: v0.2
 decision_frequency: weekly
 execution_model: next_available_valuation
 history_mode: append_only
@@ -54,6 +54,19 @@ parameters:
     rebalance_band_pct: 3
     currency_universe: eur_quoted_only
     universe: all_eur_quoted_funds
+
+  v0.2:
+    note: >
+      Seul le calendrier change par rapport à la v0.1. La revue passe du
+      lundi au vendredi : elle se calcule sur la dernière valorisation de la
+      semaine et s'applique à la valorisation suivante, donc au lundi. C'est la
+      convention du protocole commun du 23 septembre 2026, et elle permet à
+      Bernard de voir dès le dimanche l'allocation retenue pour la semaine qui
+      vient. Aucun seuil, aucune fenêtre, aucun univers n'est modifié : les
+      paramètres de la v0.1 restent en vigueur et ne sont pas réécrits.
+    review_day: friday
+    applies_on: next_available_valuation
+    changed_on: 2026-10-04
 
 constraints:
   - no_daily_trading

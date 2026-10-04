@@ -6,6 +6,42 @@ Le calcul quotidien des huit courbes Claude est assuré par `strategies/claude/m
 
 Cet espace appartient à Claude. Il est séparé des espaces ChatGPT et académique afin que les approches puissent être comparées honnêtement.
 
+## Revue du samedi, programmée le 4 octobre 2026
+
+Les huit stratégies passent à une version nouvelle. Seul le calendrier change,
+aucun seuil ni aucun univers n'est touché, et les paramètres des versions
+antérieures restent en place.
+
+La revue hebdomadaire se calcule désormais **le samedi à 14 h**, sur la dernière
+valorisation de la semaine, celle du vendredi. L'allocation décidée s'applique à
+la valorisation suivante, donc au lundi. Bernard peut ainsi consulter dès le
+dimanche ce qui a été retenu pour la semaine qui commence.
+
+C'est aussi la convention du protocole commun du 23 septembre : décision calculée
+après la dernière valorisation disponible de la semaine, application à la
+valorisation suivante.
+
+Une ligne a été ajoutée au workflow commun pour cette programmation :
+`cron: "0 12 * * 6"`, soit samedi 12 h UTC, c'est-à-dire 14 h à Paris en heure
+d'été et 13 h en heure d'hiver. Les deux lignes de collecte des jours ouvrés sont
+inchangées.
+
+Les marchés étant fermés le samedi, ce passage n'ajoute aucune date de
+valorisation. Il décide, inscrit la décision dans `history/claude/decisions/` et
+met à jour la page. Si une donnée manque, la dernière réellement publiée est
+utilisée, même vieille d'un ou deux jours ; aucune valeur n'est inventée.
+
+| Stratégie | Version |
+|---|---|
+| Claude A, socle mondial et satellites | v0.4 |
+| Claude B, risque cible constant | v0.3 |
+| Claude C, tendance confirmée par l'ampleur | v0.3 |
+| Claude D, momentum multi-horizon | v0.2 |
+| Claude E, momentum sous garde-fou | v0.2 |
+| Claude F, structure du marché | v0.2 |
+| Claude G, retour à la moyenne | v0.2 |
+| Claude H, dollar et énergie | v0.2 |
+
 ## Modifications faites hors de l'espace Claude, le 3 octobre 2026
 
 Olivier a demandé explicitement ces deux changements, n'ayant plus accès à
@@ -17,12 +53,17 @@ rigoureusement identiques après exécution complète de la chaîne, horodatage 
 
 ### `.github/workflows/daily-update.yml`
 
-Une ligne changée dans l'étape « Compute Claude live strategies », qui appelle
+Deux interventions. Le 3 octobre, une ligne changée dans l'étape « Compute Claude
+live strategies », qui appelle
 désormais `strategies/claude/moteur.py` au lieu de
 `scripts/compute_claude_strategies.py`. Six lignes de commentaire expliquent
 pourquoi, juste au-dessus. Aucune autre étape n'est touchée.
 
-Motif : Claude est passé de cinq à huit stratégies et en ajoutera d'autres.
+Le 4 octobre, une ligne de programmation ajoutée pour la revue du samedi,
+`cron: "0 12 * * 6"`, décrite plus haut. Les horaires des jours ouvrés ne sont pas
+modifiés.
+
+Motif de la première : Claude est passé de cinq à huit stratégies et en ajoutera d'autres.
 Chaque ajout exigeait jusqu'ici de modifier un fichier commun. Le moteur déplacé
 dans l'espace Claude supprime cette dépendance.
 

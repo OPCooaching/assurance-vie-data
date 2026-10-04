@@ -300,12 +300,16 @@ STRATEGIES = {
     "claude_contrarien": claude_contrarien,
     "claude_dollar_energie": claude_dollar_energie,
 }
-VERSIONS = {
-    "claude_socle_satellites": "v0.3", "claude_risque_cible": "v0.2",
-    "claude_double_filtre": "v0.2", "claude_momentum_multi": "v0.1",
-    "claude_momentum_prudent": "v0.1", "claude_dispersion": "v0.1",
-    "claude_contrarien": "v0.1", "claude_dollar_energie": "v0.1",
-}
+def versions_actives() -> dict[str, str]:
+    """Version active de chaque stratégie, lue dans son fichier de règles."""
+    correspondance = {}
+    for chemin in sorted(ESPACE.glob("*/strategy.yml")):
+        regle = yaml.safe_load(chemin.read_text(encoding="utf-8"))
+        correspondance[regle["id"].replace("-", "_")] = regle["active_version"]
+    return correspondance
+
+
+VERSIONS = versions_actives()
 
 
 def courbe(table, dates, signal, univers, contexte, valeur_depart):
@@ -328,7 +332,11 @@ def courbe(table, dates, signal, univers, contexte, valeur_depart):
                 if a in prix and pd.notna(prix[a]) and pd.notna(veille[a]) and veille[a] > 0
             )
             valeur *= 1 + rendement
-        if date.weekday() == 0:
+        # La revue a lieu sur la dernière valorisation de la semaine, le
+        # vendredi : la décision est prise sur cette clôture et s'applique à
+        # la valorisation suivante, donc au lundi. C'est la convention du
+        # protocole commun du 23 septembre 2026.
+        if date.weekday() == 4:
             poids = signal(table, date, univers, contexte)
             derniere = dict(poids)
         points.append((date, valeur))
@@ -410,7 +418,12 @@ def main() -> int:
 
     # Journal des décisions, uniquement les jours de revue effectivement calculés.
     inscrites = 0
-    if a_calculer[-1].weekday() == 0:
+    semaine = a_calculer[-1].isocalendar()
+    deja = list(DECISIONS.glob(f"*--claude-*.json")) if DECISIONS.exists() else []
+    semaines_connues = {
+        pd.Timestamp(f.name[:10]).isocalendar()[:2] for f in deja if f.name[:4].isdigit()
+    }
+    if (semaine.year, semaine.week) not in semaines_connues:
         DECISIONS.mkdir(parents=True, exist_ok=True)
         jour = a_calculer[-1].date().isoformat()
         maintenant = datetime.now(timezone.utc).isoformat(timespec="seconds")

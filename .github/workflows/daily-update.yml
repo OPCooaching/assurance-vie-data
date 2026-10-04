@@ -6,7 +6,14 @@ on:
     paths:
       - "data/refresh-request.txt"
   schedule:
+    # Collecte et calculs des jours ouvrés, après la clôture européenne.
     - cron: "45 20 * * 1-5"
+    # Revue hebdomadaire Claude : samedi 12 h UTC, soit 14 h à Paris en heure
+    # d'été et 13 h en heure d'hiver. Les marchés sont fermés, aucune date de
+    # valorisation nouvelle n'apparaît : ce passage sert à décider, sur la
+    # dernière valorisation de la semaine, l'allocation qui s'appliquera le
+    # lundi suivant, et à la rendre consultable dès le dimanche.
+    - cron: "0 12 * * 6"
 
 permissions:
   contents: write

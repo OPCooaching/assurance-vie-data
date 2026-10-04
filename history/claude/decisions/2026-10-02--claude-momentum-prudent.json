@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-02--claude_momentum_prudent",
+  "decided_at_utc": "2026-10-04T15:23:40+00:00",
+  "effective_valuation_date": "2026-10-02",
+  "author": "claude",
+  "strategy_id": "claude_momentum_prudent",
+  "strategy_version": "v0.2",
+  "decision_type": "weekly_allocation",
+  "rationale": "Revue hebdomadaire sur les prix et le contexte publiés à cette date.",
+  "target_allocation_percent": {
+    "IE000I8KRLL9": 4.36,
+    "IE00BMG6Z448": 7.12,
+    "LU0533033667": 9.41,
+    "LU0839027447": 7.56,
+    "LU1829219390": 9.84,
+    "LU1900066462": 11.71,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "warnings": []
+}
