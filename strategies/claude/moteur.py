@@ -39,6 +39,7 @@ ESPACE = RACINE / "strategies" / "claude"
 SORTIE = RACINE / "data" / "claude" / "performance.csv"
 ALLOCATIONS = RACINE / "data" / "claude" / "latest_allocations.csv"
 ETAT = RACINE / "data" / "claude" / "tracking_state.json"
+VALORISATION = RACINE / "data" / "benchmarks" / "bernard_valuation_status.json"
 DECISIONS = RACINE / "history" / "claude" / "decisions"
 
 PART_MARCHE = 0.50
@@ -515,7 +516,21 @@ def main() -> int:
     etat = json.loads(ETAT.read_text(encoding="utf-8")) if ETAT.exists() else {}
     reprise = pd.Timestamp(etat["resume_date"]) if etat.get("resume_date") else None
 
-    a_calculer = [d for d in dates if d >= (reprise or dernier_publie)]
+    # Une date reste provisoire tant qu'un support n'a pas publié son cours
+    # officiel : sa valeur est alors calculée avec le dernier cours connu, puis
+    # corrigée dès la publication. Le recalcul repart donc de la dernière date
+    # réellement consolidée, et les lignes postérieures sont réécrites. Les
+    # lignes antérieures, elles, sont définitives et jamais retouchées.
+    socle = dernier_publie
+    if VALORISATION.exists():
+        statut = json.loads(VALORISATION.read_text(encoding="utf-8"))
+        consolide = statut.get("latest_consolidated_date")
+        if consolide:
+            anterieures = publie.loc[publie["date"] <= pd.Timestamp(consolide), "date"]
+            if not anterieures.empty:
+                socle = pd.Timestamp(anterieures.max())
+
+    a_calculer = [d for d in dates if d >= (reprise or socle)]
     # Le samedi, aucune valorisation nouvelle n'apparaît : il n'y a rien à
     # ajouter aux courbes, mais la décision de la semaine reste à prendre sur
     # la dernière clôture disponible. Le calcul des courbes est donc séparé de
@@ -528,6 +543,7 @@ def main() -> int:
     for identifiant, signal in STRATEGIES.items() if nouvelles_valorisations else ():
         if identifiant in publie.columns:
             connues = publie[["date", identifiant]].dropna()
+            connues = connues[connues["date"] <= socle]
             depart = float(connues[identifiant].iloc[-1]) if not connues.empty else 100.0
         else:
             depart = 100.0
@@ -555,7 +571,7 @@ def main() -> int:
 
     nouveau = pd.DataFrame(courbes)
     nouveau.index.name = "date"
-    nouvelles_lignes = nouveau.loc[nouveau.index > dernier_publie]
+    nouvelles_lignes = nouveau.loc[nouveau.index > socle]
     # Une stratégie publiée pour la première fois naît à la dernière date déjà
     # valorisée : sa base 100 est posée ce jour-là, et rien avant.
     naissances = {c: nouveau[c] for c in nouveau.columns if c not in publie.columns}
@@ -565,13 +581,15 @@ def main() -> int:
     for colonne in nouvelles_lignes.columns:
         if colonne not in complet.columns:
             complet[colonne] = pd.NA
+    complet = complet.loc[complet.index <= socle]
     complet = pd.concat([complet, nouvelles_lignes.reindex(columns=complet.columns)])
     for colonne, serie in naissances.items():
         for date, valeur in serie.items():
             if date in complet.index:
                 complet.loc[date, colonne] = valeur
-    verification = complet.loc[complet.index <= dernier_publie]
+    verification = complet.loc[complet.index <= socle]
     origine = publie.set_index("date")
+    origine = origine.loc[origine.index <= socle]
     for colonne in origine.columns:
         avant = origine[colonne].dropna()
         apres = verification[colonne].reindex(avant.index)

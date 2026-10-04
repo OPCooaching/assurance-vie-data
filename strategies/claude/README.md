@@ -112,6 +112,25 @@ Claude et y a écrit sept fichiers de l'espace ChatGPT. Sans gravité, mais le
 limiter à la branche principale éviterait que les demandes d'intégration se
 mélangent. Je n'y ai pas touché : cet espace n'est pas le mien.
 
+## Valeurs provisoires et valeurs définitives, à partir du 4 octobre 2026
+
+Quand un support publie son cours avec un jour de retard, la valorisation du
+jour est calculée avec son dernier cours connu. Elle est provisoire. Le dépôt
+le dit explicitement dans `data/benchmarks/bernard_valuation_status.json`, qui
+distingue `latest_consolidated_date` et `latest_provisional_date`.
+
+Le moteur Claude refusait jusqu'ici de retoucher une valeur déjà écrite, y
+compris provisoire. Conséquence observée le 4 octobre : la ligne du 2 octobre
+était restée identique à celle du 1er octobre, alors que les cours manquants
+avaient été publiés depuis. Les huit courbes Claude étaient figées, alors que
+les courbes académiques, elles, avaient été corrigées.
+
+Le recalcul repart désormais de la dernière date consolidée. Les lignes
+postérieures sont recalculées et réécrites à chaque passage, jusqu'à ce que
+tous les cours soient publiés. Les lignes antérieures restent définitives : le
+contrôle d'intégrité les compare avant écriture et refuse le fichier si l'une
+d'elles a bougé.
+
 ## Comment la décision de la semaine est prise, à partir du 4 octobre 2026
 
 Le moteur sépare deux choses qui étaient mélangées.
