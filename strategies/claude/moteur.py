@@ -367,11 +367,12 @@ def mouvements(avant: dict, apres: dict, noms: dict) -> tuple[dict, str]:
         "part_exposee_precedente_pct": round(sum(a.values()), 2),
     }
 
+    fr = lambda v: f"{v:.2f}".replace(".", ",") + " %"
     if not avant:
         if b:
             phrases = ["Première allocation : " + ", ".join(
-                f"{noms.get(x, x)} à {b[x]:.2f} %" for x in sorted(b, key=lambda x: -b[x])) + ".",
-                f"Part exposée aux marchés : {detail['part_exposee_pct']:.2f} %."]
+                f"{noms.get(x, x)} à {fr(b[x])}" for x in sorted(b, key=lambda x: -b[x])) + ".",
+                f"Part exposée aux marchés : {fr(detail['part_exposee_pct'])}."]
         else:
             phrases = ["Première allocation : aucun support exposé, "
                        "la totalité reste sur le fonds en euros."]
@@ -379,24 +380,24 @@ def mouvements(avant: dict, apres: dict, noms: dict) -> tuple[dict, str]:
         phrases = []
         if entrees:
             phrases.append("Entrées : " + ", ".join(
-                f"{noms.get(x, x)} à {b[x]:.2f} %" for x in entrees) + ".")
+                f"{noms.get(x, x)} à {fr(b[x])}" for x in entrees) + ".")
         if sorties:
             phrases.append("Sorties : " + ", ".join(
-                f"{noms.get(x, x)}, qui pesait {a[x]:.2f} %" for x in sorties) + ".")
+                f"{noms.get(x, x)}, qui pesait {fr(a[x])}" for x in sorties) + ".")
         if renforces:
             phrases.append("Renforcés : " + ", ".join(
-                f"{noms.get(x, x)} de {a[x]:.2f} à {b[x]:.2f} %" for x in renforces) + ".")
+                f"{noms.get(x, x)} de {fr(a[x])} à {fr(b[x])}" for x in renforces) + ".")
         if alleges:
             phrases.append("Allégés : " + ", ".join(
-                f"{noms.get(x, x)} de {a[x]:.2f} à {b[x]:.2f} %" for x in alleges) + ".")
+                f"{noms.get(x, x)} de {fr(a[x])} à {fr(b[x])}" for x in alleges) + ".")
         if inchanges:
             phrases.append(f"Inchangés : {len(inchanges)} support(s).")
         if not entrees and not sorties and not renforces and not alleges:
             phrases = ["Aucun mouvement : l'allocation de la semaine précédente est conservée."]
         ecart = detail["part_exposee_pct"] - detail["part_exposee_precedente_pct"]
         if abs(ecart) > 0.05:
-            phrases.append(f"Part exposée aux marchés : {detail['part_exposee_precedente_pct']:.2f} "
-                           f"% puis {detail['part_exposee_pct']:.2f} %.")
+            phrases.append(f"Part exposée aux marchés : {fr(detail['part_exposee_precedente_pct'])} "
+                           f"puis {fr(detail['part_exposee_pct'])}.")
     return detail, " ".join(phrases)
 
 
@@ -432,6 +433,68 @@ def courbe(table, dates, signal, univers, contexte, valeur_depart):
     return pd.Series(dict(points)), derniere
 
 
+def jour_de_revue(date_valorisation) -> bool:
+    """La semaine est-elle close, de sorte que la décision puisse être prise ?
+
+    La revue porte sur la dernière valorisation de la semaine. Le cas normal est
+    le vendredi. Si le vendredi est férié ou si la collecte de vendredi soir a
+    échoué, la revue du samedi rattrape sur la dernière clôture disponible,
+    même vieille d'un ou deux jours : passé le vendredi, aucune cotation
+    nouvelle n'arrivera pour cette semaine.
+    """
+    return date_valorisation.weekday() == 4 or datetime.now(timezone.utc).weekday() >= 5
+
+
+def inscrire_decisions(decisions, date_valorisation) -> int:
+    """Une décision par stratégie et par semaine, jamais réécrite.
+
+    L'absence d'écriture est normale : hors jour de revue, ou si la semaine de
+    cette valorisation a déjà sa décision.
+    """
+    if not jour_de_revue(date_valorisation):
+        return 0
+    semaine = date_valorisation.isocalendar()
+    deja = list(DECISIONS.glob("*--claude-*.json")) if DECISIONS.exists() else []
+    semaines_connues = {
+        pd.Timestamp(f.name[:10]).isocalendar()[:2] for f in deja if f.name[:4].isdigit()
+    }
+    if (semaine.year, semaine.week) in semaines_connues:
+        return 0
+
+    DECISIONS.mkdir(parents=True, exist_ok=True)
+    jour = date_valorisation.date().isoformat()
+    maintenant = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    noms = noms_lisibles()
+    inscrites = 0
+    for identifiant, _date, poids, _liquide in decisions:
+        chemin = DECISIONS / f"{jour}--{identifiant.replace('_', '-')}.json"
+        if chemin.exists():
+            continue
+        cible = {a: round(100 * w, 2) for a, w in sorted(poids.items())}
+        cible[FONDS_EURO] = round(100 - sum(cible.values()), 2)
+        precedente = derniere_decision(identifiant)
+        detail, recit = mouvements(
+            precedente.get("target_allocation_percent", {}), cible, noms)
+        chemin.write_text(json.dumps({
+            "schema_version": "1.0",
+            "record_kind": "weekly_strategy_decision",
+            "status": "decided_on_published_prices",
+            "decision_id": f"{jour}--{identifiant}",
+            "decided_at_utc": maintenant,
+            "effective_valuation_date": jour,
+            "author": "claude",
+            "strategy_id": identifiant,
+            "strategy_version": VERSIONS[identifiant],
+            "decision_type": "weekly_allocation",
+            "rationale": recit,
+            "target_allocation_percent": cible,
+            "mouvements": detail,
+            "warnings": [],
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        inscrites += 1
+    return inscrites
+
+
 def main() -> int:
     obligatoires = (UNIVERS, SYMBOLES, PRIX, REFERENCE, SORTIE)
     manquants = [str(p) for p in obligatoires if not p.exists()]
@@ -453,14 +516,16 @@ def main() -> int:
     reprise = pd.Timestamp(etat["resume_date"]) if etat.get("resume_date") else None
 
     a_calculer = [d for d in dates if d >= (reprise or dernier_publie)]
-    if len(a_calculer) < 2:
-        print("Moteur Claude : aucune date nouvelle à calculer.")
-        return 0
+    # Le samedi, aucune valorisation nouvelle n'apparaît : il n'y a rien à
+    # ajouter aux courbes, mais la décision de la semaine reste à prendre sur
+    # la dernière clôture disponible. Le calcul des courbes est donc séparé de
+    # l'inscription de la décision.
+    nouvelles_valorisations = len(a_calculer) >= 2
 
     # Chaque colonne reprend à sa dernière valeur publiée ; une colonne nouvelle
     # part de 100 à sa première date de calcul, et reste vide avant.
     courbes, allocations, decisions = {}, [], []
-    for identifiant, signal in STRATEGIES.items():
+    for identifiant, signal in STRATEGIES.items() if nouvelles_valorisations else ():
         if identifiant in publie.columns:
             connues = publie[["date", identifiant]].dropna()
             depart = float(connues[identifiant].iloc[-1]) if not connues.empty else 100.0
@@ -475,6 +540,18 @@ def main() -> int:
         allocations.append({"strategy_id": identifiant, "asset_id": FONDS_EURO,
                             "weight_pct": round(100 * liquide, 6)})
         decisions.append((identifiant, a_calculer[-1], derniere, liquide))
+
+    if not nouvelles_valorisations:
+        # Les règles sont des fonctions de la date : la même clôture donne la
+        # même allocation, avec ou sans passage par les courbes.
+        for identifiant, signal in STRATEGIES.items():
+            poids = signal(table, dates[-1], univers, contexte)
+            decisions.append((identifiant, dates[-1], poids, 1.0 - sum(poids.values())))
+        nouvelles_lignes = pd.DataFrame()
+        inscrites = inscrire_decisions(decisions, dates[-1])
+        print(f"Moteur Claude : {len(STRATEGIES)} stratégies, aucune date nouvelle, "
+              f"{inscrites} décision(s) inscrite(s).")
+        return 0
 
     nouveau = pd.DataFrame(courbes)
     nouveau.index.name = "date"
@@ -504,44 +581,7 @@ def main() -> int:
     complet.sort_index().to_csv(SORTIE, date_format="%Y-%m-%d")
     pd.DataFrame(allocations).to_csv(ALLOCATIONS, index=False)
 
-    # Journal des décisions, uniquement les jours de revue effectivement calculés.
-    inscrites = 0
-    semaine = a_calculer[-1].isocalendar()
-    deja = list(DECISIONS.glob(f"*--claude-*.json")) if DECISIONS.exists() else []
-    semaines_connues = {
-        pd.Timestamp(f.name[:10]).isocalendar()[:2] for f in deja if f.name[:4].isdigit()
-    }
-    if (semaine.year, semaine.week) not in semaines_connues:
-        DECISIONS.mkdir(parents=True, exist_ok=True)
-        jour = a_calculer[-1].date().isoformat()
-        maintenant = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        noms = noms_lisibles()
-        for identifiant, date, poids, liquide in decisions:
-            chemin = DECISIONS / f"{jour}--{identifiant.replace('_', '-')}.json"
-            if chemin.exists():
-                continue
-            cible = {a: round(100 * w, 2) for a, w in sorted(poids.items())}
-            cible[FONDS_EURO] = round(100 - sum(cible.values()), 2)
-            precedente = derniere_decision(identifiant)
-            detail, recit = mouvements(
-                precedente.get("target_allocation_percent", {}), cible, noms)
-            chemin.write_text(json.dumps({
-                "schema_version": "1.0",
-                "record_kind": "weekly_strategy_decision",
-                "status": "decided_on_published_prices",
-                "decision_id": f"{jour}--{identifiant}",
-                "decided_at_utc": maintenant,
-                "effective_valuation_date": jour,
-                "author": "claude",
-                "strategy_id": identifiant,
-                "strategy_version": VERSIONS[identifiant],
-                "decision_type": "weekly_allocation",
-                "rationale": recit,
-                "target_allocation_percent": cible,
-                "mouvements": detail,
-                "warnings": [],
-            }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            inscrites += 1
+    inscrites = inscrire_decisions(decisions, a_calculer[-1])
 
     print(f"Moteur Claude : {len(STRATEGIES)} stratégies, "
           f"{len(nouvelles_lignes)} date(s) ajoutée(s), {inscrites} décision(s) inscrite(s).")

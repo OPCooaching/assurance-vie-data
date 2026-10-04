@@ -112,6 +112,28 @@ Claude et y a écrit sept fichiers de l'espace ChatGPT. Sans gravité, mais le
 limiter à la branche principale éviterait que les demandes d'intégration se
 mélangent. Je n'y ai pas touché : cet espace n'est pas le mien.
 
+## Comment la décision de la semaine est prise, à partir du 4 octobre 2026
+
+Le moteur sépare deux choses qui étaient mélangées.
+
+Les courbes avancent à chaque jour ouvré, à mesure que de nouvelles
+valorisations arrivent. La décision, elle, n'est inscrite qu'une fois par
+semaine civile, sur la dernière clôture de cette semaine.
+
+`jour_de_revue()` décide si la semaine est close : soit la valorisation la plus
+récente est un vendredi, soit la journée en cours est un samedi ou un dimanche.
+Dans ce second cas, plus aucune cotation n'arrivera pour la semaine écoulée, et
+la revue du samedi rattrape sur la dernière clôture disponible, même vieille
+d'un ou deux jours. C'est la demande d'Olivier du 4 octobre.
+
+`inscrire_decisions()` écrit ensuite un fichier par stratégie, jamais deux fois
+pour la même semaine, et jamais par-dessus un fichier existant. Une absence
+d'écriture est donc normale du lundi au jeudi.
+
+Conséquence pratique : la décision apparaît le vendredi soir après la collecte,
+ou le samedi à 14 h si la collecte du vendredi a échoué ou si le vendredi était
+férié. Elle est consultable le dimanche dans les deux cas.
+
 ## État au 3 octobre 2026
 
 Le calcul quotidien est rétabli depuis le 30 septembre et couvre huit
