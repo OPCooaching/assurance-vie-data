@@ -24,12 +24,12 @@ claude_momentum_multi,LU0839027447,8.333333
 claude_momentum_multi,LU1681044480,8.333333
 claude_momentum_multi,LU1829221024,8.333333
 claude_momentum_multi,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,50.0
-claude_momentum_prudent,IE000I8KRLL9,4.525359
-claude_momentum_prudent,IE00BMG6Z448,7.33145
-claude_momentum_prudent,LU0533033667,9.868144
-claude_momentum_prudent,LU0839027447,7.889847
-claude_momentum_prudent,LU1681044480,8.443255
-claude_momentum_prudent,LU1829221024,11.941944
+claude_momentum_prudent,IE000I8KRLL9,4.524204
+claude_momentum_prudent,IE00BMG6Z448,7.326806
+claude_momentum_prudent,LU0533033667,9.869645
+claude_momentum_prudent,LU0839027447,7.891047
+claude_momentum_prudent,LU1681044480,8.444539
+claude_momentum_prudent,LU1829221024,11.94376
 claude_momentum_prudent,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,50.0
 claude_dispersion,DE000A0Q4R85,8.333333
 claude_dispersion,FR0010147603,8.333333
@@ -45,6 +45,6 @@ claude_contrarien,LU1829219390,10.0
 claude_contrarien,LU2611731824,10.0
 claude_contrarien,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,50.0
 claude_dollar_energie,DE000A0F5UK5,20.0
-claude_dollar_energie,IE00BMG6Z448,15.0
-claude_dollar_energie,LU1900066462,15.0
+claude_dollar_energie,IE00BKBF6H24,20.0
+claude_dollar_energie,LU1900066462,10.0
 claude_dollar_energie,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,50.0
