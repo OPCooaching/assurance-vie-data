@@ -285,9 +285,14 @@ def main():
                 })
 
     names = asset_names()
+    names = asset_names()
     academic_info = attach_allocations(academic_metadata(), "academic", names)
     (OUT / "academic.json").write_text(
-        json.dumps(payload(series, dates, start_eur, {"strategies": academic_info, "valuation": valuation}), ensure_ascii=False),
+        json.dumps(payload(series, dates, start_eur, {
+            "strategies": academic_info,
+            "decision_history": load_decision_history("academic", names),
+            "valuation": valuation,
+        }), ensure_ascii=False),
         encoding="utf-8",
     )
 
