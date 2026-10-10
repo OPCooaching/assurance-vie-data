@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W42--chatgpt-regime-macro-financier",
+  "decided_at_utc": "2026-10-10T13:01:58Z",
+  "effective_valuation_date": "2026-10-12",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-regime-macro-financier",
+  "strategy_version": "v0.1",
+  "decision_type": "maintain",
+  "data_as_of": {
+    "context": {
+      "NFCI": "2026-10-02",
+      "USEPUINDXD": "2026-10-08",
+      "VIXCLS": "2026-10-08"
+    }
+  },
+  "target_allocation_percent": {
+    "FR0010315770": 60,
+    "LU0290357846": 20,
+    "LU2611731824": 20
+  },
+  "rationale": "Revue hebdomadaire : une seule alerte sur trois est active (incertitude américaine). Le NFCI reste sous zéro et le VIX sous 25 ; la règle exige deux alertes sur trois pour passer en mode prudent. L’allocation normale est maintenue.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision archivée avant sa prise d’effet : aucune information ultérieure n’est utilisée.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé sans rendement inventé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "macro_state": "normal",
+  "flags": {
+    "nfci": false,
+    "uncertainty": true,
+    "vix": false
+  },
+  "uncertainty_threshold": 313.85
+}
