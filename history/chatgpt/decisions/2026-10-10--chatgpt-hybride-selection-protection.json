@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W42--chatgpt-hybride-selection-protection",
+  "decided_at_utc": "2026-10-10T13:01:58Z",
+  "effective_valuation_date": "2026-10-12",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-hybride-selection-protection",
+  "strategy_version": "v0.1",
+  "decision_type": "rebalance",
+  "data_as_of": {
+    "context": {
+      "NFCI": "2026-10-02",
+      "VIXCLS": "2026-10-08"
+    }
+  },
+  "target_allocation_percent": {
+    "IE000I8KRLL9": 20,
+    "IE00BM67HM91": 20,
+    "LU0533033667": 20,
+    "DE000A0Q4R85": 20,
+    "IE00BG0J4C88": 20,
+    "LU0290358497": 0
+  },
+  "rationale": "Revue mensuelle de sélection et protection hebdomadaire : les cinq ETF momentum restent positifs et au-dessus de leur tendance longue. La protection n’est pas déclenchée : NFCI -0,494 et VIX 15,41 restent sous les seuils écrits.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision archivée avant sa prise d’effet : aucune information ultérieure n’est utilisée.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé sans rendement inventé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "selection_date": "2026-10-09",
+  "protection_active": false
+}
