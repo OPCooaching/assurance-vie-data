@@ -83,20 +83,20 @@ def academic_metadata():
         return {}
     cfg = yaml.safe_load(ACADEMIC_CFG.read_text(encoding="utf-8")) or {}
     rules = {
-        "static": "Allocation fixe ; rééquilibrage à la fréquence indiquée.",
+        "static": "La répartition est fixe ; elle n’est changée que si la règle écrite le prévoit.",
         "faber_sma10": "Chaque fin de mois, l’indice monde est détenu seulement au-dessus de sa moyenne 10 mois ; sinon la poche va au monétaire.",
         "momentum_12m": "Chaque fin de mois, les cinq ETF au momentum 12 mois positif le plus élevé sont détenus ; sinon la poche va au monétaire.",
     }
     result = {}
     for strategy_id, spec in (cfg.get("strategies") or {}).items():
         frequency = spec.get("rebalance") or spec.get("signal_frequency") or "selon la règle"
-        frequency = {"monthly": "mensuelle", "annual": "annuelle"}.get(str(frequency), frequency)
+        frequency = {"monthly": "La stratégie est examinée une fois par mois.", "annual": "La stratégie est examinée une fois par an."}.get(str(frequency), frequency)
         result[strategy_id] = {
             "label": spec.get("label") or strategy_id,
             "version": "règle de référence",
             "resume": "Référence académique suivie avec les prix réellement observés depuis le 09/09/2026.",
             "regle": rules.get(spec.get("type"), "Règle documentée dans la configuration académique."),
-            "frequence": f"Revue ou rééquilibrage : {frequency}.",
+            "frequence": frequency if str(frequency).startswith("La stratégie") else f"La stratégie est examinée selon cette règle : {frequency}.",
             "status": "live_paper_tracking",
             "statut_public": "Suivi quotidien depuis le 09/09/2026. La composition ci-dessous est celle de la dernière revue disponible.",
         }
@@ -114,38 +114,96 @@ def load_existing_metadata(name: str):
         return {}
 
 
+def _previous_backtest_allocation(name: str, strategy_id: str, before_date: str):
+    """Find the allocation immediately preceding the first archived review.
+
+    Backtest files are read only here: they remain tests, while this helper only
+    explains the change visible in the first live-paper review.
+    """
+    root = Path("history") / name / "backtests" / strategy_id
+    best_date, best_allocation = "", None
+    if not root.exists():
+        return None
+    for path in root.rglob("decisions.jsonl"):
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        for line in lines:
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            date = str(item.get("effective_date") or item.get("decision_date") or "")
+            allocation = item.get("target_allocation_percent")
+            if date and date < before_date and isinstance(allocation, dict) and date > best_date:
+                best_date, best_allocation = date, allocation
+    return best_allocation
+
+
+def _movement_summary(previous, current, names):
+    """Describe allocation differences without modifying any archived decision."""
+    result = {"added": [], "removed": [], "increased": [], "reduced": []}
+    for asset_id in sorted(set(previous or {}) | set(current or {})):
+        old = float((previous or {}).get(asset_id, 0) or 0)
+        new = float((current or {}).get(asset_id, 0) or 0)
+        label = names.get(str(asset_id), str(asset_id))
+        item = {"asset": label, "from_percent": round(old, 2), "to_percent": round(new, 2)}
+        if old <= 0.005 < new:
+            result["added"].append(item)
+        elif new <= 0.005 < old:
+            result["removed"].append(item)
+        elif new > old + 0.005:
+            result["increased"].append(item)
+        elif new < old - 0.005:
+            result["reduced"].append(item)
+    return result
+
+
 def load_decision_history(name: str, names: dict[str, str]):
-    """Read immutable decisions for display; malformed records stay private."""
+    """Read immutable decisions and calculate a human-readable change summary."""
     root = Path("history") / name / "decisions"
     if not root.exists():
         return []
-    records = []
+    raw = []
     for path in sorted(root.rglob("*.json")):
         try:
             record = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
-        if not isinstance(record, dict) or record.get("status") == "template_not_a_decision":
+        if (not isinstance(record, dict) or record.get("status") == "template_not_a_decision"
+                or not record.get("strategy_id") or not record.get("decision_type")):
             continue
-        if not record.get("strategy_id") or not record.get("decision_type"):
-            continue
-        records.append({
+        allocation = record.get("target_allocation_percent", {})
+        if not isinstance(allocation, dict):
+            allocation = {}
+        raw.append({
             "decision_id": record.get("decision_id"),
             "date": record.get("effective_valuation_date") or record.get("decided_at_utc"),
             "strategy_id": record["strategy_id"],
             "strategy_version": record.get("strategy_version"),
             "decision_type": record["decision_type"],
             "rationale": record.get("rationale"),
-            "target_allocation_percent": {
-                names.get(str(asset_id), str(asset_id)): weight
-                for asset_id, weight in record.get("target_allocation_percent", {}).items()
-            },
+            "allocation": allocation,
             "warnings": record.get("warnings", []),
         })
-        if isinstance(record.get("mouvements"), dict):
-            records[-1]["mouvements"] = record["mouvements"]
-    return sorted(records, key=lambda item: str(item.get("date") or ""), reverse=True)
-
+    raw.sort(key=lambda item: str(item.get("date") or ""))
+    previous_by_strategy, visible = {}, []
+    for item in raw:
+        strategy_id, allocation = item["strategy_id"], item["allocation"]
+        previous = previous_by_strategy.get(strategy_id)
+        if previous is None:
+            previous = _previous_backtest_allocation(name, strategy_id, str(item.get("date") or ""))
+        visible.append({
+            **{key: item[key] for key in ("decision_id", "date", "strategy_id", "strategy_version", "decision_type", "rationale", "warnings")},
+            "target_allocation_percent": {
+                names.get(str(asset_id), str(asset_id)): weight
+                for asset_id, weight in allocation.items()
+            },
+            "mouvements": _movement_summary(previous, allocation, names) if previous is not None else None,
+        })
+        previous_by_strategy[strategy_id] = allocation
+    return sorted(visible, key=lambda item: str(item.get("date") or ""), reverse=True)
 
 def load_actor_performance(name: str, strategies):
     """Read daily live paper-tracking values produced by the common workflow."""
@@ -228,7 +286,7 @@ def load_actor_results(name: str):
 def payload(series_map, dates, start_eur=None, extra=None):
     data = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "start_eur": float(start_eur) if start_eur else None,
+        "start_eur": None,
         "dates": [str(x) for x in dates],
         "series": series_map,
     }
