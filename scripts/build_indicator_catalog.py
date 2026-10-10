@@ -199,7 +199,7 @@ def main() -> None:
             "needs": "Les cinq séries externes ci-dessous et une règle explicite de mise à jour.",
             "status": "ready",
             "status_label": "Nouvelles données prêtes",
-            "current": "Aucune courbe ne les utilise encore : il faut d’abord écrire une règle et la tester sans regarder le résultat à l’avance.",
+            "current": "ChatGPT C utilise NFCI, l’incertitude américaine et le VIX. ChatGPT D utilise NFCI et le VIX comme garde-fou. ChatGPT E les consulte lors de sa revue, sans règle mécanique unique.",
         },
         {
             "name": "Confirmation par l’activité de marché",
