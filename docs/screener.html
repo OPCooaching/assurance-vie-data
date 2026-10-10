@@ -2,7 +2,7 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Indicateurs disponibles</title><link rel="stylesheet" href="assets/style.css?v=20260926-indicators-current"></head>
 <body><header><h1>Indicateurs disponibles</h1><nav><a href="index.html">Synthèse</a><a href="academic.html">Académiques</a><a href="chatgpt.html">ChatGPT</a><a href="claude.html">Claude</a><a href="screener.html" aria-current="page">Indicateurs</a></nav></header>
-<main class="indicator-main">
+<main class="indicator-main"><section id="review-banner" class="review-banner" aria-live="polite"></section>
   <section class="indicator-hero">
     <p class="kicker">Données réellement disponibles</p>
     <h2>Ce que les données permettent d’analyser aujourd’hui</h2>
@@ -12,8 +12,8 @@
   <section class="indicator-counts" id="indicator-counts"></section>
   <section id="indicator-groups"></section>
   <section class="card"><h2>Indicateurs externes</h2><p class="muted">Ces données viennent de sources indépendantes. Leur date dépend de leur rythme réel de publication : quotidien ou hebdomadaire.</p><div id="external-observations" class="external-grid"></div></section>
-  <section class="card"><h2>Ce que ces données rendent possible</h2><div id="strategy-paths" class="path-grid"></div></section>
-  <section class="card"><h2>Ce qui n’est pas utilisé</h2><div id="unavailable" class="unavailable-list"></div></section>
+  <section class="card"><h2>Comment les stratégies les utilisent aujourd’hui</h2><div id="strategy-paths" class="path-grid"></div></section>
+  <section class="card"><h2>Ce qui ne peut pas encore être utilisé proprement</h2><div id="unavailable" class="unavailable-list"></div></section>
 </main>
 <script>
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -42,6 +42,9 @@ function renderPaths(rows){
 function renderUnavailable(rows){
   document.querySelector("#unavailable").innerHTML=(rows||[]).map(row=>'<article><h3>'+esc(row.name)+'</h3><p>'+esc(row.reason)+'</p><p class="muted">'+esc(row.consequence)+'</p></article>').join("")||'<p class="muted">Aucune limite recensée.</p>';
 }
+
+async function renderReviewBanner(){try{const r=await fetch("data/review-status.json",{cache:"no-store"});if(!r.ok)return;const review=await r.json();const box=document.querySelector("#review-banner");const long=value=>new Date(String(value).slice(0,10)+"T12:00:00Z").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});const labels={in_progress:"en cours",completed:"terminée",failed:"échec"};box.className="review-banner is-"+(review.status||"in_progress");box.innerHTML='<div><p class="eyebrow">Suivi hebdomadaire</p><h2>Revue du samedi '+esc(long(review.review_date))+' : '+esc(labels[review.status]||review.status||"en cours")+'</h2></div><p>Calculé avec les données disponibles jusqu’au '+esc(long(review.data_as_of_date))+'.'+(review.last_consolidated_date?' Dernière date entièrement consolidée : '+esc(long(review.last_consolidated_date))+'.':'')+(review.message?' '+esc(review.message):'')+'</p>';}catch(_) {}}
+renderReviewBanner();
 fetch("data/indicators.json").then(r=>{if(!r.ok)throw new Error("Données indisponibles");return r.json()}).then(data=>{
   const summary=data.summary||{};
   document.querySelector("#indicator-status").textContent="Prix disponibles jusqu’au "+dateFR(data.price_as_of_date)+" · Données générées le "+dateFR(data.generated_at)+". Chaque série externe garde sa propre date de publication.";
