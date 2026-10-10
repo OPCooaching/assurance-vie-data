@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W42--chatgpt-volatilite-pilotee",
+  "decided_at_utc": "2026-10-10T13:01:58Z",
+  "effective_valuation_date": "2026-10-12",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-volatilite-pilotee",
+  "strategy_version": "v0.1",
+  "decision_type": "rebalance",
+  "data_as_of": {
+    "prices": "2026-10-09"
+  },
+  "target_allocation_percent": {
+    "FR0010315770": 21.741437,
+    "LU0290357846": 21.741437,
+    "LU0478205379": 21.741437,
+    "LU2611731824": 21.741437,
+    "LU0290358497": 13.034252
+  },
+  "rationale": "Revue hebdomadaire : la volatilité annualisée observée sur 20 séances est de 11,50 %. Pour viser 10 % sans levier, la règle retient 86,97 % répartis entre les quatre poches risquées et 13,03 % en monétaire.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision archivée avant sa prise d’effet : aucune information ultérieure n’est utilisée.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé sans rendement inventé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "realised_volatility_annual": 0.1149878016,
+  "risk_exposure": 0.8696574646
+}
