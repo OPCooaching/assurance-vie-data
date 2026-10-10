@@ -18,3 +18,4 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-10-03T09:39:00Z — rebuild public decision history with support names after the weekly review.
 2026-10-03T09:42:00Z — retry public dashboard rebuild after validation of decision labels.
 2026-10-03T09:45:00Z — rebuild dashboard after fixing the public decision-label source.
+2026-10-10T13:01:58Z — revue W42 : décisions théoriques A à E et académiques archivées ; reconstruire les pages sans modifier l’historique.\n
