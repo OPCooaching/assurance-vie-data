@@ -1,9 +1,65 @@
 {
-  "generated_at": "2026-10-10T00:21:07+00:00",
-  "latest_provisional_date": "2026-10-08",
+  "generated_at": "2026-10-10T13:13:18+00:00",
+  "latest_provisional_date": "2026-10-09",
   "latest_consolidated_date": "2026-10-08",
-  "latest_status": "consolidated",
-  "pending_supports": [],
+  "latest_status": "provisional",
+  "pending_supports": [
+    {
+      "asset_id": "FR0010380675",
+      "support_name": "LAZARD ACTIONS EMERGENTES R",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "LU1829221024",
+      "support_name": "AMUNDI NASDAQ-100 II UCITS ETF ACC",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "LU1829219390",
+      "support_name": "AMUNDI EURO STOXX BANKS UCITS ETF ACC",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "LU3038520774",
+      "support_name": "AMUNDI STOXX EUROPE DEFENSE UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "DE000A0F5UK5",
+      "support_name": "ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE)",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "LU0533033667",
+      "support_name": "AMUNDI MSCI WORLD INFORMATION TECHNOLOGY UCITS ETF EUR ACC",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "IE00B6R52143",
+      "support_name": "ISHARES AGRIBUSINESS UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "IE00BYZK4552",
+      "support_name": "ISHARES AUTOMATION & ROBOTICS UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "IE000I8KRLL9",
+      "support_name": "ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "IE00BM67HK77",
+      "support_name": "XTRACKERS MSCI WORLD HEALTH CARE UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    },
+    {
+      "asset_id": "IE00BMG6Z448",
+      "support_name": "ISHARES MSCI EM EX-CHINA UCITS ETF",
+      "latest_official_close_date": "2026-10-08"
+    }
+  ],
   "missing_from_entire_series": [],
   "method": "Official close on each published support; for a provisional date only, a delayed support keeps its latest official close until its new close is published."
 }
