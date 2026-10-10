@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-08--claude_contrarien",
+  "decided_at_utc": "2026-10-10T00:21:09+00:00",
+  "effective_valuation_date": "2026-10-08",
+  "author": "claude",
+  "strategy_id": "claude_contrarien",
+  "strategy_version": "v0.2",
+  "decision_type": "weekly_allocation",
+  "rationale": "Entrées : Amundi Euro STOXX Banks UCITS ETF capitalisant à 10,00 %. Sorties : iShares STOXX Europe 600 Basic Resources UCITS ETF (Allemagne), qui pesait 10,00 %. Inchangés : 4 support(s).",
+  "target_allocation_percent": {
+    "FR0007390174": 10.0,
+    "FR0010651224": 10.0,
+    "IE000R85HL30": 10.0,
+    "LU1829219390": 10.0,
+    "LU2611731824": 10.0,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "LU1829219390",
+        "nom": "Amundi Euro STOXX Banks UCITS ETF capitalisant",
+        "poids_pct": 10.0
+      }
+    ],
+    "sorties": [
+      {
+        "asset_id": "DE000A0F5UK5",
+        "nom": "iShares STOXX Europe 600 Basic Resources UCITS ETF (Allemagne)",
+        "poids_pct_precedent": 10.0
+      }
+    ],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [
+      {
+        "asset_id": "FR0007390174",
+        "nom": "Cm-Cic Global Gold C",
+        "poids_pct": 10.0
+      },
+      {
+        "asset_id": "FR0010651224",
+        "nom": "Bdl Convictions C",
+        "poids_pct": 10.0
+      },
+      {
+        "asset_id": "IE000R85HL30",
+        "nom": "Amundi MSCI USA SRI Climate Net Zero Ambition PAB UCITS ETF",
+        "poids_pct": 10.0
+      },
+      {
+        "asset_id": "LU2611731824",
+        "nom": "Amundi Nyse Arca Gold Bugs UCITS ETF distribuant",
+        "poids_pct": 10.0
+      }
+    ],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 50.0
+  },
+  "warnings": []
+}

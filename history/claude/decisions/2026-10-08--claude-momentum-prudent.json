@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-08--claude_momentum_prudent",
+  "decided_at_utc": "2026-10-10T00:21:09+00:00",
+  "effective_valuation_date": "2026-10-08",
+  "author": "claude",
+  "strategy_id": "claude_momentum_prudent",
+  "strategy_version": "v0.2",
+  "decision_type": "weekly_allocation",
+  "rationale": "Entrées : Amundi MSCI EM Asia UCITS Et à 8,45 %, Amundi Nasdaq-100 II UCITS ETF capitalisant à 11,95 %. Sorties : Amundi Euro STOXX Banks UCITS ETF capitalisant, qui pesait 9,84 %, Amundi MSCI Eastern Europe Ex Russia UCITS ETF, qui pesait 11,71 %. Renforcés : iShares MSCI Global Semiconductors UCITS ETF de 4,36 % à 4,52 %, iShares MSCI EM ex-Chine UCITS ETF de 7,12 % à 7,32 %, Amundi MSCI World Information Technology UCITS ETF EUR capitalisant de 9,41 % à 9,87 %, Xtrackers Nikkei 225 UCITS ETF 1D de 7,56 % à 7,89 %.",
+  "target_allocation_percent": {
+    "IE000I8KRLL9": 4.52,
+    "IE00BMG6Z448": 7.32,
+    "LU0533033667": 9.87,
+    "LU0839027447": 7.89,
+    "LU1681044480": 8.45,
+    "LU1829221024": 11.95,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "LU1681044480",
+        "nom": "Amundi MSCI EM Asia UCITS Et",
+        "poids_pct": 8.45
+      },
+      {
+        "asset_id": "LU1829221024",
+        "nom": "Amundi Nasdaq-100 II UCITS ETF capitalisant",
+        "poids_pct": 11.95
+      }
+    ],
+    "sorties": [
+      {
+        "asset_id": "LU1829219390",
+        "nom": "Amundi Euro STOXX Banks UCITS ETF capitalisant",
+        "poids_pct_precedent": 9.84
+      },
+      {
+        "asset_id": "LU1900066462",
+        "nom": "Amundi MSCI Eastern Europe Ex Russia UCITS ETF",
+        "poids_pct_precedent": 11.71
+      }
+    ],
+    "renforces": [
+      {
+        "asset_id": "IE000I8KRLL9",
+        "nom": "iShares MSCI Global Semiconductors UCITS ETF",
+        "de_pct": 4.36,
+        "a_pct": 4.52
+      },
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "iShares MSCI EM ex-Chine UCITS ETF",
+        "de_pct": 7.12,
+        "a_pct": 7.32
+      },
+      {
+        "asset_id": "LU0533033667",
+        "nom": "Amundi MSCI World Information Technology UCITS ETF EUR capitalisant",
+        "de_pct": 9.41,
+        "a_pct": 9.87
+      },
+      {
+        "asset_id": "LU0839027447",
+        "nom": "Xtrackers Nikkei 225 UCITS ETF 1D",
+        "de_pct": 7.56,
+        "a_pct": 7.89
+      }
+    ],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 50.0
+  },
+  "warnings": []
+}

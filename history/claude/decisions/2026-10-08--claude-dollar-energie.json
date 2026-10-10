@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-08--claude_dollar_energie",
+  "decided_at_utc": "2026-10-10T00:21:09+00:00",
+  "effective_valuation_date": "2026-10-08",
+  "author": "claude",
+  "strategy_id": "claude_dollar_energie",
+  "strategy_version": "v0.2",
+  "decision_type": "weekly_allocation",
+  "rationale": "Entrées : iShares Core MSCI World UCITS ETF à 20,00 %. Sorties : iShares MSCI EM ex-Chine UCITS ETF, qui pesait 15,00 %. Allégés : Amundi MSCI Eastern Europe Ex Russia UCITS ETF de 15,00 % à 10,00 %. Inchangés : 1 support(s).",
+  "target_allocation_percent": {
+    "DE000A0F5UK5": 20.0,
+    "IE00BKBF6H24": 20.0,
+    "LU1900066462": 10.0,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [
+      {
+        "asset_id": "IE00BKBF6H24",
+        "nom": "iShares Core MSCI World UCITS ETF",
+        "poids_pct": 20.0
+      }
+    ],
+    "sorties": [
+      {
+        "asset_id": "IE00BMG6Z448",
+        "nom": "iShares MSCI EM ex-Chine UCITS ETF",
+        "poids_pct_precedent": 15.0
+      }
+    ],
+    "renforces": [],
+    "alleges": [
+      {
+        "asset_id": "LU1900066462",
+        "nom": "Amundi MSCI Eastern Europe Ex Russia UCITS ETF",
+        "de_pct": 15.0,
+        "a_pct": 10.0
+      }
+    ],
+    "inchanges": [
+      {
+        "asset_id": "DE000A0F5UK5",
+        "nom": "iShares STOXX Europe 600 Basic Resources UCITS ETF (Allemagne)",
+        "poids_pct": 20.0
+      }
+    ],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 50.0
+  },
+  "warnings": []
+}
