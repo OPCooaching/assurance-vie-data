@@ -11,7 +11,8 @@ const FALLBACK=["#38bdf8","#ffd166","#35c78a","#a78bfa","#e05263"];
 const ACADEMIC=["60/40 mondial adapté","Harry Browne adapté","Faber Trend 10 mois","Momentum académique 12 mois"];
 let activeChart;
 const colorFor=(label,i=0)=>STRATEGY_COLORS[label]||FALLBACK[i%FALLBACK.length];
-async function loadJSON(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(path);return r.json();}\nasync function loadReviewStatus(){try{return await loadJSON("data/review-status.json");}catch(_){return null;}}
+async function loadJSON(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(path);return r.json();}
+async function loadReviewStatus(){try{return await loadJSON("data/review-status.json");}catch(_){return null;}}
 function longDate(value){if(!value)return "—";return new Date(String(value).slice(0,10)+"T12:00:00Z").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
 function renderReviewBanner(review){const box=document.querySelector("#review-banner");if(!box||!review)return;const labels={in_progress:"en cours",completed:"terminée",failed:"échec"};const state=labels[review.status]||review.status||"en cours";box.className="review-banner is-"+(review.status||"in_progress");box.innerHTML='<div><p class="eyebrow">Suivi hebdomadaire</p><h2>Revue du samedi '+htmlEscape(longDate(review.review_date))+' : '+htmlEscape(state)+'</h2></div><p>Calculé avec les données disponibles jusqu’au '+htmlEscape(longDate(review.data_as_of_date))+'.'+(review.last_consolidated_date?' Dernière date entièrement consolidée : '+htmlEscape(longDate(review.last_consolidated_date))+'.':'')+(review.message?' '+htmlEscape(review.message):'')+'</p>';}
 
