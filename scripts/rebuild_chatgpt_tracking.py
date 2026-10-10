@@ -55,9 +55,9 @@ def weekly_decisions(strategy_id: str):
 
 
 def read_decisions(strategy_id: str):
-    records = weekly_decisions(strategy_id)
-    if not records:
-        records = legacy_decisions(strategy_id)
+    # Keep preserved historical allocations until a newer append-only
+    # decision becomes effective; never replace the earlier history.
+    records = legacy_decisions(strategy_id) + weekly_decisions(strategy_id)
     return sorted(
         (row for row in records if row.get("effective_date") and row.get("target_allocation_percent")),
         key=lambda row: row["effective_date"],
