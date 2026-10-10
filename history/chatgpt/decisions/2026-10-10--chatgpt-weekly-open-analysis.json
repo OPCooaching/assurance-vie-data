@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W42--chatgpt-weekly-open-analysis",
+  "decided_at_utc": "2026-10-10T13:01:58Z",
+  "effective_valuation_date": "2026-10-12",
+  "author": "chatgpt",
+  "strategy_id": "chatgpt-weekly-open-analysis",
+  "strategy_version": "v0.1",
+  "decision_type": "maintain",
+  "data_as_of": {
+    "context": {
+      "USEPUINDXD": "2026-10-08",
+      "NFCI": "2026-10-02",
+      "VIXCLS": "2026-10-08",
+      "DCOILBRENTEU": "2026-10-06",
+      "WEI": "2026-10-03",
+      "DTWEXBGS": "2026-10-02",
+      "DEXUSEU": "2026-10-02",
+      "ECBDFR": "2026-10-09"
+    }
+  },
+  "target_allocation_percent": {
+    "FR0000438905": 30,
+    "FR0000988057": 20,
+    "IE00BL25JL35": 15,
+    "FR0000097156": 10,
+    "IE00BM97MR69": 15,
+    "LU0290358497": 10
+  },
+  "rationale": "Revue de l’ensemble des 337 supports comparables : 89 sont positifs simultanément sur 20, 60 et 120 séances. Les six expositions de la semaine précédente restent dans ce groupe ; aucune rotation n’est justifiée. La poche défensive de 25 % est conservée car les candidats favorables restent majoritairement exposés aux mêmes marchés actions.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision archivée avant sa prise d’effet : aucune information ultérieure n’est utilisée.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé sans rendement inventé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "reviewed_universe": {
+    "total_supports": 473,
+    "price_comparable_supports": 337,
+    "positive_on_20_60_120_sessions": 89
+  }
+}
