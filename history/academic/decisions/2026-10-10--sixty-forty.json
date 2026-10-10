@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decision_id": "2026-W42--sixty_forty",
+  "decided_at_utc": "2026-10-10T13:01:58Z",
+  "effective_valuation_date": "2026-10-12",
+  "author": "chatgpt",
+  "strategy_id": "sixty_forty",
+  "strategy_version": "règle de référence",
+  "decision_type": "maintain",
+  "data_as_of": {
+    "prices": "2026-10-09"
+  },
+  "target_allocation_percent": {
+    "FR0010315770": 60,
+    "LU0478205379": 40
+  },
+  "rationale": "Revue sans changement : la règle fixe 60 % actions Monde et 40 % obligations. Elle ne permet pas de choix discrétionnaire ; son rééquilibrage est mensuel.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Règle académique stable appliquée sans décision discrétionnaire.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "version": "règle de référence"
+}
