@@ -72,3 +72,6 @@
 .unavailable-list h3{font-family:Georgia,"Iowan Old Style",serif;font-size:21px;font-weight:500;margin:0 0 8px}
 .unavailable-list p{margin:7px 0;line-height:1.5}
 @media(max-width:900px){.indicator-counts,.indicator-grid,.unavailable-list{grid-template-columns:1fr}}
+
+/* Clear review state, shared by the public pages. */
+.review-banner{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:22px 0;padding:18px 22px;border:1px solid var(--line);border-left:5px solid #f6bd60;border-radius:14px;background:linear-gradient(120deg,rgba(246,189,96,.13),rgba(10,29,38,.55))}.review-banner h2{margin:0;font-size:23px}.review-banner p{margin:5px 0 0;color:#d7e5e9;line-height:1.45}.review-banner .eyebrow{margin:0;color:#f6cf87;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.review-banner.is-completed{border-left-color:#35c78a;background:linear-gradient(120deg,rgba(53,199,138,.13),rgba(10,29,38,.55))}.review-banner.is-failed{border-left-color:#e05263;background:linear-gradient(120deg,rgba(224,82,99,.14),rgba(10,29,38,.55))}.review-changes{margin:8px 0 0;padding-left:20px}.review-changes li{margin:5px 0}@media(max-width:700px){.review-banner{display:block}.review-banner h2{font-size:20px}}
