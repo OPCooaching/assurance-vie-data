@@ -2,54 +2,54 @@
   "strategies": {
     "chatgpt-momentum-mensuel": {
       "label": "ChatGPT A — Momentum mensuel multi-horizons",
-      "status": "reconstruction_with_real_prices",
+      "status": "live_paper_tracking",
       "version": "v0.1",
       "resume": "Une règle écrite sélectionne chaque mois les supports dont la progression récente est la plus solide.",
       "objectif": "Comparer cette règle de tendance à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
-      "regle": "La sélection déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
+      "regle": "Chaque samedi, la règle est contrôlée. À la revue mensuelle, elle classe les ETF sur 63, 126 et 252 séances, conserve ceux qui sont positifs et au-dessus de leur moyenne 200 séances, puis retient les cinq premiers à parts égales. Entre deux revues mensuelles, elle conserve l’allocation.",
       "frequence": "Sélection mensuelle.",
-      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
+      "statut_public": "Suivi simulé depuis le 09/09/2026 avec des cours réellement publiés. Les décisions à partir du 10/10/2026 sont archivées avant leur prise d’effet ; aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-volatilite-pilotee": {
       "label": "ChatGPT B — Exposition pilotée par le risque",
-      "status": "reconstruction_with_real_prices",
+      "status": "live_paper_tracking",
       "version": "v0.1",
       "resume": "Une règle réduit ou augmente l’exposition d’une poche diversifiée selon son risque observé.",
       "objectif": "Comparer une protection contre les périodes instables à Bernard, avec les cours réellement publiés depuis le 9 septembre.",
-      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
+      "regle": "Chaque samedi, elle mesure la volatilité réellement observée sur 20 séances du panier défini. Elle ajuste la part risquée pour viser 10 % de volatilité annuelle, sans levier, et place le solde en monétaire.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
+      "statut_public": "Suivi simulé depuis le 09/09/2026 avec des cours réellement publiés. Les décisions à partir du 10/10/2026 sont archivées avant leur prise d’effet ; aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-regime-macro-financier": {
       "label": "ChatGPT C — Régime macro-financier",
-      "status": "reconstruction_with_real_prices",
+      "status": "live_paper_tracking",
       "version": "v0.1",
       "resume": "Une règle adapte le portefeuille selon la volatilité, les conditions financières et l’incertitude publiées.",
       "objectif": "Comparer une approche qui tient compte du contexte économique et financier à Bernard.",
-      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Les données macro utilisées doivent être celles publiées avant la décision.",
+      "regle": "Chaque samedi, elle lit les dernières publications disponibles du NFCI, de l’indice d’incertitude américaine et du VIX. Deux alertes sur trois font passer à l’allocation prudente ; sinon elle conserve l’allocation normale. Les dates de publication sont archivées.",
       "frequence": "Revue hebdomadaire.",
-      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
+      "statut_public": "Suivi simulé depuis le 09/09/2026 avec des cours réellement publiés. Les décisions à partir du 10/10/2026 sont archivées avant leur prise d’effet ; aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-hybride-selection-protection": {
       "label": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
-      "status": "reconstruction_with_real_prices",
+      "status": "live_paper_tracking",
       "version": "v0.1",
       "resume": "Une sélection mensuelle est complétée par des protections plus rapides si le risque se détériore.",
       "objectif": "Comparer une règle qui sépare le choix des supports et la protection contre les baisses à Bernard.",
-      "regle": "L’allocation déjà calculée est appliquée aux cours publiés jour après jour. Ce n’est pas encore une nouvelle décision prise automatiquement chaque semaine.",
+      "regle": "Chaque samedi, la protection est contrôlée avec le NFCI et le VIX. Une fois par mois, les cinq ETF momentum sont reclassés ; hors alerte, ils restent investis à 100 %. En alerte, la règle réduit leur exposition de moitié au profit du monétaire.",
       "frequence": "Sélection mensuelle, protection hebdomadaire.",
-      "statut_public": "Reconstruction depuis le 09/09/2026 : allocation théorique et cours réels. Aucun arbitrage n’est envoyé au contrat."
+      "statut_public": "Suivi simulé depuis le 09/09/2026 avec des cours réellement publiés. Les décisions à partir du 10/10/2026 sont archivées avant leur prise d’effet ; aucun arbitrage n’est envoyé au contrat."
     },
     "chatgpt-weekly-open-analysis": {
       "label": "ChatGPT E — Analyse hebdomadaire complète",
-      "status": "reconstruction_with_real_prices",
+      "status": "live_paper_tracking",
       "version": "v0.1",
       "resume": "Chaque semaine, ChatGPT examine tous les supports comparables et les indicateurs disponibles, puis choisit librement les actifs et leurs poids.",
       "objectif": "Tester une décision réellement adaptée à la semaine, sans imposer d’avance un score, cinq lignes ou une même règle immuable.",
       "regle": "Avant chaque semaine, ChatGPT explique les indicateurs retenus, les signaux contraires, l’allocation à 100 % et archive la décision. La courbe commence à cette date et suit ensuite les cours réels.",
       "frequence": "Décision chaque samedi pour la semaine suivante.",
-      "faiblesse": "La première décision sert à démarrer la comparaison. À partir de maintenant, toute décision devra être écrite le samedi avant de produire ses effets la semaine suivante.",
-      "statut_public": "Première allocation reconstituée avec les seules données disponibles le 18/09/2026 ; elle s’applique à partir du 21/09. La courbe utilise ensuite les cours réellement publiés. Les décisions suivantes seront archivées avant la semaine concernée."
+      "faiblesse": "E est une décision théorique documentée, non une promesse de gain. Elle peut maintenir une allocation lorsqu’aucune rotation ne ressort clairement des données.",
+      "statut_public": "Suivi simulé depuis le 09/09/2026 avec des cours réellement publiés. Les décisions à partir du 10/10/2026 sont archivées avant leur prise d’effet ; aucun arbitrage n’est envoyé au contrat."
     }
   }
 }
