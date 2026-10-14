@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "declared_correction",
+  "date": "2026-10-14",
+  "author": "claude",
+  "demande_par": "Olivier",
+  "fichier": "data/claude/performance.csv",
+  "periode": "2026-10-01 → 2026-10-12",
+  "cause": "Le recalcul quotidien des dates provisoires repartait de la date de reprise du 30/09/2026 tout en prenant comme point de départ la dernière valeur déjà publiée. Chaque jour, tout le gain cumulé depuis le 30/09 était donc ajouté une fois de plus. Claude F affichait ainsi 111,34 au 12/10 au lieu d'environ 102,34.",
+  "second_defaut": "La courbe recalculait elle-même l'allocation au lieu de lire la décision enregistrée : la composition affichée pouvait différer de la décision publiée.",
+  "correction": "Le moteur repart désormais de la dernière valeur définitive et applique les décisions réellement enregistrées. Les valeurs du 01/10 au 12/10 ont été recalculées une seule fois, depuis la valeur du 30/09/2026 restée inchangée. Aucune valeur antérieure au 01/10 et aucune décision n'ont été modifiées.",
+  "valeurs": {
+    "claude_socle_satellites": {
+      "2026-10-01": {
+        "publie_avant": 99.276533,
+        "corrige": 99.260621
+      },
+      "2026-10-02": {
+        "publie_avant": 99.510062,
+        "corrige": 100.064475
+      },
+      "2026-10-05": {
+        "publie_avant": 100.106881,
+        "corrige": 100.464087
+      },
+      "2026-10-06": {
+        "publie_avant": 101.093727,
+        "corrige": 100.804823
+      },
+      "2026-10-07": {
+        "publie_avant": 101.393183,
+        "corrige": 100.132262
+      },
+      "2026-10-08": {
+        "publie_avant": 101.291899,
+        "corrige": 99.736654
+      },
+      "2026-10-09": {
+        "publie_avant": 101.190716,
+        "corrige": 99.81432
+      },
+      "2026-10-12": {
+        "publie_avant": 101.169285,
+        "corrige": 99.814891
+      }
+    },
+    "claude_risque_cible": {
+      "2026-10-01": {
+        "publie_avant": 99.130548,
+        "corrige": 99.11146
+      },
+      "2026-10-02": {
+        "publie_avant": 99.409303,
+        "corrige": 100.074636
+      },
+      "2026-10-05": {
+        "publie_avant": 100.123879,
+        "corrige": 100.554078
+      },
+      "2026-10-06": {
+        "publie_avant": 101.307956,
+        "corrige": 100.963253
+      },
+      "2026-10-07": {
+        "publie_avant": 101.666093,
+        "corrige": 100.155236
+      },
+      "2026-10-08": {
+        "publie_avant": 101.541969,
+        "corrige": 99.680573
+      },
+      "2026-10-09": {
+        "publie_avant": 101.417997,
+        "corrige": 99.773771
+      },
+      "2026-10-12": {
+        "publie_avant": 101.389949,
+        "corrige": 99.774527
+      }
+    },
+    "claude_double_filtre": {
+      "2026-10-01": {
+        "publie_avant": 99.266751,
+        "corrige": 99.25084
+      },
+      "2026-10-02": {
+        "publie_avant": 99.500257,
+        "corrige": 100.054615
+      },
+      "2026-10-05": {
+        "publie_avant": 100.004925,
+        "corrige": 100.361762
+      },
+      "2026-10-06": {
+        "publie_avant": 100.791626,
+        "corrige": 100.596032
+      },
+      "2026-10-07": {
+        "publie_avant": 101.126684,
+        "corrige": 100.158556
+      },
+      "2026-10-08": {
+        "publie_avant": 101.221423,
+        "corrige": 99.920159
+      },
+      "2026-10-09": {
+        "publie_avant": 101.316252,
+        "corrige": 99.95868
+      },
+      "2026-10-12": {
+        "publie_avant": 101.379441,
+        "corrige": 99.8885
+      }
+    },
+    "claude_momentum_multi": {
+      "2026-10-01": {
+        "publie_avant": 98.666749,
+        "corrige": 98.646985
+      },
+      "2026-10-02": {
+        "publie_avant": 99.093791,
+        "corrige": 99.62158
+      },
+      "2026-10-05": {
+        "publie_avant": 99.999425,
+        "corrige": 100.184351
+      },
+      "2026-10-06": {
+        "publie_avant": 101.140437,
+        "corrige": 100.680379
+      },
+      "2026-10-07": {
+        "publie_avant": 101.635686,
+        "corrige": 99.685203
+      },
+      "2026-10-08": {
+        "publie_avant": 101.613683,
+        "corrige": 99.064643
+      },
+      "2026-10-09": {
+        "publie_avant": 101.591684,
+        "corrige": 98.828739
+      },
+      "2026-10-12": {
+        "publie_avant": 101.034683,
+        "corrige": 98.437267
+      }
+    },
+    "claude_momentum_prudent": {
+      "2026-10-01": {
+        "publie_avant": 98.440672,
+        "corrige": 98.427588
+      },
+      "2026-10-02": {
+        "publie_avant": 98.388353,
+        "corrige": 99.130372
+      },
+      "2026-10-05": {
+        "publie_avant": 98.839354,
+        "corrige": 99.740507
+      },
+      "2026-10-06": {
+        "publie_avant": 99.516377,
+        "corrige": 100.317282
+      },
+      "2026-10-07": {
+        "publie_avant": 99.66926,
+        "corrige": 99.33172
+      },
+      "2026-10-08": {
+        "publie_avant": 99.336798,
+        "corrige": 98.680878
+      },
+      "2026-10-09": {
+        "publie_avant": 99.005446,
+        "corrige": 98.489364
+      },
+      "2026-10-12": {
+        "publie_avant": 98.232096,
+        "corrige": 98.171364
+      }
+    },
+    "claude_dispersion": {
+      "2026-10-01": {
+        "publie_avant": 99.925219,
+        "corrige": 99.905286
+      },
+      "2026-10-02": {
+        "publie_avant": 100.007161,
+        "corrige": 100.057228
+      },
+      "2026-10-05": {
+        "publie_avant": 101.544178,
+        "corrige": 101.575785
+      },
+      "2026-10-06": {
+        "publie_avant": 103.399297,
+        "corrige": 101.808991
+      },
+      "2026-10-07": {
+        "publie_avant": 105.31172,
+        "corrige": 101.85193
+      },
+      "2026-10-08": {
+        "publie_avant": 107.019242,
+        "corrige": 101.623862
+      },
+      "2026-10-09": {
+        "publie_avant": 108.754449,
+        "corrige": 102.151557
+      },
+      "2026-10-12": {
+        "publie_avant": 111.34268,
+        "corrige": 102.338722
+      }
+    },
+    "claude_contrarien": {
+      "2026-10-01": {
+        "publie_avant": 99.541039,
+        "corrige": 99.529151
+      },
+      "2026-10-02": {
+        "publie_avant": 99.432012,
+        "corrige": 100.016041
+      },
+      "2026-10-05": {
+        "publie_avant": 99.728446,
+        "corrige": 100.334246
+      },
+      "2026-10-06": {
+        "publie_avant": 100.498544,
+        "corrige": 100.670248
+      },
+      "2026-10-07": {
+        "publie_avant": 100.491881,
+        "corrige": 99.730234
+      },
+      "2026-10-08": {
+        "publie_avant": 99.987515,
+        "corrige": 99.759352
+      },
+      "2026-10-09": {
+        "publie_avant": 99.593028,
+        "corrige": 100.73569
+      },
+      "2026-10-12": {
+        "publie_avant": 100.33627,
+        "corrige": 100.912319
+      }
+    },
+    "claude_dollar_energie": {
+      "2026-10-01": {
+        "publie_avant": 99.011528,
+        "corrige": 99.042027
+      },
+      "2026-10-02": {
+        "publie_avant": 98.934707,
+        "corrige": 99.717281
+      },
+      "2026-10-05": {
+        "publie_avant": 99.207991,
+        "corrige": 100.549915
+      },
+      "2026-10-06": {
+        "publie_avant": 99.887824,
+        "corrige": 100.884778
+      },
+      "2026-10-07": {
+        "publie_avant": 99.777271,
+        "corrige": 99.822575
+      },
+      "2026-10-08": {
+        "publie_avant": 99.302781,
+        "corrige": 99.232844
+      },
+      "2026-10-09": {
+        "publie_avant": 98.830548,
+        "corrige": 100.153564
+      },
+      "2026-10-12": {
+        "publie_avant": 99.515568,
+        "corrige": 100.398094
+      }
+    }
+  }
+}

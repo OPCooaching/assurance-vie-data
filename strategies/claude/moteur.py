@@ -402,16 +402,52 @@ def mouvements(avant: dict, apres: dict, noms: dict) -> tuple[dict, str]:
     return detail, " ".join(phrases)
 
 
-def courbe(table, dates, signal, univers, contexte, valeur_depart):
-    """Base 100 au départ, décision le lundi, application à la valorisation suivante."""
+def decisions_enregistrees(identifiant: str) -> dict:
+    """Allocations réellement décidées, par date de valorisation de la décision.
+
+    Le fonds en euros n'est pas repris : son rendement quotidien est nul et
+    il est rajouté comme solde dans les sorties.
+    """
+    if not DECISIONS.exists():
+        return {}
+    retenues = {}
+    for fichier in sorted(DECISIONS.glob(f"*--{identifiant.replace('_', '-')}.json")):
+        try:
+            decision = json.loads(fichier.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        jour = decision.get("effective_valuation_date")
+        cible = decision.get("target_allocation_percent")
+        if not jour or not isinstance(cible, dict):
+            continue
+        retenues[pd.Timestamp(jour)] = {
+            a: float(w) / 100 for a, w in cible.items() if a != FONDS_EURO and float(w) > 0
+        }
+    return retenues
+
+
+def courbe(table, dates, signal, univers, contexte, valeur_depart, decisions=None):
+    """Valeur départ au premier jour, puis rendement de l'allocation en vigueur.
+
+    L'allocation en vigueur est la dernière décision réellement enregistrée,
+    appliquée à partir de la valorisation qui suit sa date. Une semaine sans
+    décision enregistrée retombe sur la règle, évaluée le vendredi. Avant toute
+    décision, la règle est évaluée au premier jour du calcul.
+
+    Le calcul ne dépend donc que des dates : refait depuis n'importe quel jour
+    déjà publié, il prolonge la même courbe, sans recompter un gain.
+    """
+    decisions = decisions or {}
+    semaines_decidees = {d.isocalendar()[:2] for d in decisions}
     valeur = float(valeur_depart)
-    poids, veille, derniere = None, None, {}
+    poids, veille = None, None
     points = []
     for rang, date in enumerate(dates):
         prix = table.loc[date]
         if rang == 0:
-            poids = signal(table, date, univers, contexte)
-            derniere = dict(poids)
+            anterieures = [d for d in decisions if d <= date]
+            poids = (dict(decisions[max(anterieures)]) if anterieures
+                     else signal(table, date, univers, contexte))
             points.append((date, valeur))
             veille = prix
             continue
@@ -425,13 +461,16 @@ def courbe(table, dates, signal, univers, contexte, valeur_depart):
         # La revue a lieu sur la dernière valorisation de la semaine, le
         # vendredi : la décision est prise sur cette clôture et s'applique à
         # la valorisation suivante, donc au lundi. C'est la convention du
-        # protocole commun du 23 septembre 2026.
-        if date.weekday() == 4:
+        # protocole commun du 23 septembre 2026. Une décision enregistrée un
+        # autre jour, faute de cours du vendredi, s'applique de la même façon
+        # à la valorisation suivante.
+        if date in decisions:
+            poids = dict(decisions[date])
+        elif date.weekday() == 4 and date.isocalendar()[:2] not in semaines_decidees:
             poids = signal(table, date, univers, contexte)
-            derniere = dict(poids)
         points.append((date, valeur))
         veille = prix
-    return pd.Series(dict(points)), derniere
+    return pd.Series(dict(points)), dict(poids or {})
 
 
 def jour_de_revue(date_valorisation) -> bool:
@@ -530,7 +569,11 @@ def main() -> int:
             if not anterieures.empty:
                 socle = pd.Timestamp(anterieures.max())
 
-    a_calculer = [d for d in dates if d >= (reprise or socle)]
+    # Le calcul repart de la dernière valeur définitive, jamais d'une date plus
+    # ancienne : repartir de la reprise du 30/09 avec la valeur de la veille
+    # recomptait chaque jour tout le gain accumulé depuis cette date.
+    debut = max(reprise, socle) if reprise is not None else socle
+    a_calculer = [d for d in dates if d >= debut]
     # Le samedi, aucune valorisation nouvelle n'apparaît : il n'y a rien à
     # ajouter aux courbes, mais la décision de la semaine reste à prendre sur
     # la dernière clôture disponible. Le calcul des courbes est donc séparé de
@@ -547,7 +590,8 @@ def main() -> int:
             depart = float(connues[identifiant].iloc[-1]) if not connues.empty else 100.0
         else:
             depart = 100.0
-        serie, derniere = courbe(table, a_calculer, signal, univers, contexte, depart)
+        serie, derniere = courbe(table, a_calculer, signal, univers, contexte, depart,
+                                 decisions_enregistrees(identifiant))
         courbes[identifiant] = serie
         liquide = 1.0 - sum(derniere.values())
         for actif, poids in sorted(derniere.items()):
