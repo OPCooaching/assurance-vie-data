@@ -1,15 +1,9 @@
 {
-  "generated_at": "2026-10-13T23:55:52+00:00",
-  "latest_provisional_date": "2026-10-12",
-  "latest_consolidated_date": "2026-10-09",
-  "latest_status": "provisional",
-  "pending_supports": [
-    {
-      "asset_id": "FR0010380675",
-      "support_name": "LAZARD ACTIONS EMERGENTES R",
-      "latest_official_close_date": "2026-10-09"
-    }
-  ],
+  "generated_at": "2026-10-14T23:28:44+00:00",
+  "latest_provisional_date": "2026-10-13",
+  "latest_consolidated_date": "2026-10-13",
+  "latest_status": "consolidated",
+  "pending_supports": [],
   "missing_from_entire_series": [],
   "method": "Official close on each published support; for a provisional date only, a delayed support keeps its latest official close until its new close is published."
 }
