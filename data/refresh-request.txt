@@ -21,3 +21,5 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-10-10T13:01:58Z — revue W42 : décisions théoriques A à E et académiques archivées ; reconstruire les pages sans modifier l’historique.\n2026-10-10T13:18:00Z — clarifier sur la page les règles de revue désormais archivées pour A à E.\n
 
 2026-10-10T15:20:00+02:00 | regenerate public dashboard after review-status and base-100 presentation update
+
+2026-10-19T12:18:54+02:00 | rebuild dashboard after delayed Saturday review 2026-10-17
