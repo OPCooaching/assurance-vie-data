@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-10-19T10:18:54Z",
+  "effective_valuation_date": "2026-10-19",
+  "author": "chatgpt",
+  "strategy_version": "règle de référence",
+  "decision_type": "maintain",
+  "data_as_of": {
+    "prices": "2026-10-16"
+  },
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision fondée sur les données disponibles au 16/10/2026 ; aucune donnée ultérieure n’est utilisée."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "decision_id": "2026-W43--academic_momentum",
+  "strategy_id": "academic_momentum",
+  "target_allocation_percent": {
+    "IE000I8KRLL9": 20,
+    "IE00BL25JM42": 20,
+    "IE00BMG6Z448": 20,
+    "LU1900066462": 20,
+    "LU0839027447": 20
+  },
+  "rationale": "Le classement momentum à 12 mois est mensuel. Les cinq ETF de la dernière sélection restent en vigueur jusqu’au prochain classement ; aucun changement."
+}
