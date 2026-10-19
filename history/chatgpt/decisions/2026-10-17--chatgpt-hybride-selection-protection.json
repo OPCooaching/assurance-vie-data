@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-10-19T10:18:54Z",
+  "effective_valuation_date": "2026-10-19",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision fondée sur les données disponibles au 16/10/2026 ; aucune donnée ultérieure n’est utilisée.",
+    "Un OPCVM peut publier sa valeur avec retard : le dernier cours officiel connu est conservé sans rendement inventé."
+  ],
+  "validation": {
+    "allocation_total_percent": 100,
+    "no_lookahead_checked": true,
+    "historical_records_unchanged": true
+  },
+  "execution_assumption": "next_available_valuation",
+  "decision_id": "2026-W43--chatgpt-hybride-selection-protection",
+  "strategy_id": "chatgpt-hybride-selection-protection",
+  "decision_type": "maintain",
+  "data_as_of": {
+    "prices": "2026-10-16"
+  },
+  "target_allocation_percent": {
+    "IE000I8KRLL9": 20,
+    "IE00BM67HM91": 20,
+    "LU0533033667": 20,
+    "DE000A0Q4R85": 20,
+    "IE00BG0J4C88": 20,
+    "LU0290358497": 0
+  },
+  "rationale": "La sélection est mensuelle et reste inchangée. Le garde-fou hebdomadaire n’est pas déclenché : le NFCI est favorable et le VIX, à 16,46, reste sous le seuil prévu.",
+  "protection_active": false
+}
