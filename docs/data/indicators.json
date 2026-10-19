@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-17T15:19:12+00:00",
-  "price_as_of_date": "2026-10-16",
+  "generated_at": "2026-10-19T10:25:44+00:00",
+  "price_as_of_date": "2026-10-19",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
     "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
     "price_ready": 337,
-    "volume_ready": 175,
+    "volume_ready": 208,
     "external_ready": 8
   },
   "groups": [
@@ -141,7 +141,7 @@
           "indicator": "Volume du jour ÷ volume moyen des 20 séances précédentes",
           "strategy_use": "Confirmation de mouvement sur les actions et ETF qui publient un volume fiable.",
           "availability": "partial",
-          "availability_label": "Disponible pour 175 supports seulement.",
+          "availability_label": "Disponible pour 208 supports seulement.",
           "is_new_data": false
         }
       ]
