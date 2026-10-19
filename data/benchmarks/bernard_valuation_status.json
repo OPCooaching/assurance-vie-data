@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-19T10:25:45+00:00",
+  "generated_at": "2026-10-19T23:57:29+00:00",
   "latest_provisional_date": "2026-10-19",
-  "latest_consolidated_date": "2026-10-15",
+  "latest_consolidated_date": "2026-10-16",
   "latest_status": "provisional",
   "pending_supports": [
     {
       "asset_id": "FR0010380675",
       "support_name": "LAZARD ACTIONS EMERGENTES R",
-      "latest_official_close_date": "2026-10-15"
+      "latest_official_close_date": "2026-10-16"
     }
   ],
   "missing_from_entire_series": [],
