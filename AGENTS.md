@@ -41,6 +41,9 @@ Les stratégies de `strategies/academic/` servent de témoins. Leurs règles et 
 
 ## Décisions et versions
 
+Pour les calculs et revues ChatGPT, lire `strategies/chatgpt/ACCOUNTING_RULES.md`.
+Les contrôles de comptabilité dans `tests/` doivent réussir avant publication.
+
 - Toute décision effectivement enregistrée est append-only.
 - Toute modification de logique crée une nouvelle version de stratégie.
 - Une reconstitution ou un backtest est clairement étiqueté comme tel ; il ne devient jamais une décision hebdomadaire réellement prise à l'époque.

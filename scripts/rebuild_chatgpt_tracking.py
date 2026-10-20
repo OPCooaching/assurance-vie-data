@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
+from portfolio_accounting import simulate
 
 START = pd.Timestamp("2026-09-09")
 PRICES = Path("data/prices/daily.csv")
@@ -41,13 +42,21 @@ def weekly_decisions(strategy_id: str):
     for path in sorted(WEEKLY_DECISIONS.rglob("*.json")):
         try:
             row = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            continue
+        except (OSError, json.JSONDecodeError) as error:
+            raise ValueError(f"Unreadable decision: {path}") from error
         if row.get("status") == "template_not_a_decision" or row.get("strategy_id") != strategy_id:
             continue
+        effective = row.get("effective_valuation_date")
+        if row.get("decided_at_utc") and effective:
+            # A decision received on Monday cannot execute at Monday's NAV
+            # under the stated next-business-day contract convention.
+            decided = pd.Timestamp(row["decided_at_utc"]).tz_convert("Europe/Paris")
+            earliest = (decided.normalize().tz_localize(None) + pd.offsets.BDay(1)).date()
+            effective = max(effective, str(earliest))
         records.append(
             {
-                "effective_date": row.get("effective_valuation_date"),
+                "effective_date": effective,
+                "maintain": row.get("decision_type") in {"maintain", "no_change"},
                 "target_allocation_percent": row.get("target_allocation_percent", {}),
             }
         )
@@ -57,7 +66,9 @@ def weekly_decisions(strategy_id: str):
 def read_decisions(strategy_id: str):
     # Keep preserved historical allocations until a newer append-only
     # decision becomes effective; never replace the earlier history.
-    records = legacy_decisions(strategy_id) + weekly_decisions(strategy_id)
+    weekly = weekly_decisions(strategy_id)
+    cutoff = min((r["effective_date"] for r in weekly if r["effective_date"]), default="9999")
+    records = [r for r in legacy_decisions(strategy_id) if r["effective_date"] and r["effective_date"] < cutoff] + weekly
     return sorted(
         (row for row in records if row.get("effective_date") and row.get("target_allocation_percent")),
         key=lambda row: row["effective_date"],
@@ -71,47 +82,19 @@ def strategy_ids():
         for path in WEEKLY_DECISIONS.rglob("*.json"):
             try:
                 row = json.loads(path.read_text(encoding="utf-8"))
-            except (OSError, json.JSONDecodeError):
-                continue
+            except (OSError, json.JSONDecodeError) as error:
+                raise ValueError(f"Unreadable decision: {path}") from error
             if row.get("status") != "template_not_a_decision" and row.get("strategy_id"):
                 weekly.add(row["strategy_id"])
     return sorted(legacy | weekly)
 
 
 def curve_for_strategy(px, dates, strategy_id):
-    # The dashboard may include a provisional valuation date. Forward filling
-    # only uses a support's prior published close; it never pulls a later price
-    # back into an earlier day.
-    px = px.reindex(dates).ffill()
-    decisions = read_decisions(strategy_id)
-    weights, latest = {}, {}
-    value, rows, previous = None, [], None
-    for dt in dates:
-        effective = str(dt.date())
-        eligible = [row for row in decisions if row["effective_date"] <= effective]
-        if not eligible:
-            rows.append((dt, None))
-            previous = dt
-            continue
-        newest = eligible[-1]
-        weights = {
-            asset: float(weight) / 100.0
-            for asset, weight in newest["target_allocation_percent"].items()
-        }
-        latest = dict(weights)
-        if value is None:
-            value = 100.0
-        elif previous is not None:
-            change = 0.0
-            for asset, weight in weights.items():
-                current = px.at[dt, asset] if asset in px.columns else None
-                prior = px.at[previous, asset] if asset in px.columns else None
-                if pd.notna(current) and pd.notna(prior) and prior > 0:
-                    change += weight * (float(current) / float(prior) - 1.0)
-            value *= 1.0 + change
-        rows.append((dt, value))
-        previous = dt
-    return pd.Series(dict(rows)), latest
+    events = [{"date": row["effective_date"],
+               "weights": {a: float(w)/100 for a, w in row["target_allocation_percent"].items()},
+               "maintain": row.get("maintain", False)}
+              for row in read_decisions(strategy_id)]
+    return simulate(px, dates, events)
 
 
 def main():

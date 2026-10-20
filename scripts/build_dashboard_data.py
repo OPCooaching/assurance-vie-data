@@ -53,6 +53,23 @@ def asset_names():
     return dict(zip(frame["asset_id"], frame["support_name"]))
 
 
+def actor_freshness(actor, strategies, dates):
+    """Freshness of each actual simulated holding, not the Bernard basket."""
+    raw = pd.read_csv("data/prices/daily.csv")
+    last = str(max(dates))
+    usable = raw.loc[(raw["date"] <= last) & raw["close_eur"].notna()]
+    latest = usable.groupby("asset_id")["date"].max().to_dict()
+    result = {}
+    for sid, spec in strategies.items():
+        rows = []
+        for h in spec.get("holdings", []):
+            d = latest.get(h["asset_id"])
+            rows.append({"asset_id": h["asset_id"], "name": h["name"], "price_date": d,
+                         "age_days": (pd.Timestamp(last)-pd.Timestamp(d)).days if d else None})
+        result[sid] = rows
+    return {"as_of": last, "holdings": result}
+
+
 def attach_allocations(strategies, actor, names):
     """Attach the current workflow allocation to its public strategy description."""
     path = Path("data") / actor / "latest_allocations.csv"
@@ -90,15 +107,16 @@ def academic_metadata():
     result = {}
     for strategy_id, spec in (cfg.get("strategies") or {}).items():
         frequency = spec.get("rebalance") or spec.get("signal_frequency") or "selon la règle"
-        frequency = {"monthly": "La stratégie est examinée une fois par mois.", "annual": "La stratégie est examinée une fois par an."}.get(str(frequency), frequency)
+        frequency = {"monthly": "Signal en fin de mois ; rééquilibrage à la clôture de la première séance du mois suivant.", "annual": "Rééquilibrage à la clôture de la première séance de janvier."}.get(str(frequency), frequency)
         result[strategy_id] = {
             "label": spec.get("label") or strategy_id,
             "version": "règle de référence",
             "resume": "Référence académique suivie avec les prix réellement observés depuis le 09/09/2026.",
             "regle": rules.get(spec.get("type"), "Règle documentée dans la configuration académique."),
-            "frequence": frequency if str(frequency).startswith("La stratégie") else f"La stratégie est examinée selon cette règle : {frequency}.",
+            "frequence": str(frequency),
             "status": "live_paper_tracking",
-            "statut_public": "Suivi quotidien depuis le 09/09/2026. La composition ci-dessous est celle de la dernière revue disponible.",
+            "faiblesse": spec.get("warning", ""),
+            "statut_public": "Suivi simulé depuis le 09/09/2026. La composition ci-dessous correspond aux positions valorisées, et non aux proportions cibles du journal de contrôle.",
         }
     return result
 
@@ -125,6 +143,8 @@ def _previous_backtest_allocation(name: str, strategy_id: str, before_date: str)
     if not root.exists():
         return None
     for path in root.rglob("decisions.jsonl"):
+        if name == "chatgpt" and path.parent.name != "v0.1":
+            continue  # New research runs must not change archived review comparisons.
         try:
             lines = path.read_text(encoding="utf-8").splitlines()
         except OSError:
@@ -177,15 +197,24 @@ def load_decision_history(name: str, names: dict[str, str]):
         allocation = record.get("target_allocation_percent", {})
         if not isinstance(allocation, dict):
             allocation = {}
+        date = record.get("effective_valuation_date") or record.get("decided_at_utc")
+        warnings = list(record.get("warnings", []))
+        decided = record.get("decided_at_utc")
+        if name == "chatgpt" and decided and date:
+            earliest = (pd.Timestamp(decided).tz_convert("Europe/Paris").normalize().tz_localize(None) + pd.offsets.BDay(1)).date()
+            if str(earliest) > date:
+                warnings.append("Revue reçue tardivement : exécution simulée reportée au prochain jour ouvré.")
+                date = str(earliest)
         raw.append({
             "decision_id": record.get("decision_id"),
-            "date": record.get("effective_valuation_date") or record.get("decided_at_utc"),
+            "date": date,
+            "decided_at": decided,
             "strategy_id": record["strategy_id"],
             "strategy_version": record.get("strategy_version"),
             "decision_type": record["decision_type"],
             "rationale": record.get("rationale"),
             "allocation": allocation,
-            "warnings": record.get("warnings", []),
+            "warnings": warnings,
         })
     raw.sort(key=lambda item: str(item.get("date") or ""))
     previous_by_strategy, visible = {}, []
@@ -195,7 +224,7 @@ def load_decision_history(name: str, names: dict[str, str]):
         if previous is None:
             previous = _previous_backtest_allocation(name, strategy_id, str(item.get("date") or ""))
         visible.append({
-            **{key: item[key] for key in ("decision_id", "date", "strategy_id", "strategy_version", "decision_type", "rationale", "warnings")},
+            **{key: item[key] for key in ("decision_id", "date", "decided_at", "strategy_id", "strategy_version", "decision_type", "rationale", "warnings")},
             "target_allocation_percent": {
                 names.get(str(asset_id), str(asset_id)): weight
                 for asset_id, weight in allocation.items()
@@ -348,6 +377,7 @@ def main():
     (OUT / "academic.json").write_text(
         json.dumps(payload(series, dates, start_eur, {
             "strategies": academic_info,
+            "freshness": actor_freshness("academic", academic_info, dates),
             "decision_history": load_decision_history("academic", names),
             "valuation": valuation,
         }), ensure_ascii=False),
@@ -366,6 +396,16 @@ def main():
         )
         metadata["decision_history"] = load_decision_history(name, names)
         metadata["valuation"] = valuation
+        if name == "chatgpt":
+            for sid, spec in metadata.get("strategies", {}).items():
+                spec["statut_public"] = (
+                    "Simulation corrigée le 20/10/2026. Début partiellement reconstitué ; "
+                    "revues archivées ensuite. Frais du contrat non déduits. "
+                    "Les décisions tardives sont exécutées au prochain jour ouvré.")
+                if sid == "chatgpt-momentum-mensuel":
+                    spec["faiblesse"] = (
+                        "La sélection du 09/10 est une dérogation historique au calendrier de fin de mois. "
+                        "Elle est conservée dans la courbe et ne constitue pas une application conforme de la règle.")
         # Only workflow-produced tracking files may add public actor curves.
         # Their dates begin at the declared live-tracking start, never in a
         # reconstructed historical period.
@@ -378,6 +418,8 @@ def main():
             aligned_series(curve["label"], curve["by_date"], actor_dates)
             for curve in actor_curves
         )
+        if name == "chatgpt":
+            metadata["freshness"] = actor_freshness(name, metadata.get("strategies", {}), actor_dates)
         (OUT / f"{name}.json").write_text(
             json.dumps(payload(actor_series, actor_dates, start_eur, metadata), ensure_ascii=False),
             encoding="utf-8",

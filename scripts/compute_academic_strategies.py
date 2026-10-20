@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import yaml
+from portfolio_accounting import simulate
 
 CFG = Path("config/academic_strategies.yml")
 UNIVERSE = Path("config/universe.csv")
@@ -31,31 +32,16 @@ def portfolio_curve(px, target_weights, start_date, rebalance):
     if sub.empty:
         return None
 
-    rets = sub.pct_change().fillna(0.0)
-    weights = pd.Series({a: target_weights[a] for a in assets}, dtype=float)
-    weights = weights / weights.sum()
-    value = 1.0
-    rows = []
-
+    events = []
     last_key = None
-    for dt, r in rets.iterrows():
+    for dt in sub.index:
         key = (dt.year, dt.month) if rebalance == "monthly" else dt.year
         if last_key is None or key != last_key:
-            weights = pd.Series({a: target_weights[a] for a in assets}, dtype=float)
-            weights = weights / weights.sum()
+            events.append({"date": dt, "weights": target_weights})
             last_key = key
-
-        port_ret = float((weights * r).sum())
-        value *= (1.0 + port_ret)
-
-        grown = weights * (1.0 + r)
-        denom = grown.sum()
-        if denom > 0:
-            weights = grown / denom
-
-        rows.append((dt, value))
-
-    return pd.Series(dict(rows)).sort_index()
+    curve, latest = simulate(px, sub.index, events)
+    curve.attrs["latest_allocation"] = latest
+    return curve
 
 
 def faber_curve(px, risk_asset, defensive_asset, start_date):
@@ -75,16 +61,14 @@ def faber_curve(px, risk_asset, defensive_asset, start_date):
     monthly_signal = pd.Series(signal.values, index=signal.index.to_period("M"))
     daily["risk_on"] = daily["month"].map(monthly_signal).fillna(0.0)
 
-    rr = daily[risk_asset].pct_change().fillna(0.0)
-    dr = daily[defensive_asset].pct_change().fillna(0.0)
-    port_ret = daily["risk_on"] * rr + (1.0 - daily["risk_on"]) * dr
-    curve = (1.0 + port_ret).cumprod()
-
-    last_alloc = {
-        risk_asset: float(daily["risk_on"].iloc[-1]),
-        defensive_asset: float(1.0 - daily["risk_on"].iloc[-1]),
-    }
-    return curve, last_alloc
+    events, previous_month = [], None
+    for dt, row in daily.iterrows():
+        if dt.to_period("M") != previous_month:
+            events.append({"date": dt, "weights": {
+                risk_asset: float(row["risk_on"]),
+                defensive_asset: 1.0 - float(row["risk_on"])}})
+            previous_month = dt.to_period("M")
+    return simulate(px, daily.index, events)
 
 
 def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
@@ -99,7 +83,7 @@ def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
         return None, None
 
     month_ends = sub.resample("ME").last()
-    mom = month_ends[assets].pct_change(12)
+    mom = month_ends[assets].pct_change(12, fill_method=None)
     signals = {}
 
     for dt in month_ends.index:
@@ -112,24 +96,13 @@ def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
             signals[next_period] = {defensive_asset: 1.0}
 
     daily = sub.loc[sub.index >= start_date]
-    daily_rets = daily.pct_change().fillna(0.0)
-    value = 1.0
-    rows = []
-    current = {defensive_asset: 1.0}
-
-    for dt, row in daily_rets.iterrows():
+    events, previous_month = [], None
+    for dt in daily.index:
         period = dt.to_period("M")
-        if period in signals:
-            current = signals[period]
-
-        port_ret = 0.0
-        for asset, w in current.items():
-            if asset in row.index and pd.notna(row[asset]):
-                port_ret += w * float(row[asset])
-        value *= 1.0 + port_ret
-        rows.append((dt, value))
-
-    return pd.Series(dict(rows)).sort_index(), current
+        if period != previous_month:
+            events.append({"date": dt, "weights": signals.get(period, {defensive_asset: 1.0})})
+            previous_month = period
+    return simulate(px, daily.index, events)
 
 
 def main():
@@ -149,6 +122,7 @@ def main():
     norm = float(cfg.get("normalization", 100))
     universe = pd.read_csv(UNIVERSE)
     px = load_prices()
+    px = px.loc[px.index <= benchmark_dates.iloc[-1]]
 
     curves = {}
     allocations = []
@@ -158,7 +132,7 @@ def main():
 
         if typ == "static":
             curve = portfolio_curve(px, spec["allocations"], start, spec.get("rebalance", "monthly"))
-            alloc = spec["allocations"]
+            alloc = curve.attrs["latest_allocation"] if curve is not None else None
         elif typ == "faber_sma10":
             curve, alloc = faber_curve(px, spec["risk_asset"], spec["defensive_asset"], start)
         elif typ == "momentum_12m":

@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import yaml
+from portfolio_accounting import simulate
 
 CFG = Path("config/chatgpt_backtests_v0_1.yml")
 PRICES = Path("data/prices/daily.csv")
@@ -119,20 +120,18 @@ def macro_weights(context, dt, spec):
 
 
 def run(name, px, decision_dates, signal):
-    returns = px.pct_change().fillna(0.0)
-    value = 100.0
-    weights = None
-    rows, decisions = [], []
+    events, decisions = [], []
     for position, dt in enumerate(px.index):
-        if position and weights:
-            value *= 1.0 + sum(weights.get(asset, 0.0) * float(returns.at[dt, asset]) for asset in weights if asset in returns.columns)
         if dt in decision_dates:
             target, details = signal(dt)
             target = normalise(target)
             decisions.append({"decision_date": str(dt.date()), "effective_date": str(px.index[position + 1].date()) if position + 1 < len(px.index) else None, "target_allocation_percent": {a: round(w * 100, 6) for a, w in target.items()}, "details": details})
-            weights = target
-        rows.append({"date": str(dt.date()), "value": value})
-    return pd.DataFrame(rows), decisions
+            if position + 1 < len(px.index):
+                events.append({"date": px.index[position + 1], "weights": target})
+    curve, _ = simulate(px, px.index, events)
+    # Uninvested initial cash, then execution at the following closing price.
+    curve = curve.fillna(100.0)
+    return pd.DataFrame({"date": [str(d.date()) for d in curve.index], "value": curve.values}), decisions
 
 
 def metrics(curve, decisions):
@@ -147,6 +146,7 @@ def metrics(curve, decisions):
 def main():
     cfg, px, context, universe = load_inputs()
     base = cfg["backtest"]
+    base = {**base, "version": "v0.1-accounting-20261020"}
     defensive = base["defensive_asset"]
     if defensive not in px.columns:
         raise ValueError("Defensive asset missing from prices")
@@ -176,11 +176,22 @@ def main():
         weights = {asset: weight * exposure for asset, weight in selected.items()}
         weights[defensive] = weights.get(defensive, 0.0) + 1.0 - exposure
         return normalise(weights), {"monthly_selection": last_month, "protection_active": protect, "publication_dates": dates or {}, "data_quality": "provisional_revised_macro_data"}
-    jobs["chatgpt-hybride-selection-protection"] = (weekly, hybrid_signal)
+    jobs["chatgpt-hybride-selection-protection"] = (weekly | monthly, hybrid_signal)
     web = {"version": base["version"], "start": str(start.date()), "end": str(test_px.index[-1].date()), "results": []}
     for strategy_id, (dates, signal) in jobs.items():
-        curve, decisions = run(strategy_id, test_px, dates, signal)
         folder = OUT / strategy_id / base["version"]
+        if folder.exists():
+            # Resume a stopped batch without rewriting any completed result.
+            result = json.loads((folder / "metrics.json").read_text(encoding="utf-8"))
+            web["results"].append(result)
+            continue
+        try:
+            curve, decisions = run(strategy_id, test_px, dates, signal)
+        except ValueError as error:
+            web["results"].append({"strategy_id": strategy_id, "status": "unavailable",
+                                   "reason": str(error), "metrics": {},
+                                   "limitations": ["missing_execution_price"]})
+            continue
         folder.mkdir(parents=True, exist_ok=True)
         (folder / "specification.yml").write_text(
             yaml.safe_dump({"backtest": base, "strategy": specs[strategy_id]}, allow_unicode=True, sort_keys=False),

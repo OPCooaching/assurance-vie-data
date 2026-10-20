@@ -204,7 +204,8 @@ def normalise_to_eur(parts, period):
         if currency == "EUR":
             part["close_eur"] = part["close_native"]
         else:
-            rates = fx[currency].reindex(part["date"]).ffill().bfill()
+            dates = pd.DatetimeIndex(part["date"])
+            rates = fx[currency].reindex(fx[currency].index.union(dates)).sort_index().ffill().reindex(dates)
             if rates.isna().any() or (rates <= 0).any():
                 raise RuntimeError(f"Invalid EUR conversion history for {currency}.")
             # EURUSD=X means USD for one EUR, hence a USD quote is divided by it.
