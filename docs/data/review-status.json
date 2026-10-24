@@ -1,8 +1,8 @@
 {
-  "review_date": "2026-10-17",
-  "status": "completed",
-  "data_as_of_date": "2026-10-16",
-  "last_consolidated_date": "2026-10-15",
-  "updated_at": "2026-10-19T10:27:00Z",
-  "message": "Les portefeuilles théoriques ont été revus ; les décisions pour la semaine du 19 octobre sont archivées."
+  "review_date": "2026-10-24",
+  "status": "in_progress",
+  "data_as_of_date": "2026-10-19",
+  "last_consolidated_date": "2026-10-16",
+  "updated_at": "2026-10-24T13:01:21Z",
+  "message": "Mise à jour du catalogue et revue hebdomadaire en cours avec les derniers cours officiellement disponibles."
 }
