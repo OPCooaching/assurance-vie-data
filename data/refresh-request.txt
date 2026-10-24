@@ -23,3 +23,5 @@ Ce fichier déclenche uniquement le workflow de mise à jour ; il ne contient au
 2026-10-10T15:20:00+02:00 | regenerate public dashboard after review-status and base-100 presentation update
 
 2026-10-19T12:18:54+02:00 | rebuild dashboard after delayed Saturday review 2026-10-17
+
+2026-10-24T15:01:21+02:00 | refresh after validated Altaprofits catalogue update before weekly review
