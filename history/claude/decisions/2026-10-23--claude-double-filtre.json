@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-23--claude_double_filtre",
+  "decided_at_utc": "2026-10-25T14:48:37+00:00",
+  "effective_valuation_date": "2026-10-23",
+  "author": "claude",
+  "strategy_id": "claude_double_filtre",
+  "strategy_version": "v0.3",
+  "decision_type": "weekly_allocation",
+  "rationale": "Sorties : iShares Core MSCI World UCITS ETF, qui pesait 10,50 %, Xtrackers MSCI World Minimum Volatility UCITS ETF, qui pesait 4,50 %. Renforcés : Xtrackers II EUR Overnight Rate Swap UCITS ETF de 35,00 % à 50,00 %.",
+  "target_allocation_percent": {
+    "LU0290358497": 50.0,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [],
+    "sorties": [
+      {
+        "asset_id": "IE00BKBF6H24",
+        "nom": "iShares Core MSCI World UCITS ETF",
+        "poids_pct_precedent": 10.5
+      },
+      {
+        "asset_id": "IE00BL25JN58",
+        "nom": "Xtrackers MSCI World Minimum Volatility UCITS ETF",
+        "poids_pct_precedent": 4.5
+      }
+    ],
+    "renforces": [
+      {
+        "asset_id": "LU0290358497",
+        "nom": "Xtrackers II EUR Overnight Rate Swap UCITS ETF",
+        "de_pct": 35.0,
+        "a_pct": 50.0
+      }
+    ],
+    "alleges": [],
+    "inchanges": [],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 50.0
+  },
+  "warnings": []
+}
