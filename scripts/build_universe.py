@@ -58,6 +58,12 @@ def main():
             }
         rows.append(row)
 
+    # A catalogue exit forbids new allocations, but must not erase the quote
+    # mapping needed to value old simulated or actually held positions.
+    active_ids = set(universe["asset_id"])
+    rows.extend({key: old.get(key, "") for key in MAP_FIELDS}
+                for asset_id, old in existing.items() if asset_id not in active_ids)
+
     with SYMBOL_MAP.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=MAP_FIELDS, lineterminator="\n")
         w.writeheader()

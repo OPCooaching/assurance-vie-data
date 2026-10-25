@@ -3,6 +3,8 @@
   "status": "in_progress",
   "data_as_of_date": "2026-10-19",
   "last_consolidated_date": "2026-10-16",
-  "updated_at": "2026-10-24T13:01:21Z",
-  "message": "Mise à jour du catalogue et revue hebdomadaire en cours avec les derniers cours officiellement disponibles."
+  "updated_at": "2026-10-25T14:45:45.325988+00:00",
+  "message": "Reprise le 25 octobre après correction de la conversion des devises. Collecte, contrôles et revue des portefeuilles en cours.",
+  "data_update_status": "retrying",
+  "previous_failure_run": 40108040263
 }

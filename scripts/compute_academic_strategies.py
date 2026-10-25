@@ -12,6 +12,18 @@ PRICES = Path("data/prices/daily.csv")
 BASELINE = Path("data/benchmarks/bernard_origin.csv")
 OUT = Path("data/academic/performance.csv")
 ALLOC_OUT = Path("data/academic/latest_allocations.csv")
+UNIVERSE_HISTORY = Path("config/universe_history")
+
+
+def universe_on(signal_date, fallback):
+    """Use the catalogue known at the signal date, never today's additions."""
+    snapshots = sorted(UNIVERSE_HISTORY.glob("????-??-??.csv"))
+    eligible = [p for p in snapshots if p.stem <= str(pd.Timestamp(signal_date).date())]
+    if not eligible:
+        if snapshots:
+            return fallback.iloc[:0].copy()
+        return fallback
+    return pd.read_csv(eligible[-1])
 
 
 def load_prices():
@@ -72,7 +84,9 @@ def faber_curve(px, risk_asset, defensive_asset, start_date):
 
 
 def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
-    etfs = universe_df.loc[universe_df["category"].str.upper() == "ETF", "asset_id"].tolist()
+    historical = [pd.read_csv(p) for p in sorted(UNIVERSE_HISTORY.glob("????-??-??.csv"))]
+    known = pd.concat([universe_df, *historical], ignore_index=True).drop_duplicates("asset_id")
+    etfs = known.loc[known["category"].str.upper() == "ETF", "asset_id"].tolist()
     assets = [a for a in etfs if a in px.columns]
     if defensive_asset not in px.columns or not assets:
         return None, None
@@ -88,6 +102,9 @@ def momentum_curve(px, universe_df, defensive_asset, start_date, top_n):
 
     for dt in month_ends.index:
         row = mom.loc[dt].dropna()
+        available = universe_on(dt, universe_df)
+        eligible = set(available.loc[available["category"].str.upper() == "ETF", "asset_id"])
+        row = row.loc[row.index.isin(eligible)]
         winners = row[row > 0].sort_values(ascending=False).head(top_n).index.tolist()
         next_period = (dt + pd.offsets.MonthEnd(1)).to_period("M")
         if winners:

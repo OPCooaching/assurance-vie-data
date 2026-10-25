@@ -113,3 +113,17 @@ jobs:
             git commit -m "data: daily market update $(date -u +%F)"
             git push
           fi
+
+      - name: Record failed data update
+        if: failure()
+        run: |
+          python scripts/record_pipeline_failure.py
+          git config user.name "assurance-vie-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          # Publish only the failure state, never partially generated data.
+          git reset
+          git add docs/data/review-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "status: report failed data update"
+            git push
+          fi

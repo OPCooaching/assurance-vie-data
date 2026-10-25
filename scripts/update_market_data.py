@@ -174,7 +174,10 @@ def extract_fx(data, symbol):
     if "Close" not in data:
         return pd.Series(dtype=float)
     result = pd.to_numeric(data["Close"], errors="coerce")
-    result.index = pd.to_datetime(result.index).date.astype(str)
+    # FX and asset dates must have the same type before union/reindex.  Mixing
+    # ISO strings with Timestamps crashes sort_index during foreign conversion.
+    result.index = pd.DatetimeIndex(pd.to_datetime(result.index)).tz_localize(None).normalize()
+    result = result.loc[~result.index.duplicated(keep="last")].sort_index()
     return result.dropna()
 
 
@@ -204,7 +207,7 @@ def normalise_to_eur(parts, period):
         if currency == "EUR":
             part["close_eur"] = part["close_native"]
         else:
-            dates = pd.DatetimeIndex(part["date"])
+            dates = pd.DatetimeIndex(pd.to_datetime(part["date"])).tz_localize(None).normalize()
             rates = fx[currency].reindex(fx[currency].index.union(dates)).sort_index().ffill().reindex(dates)
             if rates.isna().any() or (rates <= 0).any():
                 raise RuntimeError(f"Invalid EUR conversion history for {currency}.")
