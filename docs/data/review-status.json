@@ -1,10 +1,11 @@
 {
   "review_date": "2026-10-24",
-  "status": "in_progress",
+  "status": "failed",
   "data_as_of_date": "2026-10-19",
   "last_consolidated_date": "2026-10-16",
-  "updated_at": "2026-10-25T14:45:45.325988+00:00",
-  "message": "Reprise le 25 octobre après correction de la conversion des devises. Collecte, contrôles et revue des portefeuilles en cours.",
-  "data_update_status": "retrying",
-  "previous_failure_run": 40108040263
+  "updated_at": "2026-10-27T00:06:20.961891+00:00",
+  "message": "Le traitement des données a échoué. La revue n’est pas terminée ; les derniers résultats vérifiés sont conservés.",
+  "data_update_status": "failed",
+  "previous_failure_run": 40108040263,
+  "data_update_failed_at": "2026-10-27T00:06:20.961891+00:00"
 }
