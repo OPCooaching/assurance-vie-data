@@ -1,11 +1,8 @@
 {
-  "review_date": "2026-10-24",
+  "review_date": "2026-10-31",
   "status": "failed",
-  "data_as_of_date": "2026-10-19",
-  "last_consolidated_date": "2026-10-16",
-  "updated_at": "2026-10-27T00:06:20.961891+00:00",
-  "message": "Le traitement des données a échoué. La revue n’est pas terminée ; les derniers résultats vérifiés sont conservés.",
-  "data_update_status": "failed",
-  "previous_failure_run": 40108040263,
-  "data_update_failed_at": "2026-10-30T00:25:41.224969+00:00"
+  "data_as_of_date": "2026-10-29",
+  "last_consolidated_date": "2026-10-29",
+  "updated_at": "2026-10-31T14:00:54Z",
+  "message": "La revue ne peut pas démarrer : la collecte des prix échoue lors de la conversion en euros, car le script mélange des dates au format texte et des dates reconnues. Les dernières données vérifiées sont conservées."
 }
