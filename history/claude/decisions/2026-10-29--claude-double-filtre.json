@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-10-29--claude_double_filtre",
+  "decided_at_utc": "2026-10-31T00:06:51+00:00",
+  "effective_valuation_date": "2026-10-29",
+  "author": "claude",
+  "strategy_id": "claude_double_filtre",
+  "strategy_version": "v0.3",
+  "decision_type": "weekly_allocation",
+  "rationale": "Aucun mouvement : l'allocation de la semaine précédente est conservée.",
+  "target_allocation_percent": {
+    "LU0290358497": 50.0,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 50.0
+  },
+  "mouvements": {
+    "entrees": [],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [
+      {
+        "asset_id": "LU0290358497",
+        "nom": "Xtrackers II EUR Overnight Rate Swap UCITS ETF",
+        "poids_pct": 50.0
+      }
+    ],
+    "part_exposee_pct": 50.0,
+    "part_exposee_precedente_pct": 50.0
+  },
+  "warnings": []
+}

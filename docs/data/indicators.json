@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25T14:48:33+00:00",
-  "price_as_of_date": "2026-10-23",
+  "generated_at": "2026-10-31T00:06:47+00:00",
+  "price_as_of_date": "2026-10-30",
   "summary": {
     "title": "Indicateurs et stratégies possibles",
     "message": "Cette page ne classe aucun support et ne recommande aucun achat. Elle répond à trois questions : quelles données existent, quelles stratégies elles rendent possibles, et quelles données manquent.",
@@ -54,7 +54,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-22 · daily.",
+          "availability_label": "Dernière publication : 2026-10-29 · daily.",
           "is_new_data": true,
           "external_id": "USEPUINDXD"
         },
@@ -64,7 +64,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-16 · weekly.",
+          "availability_label": "Dernière publication : 2026-10-23 · weekly.",
           "is_new_data": true,
           "external_id": "NFCI"
         },
@@ -74,7 +74,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-16 · daily.",
+          "availability_label": "Dernière publication : 2026-10-23 · daily.",
           "is_new_data": true,
           "external_id": "DTWEXBGS"
         },
@@ -84,7 +84,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-20 · daily.",
+          "availability_label": "Dernière publication : 2026-10-27 · daily.",
           "is_new_data": true,
           "external_id": "DCOILBRENTEU"
         },
@@ -94,7 +94,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-17 · weekly.",
+          "availability_label": "Dernière publication : 2026-10-24 · weekly.",
           "is_new_data": true,
           "external_id": "WEI"
         },
@@ -104,7 +104,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-22 · daily.",
+          "availability_label": "Dernière publication : 2026-10-29 · daily.",
           "is_new_data": true,
           "external_id": "VIXCLS"
         },
@@ -114,7 +114,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-16 · daily.",
+          "availability_label": "Dernière publication : 2026-10-23 · daily.",
           "is_new_data": true,
           "external_id": "DEXUSEU"
         },
@@ -124,7 +124,7 @@
           "indicator": "Valeur brute publiée par la source externe",
           "strategy_use": "Peut servir de condition de régime dans une règle écrite et testée ; ce n’est pas une instruction d’achat.",
           "availability": "available",
-          "availability_label": "Dernière publication : 2026-10-23 · daily.",
+          "availability_label": "Dernière publication : 2026-10-30 · daily.",
           "is_new_data": true,
           "external_id": "ECBDFR"
         }
@@ -205,8 +205,8 @@
       "frequency": "daily",
       "source": "Economic Policy Uncertainty (Baker, Bloom, Davis), via FRED",
       "source_url": "https://fred.stlouisfed.org/series/USEPUINDXD",
-      "last_observation_date": "2026-10-22",
-      "value": 258.62,
+      "last_observation_date": "2026-10-29",
+      "value": 251.1,
       "kind": "raw_external"
     },
     {
@@ -216,8 +216,8 @@
       "frequency": "weekly",
       "source": "Chicago Fed, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/NFCI",
-      "last_observation_date": "2026-10-16",
-      "value": -0.496,
+      "last_observation_date": "2026-10-23",
+      "value": -0.487,
       "kind": "raw_external"
     },
     {
@@ -227,8 +227,8 @@
       "frequency": "daily",
       "source": "Federal Reserve Board, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/DTWEXBGS",
-      "last_observation_date": "2026-10-16",
-      "value": 121.4048,
+      "last_observation_date": "2026-10-23",
+      "value": 121.3202,
       "kind": "raw_external"
     },
     {
@@ -238,8 +238,8 @@
       "frequency": "daily",
       "source": "U.S. Energy Information Administration, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/DCOILBRENTEU",
-      "last_observation_date": "2026-10-20",
-      "value": 115.22,
+      "last_observation_date": "2026-10-27",
+      "value": 123.1,
       "kind": "raw_external"
     },
     {
@@ -249,8 +249,8 @@
       "frequency": "weekly",
       "source": "Lewis-Mertens-Stock Weekly Economic Index, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/WEI",
-      "last_observation_date": "2026-10-17",
-      "value": 3.33,
+      "last_observation_date": "2026-10-24",
+      "value": 2.98,
       "kind": "raw_external"
     },
     {
@@ -260,8 +260,8 @@
       "frequency": "daily",
       "source": "Cboe, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/VIXCLS",
-      "last_observation_date": "2026-10-22",
-      "value": 19.03,
+      "last_observation_date": "2026-10-29",
+      "value": 17.2,
       "kind": "raw_external"
     },
     {
@@ -271,8 +271,8 @@
       "frequency": "daily",
       "source": "Federal Reserve Board, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/DEXUSEU",
-      "last_observation_date": "2026-10-16",
-      "value": 1.1231,
+      "last_observation_date": "2026-10-23",
+      "value": 1.1199,
       "kind": "raw_external"
     },
     {
@@ -282,7 +282,7 @@
       "frequency": "daily",
       "source": "Banque centrale européenne, via FRED",
       "source_url": "https://fred.stlouisfed.org/series/ECBDFR",
-      "last_observation_date": "2026-10-23",
+      "last_observation_date": "2026-10-30",
       "value": 2.5,
       "kind": "raw_external"
     }
