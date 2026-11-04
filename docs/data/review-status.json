@@ -6,5 +6,5 @@
   "updated_at": "2026-10-31T14:00:54Z",
   "message": "La revue ne peut pas démarrer : la collecte des prix échoue lors de la conversion en euros, car le script mélange des dates au format texte et des dates reconnues. Les dernières données vérifiées sont conservées.",
   "data_update_status": "failed",
-  "data_update_failed_at": "2026-11-03T02:40:15.652444+00:00"
+  "data_update_failed_at": "2026-11-04T00:55:55.936354+00:00"
 }
