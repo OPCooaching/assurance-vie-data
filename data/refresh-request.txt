@@ -1,1 +1,2 @@
 Reprise complète de la revue du 24 octobre 2026; correction FX et univers daté; 2026-10-25T14:45:45.326276+00:00
+2026-11-06T12:40:00+01:00 — verification after FX conversion lookback correction
