@@ -23,6 +23,14 @@ class EuroConversionTests(unittest.TestCase):
         self.assertEqual(result.close_eur.tolist(), [100.0, 96.0])
         self.assertEqual(result.close.tolist(), [100.0, 96.0])
 
+    def test_short_refresh_requests_prior_fx_lookback(self):
+        fx = pd.DataFrame({"Close": [1.2]}, index=pd.DatetimeIndex(["2026-10-22"]))
+        part = pd.DataFrame({"date": ["2026-10-22"], "close_native": [120.0],
+                             "quote_currency": ["USD"]})
+        with patch.object(market, "download_batch", return_value=fx) as download:
+            market.normalise_to_eur([part], "7d")
+        self.assertEqual(download.call_args.args[1], "14d")
+
     def test_uses_previous_fx_without_future_rate(self):
         result = self.convert(["2026-10-23"], ["2026-10-22", "2026-10-26"], [1.2, 2.0])
         self.assertEqual(result.close_eur.iloc[0], 100.0)
