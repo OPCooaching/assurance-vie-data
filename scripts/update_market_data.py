@@ -13,6 +13,7 @@ OUT = Path("data/prices/daily.csv")
 BATCH = 40
 BOOTSTRAP_PERIOD = "5y"
 UPDATE_PERIOD = "7d"
+FX_LOOKBACK_DAYS = 7
 MIN_BOOTSTRAP_SPAN_DAYS = 5 * 365 - 14
 METADATA_MAX_AGE_DAYS = 30
 PRICE_COLUMNS = [
@@ -196,11 +197,24 @@ def fx_rates_to_eur(currencies, period):
     return rates
 
 
+def fx_period_for(asset_period: str) -> str:
+    """Request a short extra window for FX before a short price refresh.
+
+    A seven-day asset download may begin one trading day before Yahoo's own
+    seven-day FX response (different market calendars/time zones).  The extra
+    history is used only to find the latest *prior* official exchange rate;
+    it never supplies a future rate.
+    """
+    if asset_period.endswith("d") and asset_period[:-1].isdigit():
+        return f"{int(asset_period[:-1]) + FX_LOOKBACK_DAYS}d"
+    return asset_period
+
+
 def normalise_to_eur(parts, period):
     if not parts:
         return []
     currencies = [part["quote_currency"].iloc[0] for part in parts]
-    fx = fx_rates_to_eur(currencies, period)
+    fx = fx_rates_to_eur(currencies, fx_period_for(period))
     result = []
     for part in parts:
         currency = part["quote_currency"].iloc[0]
