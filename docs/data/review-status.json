@@ -1,10 +1,11 @@
 {
   "review_date": "2026-10-31",
   "status": "failed",
-  "data_as_of_date": "2026-10-29",
-  "last_consolidated_date": "2026-10-29",
-  "updated_at": "2026-10-31T14:00:54Z",
-  "message": "La revue ne peut pas démarrer : la collecte des prix échoue lors de la conversion en euros, car le script mélange des dates au format texte et des dates reconnues. Les dernières données vérifiées sont conservées.",
-  "data_update_status": "failed",
-  "data_update_failed_at": "2026-11-06T01:09:09.298607+00:00"
+  "data_as_of_date": "2026-11-06",
+  "last_consolidated_date": "2026-11-04",
+  "updated_at": "2026-11-06T11:40:37Z",
+  "message": "La revue du 31 octobre est restée inachevée et n’est pas reconstituée. La collecte des prix a été réparée et validée le 6 novembre ; les nouvelles données seront utilisées lors de la prochaine revue.",
+  "data_update_status": "completed",
+  "data_update_failed_at": "2026-11-06T01:09:09.298607+00:00",
+  "data_update_completed_at": "2026-11-06T11:40:37Z"
 }
