@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0", "record_kind": "scheduled_strategy_review", "status": "archived_before_effective_week", "decided_at_utc": "2026-11-07T14:00:00Z", "effective_valuation_date": "2026-11-09", "author": "chatgpt", "strategy_version": "règle de référence", "decision_id": "2026-W45--faber_trend", "strategy_id": "faber_trend", "decision_type": "maintain", "execution_assumption": "next_available_valuation",
+  "data_as_of": {"prices": "2026-11-06", "monthly_signal_close": "2026-10-30"}, "target_allocation_percent": {"FR0010315770": 100, "LU0290358497": 0},
+  "rationale": "À la clôture mensuelle d'octobre, l'ETF Monde reste au-dessus de sa moyenne mobile sur dix mois. La règle Faber conserve donc l'exposition actions pour novembre.",
+  "warnings": ["Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.", "Décision fondée sur la clôture mensuelle disponible du 30/10/2026 ; aucune donnée ultérieure n’est utilisée."],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
