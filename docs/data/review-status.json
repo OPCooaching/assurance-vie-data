@@ -1,10 +1,10 @@
 {
-  "review_date": "2026-10-31",
-  "status": "failed",
+  "review_date": "2026-11-07",
+  "status": "in_progress",
   "data_as_of_date": "2026-11-06",
   "last_consolidated_date": "2026-11-04",
-  "updated_at": "2026-11-06T11:40:37Z",
-  "message": "La revue du 31 octobre est restée inachevée et n’est pas reconstituée. La collecte des prix a été réparée et validée le 6 novembre ; les nouvelles données seront utilisées lors de la prochaine revue.",
+  "updated_at": "2026-11-07T13:59:34Z",
+  "message": "La revue hebdomadaire est en cours. Les décisions et les pages seront publiées seulement après les contrôles complets.",
   "data_update_status": "completed",
   "data_update_failed_at": "2026-11-06T01:09:09.298607+00:00",
   "data_update_completed_at": "2026-11-06T11:40:37Z"
