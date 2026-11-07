@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-11-07T14:00:00Z",
+  "effective_valuation_date": "2026-11-09",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "decision_id": "2026-W45--chatgpt-regime-macro-financier",
+  "strategy_id": "chatgpt-regime-macro-financier",
+  "decision_type": "maintain",
+  "execution_assumption": "next_available_valuation",
+  "data_as_of": {
+    "prices": "2026-11-06",
+    "context": {"NFCI": "2026-10-30", "USEPUINDXD": "2026-11-05", "VIXCLS": "2026-11-05"}
+  },
+  "target_allocation_percent": {"FR0010315770": 60, "LU0290357846": 20, "LU2611731824": 20},
+  "rationale": "Le VIX à 28,18 active l'alerte de volatilité, mais le NFCI reste favorable à -0,459 et l'incertitude économique américaine à 168,2 est sous son seuil. Une seule alerte sur trois est active : la règle conserve le régime normal et son allocation.",
+  "macro_state": "normal",
+  "flags": {"nfci": false, "uncertainty": false, "vix": true},
+  "uncertainty_threshold": 293.915,
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Les indicateurs macro sont publiés avec décalage : les dates de chaque dernière publication sont conservées.",
+    "Décision fondée sur les données disponibles au 06/11/2026 ; aucune donnée ultérieure n’est utilisée."
+  ],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
