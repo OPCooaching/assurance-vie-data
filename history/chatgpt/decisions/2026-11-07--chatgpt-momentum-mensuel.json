@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-11-07T14:00:00Z",
+  "effective_valuation_date": "2026-11-09",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "decision_id": "2026-W45--chatgpt-momentum-mensuel",
+  "strategy_id": "chatgpt-momentum-mensuel",
+  "decision_type": "rebalance",
+  "execution_assumption": "next_available_valuation",
+  "data_as_of": {"prices": "2026-11-06", "monthly_selection_close": "2026-10-30"},
+  "target_allocation_percent": {
+    "IE00BM67HM91": 20,
+    "IE00BM67HK77": 20,
+    "LU1900066462": 20,
+    "IE00BL25JM42": 20,
+    "IE00BG0J4C88": 20
+  },
+  "rationale": "La sélection mensuelle d'octobre remplace trois lignes de la sélection précédente. Parmi les ETF ayant assez d'historique, ces cinq supports sont positifs sur 63, 126 et 252 séances et au-dessus de leur moyenne mobile de 200 séances ; ils obtiennent les meilleurs scores moyens disponibles. La règle répartit à parts égales, sans modifier la sélection avant la prochaine revue mensuelle.",
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision fondée sur les cours disponibles au 06/11/2026 et la clôture mensuelle disponible du 30/10/2026 ; aucune donnée ultérieure n’est utilisée.",
+    "Les frais du contrat et le délai réel d'exécution ne sont pas intégrés."
+  ],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
