@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-11-07T14:00:00Z",
+  "effective_valuation_date": "2026-11-09",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "decision_id": "2026-W45--chatgpt-weekly-open-analysis",
+  "strategy_id": "chatgpt-weekly-open-analysis",
+  "decision_type": "rebalance",
+  "execution_assumption": "next_available_valuation",
+  "data_as_of": {
+    "prices": "2026-11-06",
+    "context": {"NFCI": "2026-10-30", "USEPUINDXD": "2026-11-05", "VIXCLS": "2026-11-05", "ECBDFR": "2026-11-06"}
+  },
+  "target_allocation_percent": {
+    "LU0290358497": 40,
+    "LU0290357846": 15,
+    "FR0014000MR3": 10,
+    "DE0007164600": 10,
+    "FR0000120321": 10,
+    "DE0005810055": 10,
+    "FR001400J770": 5
+  },
+  "rationale": "Les 333 supports comparables avec un historique complet ont été examinés. Seuls 61 restent positifs à la fois sur 20, 60 et 120 séances ; les fonds actions détenus la semaine passée ne remplissent plus ce critère à court et moyen terme. Le VIX à 28,18 conduit à 55 % de poches défensives (40 % monétaire et 15 % obligations longues). Les 45 % actions se limitent à des supports positifs sur les trois horizons et répartis entre services de marché, technologie, consommation et sciences de la vie. Air France-KLM, très volatile, est plafonnée à 5 %. Les corrélations sur 60 séances entre les lignes actions retenues sont modérées ; les alternatives très proches ou plus concentrées ne sont pas ajoutées sans bénéfice de diversification.",
+  "reviewed_universe": {"total_supports": 464, "price_comparable_supports": 333, "positive_on_20_60_120_sessions": 61},
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Le VIX est élevé : l'allocation reste exposée à des actions et peut subir des pertes rapides.",
+    "Décision fondée sur les données disponibles au 06/11/2026 ; aucune donnée ultérieure n’est utilisée.",
+    "Les frais du contrat et le délai réel d'exécution ne sont pas intégrés."
+  ],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
