@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-11-07T14:00:00Z",
+  "effective_valuation_date": "2026-11-09",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "decision_id": "2026-W45--chatgpt-volatilite-pilotee",
+  "strategy_id": "chatgpt-volatilite-pilotee",
+  "decision_type": "rebalance",
+  "execution_assumption": "next_available_valuation",
+  "data_as_of": {"prices": "2026-11-06"},
+  "target_allocation_percent": {
+    "FR0010315770": 17.169514,
+    "LU0290357846": 17.169514,
+    "LU0478205379": 17.169514,
+    "LU2611731824": 17.169514,
+    "LU0290358497": 31.321944
+  },
+  "rationale": "La volatilité annualisée observée sur 20 séances du panier des quatre poches risquées est de 14,56 %. Pour viser 10 % sans levier, la règle réduit leur exposition totale à 68,68 %, répartie également, et porte le monétaire à 31,32 %.",
+  "realised_volatility_annual": 0.1456069173,
+  "risk_exposure": 0.6867805588,
+  "warnings": [
+    "Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.",
+    "Décision fondée sur les cours disponibles au 06/11/2026 ; aucune donnée ultérieure n’est utilisée.",
+    "Les frais du contrat et le délai réel d'exécution ne sont pas intégrés."
+  ],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
