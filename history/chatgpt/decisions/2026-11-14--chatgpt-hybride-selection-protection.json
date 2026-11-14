@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "scheduled_strategy_review",
+  "status": "archived_before_effective_week",
+  "decided_at_utc": "2026-11-14T14:00:00Z",
+  "effective_valuation_date": "2026-11-16",
+  "author": "chatgpt",
+  "strategy_version": "v0.1",
+  "decision_id": "2026-W46--chatgpt-hybride-selection-protection",
+  "strategy_id": "chatgpt-hybride-selection-protection",
+  "decision_type": "rebalance",
+  "execution_assumption": "next_available_valuation",
+  "data_as_of": {"prices": "2026-11-13", "context": {"NFCI": "2026-11-06", "VIXCLS": "2026-11-12"}},
+  "target_allocation_percent": {"IE00BM67HM91": 20, "IE00BM67HK77": 20, "LU1900066462": 20, "IE00BL25JM42": 20, "IE00BG0J4C88": 20},
+  "rationale": "La sélection mensuelle reste inchangée. Le garde-fou hebdomadaire est levé : NFCI -0,462 reste favorable et VIX 18,70 est inférieur au seuil de 25. La moitié monétaire temporaire est donc réallouée à parts égales aux cinq ETF de la sélection mensuelle.",
+  "protection_active": false,
+  "warnings": ["Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.", "La protection ne prédit pas le marché et peut se réactiver lors d'une prochaine revue."],
+  "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
