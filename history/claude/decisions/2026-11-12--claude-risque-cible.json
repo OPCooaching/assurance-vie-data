@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "weekly_strategy_decision",
+  "status": "decided_on_published_prices",
+  "decision_id": "2026-11-12--claude_risque_cible",
+  "decided_at_utc": "2026-11-14T01:04:51+00:00",
+  "effective_valuation_date": "2026-11-12",
+  "author": "claude",
+  "strategy_id": "claude_risque_cible",
+  "strategy_version": "v0.3",
+  "decision_type": "weekly_allocation",
+  "rationale": "Aucun mouvement : l'allocation de la semaine précédente est conservée.",
+  "target_allocation_percent": {
+    "IE00BL25JN58": 10.8,
+    "LU0290358497": 49.2,
+    "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA": 40.0
+  },
+  "mouvements": {
+    "entrees": [],
+    "sorties": [],
+    "renforces": [],
+    "alleges": [],
+    "inchanges": [
+      {
+        "asset_id": "IE00BL25JN58",
+        "nom": "Xtrackers MSCI World Minimum Volatility UCITS ETF",
+        "poids_pct": 10.8
+      },
+      {
+        "asset_id": "LU0290358497",
+        "nom": "Xtrackers II EUR Overnight Rate Swap UCITS ETF",
+        "poids_pct": 49.2
+      }
+    ],
+    "part_exposee_pct": 60.0,
+    "part_exposee_precedente_pct": 60.0
+  },
+  "warnings": []
+}
