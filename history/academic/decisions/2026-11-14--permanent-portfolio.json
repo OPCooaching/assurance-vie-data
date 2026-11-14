@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0", "record_kind": "scheduled_strategy_review", "status": "archived_before_effective_week", "decided_at_utc": "2026-11-14T14:00:00Z", "effective_valuation_date": "2026-11-16", "author": "chatgpt", "strategy_version": "règle de référence", "decision_id": "2026-W46--permanent_portfolio", "strategy_id": "permanent_portfolio", "decision_type": "maintain", "execution_assumption": "next_available_valuation",
+  "data_as_of": {"prices": "2026-11-13"}, "target_allocation_percent": {"FR0010315770": 25, "LU0290357846": 25, "LU0290358497": 25, "LU2611731824": 25},
+  "rationale": "Cette adaptation du Permanent Portfolio prévoit un rééquilibrage annuel. Aucun changement intermédiaire n'est autorisé par sa règle.",
+  "warnings": ["Portefeuille théorique de comparaison uniquement : aucun ordre n’est envoyé au contrat de Bernard.", "Le proxy aurifère est un ETF d'actions minières, pas de l'or physique."], "validation": {"allocation_total_percent": 100, "no_lookahead_checked": true, "historical_records_unchanged": true}
+}
