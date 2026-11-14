@@ -1,10 +1,10 @@
 {
   "review_date": "2026-11-14",
-  "status": "in_progress",
+  "status": "completed",
   "data_as_of_date": "2026-11-13",
   "last_consolidated_date": "2026-11-12",
-  "updated_at": "2026-11-14T14:00:00Z",
-  "message": "La revue hebdomadaire est en cours. Les données de marché disponibles jusqu’au vendredi 13 novembre sont en vérification.",
+  "updated_at": "2026-11-14T14:18:00Z",
+  "message": "La revue hebdomadaire est terminée. Les décisions théoriques pour le lundi 16 novembre sont archivées et les pages ont été recalculées avec les dernières données disponibles.",
   "data_update_status": "completed",
   "data_update_failed_at": "2026-11-06T01:09:09.298607+00:00",
   "data_update_completed_at": "2026-11-06T11:40:37Z"
