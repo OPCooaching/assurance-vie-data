@@ -1,15 +1,10 @@
 as_of_date,asset_id,support_name,allocation_pct,source_basis
-2026-10-10,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,FONDS EN EURO NETISSIMA,49.969193,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,FR0010380675,LAZARD ACTIONS EMERGENTES R,1.916559,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,DE000A0Q4R85,ISHARES MSCI BRAZIL UCITS ETF (DE),2.545362,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,LU1829221024,AMUNDI NASDAQ-100 II UCITS ETF ACC,3.757333,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BJZ2DD79,XTRACKERS RUSSELL 2000 UCITS ETF,2.156852,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,LU1829219390,AMUNDI EURO STOXX BANKS UCITS ETF ACC,1.612118,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,DE000A0F5UK5,ISHARES STOXX EUROPE 600 BASIC RESOURCES UCITS ETF (DE),4.328504,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,LU0533033667,AMUNDI MSCI WORLD INFORMATION TECHNOLOGY UCITS ETF EUR ACC,5.723125,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BYZK4552,ISHARES AUTOMATION & ROBOTICS UCITS ETF,5.681448,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BG0J4C88,ISHARES DIGITAL SECURITY UCITS ETF,2.222885,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE000I8KRLL9,ISHARES MSCI GLOBAL SEMICONDUCTORS UCITS ETF,13.363813,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BL25JP72,XTRACKERS MSCI WORLD MOMENTUM UCITS ETF,2.888023,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BL25JM42,XTRACKERS MSCI WORLD VALUE UCITS ETF,2.135709,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
-2026-10-10,IE00BMG6Z448,ISHARES MSCI EM EX-CHINA UCITS ETF,1.699076,Post-arbitrage portfolio observation dated 2026-10-10; allocation normalized to base 100
+2026-11-21,ALTAPROFITS:FONDS-EN-EURO-NETISSIMA,FONDS EN EURO NETISSIMA,72.06547527,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,FR0000120073,L'AIR LIQUIDE,0.95372765,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,FR0000120578,SANOFI,1.87616855,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,FR0010147603,CARMIGNAC INVESTISSEMENT LATITUDE A EUR ACC,1.86586064,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,FR0011550193,BNP PARIBAS EASY STOXX EUROPE 600 UCITS ETF,3.65818192,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,LU0292105359,XTRACKERS MSCI EUROPE CONSUMER STAPLES ESG SCREENED UCITS ETF 1C,1.99683465,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,IE00BM67HK77,XTRACKERS MSCI WORLD HEALTH CARE UCITS ETF,5.18382853,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,IE00BL25JN58,XTRACKERS MSCI WORLD MINIMUM VOLATILITY UCITS ETF,11.97415989,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json
+2026-11-21,LU0290358497,XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF,0.42576290,Observed account statement 2026-11-21; config/portfolio_snapshots/2026-11-21.json

@@ -31,3 +31,32 @@ Par conséquent, `portfolio_current.csv` conserve une **référence comptable** 
 Dès qu'un relevé post-arbitrage donnant les positions exactes est disponible, il doit remplacer cette référence comptable pour le portefeuille réel, sans modifier le benchmark d'origine ni l'événement du 24/09.
 
 Les retraits mensuels de 350 EUR restent exclus des courbes de performance.
+
+
+## Relevé du 21/11/2026, reçu le 24/11/2026
+
+La transcription anonymisée complète des neuf positions observées est conservée
+dans `config/portfolio_snapshots/2026-11-21.json`. Leur somme est exactement
+264 457,05 EUR. `config/portfolio_current.csv` contient désormais les poids calculés
+sur ce relevé ; son état antérieur du 10/10/2026 est archivé sans modification dans
+`config/portfolio_snapshots/2026-10-10.csv`. Les anciennes versions restent dans Git.
+
+`scripts/compute_real_portfolio.py` produit `data/benchmarks/bernard_real.csv` et
+`docs/data/bernard-real.json` lors du traitement quotidien, après les courbes
+théoriques. Un graphique distinct sur les quatre pages compare les variations
+depuis ce relevé en base 100. Les cours des comparateurs sont recalés au dernier
+point publié avant le relevé (le samedi ne crée pas un cours de marché).
+
+Le point du relevé est observé ; les points suivants sont des estimations des
+positions connues, utilisant les montants constatés multipliés par le rapport
+entre le nouveau cours en EUR et le prix de référence affiché. Les prix arrondis
+du relevé, les éventuels frais et les mouvements non encore communiqués limitent
+la précision. Netissima ne reçoit pas de rendement quotidien inventé. Le retrait
+programmé de 350 EUR le 16/12 reste une programmation, pas un flux exécuté.
+
+Chaque prochain relevé daté crée un nouveau segment prospectif. On ne raccorde
+pas artificiellement les segments en performance nette de flux inconnus. Les
+intervalles sans historique complet d'arbitrages restent estimés et explicités.
+Le témoin `Bernard origine`, les anciennes décisions ChatGPT/Claude et les règles
+académiques ne sont pas modifiés. Les pronostics hebdomadaires continuent dans
+leurs espaces séparés ; ils ne constituent pas des ordres réels.

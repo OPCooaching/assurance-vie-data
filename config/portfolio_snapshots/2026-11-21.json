@@ -1,0 +1,91 @@
+{
+  "as_of_date": "2026-11-21",
+  "received_date": "2026-11-24",
+  "source": "Account position supplied by Olivier; anonymized transcription",
+  "total_eur": 264457.05,
+  "holdings": [
+    {
+      "asset_id": "ALTAPROFITS:FONDS-EN-EURO-NETISSIMA",
+      "support_name": "FONDS EN EURO NETISSIMA",
+      "value_eur": 190582.23,
+      "reference_price": null,
+      "price_date": null,
+      "units": null
+    },
+    {
+      "asset_id": "FR0000120073",
+      "support_name": "L'AIR LIQUIDE",
+      "value_eur": 2522.2,
+      "reference_price": 189.14,
+      "price_date": "2026-11-19",
+      "units": 13.3351
+    },
+    {
+      "asset_id": "FR0000120578",
+      "support_name": "SANOFI",
+      "value_eur": 4961.66,
+      "reference_price": 83.79,
+      "price_date": "2026-11-19",
+      "units": 59.2154
+    },
+    {
+      "asset_id": "FR0010147603",
+      "support_name": "CARMIGNAC INVESTISSEMENT LATITUDE A EUR ACC",
+      "value_eur": 4934.4,
+      "reference_price": 449.19,
+      "price_date": "2026-11-19",
+      "units": 10.9851
+    },
+    {
+      "asset_id": "FR0011550193",
+      "support_name": "BNP PARIBAS EASY STOXX EUROPE 600 UCITS ETF",
+      "value_eur": 9674.32,
+      "reference_price": 20.66,
+      "price_date": "2026-11-20",
+      "units": 468.2634
+    },
+    {
+      "asset_id": "LU0292105359",
+      "support_name": "XTRACKERS MSCI EUROPE CONSUMER STAPLES ESG SCREENED UCITS ETF 1C",
+      "value_eur": 5280.77,
+      "reference_price": 153.78,
+      "price_date": "2026-11-20",
+      "units": 34.3398
+    },
+    {
+      "asset_id": "IE00BM67HK77",
+      "support_name": "XTRACKERS MSCI WORLD HEALTH CARE UCITS ETF",
+      "value_eur": 13709.0,
+      "reference_price": 59.68,
+      "price_date": "2026-11-20",
+      "units": 229.7084
+    },
+    {
+      "asset_id": "IE00BL25JN58",
+      "support_name": "XTRACKERS MSCI WORLD MINIMUM VOLATILITY UCITS ETF",
+      "value_eur": 31666.51,
+      "reference_price": 47.83,
+      "price_date": "2026-11-20",
+      "units": 662.1329
+    },
+    {
+      "asset_id": "LU0290358497",
+      "support_name": "XTRACKERS II EUR OVERNIGHT RATE SWAP UCITS ETF",
+      "value_eur": 1125.96,
+      "reference_price": 150.85,
+      "price_date": "2026-11-20",
+      "units": 7.4641
+    }
+  ],
+  "scheduled_withdrawal": {
+    "amount_eur": 350.0,
+    "frequency": "monthly",
+    "next_date": "2026-12-16",
+    "status": "scheduled_not_confirmed"
+  },
+  "notes": [
+    "Stop execution issues reported; no execution dates or realized trade prices inferred.",
+    "Observation date differs from individual official price dates.",
+    "This observation is not a retroactive instruction or a theoretical allocation."
+  ]
+}
