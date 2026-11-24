@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T10:25:31+00:00",
+  "generated_at": "2026-11-24T10:28:38+00:00",
   "latest_snapshot": {
     "as_of_date": "2026-11-21",
     "received_date": "2026-11-24",
@@ -95,139 +95,179 @@
     {
       "as_of_date": "2026-11-21",
       "dates": [
-        "2026-11-21"
+        "2026-11-21",
+        "2026-11-23",
+        "2026-11-24"
       ],
       "series": [
         {
           "label": "Bernard réel — suivi estimé",
           "values": [
-            100.0
+            100.0,
+            100.2273755386564,
+            100.39242273829522
           ]
         },
         {
           "label": "Bernard origine",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "60/40 mondial adapté",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Harry Browne adapté",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Faber Trend 10 mois",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Momentum académique 12 mois",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "ChatGPT D — Sélection mensuelle et protection hebdomadaire",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "ChatGPT A — Momentum mensuel multi-horizons",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "ChatGPT C — Régime macro-financier",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "ChatGPT B — Exposition pilotée par le risque",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "ChatGPT E — Analyse hebdomadaire complète",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude A — Socle mondial et satellites",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude B — Risque cible constant",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude C — Tendance confirmée par l’ampleur",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude D — Momentum multi-horizon",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude E — Momentum sous garde-fou",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude F — Structure du marché",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude G — Retour à la moyenne",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         },
         {
           "label": "Claude H — Dollar et énergie",
           "anchor_price_date": "2026-11-20",
           "values": [
-            100.0
+            100.0,
+            null,
+            null
           ]
         }
       ],
@@ -238,6 +278,32 @@
           "index": 100.0,
           "status": "observed",
           "pending_supports": [],
+          "missing_market_series": []
+        },
+        {
+          "date": "2026-11-23",
+          "value_eur": 265058.36,
+          "index": 100.2273755386564,
+          "status": "estimated",
+          "pending_supports": [
+            {
+              "asset_id": "FR0010147603",
+              "price_date": "2026-11-19"
+            }
+          ],
+          "missing_market_series": []
+        },
+        {
+          "date": "2026-11-24",
+          "value_eur": 265494.84,
+          "index": 100.39242273829522,
+          "status": "estimated",
+          "pending_supports": [
+            {
+              "asset_id": "FR0010147603",
+              "price_date": "2026-11-19"
+            }
+          ],
           "missing_market_series": []
         }
       ],
