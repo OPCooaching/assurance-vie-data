@@ -60,3 +60,9 @@ intervalles sans historique complet d'arbitrages restent estimés et explicités
 Le témoin `Bernard origine`, les anciennes décisions ChatGPT/Claude et les règles
 académiques ne sont pas modifiés. Les pronostics hebdomadaires continuent dans
 leurs espaces séparés ; ils ne constituent pas des ordres réels.
+
+Le suivi réel est aussi calculé et publié juste après le contrôle des prix,
+avant la validation des indicateurs macroéconomiques. Ainsi un indicateur
+macro périmé bloque toujours les stratégies qui en dépendent, mais pas la
+valorisation indépendante des positions observées. Seuls les deux fichiers
+du suivi réel sont publiés à cette étape ; les contrôles restent actifs.
