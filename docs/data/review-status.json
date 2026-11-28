@@ -1,10 +1,10 @@
 {
-  "review_date": "2026-11-21",
-  "status": "completed",
+  "review_date": "2026-11-28",
+  "status": "in_progress",
   "data_as_of_date": "2026-11-20",
   "last_consolidated_date": "2026-11-19",
-  "updated_at": "2026-11-21T14:16:00Z",
-  "message": "La revue hebdomadaire est terminée. Les décisions théoriques pour le lundi 23 novembre sont archivées et les pages ont été recalculées avec les dernières données disponibles.",
+  "updated_at": "2026-11-28T14:05:00Z",
+  "message": "La revue est en cours ; la dernière collecte a signalé une erreur et les données sont en cours de vérification.",
   "data_update_status": "failed",
   "data_update_failed_at": "2026-11-24T10:28:49.225624+00:00",
   "data_update_completed_at": "2026-11-06T11:40:37Z"
