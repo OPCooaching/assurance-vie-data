@@ -1,11 +1,11 @@
 {
   "review_date": "2026-11-28",
-  "status": "in_progress",
-  "data_as_of_date": "2026-11-20",
-  "last_consolidated_date": "2026-11-19",
-  "updated_at": "2026-11-28T14:05:00Z",
-  "message": "La revue est en cours ; la dernière collecte a signalé une erreur et les données sont en cours de vérification.",
-  "data_update_status": "failed",
+  "status": "failed",
+  "data_as_of_date": "2026-11-27",
+  "last_consolidated_date": "2026-11-25",
+  "updated_at": "2026-11-28T14:08:00Z",
+  "message": "La collecte des données a réussi, mais la revue des portefeuilles et la vérification des pages ne sont pas terminées. Aucune nouvelle décision hebdomadaire n’a été publiée.",
+  "data_update_status": "completed",
   "data_update_failed_at": "2026-11-24T10:28:49.225624+00:00",
   "data_update_completed_at": "2026-11-06T11:40:37Z"
 }
